@@ -1,0 +1,125 @@
+{
+  "profile_id": "generic.multisource-review.v2",
+  "version": "2.0.0",
+  "schema_version": "1.0.0",
+  "extends": "generic.structured-mvp.v1.json",
+  "manual_review": {
+    "confidence_threshold": 0.9
+  },
+  "source_priorities": [
+    {
+      "file_patterns": ["*主数据*", "*master*", "*已确认*"],
+      "sheet_patterns": [".*"],
+      "priority": 100
+    },
+    {
+      "file_patterns": ["*复核*", "*reviewed*"],
+      "sheet_patterns": [".*"],
+      "priority": 80
+    },
+    {
+      "file_patterns": ["*补充*", "*supplement*"],
+      "sheet_patterns": [".*"],
+      "priority": 50
+    }
+  ],
+  "tables": [
+    {
+      "id": "valve_control",
+      "target": "raw_data_categories.valve_control",
+      "name_zh": "阀门与远程切断",
+      "attach_to_segment": true,
+      "record_key": ["record_id"],
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*阀门*", "*截断阀*", "*valve*"], "sheet_patterns": [".*"]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "阀门编号", "阀室编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "阀门里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "remote_shutdown_available", "aliases": ["远程切断", "是否远控", "remote_shutdown_available"], "type": "boolean"},
+        {"target": "closure_time_s", "aliases": ["关断时间(s)", "closure_time_s"], "type": "number", "minimum": 0}
+      ]
+    },
+    {
+      "id": "leak_events",
+      "target": "raw_data_categories.leak_and_failure_events",
+      "name_zh": "泄漏与失效事件",
+      "attach_to_segment": true,
+      "record_key": ["record_id"],
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*泄漏事件*", "*失效事件*", "*leak_event*"], "sheet_patterns": [".*"]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "事件编号", "泄漏编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "事件里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "event_date", "aliases": ["event_date", "事件日期", "发生日期"], "type": "date"},
+        {"target": "event_type", "aliases": ["event_type", "事件类型", "失效类型"], "type": "string"},
+        {"target": "description", "aliases": ["description", "事件描述", "原因"], "type": "string"}
+      ]
+    },
+    {
+      "id": "patrol_third_party",
+      "target": "raw_data_categories.patrol_and_third_party_activity",
+      "name_zh": "巡线与第三方活动",
+      "attach_to_segment": true,
+      "record_key": ["record_id"],
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*巡线*", "*第三方活动*", "*patrol*"], "sheet_patterns": [".*"]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "巡检编号", "活动编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "inspection_date", "aliases": ["inspection_date", "巡检日期"], "type": "date"},
+        {"target": "activity_type", "aliases": ["activity_type", "活动类型", "发现类型"], "type": "string"},
+        {"target": "resolved", "aliases": ["resolved", "是否处置", "已处置"], "type": "boolean"}
+      ]
+    },
+    {
+      "id": "soil_environment",
+      "target": "raw_data_categories.soil_and_corrosion_environment",
+      "name_zh": "土壤与腐蚀环境",
+      "attach_to_segment": true,
+      "record_key": ["record_id"],
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*土壤腐蚀*", "*土壤环境*", "*soil*"], "sheet_patterns": [".*"]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "采样编号", "测试编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "采样里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "soil_resistivity_ohm_m", "aliases": ["土壤电阻率(Ω·m)", "soil_resistivity_ohm_m"], "type": "number", "minimum": 0},
+        {"target": "soil_ph", "aliases": ["土壤pH", "soil_ph"], "type": "number", "minimum": 0, "maximum": 14}
+      ]
+    },
+    {
+      "id": "emergency_resources",
+      "target": "raw_data_categories.emergency_resources",
+      "name_zh": "应急资源",
+      "attach_to_segment": true,
+      "record_key": ["record_id"],
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*应急资源*", "*应急队伍*", "*emergency_resource*"], "sheet_patterns": [".*"]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "资源编号", "队伍编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "驻点里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "resource_type", "aliases": ["resource_type", "资源类型", "队伍类型"], "type": "string"},
+        {"target": "response_time_min", "aliases": ["响应时间(min)", "response_time_min"], "type": "number", "minimum": 0}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "model_id": "frequency.correction.synthetic_provided.v1",
+  "version": "1.0.0",
+  "status": "SYNTHETIC_TEST_ONLY",
+  "source": [
+    "SY/T 6891.2-2020 Annex A formula A.1"
+  ],
+  "standard_formula": "F = sum_j(f_j,0 * f_t * K_j(a1,a2,...))",
+  "supported_model_types": {
+    "provided_factors": {
+      "description": "使用经项目批准、按管段和失效机理给定的K_j；当前测试案例中的值仅为合成数据。"
+    },
+    "log_linear_calibrated": {
+      "formula": "K_j = clip(exp(beta_0 + sum_i(beta_i * (x_i-reference_i)/scale_i)), K_min, K_max)",
+      "description": "这是引擎支持的可校准函数形式，不是标准规定的通用权重；beta、参考值、尺度和边界必须由适用失效数据校准并批准。"
+    }
+  },
+  "formal_release_requirements": [
+    "频率库和适用范围获得批准",
+    "每个失效机理的变量选择、系数、参考值、尺度和边界获得批准",
+    "训练/校准数据、拟合方法、验证集和不确定性可追溯",
+    "指标观测不是合成数据且具备数据责任人、日期和来源证据"
+  ]
+}

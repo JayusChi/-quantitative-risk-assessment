@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "version": "1.1.0",
+    "base_case": "qra_synthetic_case_v1.json",
+    "data_classification": "SYNTHETIC_TEST_ONLY"
+  },
+  "cases": [
+    {
+      "case_id": "VALID-BASELINE",
+      "description": "完整合成案例应通过输入校验和黄金结果校验",
+      "mutations": [],
+      "expected": {"validation": "PASS", "formal_report_allowed": false}
+    },
+    {
+      "case_id": "EDGE-ZERO-POPULATION",
+      "description": "所有人口清零后，社会风险和PLL应为0，假定全年暴露的IR不应被清零",
+      "mutations": [
+        {"operation": "set_all", "path": "population_cells[*].population_day", "value": 0},
+        {"operation": "set_all", "path": "population_cells[*].population_night", "value": 0}
+      ],
+      "expected": {"pll_per_year": 0.0, "fn_curve_all_zero": true, "ir_unchanged": true}
+    },
+    {
+      "case_id": "INVALID-WEATHER-SUM",
+      "description": "气象联合概率不等于1时应阻断计算",
+      "mutations": [
+        {"operation": "set", "path": "weather_joint_probability[0].probability", "value": 0.2}
+      ],
+      "expected": {"validation": "BLOCK", "error_code": "WEATHER_PROBABILITY_NOT_NORMALIZED"}
+    },
+    {
+      "case_id": "INVALID-LOC-FRACTION",
+      "description": "同一失效机理的孔径比例不等于1时应阻断计算",
+      "mutations": [
+        {"operation": "set", "path": "frequency_library.loc_fraction_by_mechanism.external_corrosion.rupture", "value": 0.15}
+      ],
+      "expected": {"validation": "BLOCK", "error_code": "LOC_FRACTION_NOT_NORMALIZED"}
+    },
+    {
+      "case_id": "INVALID-GAS-COMPOSITION",
+      "description": "天然气摩尔组分之和不等于1时应阻断后果计算",
+      "mutations": [
+        {"operation": "set", "path": "pipeline.gas_composition_mole_fraction.methane", "value": 0.8}
+      ],
+      "expected": {"validation": "BLOCK", "error_code": "GAS_COMPOSITION_NOT_NORMALIZED"}
+    },
+    {
+      "case_id": "VALID-NO-RISK-CRITERIA",
+      "description": "某后果域缺少风险接受准则时仍可完成该域计算，但不得作接受性判定",
+      "mutations": [
+        {"operation": "set", "path": "assessment.criteria_set_by_domain.environment", "value": null}
+      ],
+      "expected": {"validation": "PASS_WITH_WARNING", "domain": "environment", "status": "CALCULATED_NOT_JUDGED"}
+    },
+    {
+      "case_id": "EDGE-ZERO-ASSET-LOSS",
+      "description": "全部财产损失清零后财产EAL应为0，其他后果域保持不变",
+      "mutations": [
+        {"operation": "set_all", "path": "mock_adapter_output.scenario_outcomes[*].asset_loss_cny", "value": 0}
+      ],
+      "expected": {"asset_eal_cny_per_year": 0.0, "human_unchanged": true, "environment_unchanged": true, "service_unchanged": true}
+    },
+    {
+      "case_id": "EDGE-ENVIRONMENT-SENSITIVE-RECEPTOR",
+      "description": "低频区段命中环境敏感受体时必须进入强制治理清单，不受期望值名次限制",
+      "mutations": [],
+      "expected": {"mandatory_action_contains": "SEG-020", "reason": "environment_sensitive_receptor_hit"}
+    },
+    {
+      "case_id": "EDGE-CRITICAL-CUSTOMER",
+      "description": "影响关键供气用户的区段必须进入强制治理清单",
+      "mutations": [],
+      "expected": {"mandatory_action_contains": "SEG-012", "reason": "critical_customer_hit"}
+    },
+    {
+      "case_id": "VALID-DOMAIN-SPECIFIC-RANKING",
+      "description": "人员和财产风险榜首不同，平台不得自动生成跨域总分",
+      "mutations": [],
+      "expected": {
+        "human_top_segment": "SEG-012",
+        "asset_top_segment": "SEG-016",
+        "unweighted_total_score_exists": false
+      }
+    },
+    {
+      "case_id": "INVALID-PRODUCTION-USE",
+      "description": "合成伤害模型不得生成正式报告",
+      "mutations": [
+        {"operation": "set", "path": "metadata.run_profile", "value": "strict_standard"}
+      ],
+      "expected": {"validation": "BLOCK", "error_code": "SYNTHETIC_MODEL_IN_STRICT_RUN"}
+    }
+  ]
+}

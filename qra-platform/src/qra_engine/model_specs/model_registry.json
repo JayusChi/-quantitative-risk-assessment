@@ -1,0 +1,96 @@
+{
+  "registry_version": "1.1.0",
+  "models": [
+    {
+      "model_id": "frequency.synthetic.history_corrected.v1",
+      "domain": "failure_frequency",
+      "status": "SYNTHETIC_TEST_ONLY",
+      "implementation": "qra_engine.frequency.calculate_loc_frequencies"
+    },
+    {
+      "model_id": "qra.pipeline.engineering_indicators.v1",
+      "domain": "engineering_indicator_schema",
+      "status": "RELEASED",
+      "spec_file": "qra_indicator_catalog_v1.json",
+      "implementation": "qra_engine.indicators.validate_indicator_set"
+    },
+    {
+      "model_id": "frequency.correction.synthetic_provided.v1",
+      "domain": "failure_frequency_correction",
+      "status": "SYNTHETIC_TEST_ONLY",
+      "spec_file": "frequency_correction_model_v1.json",
+      "implementation": "qra_engine.frequency_correction.resolve_segment_correction_factors",
+      "release_blockers": [
+        "approved project or industry failure dataset",
+        "calibrated coefficients or approved project-specific K_j factors",
+        "independent validation and parameter approval"
+      ]
+    },
+    {
+      "model_id": "pipeline.adaptive.evidence_qra.v1",
+      "domain": "quantitative_evidence_conditioned_screening_qra",
+      "status": "PROVISIONAL_CONFIGURABLE_EVIDENCE_MODEL",
+      "source": [
+        "GB/T 34346-2017 Annex C",
+        "AQ/T 3046-2013 clauses 10-13 and Appendix E"
+      ],
+      "spec_file": "adaptive_evidence_qra_v1.json",
+      "implementation": "qra_engine.adaptive_risk.calculate_adaptive_evidence_qra",
+      "release_blockers": [
+        "evidence response coefficients require calibration and approval",
+        "default ignition, physical and population priors require project replacement",
+        "screening result does not replace full spatial QRA acceptance judgement"
+      ]
+    },
+    {
+      "model_id": "human.synthetic.spatial.v1",
+      "domain": "human_consequence",
+      "status": "SYNTHETIC_TEST_ONLY",
+      "spec_file": "human_synthetic_v1.json",
+      "implementation": "qra_engine.consequence.SyntheticHumanConsequenceAdapter"
+    },
+    {
+      "model_id": "human.aqt3046.pipeline.v1",
+      "domain": "human_consequence",
+      "status": "IMPLEMENTED_STANDARD_FORMULAS_PROVISIONAL_VALIDATION",
+      "source": [
+        "SY/T 6891.2-2020 9.1.2",
+        "AQ/T 3046-2013 8-13 and appendices E/G/H/I"
+      ],
+      "spec_file": "human_aqt3046_v1.json",
+      "implementation": "qra_engine.physical_consequence.AQT3046PipelineConsequenceAdapter",
+      "release_blockers": [
+        "transient rupture blowdown and line-pack depletion benchmark",
+        "pressurized-gas near-field dispersion benchmark",
+        "independent validation of digitized TNO Figure E.1 curves",
+        "approved production thermophysical, ignition, occupancy and congestion parameters",
+        "IR grid and leak-point convergence verification"
+      ]
+    },
+    {
+      "model_id": "GBT34346_2017_ANNEX_C_FIG_C2_REFERENCE_IR",
+      "domain": "risk_acceptance_criterion",
+      "status": "RELEASED",
+      "source": [
+        "GB/T 34346-2017 Annex C Figure C.2"
+      ],
+      "spec_file": "risk_criteria_gbt34346_2017_annex_c.json",
+      "implementation": "qra_engine.risk_criteria.classify_individual_risk"
+    },
+    {
+      "model_id": "pipeline.gbt34346.annex_c.secondary.v1",
+      "domain": "pipeline_quantitative_secondary_assessment",
+      "status": "IMPLEMENTED_UNIT_TESTED_SYNTHETIC_PARAMETERS",
+      "source": [
+        "GB/T 34346-2017 normative Annex C"
+      ],
+      "spec_file": "pipeline_gbt34346_annex_c_v1.json",
+      "implementation": "qra_engine.gbt34346.calculate_annex_c_secondary_assessment",
+      "release_blockers": [
+        "approved project correction factors",
+        "approved ignition probability and population density",
+        "independent benchmark case"
+      ]
+    }
+  ]
+}

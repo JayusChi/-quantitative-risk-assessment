@@ -1,0 +1,60 @@
+{
+  "model_id": "human.aqt3046.pipeline.v1",
+  "version": "0.2.0",
+  "status": "IMPLEMENTED_STANDARD_FORMULAS_PROVISIONAL_VALIDATION",
+  "asset_scope": "onshore_buried_natural_gas_transmission_pipeline",
+  "applicability_basis": [
+    "SY/T 6891.2-2020 clause 2 normative reference",
+    "SY/T 6891.2-2020 clause 9.1.2 consequence calculation call"
+  ],
+  "scope_warning": "AQ/T 3046-2013 clause 1 excludes long-distance pipelines when used alone; only components explicitly called by SY/T 6891.2 are adopted.",
+  "loc_orifice_diameter_m": {
+    "small_5mm": 0.005,
+    "medium_25mm": 0.025,
+    "large_100mm": 0.1
+  },
+  "tno_curve_status": "LOGARITHMIC_DIGITIZATION_FROM_AQT3046_FIGURE_E1_REQUIRES_INDEPENDENT_BENCHMARK",
+  "tno_sachs_curves": {
+    "1": [
+      [0.1, 0.01], [0.2, 0.01], [0.35, 0.01], [0.5, 0.009],
+      [1.0, 0.006], [2.0, 0.0035], [5.0, 0.0018], [10.0, 0.0011],
+      [20.0, 0.0007], [50.0, 0.00035], [100.0, 0.00022]
+    ],
+    "3": [
+      [0.1, 0.05], [0.2, 0.05], [0.35, 0.05], [0.5, 0.048],
+      [1.0, 0.035], [2.0, 0.02], [5.0, 0.009], [10.0, 0.0055],
+      [20.0, 0.0035], [50.0, 0.0018], [100.0, 0.0011]
+    ],
+    "7": [
+      [0.1, 1.0], [0.2, 1.0], [0.35, 1.0], [0.5, 0.9],
+      [1.0, 0.45], [2.0, 0.18], [5.0, 0.055], [10.0, 0.025],
+      [20.0, 0.012], [50.0, 0.005], [100.0, 0.0028]
+    ]
+  },
+  "formula_trace": [
+    "AQ/T 3046 E.8",
+    "AQ/T 3046 E.13-E.17",
+    "AQ/T 3046 E.18-E.22",
+    "AQ/T 3046 E.33 and Table E.7",
+    "AQ/T 3046 E.57-E.59",
+    "AQ/T 3046 E.60-E.62 and Figure E.1",
+    "AQ/T 3046 clauses 10.3.1-10.4.2",
+    "AQ/T 3046 equations 7-15",
+    "SY/T 6891.2 equations 1-6"
+  ],
+  "assumptions_and_limitations": [
+    "complete rupture uses the initial two-sided adiabatic choked-flow solution and does not yet solve transient line-pack depletion",
+    "dispersion uses the AQ/T 3046 Pasquill-Gifford continuous plume; high-pressure near-field transition requires independent validation",
+    "horizontal jet fire uses the conservative radial worst-case orientation envelope",
+    "TNO explosion-source volume and source strength are explicit project inputs",
+    "Figure E.1 curve points are digitized and remain provisional until independently benchmarked"
+  ],
+  "release_blockers": [
+    "transient rupture blowdown and line-pack depletion benchmark",
+    "pressurized-gas near-field dispersion benchmark",
+    "independent validation of digitized TNO Figure E.1 curves",
+    "approved production thermophysical, ignition, occupancy and congestion parameters",
+    "IR grid and leak-point convergence verification"
+  ],
+  "external_software_dependency": null
+}

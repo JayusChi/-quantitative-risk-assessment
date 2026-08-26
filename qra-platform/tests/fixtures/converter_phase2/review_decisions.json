@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "reviewer": "黄金案例复核人",
+  "reviewed_at": "2026-08-25T16:00:00+08:00",
+  "decisions": [
+    {
+      "review_id": "REV-A33E7BD07FE00D306F14",
+      "action": "ACCEPT_PROPOSED",
+      "reason": "已核对原始检测报告，以主数据中的断电电位为准"
+    }
+  ]
+}

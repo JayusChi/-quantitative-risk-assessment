@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "case_id": "CONVERTER-PHASE2-001",
+    "project_name": "多来源合并黄金案例",
+    "data_classification": "CUSTOMER_SOURCE_UNREVIEWED",
+    "converter_note": "结构化源资料自动映射结果，进入计算前须完成人工复核。"
+  },
+  "pipeline": {},
+  "segments": [
+    {
+      "segment_id": "SEG-001",
+      "start_km": 0.0,
+      "end_km": 1.0,
+      "length_km": 1.0,
+      "outside_diameter_mm": 610.0,
+      "wall_thickness_mm": 8.8
+    },
+    {
+      "segment_id": "SEG-002",
+      "start_km": 1.0,
+      "end_km": 2.0,
+      "length_km": 1.0,
+      "outside_diameter_mm": 610.0,
+      "wall_thickness_mm": 8.8
+    }
+  ],
+  "raw_data_categories": {
+    "cips_dense_interval_potential": {
+      "name_zh": "CIPS密间隔电位",
+      "records": [
+        {
+          "record_id": "CIPS-001",
+          "chainage_km": 0.5,
+          "on_potential_v": -1.1,
+          "off_potential_v": -0.95,
+          "out_of_range_fraction": 0.08,
+          "segment_id": "SEG-001"
+        },
+        {
+          "record_id": "CIPS-002",
+          "chainage_km": 1.5,
+          "on_potential_v": -1.08,
+          "off_potential_v": -0.93,
+          "out_of_range_fraction": 0.04,
+          "segment_id": "SEG-002"
+        }
+      ]
+    }
+  },
+  "data_category_manifest": {
+    "category_count": 2,
+    "categories": [
+      {
+        "category_id": "segment_chainage",
+        "name_zh": "管段编号、起止里程和长度",
+        "record_count": 2
+      },
+      {
+        "category_id": "cips_dense_interval_potential",
+        "name_zh": "CIPS密间隔电位",
+        "record_count": 2
+      }
+    ]
+  }
+}

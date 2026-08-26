@@ -1,0 +1,49 @@
+{
+  "model_id": "pipeline.adaptive.evidence_qra.v1",
+  "version": "1.0.0",
+  "status": "PROVISIONAL_CONFIGURABLE_EVIDENCE_MODEL",
+  "method_type": "QUANTITATIVE_EVIDENCE_CONDITIONED_SCREENING_QRA",
+  "applicability": "输入不满足完整空间人员域QRA时，利用现有管段、完整性、运行和高后果目标数据形成可追溯的定量筛查估计。",
+  "standard_formula_backbone": [
+    "GB/T 34346-2017 表C.1、表C.24、式(C.1)、式(C.40)-式(C.42)",
+    "AQ/T 3046-2013 式(E.13)-式(E.17)、式(E.58)-式(E.59)、式(6)-式(8)及表10",
+    "AQ/T 3046-2013 式(15)：风险为事故频率与期望死亡人数乘积之和"
+  ],
+  "evidence_update_note": "标准没有为任意指标组合规定统一权重。下列对数证据响应是可替换、需项目校准的模型参数，不冒充标准条文。缺失证据不阻断计算，而是按中性贡献处理并扩大不确定性带。",
+  "defaults": {
+    "operating_pressure_mpa": 4.0,
+    "operating_temperature_k": 288.15,
+    "outside_diameter_mm": 610.0,
+    "wall_thickness_mm": 10.0,
+    "ambient_pressure_pa_abs": 101325.0,
+    "molar_mass_kg_mol": 0.018,
+    "gamma": 1.31,
+    "gas_discharge_coefficient": 0.82,
+    "heat_of_combustion_j_kg": 50000000.0,
+    "radiative_fraction": 0.2,
+    "thermal_exposure_time_s": 20.0,
+    "point_ignition_probability": 0.1,
+    "day_time_weight": 0.5,
+    "default_population_density_per_m2": 0.0002,
+    "minimum_distance_m": 1.0,
+    "minimum_evidence_factor": 0.3,
+    "maximum_evidence_factor": 5.0,
+    "minimum_uncertainty_factor": 2.0,
+    "maximum_uncertainty_factor": 10.0
+  },
+  "evidence_terms": [
+    {"indicator_id": "external_corrosion.cp_off_potential_v", "name_zh": "断电电位", "reference": -0.85, "scale": 0.15, "coefficient": 0.55, "transform": "linear", "normalized_min": -2.0, "normalized_max": 3.0},
+    {"indicator_id": "external_corrosion.cp_out_of_range_fraction", "name_zh": "保护电位超限比例", "reference": 0.1, "scale": 0.2, "coefficient": 0.7, "transform": "linear", "normalized_min": -1.0, "normalized_max": 4.0},
+    {"indicator_id": "external_corrosion.dcvg_acvg_severity_max", "name_zh": "DCVG/ACVG最大严重度", "reference": 20.0, "scale": 30.0, "coefficient": 0.55, "transform": "linear", "normalized_min": -1.0, "normalized_max": 3.0},
+    {"indicator_id": "external_corrosion.soil_resistivity_ohm_m", "name_zh": "土壤电阻率", "reference": 40.0, "scale": 40.0, "coefficient": 0.45, "transform": "inverse", "normalized_min": -2.0, "normalized_max": 2.0},
+    {"indicator_id": "external_corrosion.ac_interference_voltage_v", "name_zh": "交流干扰电压", "reference": 4.0, "scale": 6.0, "coefficient": 0.4, "transform": "linear", "normalized_min": -1.0, "normalized_max": 3.0},
+    {"indicator_id": "inspection_integrity.maximum_corrosion_depth_ratio", "name_zh": "最大腐蚀深度比", "reference": 0.2, "scale": 0.2, "coefficient": 0.8, "transform": "linear", "normalized_min": -1.0, "normalized_max": 4.0},
+    {"indicator_id": "inspection_integrity.unrepaired_critical_anomaly_count", "name_zh": "未修复临界缺陷数量", "reference": 0.0, "scale": 1.0, "coefficient": 0.5, "transform": "linear", "normalized_min": 0.0, "normalized_max": 3.0},
+    {"indicator_id": "management_emergency.maintenance_completion_fraction", "name_zh": "维护计划完成率", "reference": 0.9, "scale": 0.3, "coefficient": 0.6, "transform": "inverse", "normalized_min": -0.34, "normalized_max": 3.0}
+  ],
+  "formal_release_limitations": [
+    "证据更新系数在用于真实决策前必须以适用管道失效数据校准、验证并批准",
+    "使用默认物性、点火概率、人口密度或其他先验时只能作为筛查估计",
+    "该模型不替代完整空间QRA的IR等值线和F-N合规判断"
+  ]
+}

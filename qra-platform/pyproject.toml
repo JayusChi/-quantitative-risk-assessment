@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pipeline-qra-platform"
+version = "0.8.0"
+description = "陆上埋地天然气输送管道 QRA 计算、数据转换与持久化平台"
+readme = {text = "天然气输送管道定量风险评估、源资料转换与持久化平台。完整使用说明见代码库外层 README.md。", content-type = "text/markdown"}
+requires-python = ">=3.10"
+dependencies = [
+    "openpyxl>=3.1,<4",
+    "pdfplumber>=0.11,<1",
+    "pypdf>=5,<7",
+    "xlrd>=2.0,<3",
+]
+
+[project.scripts]
+qra-engine = "qra_engine.cli:main"
+qra-db = "db_qra.cli:main"
+qra-converter = "qra_converter.cli:platform_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+qra_engine = ["model_specs/*.json"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

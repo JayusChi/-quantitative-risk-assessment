@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
+.env
+*.log
+
+# 本地业务数据、计算产物和运行状态不得进入源码版本库。
+workspace/inputs/**
+workspace/outputs/**
+workspace/runtime/**
+workspace/state/*.sqlite*
+!workspace/inputs/.gitkeep
+!workspace/outputs/.gitkeep
+!workspace/runtime/.gitkeep
+!workspace/state/.gitkeep
+

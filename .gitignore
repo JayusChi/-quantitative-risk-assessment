@@ -1,0 +1,63 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.lic
+
+# IDE and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
+
+# Logs, databases and generated runtime files
+*.log
+*.sqlite
+*.sqlite3
+*.db
+tmp/
+.tmp_*/
+
+# QRA local business data and generated results
+qra-platform/workspace/*
+!qra-platform/workspace/README.md
+
+# Local reference/source documents and licensed software are not source code
+/标准文档/
+/技术方案文档/
+/风险分析DNV GL Phast Safeti 8.4/
+/风险分析DNV GL Phast Safeti 8.4.rar
+/八月项目.doc
+
+# Archives, installers and executable binaries
+*.rar
+*.7z
+*.zip
+*.exe
+*.dll
+*.msi
+
+# Build and packaging outputs
+build/
+dist/
+site/
+

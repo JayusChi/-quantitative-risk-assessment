@@ -1,0 +1,31 @@
+{
+  "criterion_id": "GBT34346_2017_ANNEX_C_FIG_C2_REFERENCE_IR",
+  "version": "1.0.0",
+  "domain": "human_individual_risk",
+  "source": "GB/T 34346-2017 Annex C Figure C.2",
+  "status": "IMPLEMENTED_UNIT_TESTED",
+  "legal_force": "RECOMMENDED_STANDARD_REFERENCE_VALUE",
+  "thresholds_per_year": {
+    "acceptable_upper": 1e-5,
+    "unacceptable_lower": 1e-3
+  },
+  "classification": [
+    {
+      "level": "LOW_ACCEPTABLE",
+      "condition": "IR <= 1e-5 / year"
+    },
+    {
+      "level": "MEDIUM_ALARP",
+      "condition": "1e-5 / year < IR <= 1e-3 / year"
+    },
+    {
+      "level": "HIGH_UNACCEPTABLE",
+      "condition": "IR > 1e-3 / year"
+    }
+  ],
+  "notes": [
+    "The values in Figure C.2 are labelled reference values.",
+    "An approved project or jurisdiction criterion set shall override this set when applicable.",
+    "This set does not invent a numeric F-N acceptance curve."
+  ]
+}

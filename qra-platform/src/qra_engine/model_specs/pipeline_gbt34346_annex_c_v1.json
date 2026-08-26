@@ -1,0 +1,22 @@
+{
+  "model_id": "pipeline.gbt34346.annex_c.secondary.v1",
+  "version": "0.1.0",
+  "domain": "pipeline_quantitative_secondary_assessment",
+  "source": "GB/T 34346-2017 normative Annex C",
+  "status": "IMPLEMENTED_UNIT_TESTED_SYNTHETIC_PARAMETERS",
+  "implemented_formulas": [
+    "C.1",
+    "C.2",
+    "C.3",
+    "C.12-C.15 via qra_engine.aqt3046 equivalent SI implementation",
+    "C.40",
+    "C.41",
+    "C.42",
+    "C.43"
+  ],
+  "limitations": [
+    "This is the standard's secondary quantitative assessment, not the full spatial QRA required by SY/T 6891.2.",
+    "Point ignition probability and population density are explicit inputs until project GIS/ignition data are approved.",
+    "Horizontal jet-fire consequence is implemented; the full multi-consequence QRA remains blocked."
+  ]
+}

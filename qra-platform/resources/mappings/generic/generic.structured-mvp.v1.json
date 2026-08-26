@@ -1,0 +1,163 @@
+{
+  "profile_id": "generic.structured-mvp.v1",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "defaults": {
+    "schema_version": "1.0.0",
+    "metadata": {
+      "data_classification": "CUSTOMER_SOURCE_UNREVIEWED",
+      "converter_note": "结构化源资料自动映射结果，进入计算前须完成人工复核。"
+    },
+    "pipeline": {}
+  },
+  "tables": [
+    {
+      "id": "segments",
+      "target": "segments",
+      "name_zh": "管段台账",
+      "required": true,
+      "header_search_rows": 20,
+      "minimum_header_matches": 3,
+      "selectors": [
+        {"file_patterns": ["*segment*", "*管段*", "*分段*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(管段|分段|segment).*", "segments?"]}
+      ],
+      "fields": [
+        {"target": "segment_id", "aliases": ["segment_id", "segment id", "管段编号", "区段编号"], "type": "string", "required": true},
+        {"target": "start_km", "aliases": ["start_km", "起始里程(km)", "起点里程(km)", "起始里程", "起点里程", "起点桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "end_km", "aliases": ["end_km", "终止里程(km)", "终点里程(km)", "终止里程", "终点里程", "终点桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "length_km", "aliases": ["length_km", "长度(km)", "管段长度(km)", "管段长度"], "type": "number", "source_unit": "km", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "outside_diameter_mm", "aliases": ["outside_diameter_mm", "外径(mm)", "管径(mm)", "外径", "管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "minimum": 0},
+        {"target": "wall_thickness_mm", "aliases": ["wall_thickness_mm", "壁厚(mm)", "壁厚"], "type": "number", "source_unit": "mm", "target_unit": "mm", "minimum": 0},
+        {"target": "material_grade", "aliases": ["material_grade", "钢级", "管材"], "type": "string"}
+      ]
+    },
+    {
+      "id": "operating_conditions",
+      "target": "pipeline",
+      "name_zh": "运行工况",
+      "header_search_rows": 20,
+      "minimum_header_matches": 1,
+      "selectors": [
+        {"file_patterns": ["*operation*", "*工况*", "*运行参数*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(工况|运行参数|operation).*", "pipeline"]}
+      ],
+      "fields": [
+        {"target": "pipeline_id", "aliases": ["pipeline_id", "管线编号", "管道编号"], "type": "string"},
+        {"target": "service", "aliases": ["service", "输送介质"], "type": "enum", "enum_map": {"天然气": "natural_gas_transmission", "natural gas": "natural_gas_transmission"}},
+        {"target": "total_length_km", "aliases": ["total_length_km", "管线总长(km)", "管道总长(km)"], "type": "number", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "design_pressure_mpa", "aliases": ["design_pressure_mpa", "设计压力(mpa)", "设计压力"], "type": "number", "source_unit": "MPa", "target_unit": "MPa", "minimum": 0},
+        {"target": "operating_pressure_mpa", "aliases": ["operating_pressure_mpa", "运行压力(mpa)", "运行压力"], "type": "number", "source_unit": "MPa", "target_unit": "MPa", "minimum": 0},
+        {"target": "operating_temperature_k", "aliases": ["运行温度(℃)", "operating_temperature_c"], "type": "number", "source_unit": "℃", "target_unit": "K"}
+      ]
+    },
+    {
+      "id": "cips",
+      "target": "raw_data_categories.cips_dense_interval_potential",
+      "name_zh": "CIPS密间隔电位",
+      "attach_to_segment": true,
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*cips*", "*阴保*", "*密间隔*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(cips|阴保|密间隔).*" ]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "记录编号", "检测点编号", "测试桩编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号", "区段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "桩号(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "on_potential_v", "aliases": ["on_potential_v", "通电电位(v)", "通电电位"], "type": "number"},
+        {"target": "off_potential_v", "aliases": ["off_potential_v", "断电电位(v)", "断电电位"], "type": "number"},
+        {"target": "out_of_range_fraction", "aliases": ["超限比例(%)", "不合格比例(%)", "out_of_range_percent"], "type": "number", "source_unit": "%", "target_unit": "fraction", "minimum": 0, "maximum": 1}
+      ]
+    },
+    {
+      "id": "dcvg_acvg",
+      "target": "raw_data_categories.coating_defect_survey",
+      "name_zh": "DCVG/ACVG防腐层缺陷",
+      "attach_to_segment": true,
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*dcvg*", "*acvg*", "*防腐层缺陷*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(dcvg|acvg|防腐层缺陷).*" ]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "缺陷编号", "记录编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号", "区段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "缺陷里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "survey_method", "aliases": ["检测方法", "survey_method"], "type": "enum", "enum_map": {"dcvg": "DCVG", "acvg": "ACVG"}},
+        {"target": "severity", "aliases": ["缺陷等级", "严重程度", "severity"], "type": "string"},
+        {"target": "ir_percent", "aliases": ["ir(%)", "ir_percent"], "type": "number", "source_unit": "%", "target_unit": "%", "minimum": 0, "maximum": 100}
+      ]
+    },
+    {
+      "id": "inline_inspection",
+      "target": "raw_data_categories.inline_inspection_defects",
+      "name_zh": "内检测缺陷",
+      "attach_to_segment": true,
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*内检测*", "*内检测缺陷*", "*inline*", "*ili*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(内检测|缺陷|inline|ili).*" ]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "缺陷编号", "异常编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号", "区段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "缺陷里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "anomaly_type", "aliases": ["anomaly_type", "缺陷类型", "异常类型"], "type": "string"},
+        {"target": "depth_fraction", "aliases": ["缺陷深度(%)", "金属损失(%)", "depth_percent"], "type": "number", "source_unit": "%", "target_unit": "fraction", "minimum": 0, "maximum": 1},
+        {"target": "length_mm", "aliases": ["缺陷长度(mm)", "length_mm"], "type": "number", "source_unit": "mm", "target_unit": "mm", "minimum": 0},
+        {"target": "width_mm", "aliases": ["缺陷宽度(mm)", "width_mm"], "type": "number", "source_unit": "mm", "target_unit": "mm", "minimum": 0},
+        {"target": "unrepaired_critical_anomaly_count", "aliases": ["未修复严重缺陷数", "unrepaired_critical_anomaly_count"], "type": "integer", "minimum": 0}
+      ]
+    },
+    {
+      "id": "population_targets",
+      "target": "population_cells",
+      "raw_category_id": "high_consequence_targets",
+      "name_zh": "人口与高后果目标",
+      "attach_to_segment": true,
+      "header_search_rows": 25,
+      "minimum_header_matches": 3,
+      "selectors": [
+        {"file_patterns": ["*人口*", "*高后果*", "*population*", "*receptor*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(人口|高后果|population|receptor).*" ]}
+      ],
+      "fields": [
+        {"target": "target_id", "aliases": ["target_id", "受体编号", "目标编号", "高后果区编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号", "区段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "目标里程(km)", "桩号", "高后果区起点"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "target_type", "aliases": ["target_type", "受体类型", "目标类型", "高后果区类型"], "type": "string"},
+        {"target": "x_m", "aliases": ["x_m", "x坐标(m)", "x坐标"], "type": "number", "source_unit": "m", "target_unit": "m", "required": true},
+        {"target": "y_m", "aliases": ["y_m", "y坐标(m)", "y坐标"], "type": "number", "source_unit": "m", "target_unit": "m", "required": true},
+        {"target": "population_day", "aliases": ["population_day", "昼间人口", "白天人口"], "type": "number", "minimum": 0, "required": true},
+        {"target": "population_night", "aliases": ["population_night", "夜间人口", "夜晚人口"], "type": "number", "minimum": 0, "required": true},
+        {"target": "outdoor_fraction_day", "aliases": ["昼间室外比例(%)", "白天室外比例(%)", "outdoor_percent_day"], "type": "number", "source_unit": "%", "target_unit": "fraction", "minimum": 0, "maximum": 1},
+        {"target": "outdoor_fraction_night", "aliases": ["夜间室外比例(%)", "夜晚室外比例(%)", "outdoor_percent_night"], "type": "number", "source_unit": "%", "target_unit": "fraction", "minimum": 0, "maximum": 1}
+      ]
+    },
+    {
+      "id": "maintenance_work_orders",
+      "target": "raw_data_categories.events_and_maintenance_work_orders",
+      "name_zh": "维修工单",
+      "attach_to_segment": true,
+      "header_search_rows": 20,
+      "minimum_header_matches": 2,
+      "selectors": [
+        {"file_patterns": ["*维修*", "*工单*", "*maintenance*", "*work_order*"], "sheet_patterns": [".*"]},
+        {"file_patterns": ["*.xls", "*.xlsx"], "sheet_patterns": [".*(维修|工单|maintenance|work.?order).*" ]}
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["record_id", "工单编号", "维修编号"], "type": "string", "required": true},
+        {"target": "segment_id", "aliases": ["segment_id", "管段编号", "区段编号"], "type": "string"},
+        {"target": "chainage_km", "aliases": ["chainage_km", "里程(km)", "维修里程(km)", "桩号"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0},
+        {"target": "work_order_date", "aliases": ["work_order_date", "工单日期", "维修日期"], "type": "date"},
+        {"target": "status", "aliases": ["status", "工单状态", "维修状态"], "type": "string"},
+        {"target": "work_order_count", "aliases": ["work_order_count", "工单数量"], "type": "integer", "minimum": 0},
+        {"target": "completed_work_order_count", "aliases": ["completed_work_order_count", "已完成工单数量"], "type": "integer", "minimum": 0}
+      ]
+    }
+  ]
+}
