@@ -1,0 +1,125 @@
+{
+  "acceptance_id": "qra.stage3-parsing/1.0.0",
+  "deterministic_suite": "PASS",
+  "errors": 0,
+  "executed_at": "2026-08-28T02:28:20.031356+00:00",
+  "failures": 0,
+  "formal_scan_acceptance": true,
+  "ocr_configuration": {
+    "configured": true,
+    "protection": "WINDOWS_DPAPI_CURRENT_USER",
+    "source": "encrypted-store"
+  },
+  "real_ocr_audit": {
+    "status": "PASS",
+    "targets": [
+      {
+        "file_name": "001.jpg",
+        "input_sha256": "d53f3385ba6ed037e8889cb728efe02cba1493d642df12d7cdd05522eaa42bc4",
+        "issue_codes": [
+          "PARSE.IMAGE_CONTENT_CLIPPED",
+          "PARSE.IMAGE_SKEWED"
+        ],
+        "label": "JIUJIANG_IMAGE",
+        "located_ocr_block_count": 3,
+        "media_type": "image/jpeg",
+        "ocr_block_count": 3,
+        "ocr_calls": [
+          {
+            "model_version": "qwen3.5-ocr",
+            "provider_id": "aliyun-bailian-dashscope",
+            "provider_request_id": "0b8cea88-6c4b-9720-b55f-e92f66cabe59",
+            "raw_response_sha256": "b2682aa016b0eb32427e5ef3c48db2b55c2d0b46d025489fda8811644c593763"
+          }
+        ],
+        "ocr_cell_count": 0,
+        "page_classifications": [
+          "IMAGE"
+        ],
+        "page_count": 1,
+        "parse_sha256": "8854eec5806aa779196f14d3dfebf1a1e0a5982d307fd14db739c3de5f73faa3",
+        "parsing_provenance": {
+          "cache_key": "527351f03df7de62fe4a99a0af0838d285f8f63874e83b4a54a74b8e38e37a1c",
+          "contract_version": "qra.parsed-document/1.0.0",
+          "ocr_model_version": "qwen3.5-ocr",
+          "ocr_parameters": {
+            "detect_tables": true,
+            "languages": [
+              "zh-Hans",
+              "en"
+            ],
+            "timeout_seconds": 120.0
+          },
+          "ocr_provider_id": "aliyun-bailian-dashscope",
+          "parser_id": "image/pillow-ocr",
+          "parser_version": "1.0.0",
+          "preprocessing_profile": "qra.image-preprocess/1.0.0",
+          "source_sha256": "d53f3385ba6ed037e8889cb728efe02cba1493d642df12d7cdd05522eaa42bc4"
+        },
+        "succeeded": true,
+        "table_count": 0
+      },
+      {
+        "file_name": "jiujiang-real-scan-acceptance.pdf",
+        "input_sha256": "8697e29759fb93264e5b0df926ee20382fe429338addd494936dfed533827611",
+        "issue_codes": [
+          "PARSE.IMAGE_CONTENT_CLIPPED",
+          "PARSE.IMAGE_SKEWED"
+        ],
+        "label": "JIUJIANG_SCAN_PDF",
+        "located_ocr_block_count": 7,
+        "media_type": "application/pdf",
+        "ocr_block_count": 7,
+        "ocr_calls": [
+          {
+            "image_id": "page-1-image-1",
+            "model_version": "qwen3.5-ocr",
+            "page_number": 1,
+            "provider_id": "aliyun-bailian-dashscope",
+            "provider_request_id": "a2f172a2-47db-98be-9adb-9303a6b6fdba",
+            "raw_response_sha256": "0ffdf12dead7a8b1885755523e733fe0a37a254e47b33b87764b37ee44d1a52a"
+          },
+          {
+            "image_id": "page-2-image-1",
+            "model_version": "qwen3.5-ocr",
+            "page_number": 2,
+            "provider_id": "aliyun-bailian-dashscope",
+            "provider_request_id": "9a6759d4-40d2-94a0-be59-e0b9042132e2",
+            "raw_response_sha256": "3103ced1e59cb3aa69bfe2496a0f5651f31a03bf86cd4bcc677fae75160b1f3f"
+          }
+        ],
+        "ocr_cell_count": 0,
+        "page_classifications": [
+          "SCAN",
+          "SCAN"
+        ],
+        "page_count": 2,
+        "parse_sha256": "57c6e3a1e2f1e0a963a9c893ac13dd68f93c169e7bc65652161d9cd1a40f5db7",
+        "parsing_provenance": {
+          "cache_key": "9def4c31fd2e5f5d850fe475c366d597322350768badbdda38917a9286ee60d3",
+          "contract_version": "qra.parsed-document/1.0.0",
+          "ocr_model_version": "qwen3.5-ocr",
+          "ocr_parameters": {
+            "detect_tables": true,
+            "languages": [
+              "zh-Hans",
+              "en"
+            ],
+            "timeout_seconds": 120.0
+          },
+          "ocr_provider_id": "aliyun-bailian-dashscope",
+          "parser_id": "pdf/pdfplumber-pypdf-ocr",
+          "parser_version": "2.0.0",
+          "preprocessing_profile": "qra.image-preprocess/1.0.0",
+          "source_sha256": "8697e29759fb93264e5b0df926ee20382fe429338addd494936dfed533827611"
+        },
+        "succeeded": true,
+        "table_count": 0
+      }
+    ]
+  },
+  "real_ocr_status": "PASS",
+  "skipped": 1,
+  "stage": 3,
+  "tests_run": 35
+}

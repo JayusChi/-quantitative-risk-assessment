@@ -1,0 +1,67 @@
+{
+  "fixture_contract": "qra.stage3.synthetic-fixtures/1.0.0",
+  "generation": "tests/unit/converter/parsing/test_document_readers.py creates all source files in isolated temporary directories",
+  "cases": {
+    "csv_multiline_gb18030": {
+      "expected_encoding": "gb18030",
+      "expected_second_record_physical_lines": [2, 3],
+      "expected_leading_zero": "001",
+      "expected_empty_type": "EMPTY_STRING"
+    },
+    "xlsx_formula_merge_hidden_date": {
+      "expected_merge": "A1:B1",
+      "expected_formula": "=1+1",
+      "expected_formula_issue": "PARSE.FORMULA_VALUE_MISSING",
+      "expected_hidden_row": 3,
+      "expected_hidden_column": "C"
+    },
+    "xls_biff_formula_merge_date": {
+      "fixture": "stage3_legacy.xls",
+      "expected_sheet_count": 2,
+      "expected_merge": "R1C1:R1C4",
+      "expected_leading_zero": "001",
+      "expected_formula": "=1.0+1.0",
+      "expected_cached_value": 2.0,
+      "expected_date": "2026-08-28"
+    },
+    "docx_structure": {
+      "expected_page_count": 0,
+      "expected_location": "word/document.xml;paragraph:1"
+    },
+    "native_pdf": {
+      "expected_page_classification": "TEXT_NATIVE",
+      "expected_page_number": 1
+    },
+    "scan_pdf_fixture_ocr": {
+      "expected_page_classification": "SCAN",
+      "expected_text": "扫描证据",
+      "expected_coordinate_space": "PDF_POINTS_TOP_LEFT"
+    },
+    "mixed_pdf_native_and_scan": {
+      "expected_page_classifications": ["TEXT_NATIVE", "SCAN"],
+      "expected_ocr_page_number": 2
+    },
+    "rotated_scan_pdf": {
+      "expected_rotation": 90,
+      "expected_coordinate_space": "PDF_POINTS_TOP_LEFT"
+    },
+    "image_fixture_ocr": {
+      "expected_text": "管段001",
+      "expected_low_confidence_issue": "PARSE.LOW_TEXT_CONFIDENCE"
+    },
+    "image_ocr_disabled": {
+      "expected_issues": [
+        "PARSE.OCR_REQUIRED",
+        "PARSE.OCR_PROVIDER_NOT_CONFIGURED"
+      ]
+    },
+    "image_quality_variants": {
+      "expected_flags": ["blurry", "overexposed", "underexposed", "low_resolution"]
+    },
+    "invalid_inputs": {
+      "corrupt_pdf_issue": "PARSE.DOCUMENT_CORRUPT",
+      "empty_csv_issue": "PARSE.NO_CONTENT",
+      "oversized_image_issue": "PARSE.DOCUMENT_CORRUPT"
+    }
+  }
+}

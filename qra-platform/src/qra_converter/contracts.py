@@ -41,6 +41,7 @@ class RawTable:
     extraction_method: str = "STRUCTURED_TABLE"
     confidence: float = 1.0
     requires_review: bool = False
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -117,6 +118,9 @@ class ConversionResult:
 
     payload: dict[str, Any]
     mapping_version: str
+    contract_id: str | None = None
+    contract_version: str | None = None
+    contract_sha256: str | None = None
     sources: tuple[SourceReference, ...] = field(default_factory=tuple)
     issues: tuple[ConversionIssue, ...] = field(default_factory=tuple)
     lineage: tuple[FieldLineage, ...] = field(default_factory=tuple)
@@ -142,6 +146,9 @@ class ConversionResult:
         return {
             "payload": self.payload,
             "mapping_version": self.mapping_version,
+            "contract_id": self.contract_id,
+            "contract_version": self.contract_version,
+            "contract_sha256": self.contract_sha256,
             "sources": [asdict(source) for source in self.sources],
             "issues": [
                 {**asdict(issue), "severity": issue.severity.value} for issue in self.issues

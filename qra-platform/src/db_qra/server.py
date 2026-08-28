@@ -6,6 +6,7 @@ import hmac
 import io
 import json
 import os
+import re
 import threading
 import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -24,12 +25,53 @@ from .conversion_adapter import (
 )
 from .database import QraDatabase
 from .engine_adapter import ENGINE_VERSION, execute_run, preview_case
+from .file_intake import (
+    MAX_SOURCE_FILES,
+    MAX_UPLOAD_FILE_BYTES,
+    MAX_UPLOAD_TOTAL_BYTES,
+    IntakeError,
+)
 from .paths import DEFAULT_RUNTIME_ROOT
+from .ocr_settings import (
+    DEFAULT_OCR_TIMEOUT_SECONDS,
+    OcrSettingsStore,
+    apply_ocr_settings,
+    environment_ocr_configured,
+    load_ocr_settings_into_process,
+    ocr_settings_status,
+    parse_bailian_config_csv,
+    settings_path_for_database,
+    validate_bailian_settings,
+)
 
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
 RUNTIME_ROOT = DEFAULT_RUNTIME_ROOT
 RUN_SLOTS = threading.BoundedSemaphore(value=2)
 CONVERSION_SLOTS = threading.BoundedSemaphore(value=2)
+
+
+def _public_error_message(value: object) -> str:
+    message = str(value)
+    message = re.sub(
+        r"(?:[A-Za-z]:[\\/]|/)(?:[^\s:]+[\\/])*[^\s:]*",
+        "[受控路径]",
+        message,
+    )
+    return message[:500]
+
+
+def _public_conversion_job(job: dict[str, Any]) -> dict[str, Any]:
+    """Hide legacy non-actionable JPEG metadata notices from customers."""
+    public = dict(job)
+    issues = public.get("intake_issues")
+    if isinstance(issues, list):
+        public["intake_issues"] = [
+            issue
+            for issue in issues
+            if not isinstance(issue, dict)
+            or issue.get("code") != "INTAKE.JPEG_TRAILING_DATA"
+        ]
+    return public
 
 
 def _conversion_background(database: QraDatabase, job_id: str) -> None:
@@ -43,7 +85,7 @@ def _conversion_background(database: QraDatabase, job_id: str) -> None:
                 "code": "CONVERSION_WORKER_FAILED",
                 "stage": "background",
                 "type": type(exc).__name__,
-                "message": str(exc),
+                "message": _public_error_message(exc),
             },
         )
         print(f"[QRA-Converter] {job_id} failed: {type(exc).__name__}: {exc}")
@@ -109,6 +151,14 @@ def _zip_run(database: QraDatabase, run_id: str) -> bytes:
 
 class QraRequestHandler(BaseHTTPRequestHandler):
     database: QraDatabase
+    ocr_settings_store: OcrSettingsStore | None = None
+
+    def _get_ocr_settings_store(self) -> OcrSettingsStore:
+        store = self.ocr_settings_store
+        if store is None:
+            store = OcrSettingsStore(settings_path_for_database(self.database.path))
+            type(self).ocr_settings_store = store
+        return store
 
     def _send(
         self,
@@ -165,6 +215,18 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         except json.JSONDecodeError as exc:
             raise ValueError(f"JSON语法错误：第{exc.lineno}行，第{exc.colno}列") from exc
 
+    def _read_optional_json_body(self) -> dict[str, Any]:
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+        except ValueError as exc:
+            raise ValueError("无效的Content-Length") from exc
+        if length == 0:
+            return {}
+        body = self._read_json_body()
+        if not isinstance(body, dict):
+            raise ValueError("请求体必须是JSON对象")
+        return body
+
     def _require_write_access(self) -> None:
         """Keep mutations local by default or require an explicit deployment token."""
         configured = os.environ.get("QRA_ADMIN_TOKEN")
@@ -194,17 +256,32 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         raw_files = body.get("files")
         if not isinstance(raw_files, list) or not raw_files:
             raise ValueError("files必须是非空数组")
+        if len(raw_files) > MAX_SOURCE_FILES:
+            raise ValueError(f"files最多包含{MAX_SOURCE_FILES}项")
         decoded = []
+        decoded_total = 0
+        encoded_total = 0
+        max_encoded_file = 4 * ((MAX_UPLOAD_FILE_BYTES + 2) // 3)
+        max_encoded_total = 4 * ((MAX_UPLOAD_TOTAL_BYTES + 2) // 3)
         for index, item in enumerate(raw_files):
             if not isinstance(item, dict):
                 raise ValueError(f"files[{index}]必须是对象")
             encoded = item.get("content_base64")
             if not isinstance(encoded, str) or not encoded:
                 raise ValueError(f"files[{index}].content_base64不能为空")
+            encoded_length = len(encoded)
+            encoded_total += encoded_length
+            if encoded_length > max_encoded_file or encoded_total > max_encoded_total:
+                raise ValueError("Base64编码内容超过入口大小限制")
             try:
                 content = base64.b64decode(encoded, validate=True)
             except (binascii.Error, ValueError) as exc:
                 raise ValueError(f"files[{index}]不是有效Base64") from exc
+            if len(content) > MAX_UPLOAD_FILE_BYTES:
+                raise ValueError(f"files[{index}]解码后超过单文件大小限制")
+            decoded_total += len(content)
+            if decoded_total > MAX_UPLOAD_TOTAL_BYTES:
+                raise ValueError("files解码后总量超过任务大小限制")
             decoded.append(
                 {
                     "file_name": str(item.get("file_name") or ""),
@@ -229,13 +306,16 @@ class QraRequestHandler(BaseHTTPRequestHandler):
             review_decisions=review_decisions,
             batch_id=batch_id,
             actor=self._actor(body),
+            contract=str(body.get("contract") or "").strip() or None,
+            failure_policy=str(body.get("failure_policy") or "ALL_OR_NOTHING"),
         )
-        if created:
+        job = self.database.get_conversion_job(job_id, detailed=False)
+        if created and job["status"] == "QUEUED":
             _start_conversion_thread(self.database, job_id)
         return {
             "created": created,
             "deduplicated": not created,
-            "job": self.database.get_conversion_job(job_id, detailed=False),
+            "job": job,
         }
 
     @staticmethod
@@ -286,15 +366,60 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 overview["storage_engine"] = "SQLite"
                 self._json(200, overview)
                 return
+            if parts == ["admin", "api", "ocr-settings"]:
+                self._json(200, ocr_settings_status(self._get_ocr_settings_store()))
+                return
             if parts == ["admin", "api", "conversion-profiles"]:
                 self._json(200, list_mapping_profiles())
                 return
             if parts == ["admin", "api", "conversions"]:
                 limit = int(query.get("limit", ["200"])[0])
-                self._json(200, self.database.list_conversion_jobs(limit))
+                status = str(query.get("status", [""])[0]).strip() or None
+                cursor = str(query.get("cursor", [""])[0]).strip() or None
+                self._json(
+                    200,
+                    self.database.list_conversion_jobs(limit, status=status, cursor=cursor),
+                )
                 return
+            if (
+                len(parts) == 7
+                and parts[:3] == ["admin", "api", "conversions"]
+                and parts[4] == "sources"
+                and parts[6] == "artifacts"
+            ):
+                artifact_path = str(query.get("path", [""])[0]).strip()
+                if not artifact_path:
+                    self._json(
+                        200,
+                        self.database.list_conversion_parse_artifacts(parts[3], parts[5]),
+                    )
+                    return
+                stored = self.database.get_conversion_parse_artifact(
+                    parts[3], parts[5], artifact_path
+                )
+                if stored is None:
+                    self._json(404, {"error": "PARSE_ARTIFACT_NOT_FOUND"})
+                    return
+                metadata, content = stored
+                self._send(
+                    200,
+                    str(metadata["content_type"]),
+                    content,
+                    headers={"ETag": str(metadata["sha256"])},
+                )
+                return
+            if len(parts) == 5 and parts[:3] == ["admin", "api", "conversions"]:
+                if parts[4] == "sources":
+                    self._json(200, self.database.list_conversion_sources(parts[3]))
+                    return
+                if parts[4] == "events":
+                    limit = int(query.get("limit", ["500"])[0])
+                    self._json(200, self.database.list_conversion_events(parts[3], limit=limit))
+                    return
             if len(parts) == 4 and parts[:3] == ["admin", "api", "conversions"]:
-                self._json(200, self.database.get_conversion_job(parts[3]))
+                job = _public_conversion_job(self.database.get_conversion_job(parts[3]))
+                job["events"] = self.database.list_conversion_events(parts[3])
+                self._json(200, job)
                 return
             if parts == ["admin", "api", "snapshots"]:
                 self._json(200, self.database.list_snapshots())
@@ -399,11 +524,24 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     cache_control="private, max-age=60",
                 )
                 return
-            self._json(404, {"error": "未找到页面"})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": "未找到页面", "issues": []},
+            )
         except KeyError as exc:
-            self._json(404, {"error": str(exc)})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": _public_error_message(exc), "issues": []},
+            )
         except PermissionError as exc:
-            self._json(403, {"error": "FORBIDDEN", "message": str(exc)})
+            self._json(
+                403,
+                {
+                    "error": "FORBIDDEN",
+                    "message": _public_error_message(exc),
+                    "issues": [],
+                },
+            )
         except InputValidationError as exc:
             self._json(
                 400,
@@ -413,16 +551,84 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     "issues": [issue.to_dict() for issue in exc.issues],
                 },
             )
+        except IntakeError as exc:
+            self._json(
+                400,
+                {
+                    "error": "FILE_INTAKE_REJECTED",
+                    "message": _public_error_message(exc),
+                    "issues": [issue.to_dict() for issue in exc.issues],
+                },
+            )
         except ValueError as exc:
-            self._json(400, {"error": "BAD_REQUEST", "message": str(exc)})
-        except Exception as exc:
-            self._json(500, {"error": f"{type(exc).__name__}: {exc}"})
+            self._json(
+                400,
+                {"error": "BAD_REQUEST", "message": _public_error_message(exc), "issues": []},
+            )
+        except Exception:
+            self._json(
+                500,
+                {
+                    "error": "INTERNAL_SERVER_ERROR",
+                    "message": "服务器处理请求时发生内部错误",
+                    "issues": [],
+                },
+            )
 
     def do_POST(self) -> None:  # noqa: N802
         decoded_path = unquote(urlparse(self.path).path)
         parts = self._parts(decoded_path)
         try:
             self._require_write_access()
+            if parts == ["admin", "api", "ocr-settings"]:
+                body = self._read_json_body()
+                if not isinstance(body, dict):
+                    raise ValueError("请求体必须是JSON对象")
+                store = self._get_ocr_settings_store()
+                csv_text = body.get("csv_text")
+                if csv_text is not None and (
+                    not isinstance(csv_text, str) or not csv_text.strip()
+                ):
+                    raise ValueError("csv_text必须是非空字符串")
+                if isinstance(csv_text, str):
+                    settings = parse_bailian_config_csv(
+                        csv_text,
+                        ocr_model_version=str(
+                            body.get("ocr_model_version") or "qwen3.5-ocr"
+                        ),
+                        vision_model_version=str(
+                            body.get("vision_model_version") or "qwen3.7-max"
+                        ),
+                        ocr_timeout_seconds=body.get(
+                            "ocr_timeout_seconds", DEFAULT_OCR_TIMEOUT_SECONDS
+                        ),
+                    )
+                else:
+                    existing = store.load()
+                    if existing is None:
+                        raise ValueError("首次配置必须上传阿里云百炼CSV")
+                    settings = validate_bailian_settings(
+                        api_key=existing.api_key,
+                        api_host=existing.api_host,
+                        dashscope_url=existing.dashscope_url,
+                        openai_base_url=existing.openai_base_url,
+                        ocr_model_version=str(
+                            body.get("ocr_model_version") or existing.ocr_model_version
+                        ),
+                        vision_model_version=str(
+                            body.get("vision_model_version")
+                            or existing.vision_model_version
+                        ),
+                        ocr_timeout_seconds=body.get(
+                            "ocr_timeout_seconds", existing.ocr_timeout_seconds
+                        ),
+                        workspace_name=existing.workspace_name,
+                        workspace_id=existing.workspace_id,
+                    )
+                store.save(settings)
+                apply_ocr_settings(settings, source="encrypted-store")
+                self._json(200, ocr_settings_status(store))
+                return
             if parts == ["admin", "api", "conversions"]:
                 body = self._read_json_body()
                 if not isinstance(body, dict):
@@ -467,9 +673,11 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 return
             if len(parts) == 5 and parts[:3] == ["admin", "api", "conversions"]:
                 job_id = parts[3]
-                body = self._read_json_body()
-                if not isinstance(body, dict):
-                    raise ValueError("请求体必须是JSON对象")
+                body = self._read_optional_json_body()
+                if parts[4] == "cancel":
+                    job = self.database.request_conversion_cancel(job_id, actor=self._actor(body))
+                    self._json(200, {"job": job})
+                    return
                 if parts[4] == "retry":
                     decisions = body.get("review_decisions")
                     if decisions is not None and not isinstance(decisions, dict):
@@ -479,10 +687,12 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         review_decisions=decisions,
                         actor=self._actor(body),
                     )
-                    _start_conversion_thread(self.database, retry_id)
+                    retry_job = self.database.get_conversion_job(retry_id, detailed=False)
+                    if retry_job["status"] == "QUEUED":
+                        _start_conversion_thread(self.database, retry_id)
                     self._json(
                         202,
-                        {"job": self.database.get_conversion_job(retry_id, detailed=False)},
+                        {"job": retry_job},
                     )
                     return
                 if parts[4] == "confirm":
@@ -578,11 +788,24 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 )
                 self._json(202, {"run": self.database.get_run(run_id)})
                 return
-            self._json(404, {"error": "未找到接口"})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": "未找到接口", "issues": []},
+            )
         except KeyError as exc:
-            self._json(404, {"error": str(exc)})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": _public_error_message(exc), "issues": []},
+            )
         except PermissionError as exc:
-            self._json(403, {"error": "FORBIDDEN", "message": str(exc)})
+            self._json(
+                403,
+                {
+                    "error": "FORBIDDEN",
+                    "message": _public_error_message(exc),
+                    "issues": [],
+                },
+            )
         except InputValidationError as exc:
             self._json(
                 400,
@@ -592,29 +815,78 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     "issues": [issue.to_dict() for issue in exc.issues],
                 },
             )
+        except IntakeError as exc:
+            self._json(
+                400,
+                {
+                    "error": "FILE_INTAKE_REJECTED",
+                    "message": _public_error_message(exc),
+                    "issues": [issue.to_dict() for issue in exc.issues],
+                },
+            )
         except ValueError as exc:
-            self._json(400, {"error": "BAD_REQUEST", "message": str(exc)})
-        except Exception as exc:
-            self._json(500, {"error": f"{type(exc).__name__}: {exc}"})
+            self._json(
+                400,
+                {"error": "BAD_REQUEST", "message": _public_error_message(exc), "issues": []},
+            )
+        except Exception:
+            self._json(
+                500,
+                {
+                    "error": "INTERNAL_SERVER_ERROR",
+                    "message": "服务器处理请求时发生内部错误",
+                    "issues": [],
+                },
+            )
 
     def do_DELETE(self) -> None:  # noqa: N802
         decoded_path = unquote(urlparse(self.path).path)
         parts = self._parts(decoded_path)
         try:
             self._require_write_access()
+            if len(parts) == 4 and parts[:3] == ["admin", "api", "conversions"]:
+                result = self.database.delete_conversion_job(
+                    parts[3],
+                    actor=str(self.headers.get("X-QRA-Actor") or "local-admin"),
+                )
+                self._json(200, result)
+                return
             if len(parts) == 4 and parts[:3] == ["admin", "api", "snapshots"]:
                 self.database.delete_snapshot(parts[3])
                 self._json(200, {"status": "DELETED", "snapshot_id": parts[3]})
                 return
-            self._json(404, {"error": "未找到接口"})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": "未找到接口", "issues": []},
+            )
         except KeyError as exc:
-            self._json(404, {"error": str(exc)})
+            self._json(
+                404,
+                {"error": "NOT_FOUND", "message": _public_error_message(exc), "issues": []},
+            )
         except PermissionError as exc:
-            self._json(403, {"error": "FORBIDDEN", "message": str(exc)})
+            self._json(
+                403,
+                {
+                    "error": "FORBIDDEN",
+                    "message": _public_error_message(exc),
+                    "issues": [],
+                },
+            )
         except ValueError as exc:
-            self._json(409, {"error": str(exc)})
-        except Exception as exc:
-            self._json(500, {"error": f"{type(exc).__name__}: {exc}"})
+            self._json(
+                409,
+                {"error": "CONFLICT", "message": _public_error_message(exc), "issues": []},
+            )
+        except Exception:
+            self._json(
+                500,
+                {
+                    "error": "INTERNAL_SERVER_ERROR",
+                    "message": "服务器处理请求时发生内部错误",
+                    "issues": [],
+                },
+            )
 
     def log_message(self, format: str, *args: object) -> None:
         print(f"[QRA-Web] {self.address_string()} - {format % args}")
@@ -622,15 +894,27 @@ class QraRequestHandler(BaseHTTPRequestHandler):
 
 def serve(database: QraDatabase, host: str, port: int) -> None:
     database.initialize()
+    ocr_settings_store = OcrSettingsStore(settings_path_for_database(database.path))
+    try:
+        restored_ocr = load_ocr_settings_into_process(ocr_settings_store)
+    except (OSError, RuntimeError, ValueError) as exc:
+        restored_ocr = None
+        print(f"[QRA-OCR] 无法加载本机加密配置：{type(exc).__name__}: {_public_error_message(exc)}")
     recovered_jobs = database.requeue_interrupted_conversions()
     handler = type(
         "ConfiguredQraRequestHandler",
         (QraRequestHandler,),
-        {"database": database},
+        {"database": database, "ocr_settings_store": ocr_settings_store},
     )
     server = ThreadingHTTPServer((host, port), handler)
     print(f"QRA企业管理中心：http://{host}:{port}/admin/")
     print(f"数据库：{database.path}")
+    if restored_ocr is not None:
+        print(f"OCR：已从本机加密配置加载 {restored_ocr.ocr_model_version}")
+    elif environment_ocr_configured():
+        print(f"OCR：已从进程环境加载 {os.environ.get('QRA_OCR_MODEL_VERSION', 'qwen3.5-ocr')}")
+    else:
+        print("OCR：未配置，可在资料自动转换页面导入阿里云百炼CSV")
     for job_id in recovered_jobs:
         _start_conversion_thread(database, job_id)
     try:

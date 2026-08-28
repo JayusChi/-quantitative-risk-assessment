@@ -18,8 +18,8 @@ workspace/inputs/**
 workspace/outputs/**
 workspace/runtime/**
 workspace/state/*.sqlite*
+workspace/state/ocr-settings.json
 !workspace/inputs/.gitkeep
 !workspace/outputs/.gitkeep
 !workspace/runtime/.gitkeep
 !workspace/state/.gitkeep
-
