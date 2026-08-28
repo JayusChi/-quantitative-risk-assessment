@@ -25,7 +25,9 @@ from .risk_criteria import GBT34346_2017_ANNEX_C_IR, classify_individual_risk
 from .validation import ValidationReport, validate_case
 
 
-ENGINE_VERSION = "0.6.0"
+ENGINE_VERSION = "0.6.1"
+
+
 class QRAEngine:
     def __init__(
         self,

@@ -20,6 +20,9 @@ class MappingProfile:
     tables: tuple[dict[str, Any], ...]
     path: Path
     checksum_sha256: str
+    contract_id: str | None = None
+    contract_version: str | None = None
+    contract_sha256: str | None = None
     source_priorities: tuple[dict[str, Any], ...] = ()
     manual_review: dict[str, Any] | None = None
     inherited_profiles: tuple[str, ...] = ()
@@ -83,6 +86,19 @@ def _validate_profile(payload: Any, path: Path) -> None:
         raise ValueError(f"映射配置缺少字段：{', '.join(missing)}")
     if payload["schema_version"] != PROFILE_SCHEMA_VERSION:
         raise ValueError(f"映射配置schema_version必须为{PROFILE_SCHEMA_VERSION}")
+    contract_id = payload.get("contract_id")
+    contract_version = payload.get("contract_version")
+    if bool(contract_id) != bool(contract_version):
+        raise ValueError("映射配置contract_id和contract_version必须同时声明")
+    if contract_id is not None and not isinstance(contract_id, str):
+        raise ValueError("映射配置contract_id必须是字符串")
+    if contract_version is not None and not re.fullmatch(
+        r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", str(contract_version)
+    ):
+        raise ValueError("映射配置contract_version必须是SemVer")
+    contract_sha256 = payload.get("contract_sha256")
+    if contract_sha256 is not None and not re.fullmatch(r"[0-9a-f]{64}", str(contract_sha256)):
+        raise ValueError("映射配置contract_sha256必须是小写SHA-256")
     if not isinstance(payload["tables"], list) or not payload["tables"]:
         raise ValueError("映射配置tables必须是非空数组")
     priorities = payload.get("source_priorities", [])
@@ -107,6 +123,11 @@ def _validate_profile(payload: Any, path: Path) -> None:
         table_ids.add(table_id)
         if not table.get("target"):
             raise ValueError(f"表格映射{table_id}缺少target")
+        if not isinstance(table.get("allow_shared_source", False), bool):
+            raise ValueError(f"表格映射{table_id}的allow_shared_source必须是布尔值")
+        header_row_span = table.get("header_row_span", 1)
+        if not isinstance(header_row_span, int) or header_row_span < 1:
+            raise ValueError(f"表格映射{table_id}的header_row_span必须是正整数")
         fields = table.get("fields")
         if not isinstance(fields, list) or not fields:
             raise ValueError(f"表格映射{table_id}的fields必须是非空数组")
@@ -129,6 +150,19 @@ def _validate_profile(payload: Any, path: Path) -> None:
             if not isinstance(aliases, list) or not aliases:
                 raise ValueError(f"字段{table_id}.{target}必须声明aliases")
             targets.add(target)
+        record_filters = table.get("record_filters") or []
+        if not isinstance(record_filters, list):
+            raise ValueError(f"表格映射{table_id}的record_filters必须是数组")
+        for record_filter in record_filters:
+            if not isinstance(record_filter, dict):
+                raise ValueError(f"表格映射{table_id}的record_filters每项必须是对象")
+            field_name = str(record_filter.get("field") or "").strip()
+            if field_name not in targets:
+                raise ValueError(
+                    f"表格映射{table_id}的行过滤字段未在fields中声明：{field_name or '空'}"
+                )
+            if "equals" not in record_filter:
+                raise ValueError(f"表格映射{table_id}的行过滤{field_name}必须声明equals")
 
 
 def load_profile(path: Path | str) -> MappingProfile:
@@ -146,6 +180,13 @@ def load_profile(path: Path | str) -> MappingProfile:
         tables=tuple(payload["tables"]),
         path=profile_path,
         checksum_sha256=hashlib.sha256(canonical).hexdigest(),
+        contract_id=str(payload["contract_id"]) if payload.get("contract_id") else None,
+        contract_version=(
+            str(payload["contract_version"]) if payload.get("contract_version") else None
+        ),
+        contract_sha256=(
+            str(payload["contract_sha256"]) if payload.get("contract_sha256") else None
+        ),
         source_priorities=tuple(payload.get("source_priorities") or ()),
         manual_review=dict(payload.get("manual_review") or {}),
         inherited_profiles=inherited,

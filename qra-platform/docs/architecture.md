@@ -36,6 +36,19 @@
 - `db_qra` 作为组合根，可以调用转换器和计算引擎；
 - `tools/check_architecture.py` 会在测试前检查上述规则并禁止源码修改 `sys.path`。
 
+### 第一部分合同资源的组合规则
+
+第一部分输入标准存放在 `resources/contracts/part1/<version>`，不是任一源码包的
+隐式全局变量。`qra_converter` 只接收由组合根显式传入的合同目录，负责清单路径、
+版本和逐文件 SHA-256 校验；它不得导入 `qra_engine`。`db_qra` 和平台 CLI 是组合根，
+在创建转换任务时选择合同目录，并把 `contract_id`、`contract_version` 和清单哈希
+固化到任务。任务执行前再次比对三项身份，目录内容发生变化时必须失败。
+
+JSON Schema 负责结构、类型、枚举和早期质量问题；
+`qra_engine.validation.validate_import_contract` 仍是第二部分跨字段语义校验的最终
+权威。动态节点依赖通过黄金矩阵和资源文件测试比对，不允许为复用节点目录而让
+`qra_converter` 反向依赖 `qra_engine`。
+
 ## 3. 包职责
 
 ### `qra_engine`
@@ -67,6 +80,9 @@
 
 ```text
 qra_converter/
+├─ parsing/       统一解析合同、媒体注册、流水线、坐标、质量与缓存
+├─ ocr/           提供方端口、禁用/夹具/HTTPS适配器和重试边界
+├─ image_processing/  受控解码、EXIF转正、质量检测与可逆预处理
 ├─ readers/       XLS/XLSX/CSV 与需复核的 DOCX/PDF 辅助提取
 ├─ mapping/       表头别名、字段、枚举和单位规则
 ├─ matching/      管段、里程与空间关联
@@ -78,23 +94,30 @@ qra_converter/
 
 禁止读取器直接拼装最终 JSON，也禁止映射代码调用计算公式。
 
+第三阶段后，`readers` 的主输出为版本化 `ParsedDocument`。旧 `RawTable` 只由
+`parsing.compatibility` 生成，作为第四阶段候选字段流水线完成前的兼容边界。
+读取器注册按第二阶段检测媒体类型选择唯一主读取器；PDF 只在页级路由内部组合
+原生文本与 OCR。解析原文、规范化文本和映射后的业务字段不得互相覆盖。
+
 ### `db_qra`
 
 这是平台应用与基础设施适配层，负责 SQLite、不可变输入快照、计算任务、Admin/API 和报告资源。`paths.py` 是唯一知道本地 `workspace` 布局的源码模块；部署时通过 `QRA_WORKSPACE_ROOT` 切换数据盘或挂载点。
 
-第三阶段新增的 `conversion_adapter.py` 是平台转换组合根：只从受控映射目录选择配置，把上传源文件放入任务隔离临时目录，调用与命令行相同的 `convert_sources`，并把预览、报告、来源清单和审计结果交给数据库。HTTP 处理器只负责请求解码和后台线程调度，不复制转换规则。
+`file_intake.py` 是平台资料入口安全边界，负责文件签名/MIME 一致性、ZIP 安全展开、成员级哈希、隔离、重复/版本关系和不可变清单哈希。`conversion_adapter.py` 是平台转换组合根：只从受控映射目录选择配置，只把 `READY_FOR_PARSE` 源文件写入任务隔离临时目录，调用与命令行相同的 `convert_sources`，并把预览、报告、来源清单和审计结果交给数据库。HTTP 处理器只负责请求体限制、Base64 解码、后台线程调度和统一错误响应，不复制入口或转换规则。
 
 ## 4. 数据生命周期
 
 1. 源文件进入 `workspace/inputs`；
 2. 转换器生成 `ConversionResult`，保留文件哈希、位置和映射版本；
+   在映射前，每个 `READY_FOR_PARSE` 文件独立生成 `ParsedDocument`、质量报告和
+   预览资源，并立即写入 `PARSED/PARSE_FAILED`；
 3. 人工处理错误、警告和字段冲突，确认标准 JSON；
 4. `qra_engine.validation.validate_import_contract` 做最终输入合同校验；
 5. `db_qra` 以内容哈希写入不可变快照；
 6. 计算任务只读取指定快照，并保存引擎版本、节点状态、结果哈希和报告资源；
 7. 历史转换和计算结果不原地覆盖，新版本形成新快照。
 
-转换任务状态为 `QUEUED → RUNNING → READY_FOR_CONFIRMATION → CONFIRMED`；质量门禁使用 `BLOCKED`，执行异常使用 `FAILED`。只有 `READY_FOR_CONFIRMATION` 可以在同一事务中确认并创建或复用快照。服务重启把未完成的进程内工作线程恢复为 `QUEUED` 后重新执行。
+转换任务状态为 `QUEUED → RUNNING → READY_FOR_CONFIRMATION → CONFIRMED`；入口/质量门禁使用 `BLOCKED`，执行异常使用 `FAILED`，未确认任务可协作式进入 `CANCELLED`。文件状态独立记录 `VALIDATED/QUARANTINED/DUPLICATE/READY_FOR_PARSE/PARSE_FAILED/PARSED`。只有至少一个 `READY_FOR_PARSE` 且符合隔离策略的任务可以排队，只有 `READY_FOR_CONFIRMATION` 可以在同一事务中确认并创建或复用快照。服务重启会完成待生效取消，并把其余 `QUEUED/RUNNING` 任务恢复为 `QUEUED`。
 
 ## 5. 工程规则
 

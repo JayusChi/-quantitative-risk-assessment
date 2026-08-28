@@ -184,9 +184,9 @@ def build_risk_matrix(
                 "display_risk_band": band,
                 "display_risk_band_zh": RISK_BAND_LABELS[band],
                 "pll_per_year": pll,
-                "maximum_individual_risk_per_year": row[
+                "maximum_individual_risk_per_year": row.get(
                     "maximum_segment_individual_risk_per_year"
-                ],
+                ),
                 "authoritative_ir_level": row["risk_level"]["level"],
                 "authoritative_ir_label_zh": row["risk_level"]["label_zh"],
             }

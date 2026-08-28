@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from db_qra.ocr_settings import (
+    DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
     DEFAULT_OCR_TIMEOUT_SECONDS,
     SUPPORTED_OCR_MODELS,
     OcrSettingsStore,
@@ -33,6 +34,11 @@ OCR_ENVIRONMENT_KEYS = (
     "QRA_ALIYUN_OPENAI_BASE_URL",
     "QRA_OCR_MODEL_VERSION",
     "QRA_VISION_MODEL_VERSION",
+    "QRA_EXTRACTION_PROVIDER",
+    "QRA_EXTRACTION_MODEL_VERSION",
+    "QRA_EXTRACTION_TIMEOUT_SECONDS",
+    "QRA_EXTRACTION_MAX_RETRIES",
+    "QRA_EXTRACTION_MAX_CONCURRENCY",
     "QRA_OCR_TIMEOUT_SECONDS",
     "QRA_OCR_SETTINGS_SOURCE",
 )
@@ -53,6 +59,8 @@ class OcrSettingsTests(unittest.TestCase):
         settings = parse_bailian_config_csv(CSV_TEXT)
         self.assertEqual(settings.ocr_model_version, "qwen3.5-ocr")
         self.assertEqual(settings.ocr_timeout_seconds, 120)
+        self.assertEqual(settings.extraction_model_version, "qwen3.8-max")
+        self.assertEqual(settings.extraction_timeout_seconds, 120)
         self.assertEqual(DEFAULT_OCR_TIMEOUT_SECONDS, 120)
         self.assertNotIn(settings.api_key, repr(settings))
 
@@ -78,7 +86,12 @@ class OcrSettingsTests(unittest.TestCase):
                 self.assertTrue(status["persisted"])
                 self.assertEqual(status["source"], "encrypted-store")
                 self.assertEqual(status["ocr_timeout_seconds"], 120)
+                self.assertTrue(status["extraction_configured"])
+                self.assertEqual(status["extraction_model_version"], "qwen3.8-max")
                 self.assertEqual(os.environ["QRA_OCR_TIMEOUT_SECONDS"], "120")
+                self.assertEqual(
+                    os.environ["QRA_EXTRACTION_MODEL_VERSION"], "qwen3.8-max"
+                )
                 self.assertEqual(
                     tuple(option["id"] for option in status["available_models"]),
                     SUPPORTED_OCR_MODELS,
@@ -126,6 +139,35 @@ class OcrSettingsTests(unittest.TestCase):
         self.assertEqual(status["status_issue"], "OCR_SETTINGS_REIMPORT_REQUIRED")
         self.assertNotIn("sensitive DPAPI diagnostic", response)
         self.assertNotIn(settings.api_key, response)
+
+    def test_invalid_environment_extraction_timeout_uses_safe_default(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            store = OcrSettingsStore(
+                Path(temporary) / "missing-settings.json",
+                protector=_protector,
+                unprotector=_unprotector,
+            )
+            environment = {
+                "QRA_OCR_PROVIDER": "aliyun-bailian",
+                "QRA_ALIYUN_API_KEY": "sk-test-1234567890abcdef",
+                "QRA_ALIYUN_DASHSCOPE_URL": (
+                    "https://llm-test.cn-beijing.maas.aliyuncs.com/api/v1"
+                ),
+                "QRA_ALIYUN_OPENAI_BASE_URL": (
+                    "https://llm-test.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+                ),
+                "QRA_EXTRACTION_PROVIDER": "aliyun-bailian",
+                "QRA_EXTRACTION_MODEL_VERSION": "qwen3.8-max",
+                "QRA_EXTRACTION_TIMEOUT_SECONDS": "not-a-number",
+            }
+            with patch.dict(os.environ, environment, clear=True):
+                status = ocr_settings_status(store)
+
+        self.assertTrue(status["extraction_configured"])
+        self.assertEqual(
+            status["extraction_timeout_seconds"],
+            DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
+        )
 
     def test_ocr_model_is_case_insensitive_but_limited_to_workspace_options(self) -> None:
         settings = parse_bailian_config_csv(

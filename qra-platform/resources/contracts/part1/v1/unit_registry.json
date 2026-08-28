@@ -1,0 +1,472 @@
+{
+  "registry_id": "qra.part1-units",
+  "rules": {
+    "pressure_basis_required": true,
+    "ratio_inference_by_value_forbidden": true
+  },
+  "units": [
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Pa",
+      "case_sensitive": true,
+      "dimension": "pressure_absolute_or_gauge_declared_by_field",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "Pa"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Pa_abs",
+      "case_sensitive": true,
+      "dimension": "pressure_absolute",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "Pa_abs"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Pa",
+      "case_sensitive": true,
+      "dimension": "pressure_absolute_or_gauge_declared_by_field",
+      "factor": 1000,
+      "offset": 0,
+      "symbol": "kPa"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "MPa",
+      "case_sensitive": true,
+      "dimension": "pressure_absolute_or_gauge_declared_by_field",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "MPa"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Pa",
+      "case_sensitive": true,
+      "dimension": "pressure_absolute_or_gauge_declared_by_field",
+      "factor": 100000,
+      "offset": 0,
+      "symbol": "bar"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "mm",
+      "case_sensitive": true,
+      "dimension": "length",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "mm"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m",
+      "case_sensitive": true,
+      "dimension": "length",
+      "factor": 0.01,
+      "offset": 0,
+      "symbol": "cm"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m",
+      "case_sensitive": true,
+      "dimension": "length",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "km",
+      "case_sensitive": true,
+      "dimension": "length",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "km"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "K",
+      "case_sensitive": true,
+      "dimension": "temperature",
+      "factor": 1,
+      "offset": 273.15,
+      "symbol": "°C"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "K",
+      "case_sensitive": true,
+      "dimension": "temperature",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "K"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m/s",
+      "case_sensitive": true,
+      "dimension": "speed",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m/s"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m/s",
+      "case_sensitive": true,
+      "dimension": "speed",
+      "factor": 0.2777777777777778,
+      "offset": 0,
+      "symbol": "km/h"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "V",
+      "case_sensitive": true,
+      "dimension": "electric_potential",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "V"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "V",
+      "case_sensitive": true,
+      "dimension": "electric_potential",
+      "factor": 0.001,
+      "offset": 0,
+      "symbol": "mV"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Ω·m",
+      "case_sensitive": true,
+      "dimension": "resistivity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "Ω·m"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "Ω·m",
+      "case_sensitive": true,
+      "dimension": "resistivity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "ohm*m"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "per_km_year",
+      "case_sensitive": true,
+      "dimension": "frequency",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "per_km_year"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "per_km_year",
+      "case_sensitive": true,
+      "dimension": "frequency",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "1/(km*year)"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "fraction",
+      "case_sensitive": true,
+      "dimension": "ratio",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "fraction"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "fraction",
+      "case_sensitive": true,
+      "dimension": "ratio",
+      "factor": 0.01,
+      "offset": 0,
+      "symbol": "%"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "1/km",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "1/km"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "1/s",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "1/s"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "1/year",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "1/year"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "count",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "count"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "day",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "day"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "deg",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "deg"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "g",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "g"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "J/kg",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "J/kg"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "kg/mol",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "kg/mol"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m/year",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m/year"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m2",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m2"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m3",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m3"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "m3/d",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "m3/d"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "mg/kg",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "mg/kg"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "mg/L",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "mg/L"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "mg/m3",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "mg/m3"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "mm/year",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "mm/year"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "MPa√m",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "MPa√m"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "person",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "person"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "s",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "s"
+    },
+    {
+      "allowed_fields": [
+        "*"
+      ],
+      "canonical_unit": "year",
+      "case_sensitive": true,
+      "dimension": "registered_engineering_quantity",
+      "factor": 1,
+      "offset": 0,
+      "symbol": "year"
+    }
+  ],
+  "version": "1.0.0"
+}

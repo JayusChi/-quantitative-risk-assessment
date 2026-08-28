@@ -2,6 +2,8 @@
   "profile_id": "generic.multisource-review.v2",
   "version": "2.0.0",
   "schema_version": "1.0.0",
+  "contract_id": "qra.part1-input",
+  "contract_version": "1.0.0",
   "extends": "generic.structured-mvp.v1.json",
   "manual_review": {
     "confidence_threshold": 0.9

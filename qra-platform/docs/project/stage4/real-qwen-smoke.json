@@ -1,0 +1,30 @@
+{
+  "classification_count": 1,
+  "entity_count": 1,
+  "evidence_binding_rate": 1.0,
+  "executed_at": "2026-08-28T04:39:59.433431+00:00",
+  "failed_model_call_count": 0,
+  "failure_codes": [],
+  "field_not_found_count": 0,
+  "field_response_item_count": 1,
+  "field_response_keys": [
+    "confidence",
+    "entity_id",
+    "evidence_ids",
+    "field_id",
+    "not_found",
+    "raw_value",
+    "source_unit"
+  ],
+  "issue_codes": [],
+  "model_call_count": 4,
+  "model_candidate_count": 1,
+  "model_version": "qwen3.8-max",
+  "provider_id": "aliyun-bailian-openai",
+  "provider_issue_codes": [],
+  "provider_issue_messages": [],
+  "result_sha256": "0d90e23122cfc68dea817f0ef87f5816be9301331531edbc0c853a1b721483d5",
+  "secret_or_endpoint_recorded": false,
+  "status": "PASS",
+  "synthetic_input_only": true
+}

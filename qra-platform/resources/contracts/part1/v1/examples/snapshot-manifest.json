@@ -1,0 +1,15 @@
+{
+  "candidate_ids": [
+    "CAND-0001"
+  ],
+  "contract_id": "qra.part1-input",
+  "contract_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "contract_version": "1.0.0",
+  "created_at": "2026-08-26T10:00:00+08:00",
+  "payload_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "review_ids": [
+    "REV-0001"
+  ],
+  "snapshot_id": "SNAP-0001",
+  "unresolved_issue_ids": []
+}

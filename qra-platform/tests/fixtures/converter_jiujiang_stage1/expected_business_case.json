@@ -1,0 +1,137 @@
+{
+  "data_category_manifest": {
+    "categories": [
+      {
+        "category_id": "segment_chainage",
+        "name_zh": "管段编号、起止里程和长度",
+        "record_count": 1
+      },
+      {
+        "category_id": "operating_conditions",
+        "name_zh": "管线基础信息与运行工况",
+        "record_count": 1
+      },
+      {
+        "category_id": "high_consequence_area_register",
+        "name_zh": "高后果区台账",
+        "record_count": 1
+      },
+      {
+        "category_id": "integrity_assessment_summary",
+        "name_zh": "完整性评价摘要",
+        "record_count": 1
+      },
+      {
+        "category_id": "operating_condition_register",
+        "name_zh": "运行工况源台账",
+        "record_count": 1
+      },
+      {
+        "category_id": "risk_and_management_controls",
+        "name_zh": "风险描述与减缓措施",
+        "record_count": 1
+      }
+    ],
+    "category_count": 6
+  },
+  "metadata": {
+    "case_id": "JXNG-JIUJIANG-GDBZYQ-JJ-1-STAGE1",
+    "conversion_scope": "仅限九江支线 GDBZYQ-JJ-1；同表其他管线记录必须由行过滤排除。",
+    "data_classification": "REAL_PROJECT_CONVERTED_SOURCE_WITH_EXPLICIT_GAPS",
+    "explicit_data_gaps": [
+      "权威内部管段起止里程或测绘坐标缺失",
+      "人口受体坐标缺失",
+      "人口昼夜分布缺失",
+      "人口室内外比例缺失",
+      "运行压力仅有3.0-3.8 MPa范围，未擅自折算为单值",
+      "运行温度、逐段壁厚和阀门里程缺失",
+      "照片和视频无GPS地理参照，不能用于里程换算"
+    ],
+    "formal_qra_allowed": false,
+    "project_name": "九江支线脱敏真实资料回归案例",
+    "warning": "本黄金候选只采用台账可直接追溯的全线边界。现场照片变化点缺少权威里程，不生成11个内部计算管段；人口坐标、昼夜分布和室内外比例未获证据，不生成population_cells。"
+  },
+  "pipeline": {
+    "city": "某市",
+    "county": "某区",
+    "design_pressure_mpa": 6.3,
+    "hca_end_marker": "JJ041G（10+938）",
+    "hca_start_marker": "JJ001（0+0）",
+    "operating_pressure_data_status": "SOURCE_RANGE_ONLY_NOT_COLLAPSED",
+    "operating_pressure_source_range_mpa": "3.0-3.8",
+    "operating_temperature_data_status": "MISSING",
+    "operator_area": "脱敏作业区",
+    "outside_diameter_mm": 273.0,
+    "pipeline_id": "GDBZYQ-JJ-1",
+    "pipeline_name": "试点支线",
+    "population_spatial_data_status": "MISSING",
+    "service": "natural_gas_transmission",
+    "steel_grade": "L360MB",
+    "total_length_km": 10.938,
+    "wall_thickness_data_status": "MISSING"
+  },
+  "raw_data_categories": {
+    "high_consequence_area_register": {
+      "name_zh": "高后果区台账",
+      "records": [
+        {
+          "end_marker": "JJ041G（10+938）",
+          "feature_description": "脱敏后的高后果区汇总描述",
+          "hca_level": "Ⅲ级",
+          "hca_type": "人员密集型、易燃易爆型",
+          "identification_date": "2026-04-25",
+          "length_m": 10938.0,
+          "location_class": "四级地区",
+          "potential_impact_radius_m": 67.84,
+          "record_id": "GDBZYQ-JJ-1",
+          "source_risk_level": "低",
+          "start_marker": "JJ001（0+0）"
+        }
+      ]
+    },
+    "integrity_assessment_summary": {
+      "name_zh": "完整性评价摘要",
+      "records": [
+        {
+          "latest_assessment_date": "2024-10-27",
+          "methods_and_results": "2021至2024年已开展完整性评价",
+          "record_id": "GDBZYQ-JJ-1"
+        }
+      ]
+    },
+    "operating_condition_register": {
+      "name_zh": "运行工况源台账",
+      "records": [
+        {
+          "design_pressure_mpa": 6.3,
+          "material_grade": "L360MB",
+          "operating_pressure_range_mpa": "3.0-3.8",
+          "outside_diameter_mm": 273.0,
+          "record_id": "GDBZYQ-JJ-1",
+          "transported_medium": "天然气"
+        }
+      ]
+    },
+    "risk_and_management_controls": {
+      "name_zh": "风险描述与减缓措施",
+      "records": [
+        {
+          "mitigation_measures": "增加巡查并加强施工管理",
+          "record_id": "GDBZYQ-JJ-1",
+          "risk_description": "第三方活动风险"
+        }
+      ]
+    }
+  },
+  "schema_version": "1.0.0",
+  "segments": [
+    {
+      "end_km": 10.938,
+      "length_km": 10.938,
+      "material_grade": "L360MB",
+      "outside_diameter_mm": 273.0,
+      "segment_id": "GDBZYQ-JJ-1",
+      "start_km": 0.0
+    }
+  ]
+}

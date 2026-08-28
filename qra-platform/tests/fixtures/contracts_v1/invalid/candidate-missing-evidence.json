@@ -1,0 +1,21 @@
+{
+  "candidate_id": "CAND-0001",
+  "canonical_unit": "MPa",
+  "confidence": 0.98,
+  "entity": {
+    "entity_key": "PL-001",
+    "entity_type": "PIPELINE"
+  },
+  "evidence_ids": [],
+  "extraction_method": "STRUCTURED_TABLE",
+  "field_id": "pipeline.operating_pressure_mpa",
+  "model_or_rule_versions": {
+    "mapping": "1.0.0"
+  },
+  "normalized_value": 7.8,
+  "parsed_value": 7.8,
+  "quality_status": "PASS",
+  "raw_value": "运行压力 7.8MPa",
+  "review_status": "PENDING",
+  "source_unit": "MPa"
+}

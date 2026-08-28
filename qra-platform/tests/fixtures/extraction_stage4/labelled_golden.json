@@ -1,0 +1,78 @@
+{
+  "golden_set_id": "qra.stage4-labelled-golden/1.0.0",
+  "document_text": "A线设计压力为6000 kPa；运行压力为50 bar；管线外径为0.8 m；管线壁厚为1.2 cm；运行温度为20 °C。A线S1管段外径为800 mm，管段壁厚为12 mm。",
+  "entities": [
+    {
+      "entity_id": "ENT-PIPE-A",
+      "entity_type": "PIPELINE",
+      "raw_name": "A线",
+      "normalized_name": "a线",
+      "business_key": "PIPE-A"
+    },
+    {
+      "entity_id": "ENT-SEG-A-S1",
+      "entity_type": "SEGMENT",
+      "raw_name": "A线S1管段",
+      "normalized_name": "a线s1管段",
+      "business_key": "SEG-A-S1"
+    }
+  ],
+  "facts": [
+    {
+      "field_id": "pipeline.design_pressure_mpa",
+      "entity_id": "ENT-PIPE-A",
+      "entity_key": "PIPE-A",
+      "raw_value": "6000 kPa",
+      "source_unit": "kPa",
+      "expected_normalized_value": 6
+    },
+    {
+      "field_id": "pipeline.operating_pressure_mpa",
+      "entity_id": "ENT-PIPE-A",
+      "entity_key": "PIPE-A",
+      "raw_value": "50 bar",
+      "source_unit": "bar",
+      "expected_normalized_value": 5
+    },
+    {
+      "field_id": "pipeline.outside_diameter_mm",
+      "entity_id": "ENT-PIPE-A",
+      "entity_key": "PIPE-A",
+      "raw_value": "0.8 m",
+      "source_unit": "m",
+      "expected_normalized_value": 800
+    },
+    {
+      "field_id": "pipeline.wall_thickness_mm",
+      "entity_id": "ENT-PIPE-A",
+      "entity_key": "PIPE-A",
+      "raw_value": "1.2 cm",
+      "source_unit": "cm",
+      "expected_normalized_value": 12
+    },
+    {
+      "field_id": "pipeline.operating_temperature_k",
+      "entity_id": "ENT-PIPE-A",
+      "entity_key": "PIPE-A",
+      "raw_value": "20 °C",
+      "source_unit": "°C",
+      "expected_normalized_value": 293.15
+    },
+    {
+      "field_id": "segment.outside_diameter_mm",
+      "entity_id": "ENT-SEG-A-S1",
+      "entity_key": "SEG-A-S1",
+      "raw_value": "800 mm",
+      "source_unit": "mm",
+      "expected_normalized_value": 800
+    },
+    {
+      "field_id": "segment.wall_thickness_mm",
+      "entity_id": "ENT-SEG-A-S1",
+      "entity_key": "SEG-A-S1",
+      "raw_value": "12 mm",
+      "source_unit": "mm",
+      "expected_normalized_value": 12
+    }
+  ]
+}

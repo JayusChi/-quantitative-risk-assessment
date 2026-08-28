@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import math
 import tempfile
 import unittest
 from pathlib import Path
@@ -113,6 +114,24 @@ class DynamicExecutionTests(unittest.TestCase):
             self.assertEqual(records["adaptive_evidence_qra"]["status"], "COMPLETED")
             self.assertEqual(records["risk_matrix"]["status"], "COMPLETED")
             self.assertTrue((Path(temporary) / "nodes" / "failure_frequency.json").is_file())
+            frequency_result = json.loads(
+                (Path(temporary) / "nodes" / "failure_frequency.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            total_frequency = frequency_result["total_initiating_frequency_per_year"]
+            self.assertEqual(
+                frequency_result["failure_probability_model"]["exposure_years"],
+                1.0,
+            )
+            self.assertAlmostEqual(
+                frequency_result["at_least_one_failure_probability_over_horizon"],
+                1.0 - math.exp(-total_frequency),
+            )
+            self.assertIn(
+                "failure_probability_over_horizon",
+                frequency_result["segment_ranking"][0],
+            )
             self.assertTrue((Path(temporary) / "report_dashboard.html").is_file())
             capability = json.loads(
                 (Path(temporary) / "capability_report.json").read_text(encoding="utf-8")
@@ -218,6 +237,19 @@ class DynamicExecutionTests(unittest.TestCase):
         self.assertGreater(row["risk_value_fatalities_per_year"], 0.0)
         self.assertEqual(result["population_source"], "model_population_density_prior")
         self.assertGreater(row["uncertainty_factor"], 2.0)
+        self.assertIsNone(row["maximum_segment_individual_risk_per_year"])
+        self.assertEqual(
+            row["individual_risk_status"],
+            "NOT_CALCULATED_MISSING_SPATIAL_RECEPTORS",
+        )
+        self.assertFalse(result["human_risk"]["individual_risk"]["available"])
+        self.assertIsNone(
+            result["human_risk"]["individual_risk"]["maximum"]["value_per_year"]
+        )
+        self.assertFalse(
+            result["human_risk"]["societal_risk"]["fn_curve_available"]
+        )
+        self.assertEqual(result["human_risk"]["societal_risk"]["fn_curve"], [])
 
     def test_sparse_input_still_returns_data_inventory_and_missing_requirements(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

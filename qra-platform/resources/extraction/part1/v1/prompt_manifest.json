@@ -1,0 +1,23 @@
+{
+  "manifest_id": "qra.part1-extraction-prompts",
+  "version": "1.0.0",
+  "system_policy_version": "qra.extraction-policy/1.0.0",
+  "templates": {
+    "CLASSIFY": {
+      "path": "document_classification.md",
+      "sha256": "c1bbba2c47a8698eea24ce24265a5be2c3d27a8728508164ea0af5d8f5d6ea52"
+    },
+    "EXTRACT_ENTITIES": {
+      "path": "entity_extraction.md",
+      "sha256": "154c8d9c52d9843da30475a6e467d9580d8fdd7b7baf060df4e7c4f5e59e7b31"
+    },
+    "EXTRACT_FIELDS": {
+      "path": "field_extraction.md",
+      "sha256": "40037c44af39af75b713cc1b03b428eba0bee535d7839ef9c107ee346534ba29"
+    },
+    "EXTRACT_RELATIONSHIPS": {
+      "path": "relation_extraction.md",
+      "sha256": "2cf30361bda2eb94a90571a35a4336dc1e807d97c4603335951f607918349794"
+    }
+  }
+}

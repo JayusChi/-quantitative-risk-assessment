@@ -129,6 +129,7 @@ class ConversionResult:
     review_audit: tuple[ReviewAuditEntry, ...] = field(default_factory=tuple)
     review_decision_source: dict[str, Any] | None = None
     capability_plan: dict[str, Any] | None = None
+    stage4_result: dict[str, Any] | None = None
 
     @property
     def has_errors(self) -> bool:
@@ -159,5 +160,6 @@ class ConversionResult:
             "review_audit": [entry.to_dict() for entry in self.review_audit],
             "review_decision_source": self.review_decision_source,
             "capability_plan": self.capability_plan,
+            "stage4_result": self.stage4_result,
             "status": "BLOCKED" if self.is_blocked else "READY_FOR_REVIEW",
         }

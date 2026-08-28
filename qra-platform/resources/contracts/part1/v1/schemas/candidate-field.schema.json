@@ -1,0 +1,182 @@
+{
+  "$id": "https://qra.local/contracts/part1/v1/candidate-field.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "properties": {
+            "evidence_ids": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "non_document_source"
+          ]
+        }
+      ]
+    },
+    {
+      "if": {
+        "properties": {
+          "extraction_method": {
+            "const": "SYSTEM_DERIVED"
+          }
+        },
+        "required": [
+          "extraction_method"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_document_source": {
+            "const": "SYSTEM_DERIVED"
+          }
+        },
+        "required": [
+          "derivation",
+          "non_document_source"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "candidate_id": {
+      "pattern": "^CAND-[A-Za-z0-9._-]+$",
+      "type": "string"
+    },
+    "canonical_unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "derivation": {
+      "additionalProperties": false,
+      "properties": {
+        "input_candidate_ids": {
+          "items": {
+            "pattern": "^CAND-",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "rule_id": {
+          "type": "string"
+        },
+        "rule_version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "rule_version",
+        "input_candidate_ids"
+      ],
+      "type": "object"
+    },
+    "entity": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_key": {
+          "type": "string"
+        },
+        "entity_type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_type",
+        "entity_key"
+      ],
+      "type": "object"
+    },
+    "evidence_ids": {
+      "items": {
+        "pattern": "^EVD-",
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "extraction_method": {
+      "enum": [
+        "STRUCTURED_TABLE",
+        "TEXT_RULE",
+        "OCR",
+        "MODEL_EXTRACTION",
+        "MANUAL",
+        "SYSTEM_DERIVED"
+      ]
+    },
+    "field_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "model_or_rule_versions": {
+      "minProperties": 1,
+      "type": "object"
+    },
+    "non_document_source": {
+      "enum": [
+        "APPROVAL_REQUIRED",
+        "SYSTEM_DERIVED",
+        "MANUAL_ALLOWED"
+      ]
+    },
+    "normalized_value": {},
+    "parsed_value": {},
+    "quality_status": {
+      "enum": [
+        "PASS",
+        "INFO",
+        "WARNING",
+        "CONFLICT",
+        "LOW_CONFIDENCE",
+        "MISSING",
+        "INVALID",
+        "NOT_APPLICABLE",
+        "PENDING_REVIEW"
+      ]
+    },
+    "raw_value": {},
+    "review_status": {
+      "enum": [
+        "PENDING",
+        "ACCEPTED",
+        "REJECTED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "source_unit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "candidate_id",
+    "field_id",
+    "entity",
+    "raw_value",
+    "parsed_value",
+    "normalized_value",
+    "confidence",
+    "extraction_method",
+    "evidence_ids",
+    "quality_status",
+    "review_status",
+    "model_or_rule_versions"
+  ],
+  "type": "object"
+}

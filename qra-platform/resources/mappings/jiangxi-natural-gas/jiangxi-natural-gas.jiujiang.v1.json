@@ -1,0 +1,211 @@
+{
+  "profile_id": "jiangxi-natural-gas.jiujiang.v1",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "contract_id": "qra.part1-input",
+  "contract_version": "1.0.0",
+  "defaults": {
+    "schema_version": "1.0.0",
+    "metadata": {
+      "data_classification": "REAL_PROJECT_CONVERTED_SOURCE_WITH_EXPLICIT_GAPS",
+      "formal_qra_allowed": false,
+      "conversion_scope": "仅限九江支线 GDBZYQ-JJ-1；同表其他管线记录必须由行过滤排除。",
+      "warning": "本黄金候选只采用台账可直接追溯的全线边界。现场照片变化点缺少权威里程，不生成11个内部计算管段；人口坐标、昼夜分布和室内外比例未获证据，不生成population_cells。",
+      "explicit_data_gaps": [
+        "权威内部管段起止里程或测绘坐标缺失",
+        "人口受体坐标缺失",
+        "人口昼夜分布缺失",
+        "人口室内外比例缺失",
+        "运行压力仅有3.0-3.8 MPa范围，未擅自折算为单值",
+        "运行温度、逐段壁厚和阀门里程缺失",
+        "照片和视频无GPS地理参照，不能用于里程换算"
+      ]
+    },
+    "pipeline": {
+      "operating_pressure_data_status": "SOURCE_RANGE_ONLY_NOT_COLLAPSED",
+      "operating_temperature_data_status": "MISSING",
+      "wall_thickness_data_status": "MISSING",
+      "population_spatial_data_status": "MISSING"
+    }
+  },
+  "manual_review": {
+    "confidence_threshold": 0.9
+  },
+  "source_priorities": [
+    {
+      "file_patterns": ["*高后果区*"],
+      "sheet_patterns": ["Sheet1", ".*高后果.*"],
+      "priority": 100
+    }
+  ],
+  "tables": [
+    {
+      "id": "jiujiang_hca_segment",
+      "target": "segments",
+      "name_zh": "九江支线权威边界管段",
+      "required": true,
+      "allow_shared_source": true,
+      "record_key": ["segment_id"],
+      "record_filters": [
+        {"field": "segment_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 4,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "segment_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "start_km", "aliases": ["高后果区起点"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "end_km", "aliases": ["高后果区终点"], "type": "chainage", "source_unit": "km", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "length_km", "aliases": ["高后果区长度(m)"], "type": "number", "source_unit": "m", "target_unit": "km", "minimum": 0, "required": true},
+        {"target": "outside_diameter_mm", "aliases": ["管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "source_unit_aliases": ["mm", "毫米"], "strip_source_unit_suffix": true, "minimum": 0},
+        {"target": "material_grade", "aliases": ["管材"], "type": "string"}
+      ]
+    },
+    {
+      "id": "jiujiang_pipeline",
+      "target": "pipeline",
+      "name_zh": "九江支线管线基础信息",
+      "allow_shared_source": true,
+      "record_filters": [
+        {"field": "pipeline_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 5,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "pipeline_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "pipeline_name", "aliases": ["管道名称"], "type": "string"},
+        {"target": "operator_area", "aliases": ["作业区"], "type": "string"},
+        {"target": "service", "aliases": ["输送介质"], "type": "enum", "enum_map": {"天然气": "natural_gas_transmission"}},
+        {"target": "city", "aliases": ["市"], "type": "string"},
+        {"target": "county", "aliases": ["县（区）"], "type": "string"},
+        {"target": "total_length_km", "aliases": ["高后果区长度(m)"], "type": "number", "source_unit": "m", "target_unit": "km", "minimum": 0},
+        {"target": "design_pressure_mpa", "aliases": ["设计压力"], "type": "number", "source_unit": "MPa", "target_unit": "MPa", "minimum": 0},
+        {"target": "operating_pressure_source_range_mpa", "aliases": ["运行压力"], "type": "string"},
+        {"target": "outside_diameter_mm", "aliases": ["管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "source_unit_aliases": ["mm", "毫米"], "strip_source_unit_suffix": true, "minimum": 0},
+        {"target": "steel_grade", "aliases": ["管材"], "type": "string"},
+        {"target": "hca_start_marker", "aliases": ["高后果区起点"], "type": "string"},
+        {"target": "hca_end_marker", "aliases": ["高后果区终点"], "type": "string"}
+      ]
+    },
+    {
+      "id": "jiujiang_hca_register",
+      "target": "raw_data_categories.high_consequence_area_register",
+      "name_zh": "高后果区台账",
+      "allow_shared_source": true,
+      "record_key": ["record_id"],
+      "record_filters": [
+        {"field": "record_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 5,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "identification_date", "aliases": ["识别时间"], "type": "date"},
+        {"target": "start_marker", "aliases": ["高后果区起点"], "type": "string"},
+        {"target": "end_marker", "aliases": ["高后果区终点"], "type": "string"},
+        {"target": "length_m", "aliases": ["高后果区长度(m)"], "type": "number", "source_unit": "m", "target_unit": "m", "minimum": 0},
+        {"target": "location_class", "aliases": ["地区等级"], "type": "string"},
+        {"target": "hca_type", "aliases": ["高后果区类型"], "type": "string"},
+        {"target": "potential_impact_radius_m", "aliases": ["潜在影响半径(m)"], "type": "number", "source_unit": "m", "target_unit": "m", "minimum": 0},
+        {"target": "feature_description", "aliases": ["高后果区特征描述"], "type": "string"},
+        {"target": "hca_level", "aliases": ["高后果区等级"], "type": "string"},
+        {"target": "source_risk_level", "aliases": ["风险等级"], "type": "string"}
+      ]
+    },
+    {
+      "id": "jiujiang_operating_register",
+      "target": "raw_data_categories.operating_condition_register",
+      "name_zh": "运行工况源台账",
+      "allow_shared_source": true,
+      "record_key": ["record_id"],
+      "record_filters": [
+        {"field": "record_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 4,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "design_pressure_mpa", "aliases": ["设计压力"], "type": "number", "source_unit": "MPa", "target_unit": "MPa", "minimum": 0},
+        {"target": "operating_pressure_range_mpa", "aliases": ["运行压力"], "type": "string"},
+        {"target": "transported_medium", "aliases": ["输送介质"], "type": "string"},
+        {"target": "outside_diameter_mm", "aliases": ["管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "source_unit_aliases": ["mm", "毫米"], "strip_source_unit_suffix": true, "minimum": 0},
+        {"target": "material_grade", "aliases": ["管材"], "type": "string"}
+      ]
+    },
+    {
+      "id": "jiujiang_integrity_summary",
+      "target": "raw_data_categories.integrity_assessment_summary",
+      "name_zh": "完整性评价摘要",
+      "allow_shared_source": true,
+      "record_key": ["record_id"],
+      "record_filters": [
+        {"field": "record_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 3,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "latest_assessment_date", "aliases": ["最近一次完整性评价时间"], "type": "date"},
+        {"target": "methods_and_results", "aliases": ["完整性评价方法及结果"], "type": "string"}
+      ]
+    },
+    {
+      "id": "jiujiang_risk_controls",
+      "target": "raw_data_categories.risk_and_management_controls",
+      "name_zh": "风险描述与减缓措施",
+      "allow_shared_source": true,
+      "record_key": ["record_id"],
+      "record_filters": [
+        {"field": "record_id", "equals": "GDBZYQ-JJ-1"}
+      ],
+      "header_search_rows": 10,
+      "header_row_span": 2,
+      "minimum_header_matches": 3,
+      "selectors": [
+        {
+          "file_patterns": ["*高后果区*"],
+          "sheet_patterns": ["Sheet1", ".*高后果.*"]
+        }
+      ],
+      "fields": [
+        {"target": "record_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
+        {"target": "risk_description", "aliases": ["风险描述"], "type": "string"},
+        {"target": "mitigation_measures", "aliases": ["风险减缓措施"], "type": "string"}
+      ]
+    }
+  ]
+}

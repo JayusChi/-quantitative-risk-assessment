@@ -22,6 +22,11 @@ def build_parser() -> argparse.ArgumentParser:
     convert.add_argument("--case-id")
     convert.add_argument("--project-name")
     convert.add_argument(
+        "--contract-dir",
+        type=Path,
+        help="第一部分版本化合同目录；平台入口默认使用resources/contracts/part1/v1",
+    )
+    convert.add_argument(
         "--review-decisions",
         type=Path,
         help="人工复核决定JSON；应用后完整写入review_audit.json",
@@ -34,6 +39,7 @@ def main(
     *,
     contract_validator: Callable[[Any], Any] | None = None,
     capability_planner: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+    default_contract_dir: Path | None = None,
 ) -> int:
     args = build_parser().parse_args(argv)
     try:
@@ -47,6 +53,7 @@ def main(
             contract_validator=contract_validator,
             capability_planner=capability_planner,
             review_decisions_path=args.review_decisions,
+            contract_dir=args.contract_dir or default_contract_dir,
         )
     except (FileNotFoundError, OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"BLOCK: {exc}", file=sys.stderr)
@@ -63,6 +70,7 @@ def platform_main(argv: list[str] | None = None) -> int:
         argv,
         contract_validator=validation_module.validate_import_contract,
         capability_planner=dynamic_module.plan_dynamic_flow,
+        default_contract_dir=(Path.cwd() / "resources" / "contracts" / "part1" / "v1"),
     )
 
 

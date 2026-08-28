@@ -31,9 +31,11 @@ from .file_intake import (
     MAX_UPLOAD_TOTAL_BYTES,
     IntakeError,
 )
-from .paths import DEFAULT_RUNTIME_ROOT
 from .ocr_settings import (
+    DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
     DEFAULT_OCR_TIMEOUT_SECONDS,
+    SUPPORTED_EXTRACTION_MODELS,
+    SUPPORTED_OCR_MODELS,
     OcrSettingsStore,
     apply_ocr_settings,
     environment_ocr_configured,
@@ -43,6 +45,7 @@ from .ocr_settings import (
     settings_path_for_database,
     validate_bailian_settings,
 )
+from .paths import DEFAULT_RUNTIME_ROOT
 
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
 RUNTIME_ROOT = DEFAULT_RUNTIME_ROOT
@@ -297,6 +300,27 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         review_decisions = body.get("review_decisions")
         if review_decisions is not None and not isinstance(review_decisions, dict):
             raise ValueError("review_decisions必须是JSON对象或null")
+        external_sharing_allowed = body.get("external_sharing_allowed", False)
+        if not isinstance(external_sharing_allowed, bool):
+            raise ValueError("external_sharing_allowed必须是布尔值")
+        requested_ocr_model = body.get("ocr_model_version")
+        if requested_ocr_model is None or requested_ocr_model == "":
+            ocr_model_version = None
+        elif not isinstance(requested_ocr_model, str):
+            raise ValueError("ocr_model_version必须是字符串")
+        else:
+            ocr_model_version = requested_ocr_model.strip()
+            if ocr_model_version not in SUPPORTED_OCR_MODELS:
+                raise ValueError("OCR模型不在当前业务空间允许的模型中")
+        requested_extraction_model = body.get("extraction_model_version")
+        if requested_extraction_model is None or requested_extraction_model == "":
+            extraction_model_version = None
+        elif not isinstance(requested_extraction_model, str):
+            raise ValueError("extraction_model_version必须是字符串")
+        else:
+            extraction_model_version = requested_extraction_model.strip()
+            if extraction_model_version not in SUPPORTED_EXTRACTION_MODELS:
+                raise ValueError("信息提取模型不在当前业务空间允许的模型中")
         job_id, created = submit_conversion(
             self.database,
             profile=str(body.get("profile") or ""),
@@ -308,6 +332,9 @@ class QraRequestHandler(BaseHTTPRequestHandler):
             actor=self._actor(body),
             contract=str(body.get("contract") or "").strip() or None,
             failure_policy=str(body.get("failure_policy") or "ALL_OR_NOTHING"),
+            external_sharing_allowed=external_sharing_allowed,
+            ocr_model_version=ocr_model_version,
+            extraction_model_version=extraction_model_version,
         )
         job = self.database.get_conversion_job(job_id, detailed=False)
         if created and job["status"] == "QUEUED":
@@ -350,12 +377,21 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 self._send(204, "image/x-icon", b"")
                 return
             if decoded_path == "/health":
+                provider_status = ocr_settings_status(self._get_ocr_settings_store())
                 self._json(
                     200,
                     {
                         "status": "ok",
                         "database": str(self.database.path),
                         "engine_version": ENGINE_VERSION,
+                        "providers": {
+                            "ocr_configured": bool(
+                                provider_status.get("ocr_configured")
+                            ),
+                            "extraction_configured": bool(
+                                provider_status.get("extraction_configured")
+                            ),
+                        },
                     },
                 )
                 return
@@ -416,6 +452,50 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     limit = int(query.get("limit", ["500"])[0])
                     self._json(200, self.database.list_conversion_events(parts[3], limit=limit))
                     return
+                if parts[4] == "model-calls":
+                    self._json(200, self.database.list_conversion_model_calls(parts[3]))
+                    return
+                if parts[4] == "review-summary":
+                    self._json(200, self.database.conversion_review_summary(parts[3]))
+                    return
+                if parts[4] == "candidates":
+                    self._json(
+                        200,
+                        self.database.list_conversion_candidates(
+                            parts[3],
+                            status=str(query.get("status", [""])[0]).strip() or None,
+                            field_id=str(query.get("field_id", [""])[0]).strip() or None,
+                            entity=str(query.get("entity", [""])[0]).strip() or None,
+                            cursor=str(query.get("cursor", [""])[0]).strip() or None,
+                            limit=int(query.get("limit", ["100"])[0]),
+                        ),
+                    )
+                    return
+                if parts[4] == "issues":
+                    self._json(
+                        200,
+                        self.database.list_conversion_quality_issues(
+                            parts[3],
+                            severity=str(query.get("severity", [""])[0]).strip() or None,
+                            code=str(query.get("code", [""])[0]).strip() or None,
+                            cursor=str(query.get("cursor", [""])[0]).strip() or None,
+                            limit=int(query.get("limit", ["100"])[0]),
+                        ),
+                    )
+                    return
+                if parts[4] == "capability":
+                    self._json(200, self.database.conversion_capability(parts[3]))
+                    return
+            if (
+                len(parts) == 6
+                and parts[:3] == ["admin", "api", "conversions"]
+                and parts[4] == "candidates"
+            ):
+                self._json(
+                    200,
+                    self.database.get_conversion_candidate(parts[3], parts[5]),
+                )
+                return
             if len(parts) == 4 and parts[:3] == ["admin", "api", "conversions"]:
                 job = _public_conversion_job(self.database.get_conversion_job(parts[3]))
                 job["events"] = self.database.list_conversion_events(parts[3])
@@ -599,8 +679,16 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         vision_model_version=str(
                             body.get("vision_model_version") or "qwen3.7-max"
                         ),
+                        extraction_model_version=str(
+                            body.get("extraction_model_version") or "qwen3.8-max"
+                        ),
+                        extraction_enabled=bool(body.get("extraction_enabled", True)),
                         ocr_timeout_seconds=body.get(
                             "ocr_timeout_seconds", DEFAULT_OCR_TIMEOUT_SECONDS
+                        ),
+                        extraction_timeout_seconds=body.get(
+                            "extraction_timeout_seconds",
+                            DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
                         ),
                     )
                 else:
@@ -619,8 +707,19 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                             body.get("vision_model_version")
                             or existing.vision_model_version
                         ),
+                        extraction_model_version=str(
+                            body.get("extraction_model_version")
+                            or existing.extraction_model_version
+                        ),
+                        extraction_enabled=bool(
+                            body.get("extraction_enabled", existing.extraction_enabled)
+                        ),
                         ocr_timeout_seconds=body.get(
                             "ocr_timeout_seconds", existing.ocr_timeout_seconds
+                        ),
+                        extraction_timeout_seconds=body.get(
+                            "extraction_timeout_seconds",
+                            existing.extraction_timeout_seconds,
                         ),
                         workspace_name=existing.workspace_name,
                         workspace_id=existing.workspace_id,

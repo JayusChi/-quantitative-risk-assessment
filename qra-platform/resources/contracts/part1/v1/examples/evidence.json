@@ -1,0 +1,17 @@
+[
+  {
+    "checksum_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "evidence_id": "EVD-0001",
+    "excerpt": "运行压力 7.8MPa",
+    "location": {
+      "cell_text": "7.8MPa",
+      "column": 5,
+      "coordinate_system": "ROW_COLUMN_1_BASED",
+      "file_id": "FILE-001",
+      "kind": "TABLE",
+      "row": 3,
+      "sheet_name": "运行工况"
+    },
+    "source_type": "TABLE"
+  }
+]

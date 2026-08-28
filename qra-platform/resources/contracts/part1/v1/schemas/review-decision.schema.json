@@ -1,0 +1,67 @@
+{
+  "$id": "https://qra.local/contracts/part1/v1/review-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "ACCEPT_CANDIDATE",
+        "REPLACE_VALUE",
+        "REJECT_FIELD",
+        "MARK_NOT_APPLICABLE",
+        "REQUEST_REEXTRACTION"
+      ]
+    },
+    "after_value": {},
+    "before_value": {},
+    "candidate_ids": {
+      "items": {
+        "pattern": "^CAND-",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "evidence_ids": {
+      "items": {
+        "pattern": "^EVD-",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "reason": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "review_id": {
+      "pattern": "^REV-",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$",
+      "type": "string"
+    },
+    "reviewer": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "target": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_id",
+    "action",
+    "target",
+    "before_value",
+    "after_value",
+    "reviewer",
+    "reviewed_at",
+    "reason",
+    "candidate_ids",
+    "evidence_ids"
+  ],
+  "type": "object"
+}

@@ -38,7 +38,7 @@ def _unit(value: str | None) -> str | None:
     return _UNIT_ALIASES[normalized]
 
 
-def _number(value: Any) -> float:
+def _number(value: Any, field: dict[str, Any] | None = None) -> float:
     if isinstance(value, bool):
         raise ValueConversionError("布尔值不能作为数值")
     if isinstance(value, int | float):
@@ -49,6 +49,16 @@ def _number(value: Any) -> float:
             raise ValueConversionError("空字符串不能作为数值")
         if stripped.endswith("%"):
             stripped = stripped[:-1].strip()
+        if field and field.get("strip_source_unit_suffix"):
+            aliases = [
+                str(item).strip()
+                for item in (field.get("source_unit_aliases") or [field.get("source_unit")])
+                if str(item or "").strip()
+            ]
+            for suffix in sorted(aliases, key=len, reverse=True):
+                if stripped.casefold().endswith(suffix.casefold()):
+                    stripped = stripped[: -len(suffix)].strip()
+                    break
         try:
             result = float(stripped)
         except ValueError as exc:
@@ -136,10 +146,12 @@ def _parse_chainage_km(value: Any, field: dict[str, Any]) -> float:
             result = kilometre + metres / 1000.0
         else:
             result = _convert_unit(
-                _number(value), field.get("source_unit"), field.get("target_unit")
+                _number(value, field), field.get("source_unit"), field.get("target_unit")
             )
     else:
-        result = _convert_unit(_number(value), field.get("source_unit"), field.get("target_unit"))
+        result = _convert_unit(
+            _number(value, field), field.get("source_unit"), field.get("target_unit")
+        )
     minimum = float(field.get("minimum", 0.0))
     if result < minimum:
         raise ValueConversionError(f"里程{result}小于允许下限{minimum}")
@@ -151,7 +163,9 @@ def convert_value(value: Any, field: dict[str, Any]) -> Any:
     if value_type == "chainage":
         return _parse_chainage_km(value, field)
     if value_type in {"number", "integer"}:
-        number = _convert_unit(_number(value), field.get("source_unit"), field.get("target_unit"))
+        number = _convert_unit(
+            _number(value, field), field.get("source_unit"), field.get("target_unit")
+        )
         minimum = field.get("minimum")
         maximum = field.get("maximum")
         if minimum is not None and number < float(minimum):

@@ -1,0 +1,59 @@
+{
+  "$id": "https://qra.local/contracts/part1/v1/quality-issue.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blocking": {
+      "type": "boolean"
+    },
+    "candidate_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "code": {
+      "pattern": "^(INTAKE|PARSE|EXTRACT|NORMALIZE|FUSION|CONTRACT|GATE|DELIVERY)\\.",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "issue_id": {
+      "pattern": "^ISS-",
+      "type": "string"
+    },
+    "message": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "quality_status": {
+      "enum": [
+        "PASS",
+        "INFO",
+        "WARNING",
+        "CONFLICT",
+        "LOW_CONFIDENCE",
+        "MISSING",
+        "INVALID",
+        "NOT_APPLICABLE",
+        "PENDING_REVIEW"
+      ]
+    },
+    "target": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "issue_id",
+    "code",
+    "quality_status",
+    "blocking",
+    "target",
+    "message"
+  ],
+  "type": "object"
+}

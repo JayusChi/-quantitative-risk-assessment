@@ -20,7 +20,12 @@ from .aqt3046 import (
 )
 from .engine import QRAEngine
 from .data_categories import resolve_data_categories
-from .frequency import calculate_loc_frequencies, discretize_segment
+from .frequency import (
+    calculate_loc_frequencies,
+    discretize_segment,
+    failure_probability_horizon_years,
+    poisson_at_least_one_failure_probability,
+)
 from .frequency_correction import resolve_segment_correction_factors
 from .gbt34346 import calculate_annex_c_secondary_assessment
 from .gas_properties import gas_properties_from_case
@@ -30,7 +35,7 @@ from .reporting import build_risk_matrix, render_charts, write_risk_matrix_files
 from .validation import validate_case
 
 
-DYNAMIC_SCHEMA_VERSION = "1.1.0"
+DYNAMIC_SCHEMA_VERSION = "1.3.0"
 
 
 @dataclass(frozen=True, slots=True)
@@ -190,6 +195,7 @@ def _segment_geometry(case: dict[str, Any], _: dict[str, Any]) -> dict[str, Any]
 def _frequency_preflight(case: dict[str, Any]) -> list[dict[str, str]]:
     try:
         resolve_segment_correction_factors(case)
+        failure_probability_horizon_years(case)
     except (KeyError, TypeError, ValueError) as exc:
         return [
             {
@@ -203,6 +209,7 @@ def _frequency_preflight(case: dict[str, Any]) -> list[dict[str, str]]:
 def _failure_frequency(case: dict[str, Any], _: dict[str, Any]) -> dict[str, Any]:
     resolution = resolve_segment_correction_factors(case)
     loc_rows = calculate_loc_frequencies(case, resolution)
+    exposure_years = failure_probability_horizon_years(case)
     by_segment: defaultdict[str, float] = defaultdict(float)
     by_mechanism: defaultdict[str, float] = defaultdict(float)
     by_loc: defaultdict[str, float] = defaultdict(float)
@@ -211,20 +218,61 @@ def _failure_frequency(case: dict[str, Any], _: dict[str, Any]) -> dict[str, Any
         by_loc[row.loc_id] += row.annual_frequency
         for mechanism, value in row.mechanism_contribution.items():
             by_mechanism[mechanism] += value
+    total_frequency = sum(by_segment.values())
+    probability_by_segment = {
+        segment_id: poisson_at_least_one_failure_probability(value, exposure_years)
+        for segment_id, value in sorted(by_segment.items())
+    }
+    probability_by_mechanism = {
+        mechanism: poisson_at_least_one_failure_probability(value, exposure_years)
+        for mechanism, value in sorted(by_mechanism.items())
+    }
+    probability_by_loc = {
+        loc_id: poisson_at_least_one_failure_probability(value, exposure_years)
+        for loc_id, value in sorted(by_loc.items())
+    }
     ranking = sorted(by_segment.items(), key=lambda item: (-item[1], item[0]))
+    loc_payload = []
+    for row in loc_rows:
+        payload = row.to_dict()
+        payload["failure_probability_over_horizon"] = (
+            poisson_at_least_one_failure_probability(
+                row.annual_frequency,
+                exposure_years,
+            )
+        )
+        loc_payload.append(payload)
     return {
         "model_id": "pipeline.syt6891.2.frequency.dynamic.v1",
         "source": "SY/T 6891.2-2020 Annex A",
         "unit": "per_year",
-        "total_initiating_frequency_per_year": sum(by_segment.values()),
+        "total_initiating_frequency_per_year": total_frequency,
         "frequency_by_segment_per_year": dict(sorted(by_segment.items())),
         "frequency_by_mechanism_per_year": dict(sorted(by_mechanism.items())),
         "frequency_by_loc_per_year": dict(sorted(by_loc.items())),
+        "failure_probability_model": {
+            "distribution": "homogeneous_poisson",
+            "formula": "P(N>=1)=1-exp(-lambda*t)",
+            "exposure_years": exposure_years,
+            "assumption": "constant independent event intensity within each reported aggregation",
+            "aggregation_note": "frequencies are additive; probabilities are calculated after frequency aggregation and must not be summed",
+        },
+        "at_least_one_failure_probability_over_horizon": (
+            poisson_at_least_one_failure_probability(total_frequency, exposure_years)
+        ),
+        "failure_probability_by_segment_over_horizon": probability_by_segment,
+        "failure_probability_by_mechanism_over_horizon": probability_by_mechanism,
+        "failure_probability_by_loc_over_horizon": probability_by_loc,
         "segment_ranking": [
-            {"rank": index, "segment_id": segment_id, "annual_frequency": value}
+            {
+                "rank": index,
+                "segment_id": segment_id,
+                "annual_frequency": value,
+                "failure_probability_over_horizon": probability_by_segment[segment_id],
+            }
             for index, (segment_id, value) in enumerate(ranking, start=1)
         ],
-        "loc_frequency": [row.to_dict() for row in loc_rows],
+        "loc_frequency": loc_payload,
         "frequency_correction_model": resolution.diagnostics,
     }
 
@@ -701,7 +749,11 @@ def plan_dynamic_flow(
             if states.get(dependency) != "RUNNABLE"
         ]
         missing = _missing_requirements(case, node.requirements)
-        if not blocked_dependencies and not missing and node.preflight is not None:
+        # A blocked composite node still needs to expose its own input gaps.  In
+        # particular, the full human-QRA preflight carries weather, ignition and
+        # population requirements that are not represented by its three direct
+        # dependency nodes.
+        if not missing and node.preflight is not None:
             missing.extend(node.preflight(case))
         status = "RUNNABLE" if not blocked_dependencies and not missing else "SKIPPED"
         states[node.node_id] = status
@@ -909,17 +961,17 @@ def _render_node_charts(
         source_result = all_results[source_node_id]
         if source_node_id == "human_qra":
             return render_charts(source_result, result, output_dir / "human_qra")
+        human_risk = source_result.get("human_risk", {})
+        chart_ids = ["segment_pll_ranking", "risk_matrix", "route_profile"]
+        if human_risk.get("societal_risk", {}).get("fn_curve_available", True):
+            chart_ids.append("fn_curve")
+        if human_risk.get("individual_risk", {}).get("available", True):
+            chart_ids.append("priority_bubble")
         return render_charts(
             source_result,
             result,
             output_dir / "adaptive_evidence_qra",
-            (
-                "segment_pll_ranking",
-                "risk_matrix",
-                "route_profile",
-                "fn_curve",
-                "priority_bubble",
-            ),
+            chart_ids,
         )
     return []
 
@@ -1010,7 +1062,11 @@ def _write_dynamic_dashboard(
         "FULL_SPATIAL_HUMAN_QRA": "完整空间人员域QRA",
     }.get(tier, "尚未形成定量风险结果")
     pipeline_pll = float(human.get("societal_risk", {}).get("pipeline_pll_per_year") or 0.0)
-    maximum_ir = float(human.get("individual_risk", {}).get("maximum", {}).get("value_per_year") or 0.0)
+    individual_risk = human.get("individual_risk", {})
+    maximum_ir_value = individual_risk.get("maximum", {}).get("value_per_year")
+    maximum_ir_available = bool(
+        individual_risk.get("available", maximum_ir_value is not None)
+    )
     top = ranking[0] if ranking else {}
     top_segment = str(top.get("segment_id") or "—")
     top_share = float(top.get("fraction_of_pipeline_risk_value") or 0.0)
@@ -1073,7 +1129,13 @@ def _write_dynamic_dashboard(
         ("全线PLL", f"{pipeline_pll:.4e} 人/年" if human else "—", "navy"),
         ("最高风险管段", top_card_value, "amber"),
         ("最高段风险占比", f"{top_share:.1%}" if ranking else "—", "amber"),
-        ("最大IR估计", f"{maximum_ir:.4e} /年" if human else "—", "navy"),
+        (
+            "最大IR估计",
+            f"{float(maximum_ir_value):.4e} /年"
+            if human and maximum_ir_available and maximum_ir_value is not None
+            else "不可算（缺空间受体）" if human else "—",
+            "navy",
+        ),
         ("平均证据覆盖", f"{average_coverage:.0%}" if ranking else "—", "green"),
     ]
     cards_html = "".join(
@@ -1667,6 +1729,10 @@ def run_dynamic_flow(
                 missing_inputs.append(missing)
                 seen_missing.add(key)
 
+    source_result = results.get("human_qra") or results.get("adaptive_evidence_qra", {})
+    source_human_risk = source_result.get("human_risk", {})
+    source_individual_risk = source_human_risk.get("individual_risk", {})
+    source_societal_risk = source_human_risk.get("societal_risk", {})
     capability_report = {
         "schema_version": DYNAMIC_SCHEMA_VERSION,
         "status": status,
@@ -1691,6 +1757,20 @@ def run_dynamic_flow(
                 )
             ),
             "metric": "PLL_expected_fatalities_per_year",
+            "pll_available": source_societal_risk.get("pipeline_pll_per_year") is not None,
+            "individual_risk_available": bool(
+                source_individual_risk.get(
+                    "available",
+                    source_individual_risk.get("maximum", {}).get("value_per_year")
+                    is not None,
+                )
+            ),
+            "fn_curve_available": bool(
+                source_societal_risk.get(
+                    "fn_curve_available",
+                    bool(source_societal_risk.get("fn_curve")),
+                )
+            ),
             "formal_acceptance_judgement_allowed": bool(
                 results.get("human_qra", {}).get("run", {}).get(
                     "formal_report_allowed", False

@@ -12,12 +12,20 @@ from threading import Lock
 from typing import Any
 from uuid import uuid4
 
-SCHEMA_VERSION = "1.5.0"
+SCHEMA_VERSION = "1.8.0"
 
 ADMIN_BROWSABLE_TABLES = (
     "conversion_job",
     "conversion_source",
     "conversion_parse_artifact",
+    "extraction_run",
+    "extracted_entity",
+    "candidate_field",
+    "candidate_evidence_link",
+    "candidate_relationship",
+    "quality_issue",
+    "fusion_group",
+    "fusion_group_member",
     "input_snapshot_provenance",
     "input_snapshot",
     "input_segment",
@@ -190,6 +198,11 @@ class QraDatabase:
             converter_version TEXT NOT NULL,
             case_id TEXT,
             project_name TEXT,
+            external_sharing_allowed INTEGER NOT NULL DEFAULT 0,
+            ocr_provider_id TEXT,
+            ocr_model_version TEXT,
+            extraction_provider_id TEXT,
+            extraction_model_version TEXT,
             source_count INTEGER NOT NULL,
             source_bytes INTEGER NOT NULL,
             review_decisions_json TEXT,
@@ -199,6 +212,10 @@ class QraDatabase:
             conversion_report_json TEXT,
             preview_json TEXT,
             review_audit_json TEXT,
+            stage4_status TEXT,
+            stage4_result_sha256 TEXT,
+            stage4_metrics_json TEXT,
+            stage4_capability_json TEXT,
             error_json TEXT,
             snapshot_id TEXT REFERENCES input_snapshot(id),
             retry_count INTEGER NOT NULL DEFAULT 0,
@@ -251,6 +268,114 @@ class QraDatabase:
             parse_sha256 TEXT NOT NULL,
             created_at TEXT NOT NULL,
             PRIMARY KEY (job_id, source_id, path)
+        );
+
+        CREATE TABLE IF NOT EXISTS extraction_run (
+            id TEXT PRIMARY KEY,
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            step TEXT NOT NULL,
+            task_type TEXT,
+            status TEXT NOT NULL,
+            provider_id TEXT,
+            model_id TEXT,
+            model_version TEXT,
+            prompt_template_version TEXT,
+            schema_sha256 TEXT,
+            input_sha256 TEXT NOT NULL,
+            output_sha256 TEXT NOT NULL,
+            raw_response_sha256 TEXT,
+            provider_request_id TEXT,
+            retry_count INTEGER NOT NULL DEFAULT 0,
+            error_code TEXT,
+            input_json TEXT,
+            output_json TEXT NOT NULL,
+            started_at TEXT NOT NULL,
+            finished_at TEXT NOT NULL,
+            UNIQUE(job_id, step)
+        );
+
+        CREATE TABLE IF NOT EXISTS extracted_entity (
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            entity_id TEXT NOT NULL,
+            entity_type TEXT NOT NULL,
+            business_key TEXT,
+            normalized_name TEXT,
+            confidence REAL NOT NULL,
+            payload_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, entity_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS candidate_field (
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL,
+            field_id TEXT NOT NULL,
+            entity_type TEXT NOT NULL,
+            entity_key TEXT NOT NULL,
+            extraction_method TEXT NOT NULL,
+            confidence REAL NOT NULL,
+            quality_status TEXT NOT NULL,
+            review_status TEXT NOT NULL,
+            source_unit TEXT,
+            canonical_unit TEXT,
+            normalized_value_json TEXT,
+            payload_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, candidate_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS candidate_evidence_link (
+            job_id TEXT NOT NULL,
+            candidate_id TEXT NOT NULL,
+            evidence_id TEXT NOT NULL,
+            evidence_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, candidate_id, evidence_id),
+            FOREIGN KEY (job_id, candidate_id)
+                REFERENCES candidate_field(job_id, candidate_id) ON DELETE CASCADE
+        );
+
+        CREATE TABLE IF NOT EXISTS candidate_relationship (
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            relationship_id TEXT NOT NULL,
+            relation_type TEXT NOT NULL,
+            source_entity_id TEXT NOT NULL,
+            target_entity_id TEXT NOT NULL,
+            confidence REAL NOT NULL,
+            payload_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, relationship_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS quality_issue (
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            issue_id TEXT NOT NULL,
+            severity TEXT NOT NULL,
+            code TEXT NOT NULL,
+            blocking INTEGER NOT NULL,
+            field_id TEXT,
+            payload_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, issue_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS fusion_group (
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            fusion_group_id TEXT NOT NULL,
+            entity_key TEXT NOT NULL,
+            field_id TEXT,
+            group_type TEXT NOT NULL,
+            candidate_set_sha256 TEXT NOT NULL,
+            proposed_candidate_id TEXT,
+            confirmed_candidate_id TEXT,
+            payload_json TEXT NOT NULL,
+            PRIMARY KEY (job_id, fusion_group_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS fusion_group_member (
+            job_id TEXT NOT NULL,
+            fusion_group_id TEXT NOT NULL,
+            candidate_id TEXT NOT NULL,
+            PRIMARY KEY (job_id, fusion_group_id, candidate_id),
+            FOREIGN KEY (job_id, fusion_group_id)
+                REFERENCES fusion_group(job_id, fusion_group_id) ON DELETE CASCADE,
+            FOREIGN KEY (job_id, candidate_id)
+                REFERENCES candidate_field(job_id, candidate_id) ON DELETE CASCADE
         );
 
         CREATE TABLE IF NOT EXISTS input_snapshot_provenance (
@@ -356,6 +481,14 @@ class QraDatabase:
             ON conversion_parse_artifact(job_id, source_id, artifact_kind);
         CREATE INDEX IF NOT EXISTS idx_conversion_batch
             ON conversion_job(batch_id, created_at);
+        CREATE INDEX IF NOT EXISTS idx_extraction_run_job
+            ON extraction_run(job_id, step);
+        CREATE INDEX IF NOT EXISTS idx_candidate_filter
+            ON candidate_field(job_id, quality_status, field_id, entity_key, candidate_id);
+        CREATE INDEX IF NOT EXISTS idx_quality_issue_filter
+            ON quality_issue(job_id, severity, code, issue_id);
+        CREATE INDEX IF NOT EXISTS idx_fusion_group_job
+            ON fusion_group(job_id, group_type, fusion_group_id);
         CREATE INDEX IF NOT EXISTS idx_input_indicator_lookup
             ON input_indicator_observation(snapshot_id, segment_code, indicator_id);
         CREATE INDEX IF NOT EXISTS idx_input_raw_lookup
@@ -394,6 +527,15 @@ class QraDatabase:
                     "cancelled_at": "TEXT",
                     "cancelled_by": "TEXT",
                     "revision": "INTEGER NOT NULL DEFAULT 1",
+                    "external_sharing_allowed": "INTEGER NOT NULL DEFAULT 0",
+                    "ocr_provider_id": "TEXT",
+                    "ocr_model_version": "TEXT",
+                    "extraction_provider_id": "TEXT",
+                    "extraction_model_version": "TEXT",
+                    "stage4_status": "TEXT",
+                    "stage4_result_sha256": "TEXT",
+                    "stage4_metrics_json": "TEXT",
+                    "stage4_capability_json": "TEXT",
                 }
                 for column, declaration in conversion_migration_columns.items():
                     if column not in existing_conversion_columns:
@@ -770,6 +912,11 @@ class QraDatabase:
         sources: list[dict[str, Any]],
         case_id: str | None = None,
         project_name: str | None = None,
+        external_sharing_allowed: bool = False,
+        ocr_provider_id: str | None = None,
+        ocr_model_version: str | None = None,
+        extraction_provider_id: str | None = None,
+        extraction_model_version: str | None = None,
         review_decisions: dict[str, Any] | None = None,
         batch_id: str | None = None,
         parent_job_id: str | None = None,
@@ -823,12 +970,15 @@ class QraDatabase:
                     profile_path, contract_id, contract_version, contract_sha256,
                     contract_path, failure_policy, intake_rules_version,
                     file_manifest_sha256, intake_issues_json, converter_version,
-                    case_id, project_name, source_count, source_bytes,
+                    case_id, project_name, external_sharing_allowed,
+                    ocr_provider_id, ocr_model_version,
+                    extraction_provider_id, extraction_model_version,
+                    source_count, source_bytes,
                     review_decisions_json, retry_count, created_by, created_at
                 ) VALUES (
                     ?, ?, ?, ?, ?, 0,
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
                 """,
                 (
@@ -853,6 +1003,11 @@ class QraDatabase:
                     converter_version,
                     case_id,
                     project_name,
+                    int(bool(external_sharing_allowed)),
+                    ocr_provider_id,
+                    ocr_model_version,
+                    extraction_provider_id,
+                    extraction_model_version,
                     len(sources),
                     source_bytes,
                     canonical_json(review_decisions) if review_decisions else None,
@@ -1015,6 +1170,11 @@ class QraDatabase:
                     "contract_sha256": contract_sha256,
                     "source_count": len(sources),
                     "source_bytes": source_bytes,
+                    "external_sharing_allowed": bool(external_sharing_allowed),
+                    "ocr_provider_id": ocr_provider_id,
+                    "ocr_model_version": ocr_model_version,
+                    "extraction_provider_id": extraction_provider_id,
+                    "extraction_model_version": extraction_model_version,
                     "dedupe_key": dedupe_key,
                     "failure_policy": failure_policy,
                     "file_manifest_sha256": file_manifest_sha256,
@@ -1035,6 +1195,8 @@ class QraDatabase:
             "conversion_report_json",
             "preview_json",
             "review_audit_json",
+            "stage4_metrics_json",
+            "stage4_capability_json",
             "error_json",
         )
         for field_name in json_fields:
@@ -1100,7 +1262,11 @@ class QraDatabase:
                        failure_policy, intake_rules_version, file_manifest_sha256,
                        cancel_requested_at, cancelled_at, cancelled_by, revision,
                        converter_version, case_id, project_name, source_count,
-                       source_bytes, case_sha256, snapshot_id, retry_count,
+                       external_sharing_allowed, ocr_provider_id, ocr_model_version,
+                       extraction_provider_id,
+                       extraction_model_version, source_bytes, case_sha256,
+                       snapshot_id, retry_count,
+                       stage4_status, stage4_result_sha256,
                        created_by, created_at, started_at, finished_at,
                        confirmed_by, confirmed_at, error_json
                 FROM conversion_job
@@ -1313,6 +1479,712 @@ class QraDatabase:
         item = dict(row)
         content = bytes(item.pop("content"))
         return item, content
+
+    def get_extraction_step(
+        self, job_id: str, step: str, input_sha256: str
+    ) -> dict[str, Any] | None:
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                """
+                SELECT step, status, input_sha256, output_sha256, output_json,
+                       started_at, finished_at, retry_count, error_code
+                FROM extraction_run
+                WHERE job_id = ? AND step = ? AND input_sha256 = ?
+                """,
+                (job_id, step, input_sha256),
+            ).fetchone()
+        if row is None:
+            return None
+        item = dict(row)
+        item["output"] = json.loads(item.pop("output_json"))
+        return item
+
+    def list_conversion_model_calls(self, job_id: str) -> dict[str, Any]:
+        """Return a text-free audit view of OCR and extraction provider calls."""
+
+        self.initialize()
+        with self.session() as connection:
+            job = connection.execute(
+                """
+                SELECT external_sharing_allowed, ocr_provider_id, ocr_model_version,
+                       extraction_provider_id, extraction_model_version
+                FROM conversion_job WHERE id = ?
+                """,
+                (job_id,),
+            ).fetchone()
+            if job is None:
+                raise KeyError(f"转换任务不存在：{job_id}")
+            extraction_rows = connection.execute(
+                """
+                SELECT id, step, status, output_json, started_at, finished_at,
+                       retry_count, error_code
+                FROM extraction_run
+                WHERE job_id = ?
+                ORDER BY started_at, step, id
+                """,
+                (job_id,),
+            ).fetchall()
+            ocr_rows = connection.execute(
+                """
+                SELECT artifact.source_id, artifact.content, artifact.created_at,
+                       source.relative_path, source.parse_quality_json
+                FROM conversion_parse_artifact AS artifact
+                LEFT JOIN conversion_source AS source
+                  ON source.job_id = artifact.job_id
+                 AND source.id = artifact.source_id
+                WHERE artifact.job_id = ? AND artifact.path = 'parsed_document.json'
+                ORDER BY artifact.source_id
+                """,
+                (job_id,),
+            ).fetchall()
+            candidate_count = int(
+                connection.execute(
+                    "SELECT count(*) FROM candidate_field WHERE job_id = ?", (job_id,)
+                ).fetchone()[0]
+            )
+
+        def safe_text(value: object, limit: int = 240) -> str | None:
+            if value is None:
+                return None
+            cleaned = "".join(character for character in str(value) if ord(character) >= 32)
+            return cleaned[:limit] or None
+
+        items: list[dict[str, Any]] = []
+        for row in extraction_rows:
+            try:
+                output = json.loads(str(row["output_json"]))
+            except (TypeError, ValueError, json.JSONDecodeError):
+                output = {}
+            audits = output.get("model_calls", []) if isinstance(output, dict) else []
+            for index, audit_value in enumerate(audits, start=1):
+                if not isinstance(audit_value, dict):
+                    continue
+                usage_value = audit_value.get("usage")
+                usage = (
+                    {
+                        str(key)[:80]: value
+                        for key, value in usage_value.items()
+                        if isinstance(value, int | float) and not isinstance(value, bool)
+                    }
+                    if isinstance(usage_value, dict)
+                    else {}
+                )
+                status = safe_text(audit_value.get("status"), 80) or (
+                    "FAILED" if row["error_code"] else "COMPLETED"
+                )
+                items.append(
+                    {
+                        "call_id": f"{row['id']}-{index}",
+                        "call_kind": "EXTRACTION",
+                        "step": str(row["step"]),
+                        "task_type": safe_text(audit_value.get("task_type"), 80),
+                        "status": status,
+                        "workflow_status": str(row["status"]),
+                        "provider_id": safe_text(
+                            audit_value.get("provider_id")
+                            or job["extraction_provider_id"]
+                        ),
+                        "model_version": safe_text(
+                            audit_value.get("model_version")
+                            or job["extraction_model_version"]
+                        ),
+                        "provider_request_id": safe_text(
+                            audit_value.get("provider_request_id")
+                        ),
+                        "retry_count": int(audit_value.get("retry_count", 0) or 0),
+                        "repair_count": int(audit_value.get("repair_count", 0) or 0),
+                        "error_code": safe_text(
+                            audit_value.get("error_code") or row["error_code"], 120
+                        ),
+                        "finish_reason": safe_text(
+                            audit_value.get("finish_reason"), 80
+                        ),
+                        "prompt_template_version": safe_text(
+                            audit_value.get("prompt_template_version"), 120
+                        ),
+                        "raw_response_sha256": safe_text(
+                            audit_value.get("raw_response_sha256"), 64
+                        ),
+                        "usage": usage,
+                        "source_id": None,
+                        "source_path": None,
+                        "cache_hit": False,
+                        "started_at": str(row["started_at"]),
+                        "finished_at": str(row["finished_at"]),
+                    }
+                )
+
+        for row in ocr_rows:
+            try:
+                document = json.loads(bytes(row["content"]).decode("utf-8"))
+            except (TypeError, ValueError, UnicodeDecodeError, json.JSONDecodeError):
+                continue
+            metadata = document.get("metadata", {}) if isinstance(document, dict) else {}
+            if not isinstance(metadata, dict):
+                continue
+            raw_calls: list[dict[str, Any]] = []
+            single = metadata.get("ocr")
+            if isinstance(single, dict) and single.get("provider_id"):
+                raw_calls.append(single)
+            multiple = metadata.get("ocr_calls")
+            if isinstance(multiple, list):
+                raw_calls.extend(item for item in multiple if isinstance(item, dict))
+            try:
+                quality = json.loads(str(row["parse_quality_json"] or "{}"))
+            except (TypeError, ValueError, json.JSONDecodeError):
+                quality = {}
+            cache_hit = bool(quality.get("cache_hit")) if isinstance(quality, dict) else False
+            for index, audit_value in enumerate(raw_calls, start=1):
+                provider_id = safe_text(
+                    audit_value.get("provider_id") or job["ocr_provider_id"]
+                )
+                model_version = safe_text(
+                    audit_value.get("model_version") or job["ocr_model_version"]
+                )
+                if not provider_id and not model_version:
+                    continue
+                fingerprint = canonical_json(
+                    {
+                        "job_id": job_id,
+                        "source_id": str(row["source_id"]),
+                        "index": index,
+                        "provider_request_id": audit_value.get("provider_request_id"),
+                        "raw_response_sha256": audit_value.get("raw_response_sha256"),
+                    }
+                )
+                items.append(
+                    {
+                        "call_id": "OCR-"
+                        + hashlib.sha256(fingerprint.encode("utf-8")).hexdigest()[:24],
+                        "call_kind": "OCR",
+                        "step": "OCR",
+                        "task_type": "OCR",
+                        "status": "CACHED" if cache_hit else "COMPLETED",
+                        "workflow_status": "PARSED",
+                        "provider_id": provider_id,
+                        "model_version": model_version,
+                        "provider_request_id": safe_text(
+                            audit_value.get("provider_request_id")
+                        ),
+                        "retry_count": 0,
+                        "repair_count": 0,
+                        "error_code": None,
+                        "finish_reason": None,
+                        "prompt_template_version": None,
+                        "raw_response_sha256": safe_text(
+                            audit_value.get("raw_response_sha256"), 64
+                        ),
+                        "usage": {},
+                        "source_id": str(row["source_id"]),
+                        "source_path": safe_text(row["relative_path"], 500),
+                        "page_number": audit_value.get("page_number"),
+                        "image_id": safe_text(audit_value.get("image_id"), 160),
+                        "cache_hit": cache_hit,
+                        "started_at": None,
+                        "finished_at": str(row["created_at"]),
+                    }
+                )
+
+        items.sort(
+            key=lambda item: (
+                str(item.get("finished_at") or item.get("started_at") or ""),
+                str(item["call_kind"]),
+                str(item["call_id"]),
+            )
+        )
+        return {
+            "conversion_id": job_id,
+            "summary": {
+                "record_count": len(items),
+                "ocr_record_count": sum(item["call_kind"] == "OCR" for item in items),
+                "extraction_record_count": sum(
+                    item["call_kind"] == "EXTRACTION" for item in items
+                ),
+                "failed_record_count": sum(
+                    item["status"] in {"FAILED", "STRUCTURE_FAILED"} for item in items
+                ),
+                "cached_record_count": sum(bool(item.get("cache_hit")) for item in items),
+                "candidate_count": candidate_count,
+                "external_sharing_allowed": bool(job["external_sharing_allowed"]),
+                "ocr_provider_id": job["ocr_provider_id"],
+                "ocr_model_version": job["ocr_model_version"],
+                "extraction_provider_id": job["extraction_provider_id"],
+                "extraction_model_version": job["extraction_model_version"],
+            },
+            "items": items,
+        }
+
+    def save_extraction_step(self, job_id: str, result: dict[str, Any]) -> None:
+        """Persist one immutable step output while the conversion remains runnable."""
+
+        step = str(result["step"])
+        output = dict(result["output"])
+        calls = [item for item in output.get("model_calls", []) if isinstance(item, dict)]
+        call = calls[0] if calls else {}
+        run_id = "XRUN-" + hashlib.sha256(f"{job_id}\0{step}".encode()).hexdigest()[:24]
+        with self.transaction() as connection:
+            job = connection.execute(
+                "SELECT status, cancel_requested_at FROM conversion_job WHERE id = ?",
+                (job_id,),
+            ).fetchone()
+            if job is None:
+                raise KeyError(f"转换任务不存在：{job_id}")
+            if job["status"] != "RUNNING" or job["cancel_requested_at"]:
+                raise ValueError("转换任务当前不允许固化提取步骤")
+            existing = connection.execute(
+                """
+                SELECT input_sha256, output_sha256 FROM extraction_run
+                WHERE job_id = ? AND step = ?
+                """,
+                (job_id, step),
+            ).fetchone()
+            if existing is not None:
+                if (
+                    str(existing["input_sha256"]) == str(result["input_sha256"])
+                    and str(existing["output_sha256"]) == str(result["output_sha256"])
+                ):
+                    return
+                raise ValueError("已固化步骤不能写入不同输入或输出")
+            connection.execute(
+                """
+                INSERT INTO extraction_run(
+                    id, job_id, step, task_type, status, provider_id, model_id,
+                    model_version, prompt_template_version, schema_sha256,
+                    input_sha256, output_sha256, raw_response_sha256,
+                    provider_request_id, retry_count, error_code, input_json,
+                    output_json, started_at, finished_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    run_id,
+                    job_id,
+                    step,
+                    call.get("task_type"),
+                    str(result["status"]),
+                    call.get("provider_id"),
+                    call.get("model_id"),
+                    call.get("model_version"),
+                    call.get("prompt_template_version"),
+                    call.get("schema_sha256"),
+                    str(result["input_sha256"]),
+                    str(result["output_sha256"]),
+                    call.get("raw_response_sha256"),
+                    call.get("provider_request_id"),
+                    int(result.get("retry_count", 0)),
+                    result.get("error_code") or call.get("error_code"),
+                    None,
+                    canonical_json(output),
+                    str(result["started_at"]),
+                    str(result["finished_at"]),
+                ),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="EXTRACTION_STEP_COMPLETED",
+                entity_type="conversion_job",
+                entity_id=job_id,
+                detail={
+                    "step": step,
+                    "input_sha256": result["input_sha256"],
+                    "output_sha256": result["output_sha256"],
+                    "provider_id": call.get("provider_id"),
+                    "model_version": call.get("model_version"),
+                },
+            )
+
+    def save_stage4_result(self, job_id: str, result: dict[str, Any]) -> None:
+        """Atomically materialize candidate facts separately from conversion payload JSON."""
+
+        result_hash = str(result.get("result_sha256") or "")
+        if len(result_hash) != 64:
+            raise ValueError("第四阶段结果哈希无效")
+        evidence = {
+            str(item["evidence_id"]): dict(item) for item in result.get("evidence", [])
+        }
+        candidates = {
+            str(item["candidate_id"]): dict(item) for item in result.get("candidates", [])
+        }
+        entities = {
+            str(item["entity_id"]): dict(item) for item in result.get("entities", [])
+        }
+        relationships = {
+            str(item["relationship_id"]): dict(item)
+            for item in result.get("relationships", [])
+        }
+        issues = {
+            str(item["issue_id"]): dict(item) for item in result.get("issues", [])
+        }
+        groups = {
+            str(item["fusion_group_id"]): dict(item)
+            for item in result.get("fusion_groups", [])
+        }
+
+        def issue_severity(item: dict[str, Any]) -> str:
+            status = str(item.get("quality_status") or "INVALID")
+            if status == "INFO":
+                return "INFO"
+            if status in {"WARNING", "LOW_CONFIDENCE", "MISSING", "PENDING_REVIEW"}:
+                return "WARNING"
+            return "ERROR"
+
+        with self.transaction() as connection:
+            job = connection.execute(
+                """
+                SELECT status, cancel_requested_at, stage4_result_sha256
+                FROM conversion_job WHERE id = ?
+                """,
+                (job_id,),
+            ).fetchone()
+            if job is None:
+                raise KeyError(f"转换任务不存在：{job_id}")
+            if job["stage4_result_sha256"] is not None:
+                if str(job["stage4_result_sha256"]) == result_hash:
+                    return
+                raise ValueError("已固化的第四阶段结果不能被不同结果覆盖")
+            if job["status"] != "RUNNING" or job["cancel_requested_at"]:
+                raise ValueError("转换任务当前不允许固化第四阶段结果")
+            connection.executemany(
+                """
+                INSERT INTO extracted_entity(
+                    job_id, entity_id, entity_type, business_key,
+                    normalized_name, confidence, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    (
+                        job_id,
+                        entity_id,
+                        str(item["entity_type"]),
+                        item.get("business_key"),
+                        item.get("normalized_name"),
+                        float(item.get("confidence", 0.0)),
+                        canonical_json(item),
+                    )
+                    for entity_id, item in sorted(entities.items())
+                ],
+            )
+            connection.executemany(
+                """
+                INSERT INTO candidate_field(
+                    job_id, candidate_id, field_id, entity_type, entity_key,
+                    extraction_method, confidence, quality_status, review_status,
+                    source_unit, canonical_unit, normalized_value_json, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    (
+                        job_id,
+                        candidate_id,
+                        str(item["field_id"]),
+                        str((item.get("entity") or {})["entity_type"]),
+                        str((item.get("entity") or {})["entity_key"]),
+                        str(item["extraction_method"]),
+                        float(item["confidence"]),
+                        str(item["quality_status"]),
+                        str(item["review_status"]),
+                        item.get("source_unit"),
+                        item.get("canonical_unit"),
+                        canonical_json(item.get("normalized_value")),
+                        canonical_json(item),
+                    )
+                    for candidate_id, item in sorted(candidates.items())
+                ],
+            )
+            links = []
+            for candidate_id, item in sorted(candidates.items()):
+                for evidence_id in sorted(set(item.get("evidence_ids") or [])):
+                    if evidence_id not in evidence:
+                        raise ValueError(f"候选引用未持久化证据：{evidence_id}")
+                    links.append(
+                        (job_id, candidate_id, evidence_id, canonical_json(evidence[evidence_id]))
+                    )
+            connection.executemany(
+                """
+                INSERT INTO candidate_evidence_link(
+                    job_id, candidate_id, evidence_id, evidence_json
+                ) VALUES (?, ?, ?, ?)
+                """,
+                links,
+            )
+            connection.executemany(
+                """
+                INSERT INTO candidate_relationship(
+                    job_id, relationship_id, relation_type, source_entity_id,
+                    target_entity_id, confidence, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    (
+                        job_id,
+                        relationship_id,
+                        str(item["relation_type"]),
+                        str(item["source_entity_id"]),
+                        str(item["target_entity_id"]),
+                        float(item.get("confidence", 0.0)),
+                        canonical_json(item),
+                    )
+                    for relationship_id, item in sorted(relationships.items())
+                ],
+            )
+            connection.executemany(
+                """
+                INSERT INTO quality_issue(
+                    job_id, issue_id, severity, code, blocking, field_id, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    (
+                        job_id,
+                        issue_id,
+                        issue_severity(item),
+                        str(item["code"]),
+                        int(bool(item.get("blocking"))),
+                        item.get("field_id"),
+                        canonical_json(item),
+                    )
+                    for issue_id, item in sorted(issues.items())
+                ],
+            )
+            connection.executemany(
+                """
+                INSERT INTO fusion_group(
+                    job_id, fusion_group_id, entity_key, field_id, group_type,
+                    candidate_set_sha256, proposed_candidate_id,
+                    confirmed_candidate_id, payload_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    (
+                        job_id,
+                        group_id,
+                        str(item["entity_key"]),
+                        item.get("field_id"),
+                        str(item["group_type"]),
+                        str(item["candidate_set_sha256"]),
+                        item.get("proposed_candidate_id"),
+                        item.get("confirmed_candidate_id"),
+                        canonical_json(item),
+                    )
+                    for group_id, item in sorted(groups.items())
+                ],
+            )
+            connection.executemany(
+                """
+                INSERT INTO fusion_group_member(job_id, fusion_group_id, candidate_id)
+                VALUES (?, ?, ?)
+                """,
+                [
+                    (job_id, group_id, str(candidate_id))
+                    for group_id, item in sorted(groups.items())
+                    for candidate_id in item.get("candidate_ids", [])
+                    if str(candidate_id) in candidates
+                ],
+            )
+            connection.execute(
+                """
+                UPDATE conversion_job
+                SET stage4_status = ?, stage4_result_sha256 = ?,
+                    stage4_metrics_json = ?, stage4_capability_json = ?,
+                    revision = revision + 1
+                WHERE id = ?
+                """,
+                (
+                    str(result["status"]),
+                    result_hash,
+                    canonical_json(result.get("metrics") or {}),
+                    canonical_json(result.get("capability_plan") or {}),
+                    job_id,
+                ),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="STAGE4_RESULT_PERSISTED",
+                entity_type="conversion_job",
+                entity_id=job_id,
+                detail={
+                    "status": result["status"],
+                    "result_sha256": result_hash,
+                    "candidate_count": len(candidates),
+                    "issue_count": len(issues),
+                    "fusion_group_count": len(groups),
+                },
+            )
+
+    def conversion_review_summary(self, job_id: str) -> dict[str, Any]:
+        self.initialize()
+        job = self.get_conversion_job(job_id, detailed=False)
+        with self.session() as connection:
+            candidate_rows = connection.execute(
+                """
+                SELECT quality_status, count(*) AS count
+                FROM candidate_field WHERE job_id = ? GROUP BY quality_status
+                """,
+                (job_id,),
+            ).fetchall()
+            issue_rows = connection.execute(
+                """
+                SELECT severity, count(*) AS count
+                FROM quality_issue WHERE job_id = ? GROUP BY severity
+                """,
+                (job_id,),
+            ).fetchall()
+            entity_count = int(
+                connection.execute(
+                    "SELECT count(*) FROM extracted_entity WHERE job_id = ?", (job_id,)
+                ).fetchone()[0]
+            )
+            relation_count = int(
+                connection.execute(
+                    "SELECT count(*) FROM candidate_relationship WHERE job_id = ?", (job_id,)
+                ).fetchone()[0]
+            )
+            group_count = int(
+                connection.execute(
+                    "SELECT count(*) FROM fusion_group WHERE job_id = ?", (job_id,)
+                ).fetchone()[0]
+            )
+        return {
+            "conversion_id": job_id,
+            "status": job.get("stage4_status") or "NOT_RUN",
+            "result_sha256": job.get("stage4_result_sha256"),
+            "candidate_counts": {
+                str(row["quality_status"]): int(row["count"])
+                for row in candidate_rows
+            },
+            "issue_counts": {str(row["severity"]): int(row["count"]) for row in issue_rows},
+            "entity_count": entity_count,
+            "relationship_count": relation_count,
+            "fusion_group_count": group_count,
+            "metrics": job.get("stage4_metrics") or {},
+        }
+
+    def list_conversion_candidates(
+        self,
+        job_id: str,
+        *,
+        status: str | None = None,
+        field_id: str | None = None,
+        entity: str | None = None,
+        cursor: str | None = None,
+        limit: int = 100,
+    ) -> dict[str, Any]:
+        self.initialize()
+        self.get_conversion_job(job_id, detailed=False)
+        filters = ["job_id = ?"]
+        parameters: list[Any] = [job_id]
+        for column, value in (
+            ("quality_status", status),
+            ("field_id", field_id),
+            ("entity_key", entity),
+        ):
+            if value:
+                filters.append(f"{column} = ?")
+                parameters.append(str(value))
+        if cursor:
+            filters.append("candidate_id > ?")
+            parameters.append(str(cursor))
+        safe_limit = max(1, min(int(limit), 500))
+        with self.session() as connection:
+            rows = connection.execute(
+                f"""
+                SELECT candidate_id, field_id, entity_type, entity_key,
+                       extraction_method, confidence, quality_status, review_status,
+                       source_unit, canonical_unit, normalized_value_json
+                FROM candidate_field
+                WHERE {' AND '.join(filters)}
+                ORDER BY candidate_id LIMIT ?
+                """,
+                (*parameters, safe_limit + 1),
+            ).fetchall()
+        has_more = len(rows) > safe_limit
+        rows = rows[:safe_limit]
+        items = []
+        for row in rows:
+            item = dict(row)
+            item["normalized_value"] = json.loads(item.pop("normalized_value_json"))
+            items.append(item)
+        return {
+            "items": items,
+            "next_cursor": items[-1]["candidate_id"] if has_more and items else None,
+        }
+
+    def get_conversion_candidate(self, job_id: str, candidate_id: str) -> dict[str, Any]:
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                "SELECT payload_json FROM candidate_field WHERE job_id = ? AND candidate_id = ?",
+                (job_id, candidate_id),
+            ).fetchone()
+            if row is None:
+                raise KeyError(f"候选不存在：{candidate_id}")
+            evidence_rows = connection.execute(
+                """
+                SELECT evidence_json FROM candidate_evidence_link
+                WHERE job_id = ? AND candidate_id = ? ORDER BY evidence_id
+                """,
+                (job_id, candidate_id),
+            ).fetchall()
+            group_rows = connection.execute(
+                """
+                SELECT g.payload_json FROM fusion_group g
+                JOIN fusion_group_member m
+                  ON m.job_id = g.job_id AND m.fusion_group_id = g.fusion_group_id
+                WHERE m.job_id = ? AND m.candidate_id = ?
+                ORDER BY g.fusion_group_id
+                """,
+                (job_id, candidate_id),
+            ).fetchall()
+        item = json.loads(str(row["payload_json"]))
+        item["evidence"] = [json.loads(str(value["evidence_json"])) for value in evidence_rows]
+        item["fusion_groups"] = [json.loads(str(value["payload_json"])) for value in group_rows]
+        return item
+
+    def list_conversion_quality_issues(
+        self,
+        job_id: str,
+        *,
+        severity: str | None = None,
+        code: str | None = None,
+        cursor: str | None = None,
+        limit: int = 100,
+    ) -> dict[str, Any]:
+        self.initialize()
+        self.get_conversion_job(job_id, detailed=False)
+        filters = ["job_id = ?"]
+        parameters: list[Any] = [job_id]
+        if severity:
+            filters.append("severity = ?")
+            parameters.append(str(severity))
+        if code:
+            filters.append("code = ?")
+            parameters.append(str(code))
+        if cursor:
+            filters.append("issue_id > ?")
+            parameters.append(str(cursor))
+        safe_limit = max(1, min(int(limit), 500))
+        with self.session() as connection:
+            rows = connection.execute(
+                f"""
+                SELECT payload_json FROM quality_issue
+                WHERE {' AND '.join(filters)} ORDER BY issue_id LIMIT ?
+                """,
+                (*parameters, safe_limit + 1),
+            ).fetchall()
+        has_more = len(rows) > safe_limit
+        items = [json.loads(str(row["payload_json"])) for row in rows[:safe_limit]]
+        return {
+            "items": items,
+            "next_cursor": items[-1]["issue_id"] if has_more and items else None,
+        }
+
+    def conversion_capability(self, job_id: str) -> dict[str, Any]:
+        job = self.get_conversion_job(job_id, detailed=False)
+        return {
+            "conversion_id": job_id,
+            "status": job.get("stage4_status") or "NOT_RUN",
+            "capability_plan": job.get("stage4_capability") or {},
+        }
 
     def list_conversion_events(self, job_id: str, limit: int = 500) -> list[dict[str, Any]]:
         self.initialize()
@@ -1851,6 +2723,11 @@ class QraDatabase:
             sources=sources,
             case_id=job.get("case_id"),
             project_name=job.get("project_name"),
+            external_sharing_allowed=bool(job.get("external_sharing_allowed")),
+            ocr_provider_id=job.get("ocr_provider_id"),
+            ocr_model_version=job.get("ocr_model_version"),
+            extraction_provider_id=job.get("extraction_provider_id"),
+            extraction_model_version=job.get("extraction_model_version"),
             review_decisions=decisions,
             batch_id=job.get("batch_id"),
             parent_job_id=job_id,
@@ -1916,6 +2793,16 @@ class QraDatabase:
                         revision = revision + 1
                     WHERE status IN ('QUEUED', 'RUNNING') AND cancel_requested_at IS NULL
                     """
+                )
+                placeholders = ",".join("?" for _ in job_ids)
+                connection.execute(
+                    f"""
+                    UPDATE conversion_source
+                    SET security_status = 'READY_FOR_PARSE'
+                    WHERE job_id IN ({placeholders})
+                      AND security_status IN ('PARSED', 'PARSE_FAILED')
+                    """,
+                    job_ids,
                 )
                 for job_id in job_ids:
                     self._record_event_in_connection(

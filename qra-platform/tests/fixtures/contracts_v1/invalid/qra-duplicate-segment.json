@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "case_id": "MIN-SEG-001",
+    "data_classification": "SYNTHETIC_TEST_ONLY",
+    "project_name": "最小管段案例"
+  },
+  "pipeline": {
+    "pipeline_id": "PL-001",
+    "total_length_km": 1.0
+  },
+  "segments": [
+    {
+      "end_km": 1.0,
+      "length_km": 1.0,
+      "segment_id": "SEG-001",
+      "start_km": 0.0
+    },
+    {
+      "end_km": 1.0,
+      "length_km": 1.0,
+      "segment_id": "SEG-001",
+      "start_km": 0.0
+    }
+  ]
+}

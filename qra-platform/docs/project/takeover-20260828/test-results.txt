@@ -1,0 +1,272 @@
+test_customer_profile_filters_other_line_and_maps_shared_sheet (tests.integration.test_converter_jiujiang_stage1.JiujiangStage1ConversionTests) ... ok
+test_customer_profile_matches_sanitized_golden_case_and_is_repeatable (tests.integration.test_converter_jiujiang_stage1.JiujiangStage1ConversionTests) ... ok
+test_repeated_conversion_has_identical_case_hash (tests.integration.test_converter_mvp.ConverterMvpIntegrationTests) ... ok
+test_structured_sources_convert_and_pass_import_contract (tests.integration.test_converter_mvp.ConverterMvpIntegrationTests) ... ok
+test_confirmed_multisource_case_matches_golden_business_json (tests.integration.test_converter_phase2.ConverterPhase2IntegrationTests) ... ok
+test_conflict_blocks_calculation_until_review_is_applied (tests.integration.test_converter_phase2.ConverterPhase2IntegrationTests) ... ok
+test_admin_server_uses_project_default_port (tests.integration.test_converter_phase3.ConverterPhase3IntegrationTest) ... ok
+test_blocked_conversion_review_retry_and_restart_recovery (tests.integration.test_converter_phase3.ConverterPhase3IntegrationTest) ... ok
+test_http_upload_preview_confirm_and_existing_json_compatibility (tests.integration.test_converter_phase3.ConverterPhase3IntegrationTest) ... ok
+test_task_deduplication_confirmation_provenance_and_cli_parity (tests.integration.test_converter_phase3.ConverterPhase3IntegrationTest) ... ok
+test_zip_traversal_is_quarantined_before_worker_execution (tests.integration.test_converter_phase3.ConverterPhase3IntegrationTest) ... ok
+test_import_calculate_persist_and_serve (tests.integration.test_database_end_to_end.DatabaseQraEndToEndTest) ... ok
+test_upload_failure_path_clears_stale_state (tests.integration.test_database_end_to_end.DatabaseQraEndToEndTest) ... ok
+test_ready_sources_persist_independent_parse_state_quality_and_artifacts (tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest) ... ok
+test_real_ocr_provider_smoke (tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest) ... skipped '���𻷾�δ������ʵOCR����ʽɨ������ձ�����ʽ���ú�����'
+test_terminal_conversion_delete_cascades_sources_and_parse_artifacts (tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest) ... ok
+test_unconfigured_image_ocr_marks_only_that_source_failed_and_keeps_artifact (tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest) ... ok
+test_decodeable_jpeg_with_small_trailing_metadata_enters_parse_queue (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_default_policy_blocks_unsafe_zip_without_starting_parser (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_http_sources_events_cancel_filters_and_page_controls (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_legacy_conversion_source_schema_is_migrated_without_rebuild (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_schema_sources_cross_task_duplicate_and_cancel_state_machine (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_zip_members_are_persisted_and_only_ready_members_reach_converter (tests.integration.test_file_intake_phase2.FileIntakePhase2IntegrationTest) ... ok
+test_admin_page_contains_one_time_ocr_configuration_controls (tests.integration.test_ocr_settings_api.OcrSettingsApiTests) ... ok
+test_browser_api_imports_encrypted_config_and_restores_on_restart (tests.integration.test_ocr_settings_api.OcrSettingsApiTests) ... ok
+test_real_shape_trial_is_repeatable_and_preserves_missing_risk_semantics (tests.integration.test_stage2_jiujiang_trial.Stage2JiujiangTrialRegressionTest) ... ok
+test_labelled_fixture_meets_candidate_and_normalization_gates (tests.integration.test_stage4_labelled_golden.Stage4LabelledGoldenTests) ... ok
+test_database_persistence_and_read_only_review_apis (tests.integration.test_stage4_pipeline.Stage4PipelineIntegrationTests) ... ok
+test_fixture_workflow_binds_evidence_and_ignores_document_commands (tests.integration.test_stage4_pipeline.Stage4PipelineIntegrationTests) ... ok
+test_per_job_model_selection_and_text_free_call_audit (tests.integration.test_stage4_pipeline.Stage4PipelineIntegrationTests) ... ok
+test_environment_selects_bailian_without_exposing_key_in_model_metadata (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_incomplete_bailian_environment_keeps_provider_disabled (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_max_model_uses_multimodal_transcription_prompt_without_ocr_options (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_missing_provider_location_preserves_only_conservative_page_evidence (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_network_denial_is_retryable_provider_error_not_timeout (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_server_failure_is_retryable_provider_error (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_structured_high_precision_response_maps_text_and_location (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_url_timeout_remains_timeout (tests.unit.converter.parsing.test_aliyun_bailian.AliyunBailianOcrProviderTests) ... ok
+test_cache_key_binds_every_behavior_version_and_parameters (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_cache_restore_requires_manifest_and_core_artifacts (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_canonical_hash_excludes_processing_runtime (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_coordinate_conversion_validation_and_inverse (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_coordinate_table_inference_is_conservative_and_confidence_capped (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_cross_page_relation_preserves_both_tables (tests.unit.converter.parsing.test_contracts.ParsingContractTests) ... ok
+test_corrupt_empty_and_oversized_inputs_return_structured_errors (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_csv_preserves_encoding_physical_lines_leading_zero_and_empty_string (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_docx_uses_structure_locations_and_never_fabricates_page_numbers (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_encrypted_pdf_is_rejected_without_password_attempt (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_exif_orientation_is_traceable_and_transform_is_reversible (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_image_pipeline_uses_fixture_ocr_and_flags_low_confidence (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_image_quality_detects_blur_exposure_and_low_resolution (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_image_quality_detects_skew_and_border_clipping (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_image_without_provider_fails_with_explicit_codes_and_no_fake_text (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_mixed_pdf_routes_native_and_scan_pages_in_one_document (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_pdf_routes_native_text_and_scan_pages_by_page (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_pipeline_cache_rebinds_artifact_and_preserves_parse_hash (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_rotated_scan_pdf_preserves_rotation_and_valid_coordinates (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_xls_golden_fixture_preserves_sheets_formula_merge_date_and_leading_zero (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_xlsx_preserves_formula_merge_hidden_and_date_evidence (tests.unit.converter.parsing.test_document_readers.DeterministicReaderTests) ... ok
+test_disabled_provider_returns_structured_not_configured_error (tests.unit.converter.parsing.test_ocr.OcrServiceTests) ... ok
+test_retry_is_bounded_exponential_and_success_is_cached (tests.unit.converter.parsing.test_ocr.OcrServiceTests) ... ok
+test_environment_factory_requires_complete_configuration (tests.unit.converter.test_aliyun_bailian_extraction.AliyunBailianExtractionProviderTests) ... ok
+test_json_schema_request_and_structured_response (tests.unit.converter.test_aliyun_bailian_extraction.AliyunBailianExtractionProviderTests) ... ok
+test_rate_limit_is_retryable_and_error_redacts_key (tests.unit.converter.test_aliyun_bailian_extraction.AliyunBailianExtractionProviderTests) ... ok
+test_all_indicator_catalog_rows_are_registered_without_hardcoded_count (tests.unit.converter.test_contract_catalog.ContractCatalogTests) ... ok
+test_field_and_target_ids_are_unique (tests.unit.converter.test_contract_catalog.ContractCatalogTests) ... ok
+test_manifest_hashes_version_and_dictionary_are_consistent (tests.unit.converter.test_contract_catalog.ContractCatalogTests) ... ok
+test_manifest_path_escape_is_rejected (tests.unit.converter.test_contract_catalog.ContractCatalogTests) ... ok
+test_tampered_file_is_rejected_without_version_change (tests.unit.converter.test_contract_catalog.ContractCatalogTests) ... ok
+test_error_blocks_draft_from_review (tests.unit.converter.test_contracts.ConversionContractTests) ... ok
+test_warning_keeps_draft_reviewable (tests.unit.converter.test_contracts.ConversionContractTests) ... ok
+test_boundary_uses_start_inclusive_end_exclusive (tests.unit.converter.test_matching.SegmentMatchingTests) ... ok
+test_last_segment_includes_pipeline_endpoint (tests.unit.converter.test_matching.SegmentMatchingTests) ... ok
+test_out_of_range_chainage_is_an_error (tests.unit.converter.test_matching.SegmentMatchingTests) ... ok
+test_duplicate_segment_and_gap_are_detected (tests.unit.converter.test_quality.ConversionQualityTests) ... ok
+test_empty_record_key_is_detected (tests.unit.converter.test_quality.ConversionQualityTests) ... ok
+test_overlapping_segments_are_detected (tests.unit.converter.test_quality.ConversionQualityTests) ... ok
+test_csv_reader_preserves_quoted_newlines_and_physical_row_number (tests.unit.converter.test_readers.TabularReaderTests) ... ok
+test_csv_reader_preserves_source_rows (tests.unit.converter.test_readers.TabularReaderTests) ... ok
+test_docx_reader_extracts_native_table_as_review_required (tests.unit.converter.test_readers.TabularReaderTests) ... ok
+test_xlsx_reader_preserves_sheet_and_typed_values (tests.unit.converter.test_readers.TabularReaderTests) ... ok
+test_conflicting_value_uses_priority_only_as_review_proposal (tests.unit.converter.test_review.MultiSourceReviewTests) ... ok
+test_exact_duplicate_records_are_merged_with_all_sources (tests.unit.converter.test_review.MultiSourceReviewTests) ... ok
+test_low_confidence_record_stays_pending_until_confirmed (tests.unit.converter.test_review.MultiSourceReviewTests) ... ok
+test_candidate_requires_evidence_or_declared_non_document_source (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_confidence_and_review_action_are_bounded_enums (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_each_non_qra_schema_has_a_valid_example (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_evidence_issue_and_snapshot_invalid_examples_are_rejected (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_minimum_and_full_examples_pass_qra_schema (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_qra_invalid_cases_produce_stable_codes (tests.unit.converter.test_schema_validation.SchemaValidationTests) ... ok
+test_document_candidate_without_evidence_is_rejected (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_oversized_response_and_non_retryable_errors_are_not_retried (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_provider_timeout_is_enforced_by_the_port (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_retry_is_limited_to_retryable_provider_errors (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_unknown_field_and_forged_evidence_are_rejected (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_untrusted_instruction_is_detected_but_never_executed (tests.unit.converter.test_stage4_extraction.Stage4ExtractionContractTests) ... ok
+test_design_and_operating_pressure_are_different_concepts (tests.unit.converter.test_stage4_fusion.Stage4FusionTests) ... ok
+test_near_duplicate_and_conflict_are_distinct (tests.unit.converter.test_stage4_fusion.Stage4FusionTests) ... ok
+test_same_chainage_on_different_pipelines_never_matches (tests.unit.converter.test_stage4_fusion.Stage4FusionTests) ... ok
+test_chainage_examples_and_half_open_terminal_rule (tests.unit.converter.test_stage4_normalization.Stage4NormalizationTests) ... ok
+test_percent_without_percent_or_column_unit_is_not_divided (tests.unit.converter.test_stage4_normalization.Stage4NormalizationTests) ... ok
+test_pressure_basis_and_missing_coordinate_system_are_blocked (tests.unit.converter.test_stage4_normalization.Stage4NormalizationTests) ... ok
+test_pressure_units_share_one_deterministic_value (tests.unit.converter.test_stage4_normalization.Stage4NormalizationTests) ... ok
+test_ranges_and_partial_dates_are_not_invented (tests.unit.converter.test_stage4_normalization.Stage4NormalizationTests) ... ok
+test_ambiguous_number_is_rejected (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_blank_is_not_silently_converted_to_zero (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_chainage_notation_is_parsed_deterministically (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_explicit_source_unit_suffix_is_stripped (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_supported_unit_conversions (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_unknown_unit_is_rejected (tests.unit.converter.test_values.ValueConversionTests) ... ok
+test_exposure_time_caps_are_applied (tests.unit.engine.test_aqt3046.HumanDamageTests) ... ok
+test_invalid_context_is_rejected_even_at_hard_threshold (tests.unit.engine.test_aqt3046.HumanDamageTests) ... ok
+test_probit_five_is_half_and_probability_is_monotonic (tests.unit.engine.test_aqt3046.HumanDamageTests) ... ok
+test_thermal_hard_threshold_and_table_10_corrections (tests.unit.engine.test_aqt3046.HumanDamageTests) ... ok
+test_toxic_flash_fire_and_vce_rules (tests.unit.engine.test_aqt3046.HumanDamageTests) ... ok
+test_adiabatic_pipe_rupture_flow_decreases_with_effective_length (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_gas_orifice_selects_sonic_and_subsonic_regimes (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_gaussian_plume_is_symmetric_and_zero_upwind (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_invalid_source_parameters_are_rejected (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_jet_fire_distance_and_flow_behaviour (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_jet_fire_threshold_distance_inverts_heat_flux (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_pasquill_gifford_rural_d_coefficients (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_sonic_mass_flow_scales_with_orifice_area (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_tno_equations_and_logarithmic_curve_interpolation (tests.unit.engine.test_aqt3046.SourceAndConsequenceTests) ... ok
+test_unknown_calculation_is_blocked (tests.unit.engine.test_automation.AutomationTests) ... ok
+test_validation_only_job (tests.unit.engine.test_automation.AutomationTests) ... ok
+test_matrix_and_selected_charts_are_written (tests.unit.engine.test_automation.ReportingTests) ... ok
+test_matrix_preserves_quantitative_frequency_consequence_relation (tests.unit.engine.test_automation.ReportingTests) ... ok
+test_eleven_categories_produce_ten_segment_quantitative_risk (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_full_qra_dashboard_uses_authoritative_scenario_and_null_semantics (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_minimal_segment_uses_explicit_priors_instead_of_returning_no_risk (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_numerical_hash_excludes_job_identity_and_time (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_partial_case_completes_available_algorithms_without_global_failure (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_partial_quantitative_dashboard_renders_full_risk_chart_set (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_raw_eleven_categories_work_without_prebuilt_indicator_summary (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_runtime_failure_is_isolated_from_other_nodes (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_sparse_input_still_returns_data_inventory_and_missing_requirements (tests.unit.engine.test_dynamic.DynamicExecutionTests) ... ok
+test_full_case_makes_every_registered_node_runnable (tests.unit.engine.test_dynamic.DynamicPlanningTests) ... ok
+test_partial_case_keeps_independent_nodes_runnable (tests.unit.engine.test_dynamic.DynamicPlanningTests) ... ok
+test_target_selection_includes_only_dependencies_and_inventory (tests.unit.engine.test_dynamic.DynamicPlanningTests) ... ok
+test_branch_frequency_equals_initiating_frequency (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_full_synthetic_chain_runs (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_numerical_hash_normalizes_record_order_and_float_tail_only (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_result_hash_can_be_reproduced (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_run_is_deterministic (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_zero_population_clears_pll_but_not_ir (tests.unit.engine.test_engine.EngineIntegrationTests) ... ok
+test_branch_probabilities_sum_to_one (tests.unit.engine.test_event_tree.EventTreeTests) ... ok
+test_delayed_ignition_uses_aqt3046_g1_source_formula (tests.unit.engine.test_event_tree.EventTreeTests) ... ok
+test_low_activity_has_no_vce (tests.unit.engine.test_event_tree.EventTreeTests) ... ok
+test_release_rate_boundary_uses_upper_interval (tests.unit.engine.test_event_tree.EventTreeTests) ... ok
+test_every_segment_has_four_loc_rows (tests.unit.engine.test_frequency.FrequencyTests) ... ok
+test_leak_point_frequency_shares_sum_to_one (tests.unit.engine.test_frequency.FrequencyTests) ... ok
+test_loc_frequency_conserves_mechanism_frequency (tests.unit.engine.test_frequency.FrequencyTests) ... ok
+test_poisson_probability_converts_frequency_without_rare_event_rounding_loss (tests.unit.engine.test_frequency.FrequencyTests) ... ok
+test_probability_horizon_defaults_to_one_year_and_rejects_invalid_values (tests.unit.engine.test_frequency.FrequencyTests) ... ok
+test_formula_c2_damage_factor_and_c1_probability (tests.unit.engine.test_gbt34346.AnnexCFormulaTests) ... ok
+test_formula_c3_management_factor (tests.unit.engine.test_gbt34346.AnnexCFormulaTests) ... ok
+test_formulas_c40_to_c43 (tests.unit.engine.test_gbt34346.AnnexCFormulaTests) ... ok
+test_table_c1_gas_wall_thickness_boundaries (tests.unit.engine.test_gbt34346.AnnexCFormulaTests) ... ok
+test_table_c24_gas_scenarios (tests.unit.engine.test_gbt34346.AnnexCFormulaTests) ... ok
+test_standard_formula_profile_returns_segment_ranking (tests.unit.engine.test_gbt34346.AnnexCProfileTests) ... ok
+test_catalog_is_unique_and_contains_full_registered_set (tests.unit.engine.test_indicators.EngineeringIndicatorTests) ... ok
+test_twenty_segment_case_covers_all_required_observation_slots (tests.unit.engine.test_indicators.EngineeringIndicatorTests) ... ok
+test_unknown_explicit_indicator_is_rejected (tests.unit.engine.test_indicators.EngineeringIndicatorTests) ... ok
+test_log_linear_model_consumes_segment_indicator_values (tests.unit.engine.test_indicators.FrequencyCorrectionTests) ... ok
+test_provided_factors_preserve_existing_frequency_result (tests.unit.engine.test_indicators.FrequencyCorrectionTests) ... ok
+test_partial_standard_model_cannot_be_released_silently (tests.unit.engine.test_model_registry.ModelRegistryTests) ... ok
+test_real_input_flags_do_not_make_test_profile_formal (tests.unit.engine.test_model_registry.ModelRegistryTests) ... ok
+test_registry_ids_are_unique_and_specs_exist (tests.unit.engine.test_model_registry.ModelRegistryTests) ... ok
+test_unknown_model_cannot_be_used_for_formal_report (tests.unit.engine.test_model_registry.ModelRegistryTests) ... ok
+test_dynamic_explicit_requirements_match_reviewed_matrix_and_dictionary (tests.unit.engine.test_part1_contract_coverage.Part1ContractCoverageTests) ... ok
+test_full_synthetic_passes_engine_import_contract (tests.unit.engine.test_part1_contract_coverage.Part1ContractCoverageTests) ... ok
+test_minimum_example_opens_only_reviewed_base_nodes (tests.unit.engine.test_part1_contract_coverage.Part1ContractCoverageTests) ... ok
+test_default_profile_runs_registered_standard_formula_chain (tests.unit.engine.test_physical_consequence.PhysicalChainIntegrationTests) ... ok
+test_fire_dispersion_explosion_and_damage_branches_return_physical_metrics (tests.unit.engine.test_physical_consequence.PhysicalConsequenceAdapterTests) ... ok
+test_gas_composition_drives_authoritative_properties_and_source_term (tests.unit.engine.test_physical_consequence.PhysicalConsequenceAdapterTests) ... ok
+test_standard_release_models_replace_fixed_test_rates (tests.unit.engine.test_physical_consequence.PhysicalConsequenceAdapterTests) ... ok
+test_existing_human_golden_result_is_reproduced (tests.unit.engine.test_risk.RiskAggregationTests) ... ok
+test_gbt34346_annex_c_boundaries (tests.unit.engine.test_risk_criteria.IndividualRiskCriterionTests) ... ok
+test_invalid_individual_risk_is_rejected (tests.unit.engine.test_risk_criteria.IndividualRiskCriterionTests) ... ok
+test_risk_value_and_per_km_density_have_independent_rankings (tests.unit.engine.test_risk_criteria.SegmentRiskTableTests) ... ok
+test_baseline_is_calculable_but_not_formal (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_gas_composition_must_be_normalized (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_loc_fraction_must_be_normalized (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_nonflammable_composition_is_rejected_before_calculation (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_synthetic_model_is_blocked_in_strict_run (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_weather_probability_must_be_normalized (tests.unit.engine.test_validation.ValidationTests) ... ok
+test_archive_member_limit_applies_across_the_whole_task (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_csv_encodings_structure_and_nul_detection (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_decodable_jpeg_small_trailing_metadata_is_accepted_silently (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_duplicate_version_group_manifest_and_dedupe_are_deterministic (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_encrypted_member_flag_is_rejected (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_supported_signatures_and_ooxml_parts (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_truncated_or_excessively_appended_jpeg_is_still_quarantined (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_type_mismatch_and_damaged_ooxml_are_quarantined (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_unsafe_zip_variants_are_blocked_before_extraction (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_zip_members_are_registered_with_archive_lineage (tests.unit.test_file_intake.FileIntakeTest) ... ok
+test_invalid_environment_extraction_timeout_uses_safe_default (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_ocr_model_is_case_insensitive_but_limited_to_workspace_options (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_old_persisted_config_defaults_to_120_seconds (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_parse_store_restore_and_public_status_never_expose_key (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_rejects_non_https_or_unrelated_api_endpoints (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_unusable_persisted_config_requires_reimport_without_exposing_error (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+test_windows_dpapi_current_user_round_trip (tests.unit.test_ocr_settings.OcrSettingsTests) ... ok
+
+----------------------------------------------------------------------
+Ran 204 tests in 41.512s
+
+OK (skipped=1)
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversion-profiles HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions HTTP/1.1" 202 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085226Z-f142d7da HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions/CONV-20260828T085226Z-f142d7da/confirm HTTP/1.1" 201 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/snapshots/SNAP-06bce1a9-cd18-4219-9057-efc7911cbd93 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/import HTTP/1.1" 201 -
+[QRA-Web] 127.0.0.1 - "GET / HTTP/1.1" 302 -
+[QRA-Web] 127.0.0.1 - "GET /admin/ HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/overview HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/preview HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/import HTTP/1.1" 400 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/overview HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /runs/RUN-20260828T085229Z-e076286b/ HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /api/runs/RUN-20260828T085229Z-e076286b/segments HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /runs/RUN-20260828T085229Z-e076286b/charts/09_%E9%A3%8E%E9%99%A9%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E4%B8%8A%E7%95%8C.svg HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/database/calculation_segment_result HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-e076286b/export HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/runs HTTP/1.1" 202 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d/segments HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/runs/RUN-20260828T085229Z-713cb23d HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/snapshots/import HTTP/1.1" 201 -
+[QRA-Web] 127.0.0.1 - "DELETE /admin/api/snapshots/SNAP-dfdf4e33-232f-4251-afe4-9f8dd292235a HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/audit?limit=100 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085230Z-635772f6/sources/SOURCE-bcdc93df-4f09-43dd-a6fa-b5757ebada42/artifacts HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085230Z-635772f6/sources/SOURCE-bcdc93df-4f09-43dd-a6fa-b5757ebada42/artifacts?path=parsed_document.json HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085234Z-81609070/sources HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085234Z-81609070/events HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions/CONV-20260828T085234Z-81609070/cancel HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions/CONV-20260828T085234Z-81609070/cancel HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions?status=CANCELLED&limit=1 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "DELETE /admin/api/conversions/CONV-20260828T085234Z-81609070 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions?status=CANCELLED&limit=1 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/conversions HTTP/1.1" 202 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/ocr-settings HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "POST /admin/api/ocr-settings HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/ocr-settings HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085236Z-2876646b/review-summary HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085236Z-2876646b/candidates?limit=2 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085236Z-2876646b/candidates/CAND-038bd6fcfb55eb82d3494b22 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085236Z-2876646b/issues?limit=2 HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085236Z-2876646b/capability HTTP/1.1" 200 -
+[QRA-Web] 127.0.0.1 - "GET /admin/api/conversions/CONV-20260828T085238Z-5c9f7288/model-calls HTTP/1.1" 200 -

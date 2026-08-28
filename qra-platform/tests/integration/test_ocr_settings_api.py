@@ -31,6 +31,11 @@ OCR_ENVIRONMENT_KEYS = (
     "QRA_ALIYUN_OPENAI_BASE_URL",
     "QRA_OCR_MODEL_VERSION",
     "QRA_VISION_MODEL_VERSION",
+    "QRA_EXTRACTION_PROVIDER",
+    "QRA_EXTRACTION_MODEL_VERSION",
+    "QRA_EXTRACTION_TIMEOUT_SECONDS",
+    "QRA_EXTRACTION_MAX_RETRIES",
+    "QRA_EXTRACTION_MAX_CONCURRENCY",
     "QRA_OCR_TIMEOUT_SECONDS",
     "QRA_OCR_SETTINGS_SOURCE",
 )
@@ -67,6 +72,8 @@ class OcrSettingsApiTests(unittest.TestCase):
                         "csv_text": CSV_TEXT,
                         "ocr_model_version": "qwen3.5-ocr",
                         "vision_model_version": "qwen3.7-max",
+                        "extraction_model_version": "qwen3.8-max",
+                        "extraction_timeout_seconds": 120,
                         "ocr_timeout_seconds": 120,
                     }
                 ).encode("utf-8")
@@ -82,6 +89,8 @@ class OcrSettingsApiTests(unittest.TestCase):
                 self.assertTrue(status["persisted"])
                 self.assertEqual(status["ocr_model_version"], "qwen3.5-ocr")
                 self.assertEqual(status["ocr_timeout_seconds"], 120)
+                self.assertTrue(status["extraction_configured"])
+                self.assertEqual(status["extraction_model_version"], "qwen3.8-max")
                 self.assertEqual(
                     [model["id"] for model in status["available_models"]],
                     [
@@ -129,12 +138,23 @@ class OcrSettingsApiTests(unittest.TestCase):
             self.assertEqual(os.environ["QRA_ALIYUN_API_KEY"], API_KEY)
             self.assertEqual(os.environ["QRA_OCR_MODEL_VERSION"], "qwen3.8-max")
             self.assertEqual(os.environ["QRA_OCR_TIMEOUT_SECONDS"], "120")
+            self.assertEqual(os.environ["QRA_EXTRACTION_MODEL_VERSION"], "qwen3.8-max")
 
     def test_admin_page_contains_one_time_ocr_configuration_controls(self) -> None:
         html = admin_html().decode("utf-8")
         self.assertIn('data-action="ocr-settings"', html)
         self.assertIn('id="ocrConfigInput"', html)
         self.assertIn('id="ocrModelSelect"', html)
+        self.assertIn('id="extractionModelSelect"', html)
+        self.assertIn('id="conversionOcrModel"', html)
+        self.assertIn('id="conversionExtractionModel"', html)
+        self.assertIn('id="conversionExternalSharing"', html)
+        self.assertIn("模型调用记录", html)
+        self.assertIn("/model-calls", html)
+        self.assertIn("ocr_model_version:$('#conversionOcrModel').value", html)
+        self.assertIn(
+            "extraction_model_version:$('#conversionExtractionModel').value", html
+        )
         self.assertIn("qwen3.8-max", html)
         self.assertIn("qwen3.7-max-2026-06-08", html)
         self.assertIn('value="120 秒"', html)

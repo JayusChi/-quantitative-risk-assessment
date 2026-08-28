@@ -1,20 +1,20 @@
 # 多来源文件自动转 JSON
 
-转换器提供 `XLS/XLSX/CSV/DOCX/PDF → 多来源合并 → 人工复核 → case.json → validate_import_contract` 链路。第三阶段通过 `db_qra` 将同一链路接入管理页面、异步任务、确认门禁和不可变快照。转换层只读取、映射、归一、关联和报告质量问题，不补模型默认值，也不执行风险计算。DOCX/PDF 表格属于辅助提取，映射成功后仍默认阻断并要求人工确认。
+转换器提供 `CSV/XLS/XLSX/DOCX/PDF/PNG/JPEG → 统一解析与OCR路由 → 多来源合并 → 人工复核 → case.json → validate_import_contract` 链路。`db_qra.file_intake` 在该链路之前按实际签名、容器结构和 ZIP 安全规则登记或隔离文件。解析层保留原文、表格、图片和位置证据；转换层只映射、归一、关联和报告质量问题，不补模型默认值，也不执行风险计算。DOCX/PDF/OCR 或推测表格属于需复核内容，不能伪装成确定性业务字段。
 
 ## 管理页面流程
 
 运行 `python -m db_qra serve` 后，在管理中心的“资料自动转换”页面：
 
-1. 选择版本化映射配置并上传一份或多份源文件，也可上传 ZIP 资料包；
-2. 后台任务展示排队、执行进度、结构化错误和待复核项；
+1. 选择版本化映射配置和隔离策略，拖放或多选源文件，也可上传 ZIP 资料包；
+2. 浏览器分别展示请求发送进度和服务端任务进度；入口检查展示检测类型、哈希、ZIP 层级、重复/版本关系和隔离原因；
 3. 状态为 `BLOCKED` 时，应用符合第二阶段合同的复核决定后重试；
 4. 状态为 `READY_FOR_CONFIRMATION` 时核对来源指纹、识别表格、单位换算、缺失项和可运行节点；
 5. 填写确认人后创建不可变快照，可选择立即进入现有计算队列。
 
 相同源文件名/内容哈希集合和相同映射配置哈希只创建一个转换任务。快照来源元数据保留转换任务、源文件哈希、转换器版本、映射版本及哈希、JSON 哈希、确认人和 UTC 时间。命令行和网页端均调用 `convert_sources`，黄金测试会比较两端业务 JSON 深度一致性。
 
-平台 API 包括 `GET /admin/api/conversion-profiles`、`GET/POST /admin/api/conversions`、`POST /admin/api/conversions/batch`、`POST /admin/api/conversions/{id}/retry` 和 `POST /admin/api/conversions/{id}/confirm`。源文件内容保存在受保护二进制字段中，管理页数据库浏览器不返回该字段；ZIP 路径穿越、符号链接、加密成员和解压超限会以结构化失败结束，且不会写入快照。
+平台 API 包括 `GET /admin/api/conversion-profiles`、`GET/POST /admin/api/conversions`、`GET /admin/api/conversions/{id}/sources`、`GET /admin/api/conversions/{id}/events`、`GET /admin/api/conversions/{id}/sources/{source_id}/artifacts`、`POST /admin/api/conversions/{id}/cancel|retry|confirm` 和批量创建接口。创建请求固化合同、入口规则、映射哈希、隔离策略和文件清单哈希。源文件内容保存在受保护二进制字段中，管理页数据库浏览器和元数据接口都不返回该字段；ZIP 路径穿越、盘符/UNC、符号链接、加密、重复路径、嵌套归档、层级/大小/数量/压缩比超限都会在解析队列之前隔离。
 
 ## 安装与运行
 
@@ -119,6 +119,22 @@ python -m qra_converter convert `
 
 通用配置只接受它明确声明的表头与单位。客户表头或单位不同，应复制为新的有版本配置，而不是修改已用于历史快照的版本。
 
+九江真实资料验收配置为 `jiangxi-natural-gas.jiujiang.v1`。该配置示范四项面向客户台账的受控能力：
+
+- `header_row_span`：组合连续多行表头，处理 Excel 合并式分组表头；
+- `record_filters`：对标准化字段执行精确等值过滤，确定性排除同表其他管线；
+- `allow_shared_source`：显式允许同一源表分别映射到管段、管线和多个原始业务类别；未声明时仍按歧义阻断；
+- `strip_source_unit_suffix`：仅在源单位和允许后缀均由映射声明时解析 `273mm` 等值；压力区间等非单值表达仍不得转为 number。
+
+阶段 1 可重复验收命令：
+
+```powershell
+python .\tools\run_stage1_acceptance.py `
+  --output-root ".\workspace\runtime\stage1-real-data-acceptance-<run-id>"
+```
+
+工具会盘点九江源资料，执行待复核与已复核命令行转换、重复哈希检查、真实 HTTP 网页上传和确认、不可变快照、去重及倒置里程负向门禁。输出只用于本机内部功能验证。
+
 映射配置的每个表格规则至少声明：
 
 ```json
@@ -160,3 +176,38 @@ python -m qra_converter convert `
 ```
 
 第一阶段脱敏黄金源资料位于 `tests/fixtures/converter_mvp`。第二阶段黄金案例位于 `tests/fixtures/converter_phase2`，覆盖重复文件内容、重复业务记录、冲突来源、来源优先级、复核审计、能力补数清单、现有输入合同和确认后业务 JSON 深度一致性。
+## 第三阶段解析前置层
+
+转换服务现在先调用统一文档解析流水线，再通过兼容适配器把可信结构转换成
+`RawTable` 交给现有映射器。解析层不识别“工作压力”等业务字段，也不执行公式、
+宏、PDF JavaScript 或嵌入对象。
+
+平台任务的每个源文件会独立保存解析状态、解析器版本、`parse_sha256`、质量摘要和
+受控资源。扫描文件未配置 OCR 时返回 `PARSE.OCR_PROVIDER_NOT_CONFIGURED` 并标记
+`PARSE_FAILED`，不会以空字符串或占位文本继续映射。详细合同、部署配置和验收命令
+见 [文档解析指南](parsing.md)。
+
+## 第四阶段候选事实层
+
+平台转换任务会在第三阶段解析和确定性表格映射之后运行候选事实流水线。结构化映射血缘先转换为第一阶段 `candidate-field` 合同；未被映射覆盖的可信文本块仅在已配置阿里云百炼 `ExtractionProvider` 且当前任务显式勾选外发授权时进入 `qwen3.8-max` 受约束模型提取。未配置 provider 或未授权外发不会生成模拟模型结果。
+
+资料中的命令、链接、角色声明和工具请求始终作为不可信文本。模型没有工具权限；响应必须通过字段、实体、关系、证据、大小、深度和控制字符检查，再由确定性标准化器重新计算标准值。
+
+第五阶段可使用以下只读接口分页读取候选层：
+
+- `GET /admin/api/conversions/{id}/model-calls`
+- `GET /admin/api/conversions/{id}/review-summary`
+- `GET /admin/api/conversions/{id}/candidates?status=&field_id=&entity=&cursor=`
+- `GET /admin/api/conversions/{id}/candidates/{candidate_id}`
+- `GET /admin/api/conversions/{id}/issues?severity=&code=&cursor=`
+- `GET /admin/api/conversions/{id}/capability`
+
+阶段四框架验收命令：
+
+```powershell
+python .\tools\run_stage4_acceptance.py --json
+```
+
+需要同时验证真实千问时，先用桌面 CSV 对合成文本执行 `tools/test_bailian_extraction.py`，再把生成的脱敏记录传给 `run_stage4_acceptance.py --real-model-record ... --require-real-model`。真实冒烟记录不包含 API Key、接口地址或合成正文。
+
+管理页面新建资料任务时可分别选择本任务的 OCR 和信息提取模型。选择结果与提供方一并固化到任务，参与去重指纹；任务创建后修改默认模型不会改变该任务。任务详情通过 `model-calls` 接口展示脱敏调用审计和候选数量，不提供输入正文、结构化原始输出或密钥。

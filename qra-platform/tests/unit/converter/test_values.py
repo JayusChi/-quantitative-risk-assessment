@@ -42,6 +42,32 @@ class ValueConversionTests(unittest.TestCase):
                 {"type": "number", "source_unit": "MPa", "target_unit": "MPa"},
             )
 
+    def test_explicit_source_unit_suffix_is_stripped(self) -> None:
+        self.assertEqual(
+            convert_value(
+                "273mm",
+                {
+                    "type": "number",
+                    "source_unit": "mm",
+                    "target_unit": "mm",
+                    "source_unit_aliases": ["mm", "毫米"],
+                    "strip_source_unit_suffix": True,
+                },
+            ),
+            273.0,
+        )
+        with self.assertRaises(ValueConversionError):
+            convert_value(
+                "273cm",
+                {
+                    "type": "number",
+                    "source_unit": "mm",
+                    "target_unit": "mm",
+                    "source_unit_aliases": ["mm", "毫米"],
+                    "strip_source_unit_suffix": True,
+                },
+            )
+
     def test_blank_is_not_silently_converted_to_zero(self) -> None:
         with self.assertRaises(ValueConversionError):
             convert_value("", {"type": "number"})

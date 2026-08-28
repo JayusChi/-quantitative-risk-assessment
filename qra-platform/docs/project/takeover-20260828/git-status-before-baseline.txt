@@ -1,0 +1,169 @@
+ M qra-platform/docs/architecture.md
+ M qra-platform/docs/development.md
+ M qra-platform/docs/engine/动态计算节点与数据能力规划_v1.md
+ M qra-platform/docs/guides/bailian-ocr.md
+ M qra-platform/docs/guides/converter.md
+ M qra-platform/docs/guides/engine.md
+ M qra-platform/docs/plans/auto-json.md
+ M qra-platform/docs/project/stage4/README.md
+ M qra-platform/resources/mappings/README.md
+ M qra-platform/resources/mappings/generic/generic.multisource-review.v2.json
+ M qra-platform/resources/mappings/generic/generic.structured-mvp.v1.json
+ M qra-platform/src/db_qra/admin_ui.py
+ M qra-platform/src/db_qra/conversion_adapter.py
+ M qra-platform/src/db_qra/database.py
+ M qra-platform/src/db_qra/ocr_settings.py
+ M qra-platform/src/db_qra/server.py
+ M qra-platform/src/qra_converter/cli.py
+ M qra-platform/src/qra_converter/contracts.py
+ M qra-platform/src/qra_converter/mapping/mapper.py
+ M qra-platform/src/qra_converter/mapping/profile.py
+ M qra-platform/src/qra_converter/mapping/values.py
+ M qra-platform/src/qra_converter/parsing/pipeline.py
+ M qra-platform/src/qra_converter/reporting/outputs.py
+ M qra-platform/src/qra_converter/service.py
+ M qra-platform/src/qra_engine/adaptive_risk.py
+ M qra-platform/src/qra_engine/dynamic.py
+ M qra-platform/src/qra_engine/engine.py
+ M qra-platform/src/qra_engine/frequency.py
+ M qra-platform/src/qra_engine/reporting.py
+ M qra-platform/tests/integration/test_converter_phase3.py
+ M qra-platform/tests/integration/test_ocr_settings_api.py
+ M qra-platform/tests/unit/converter/test_values.py
+ M qra-platform/tests/unit/engine/test_dynamic.py
+ M qra-platform/tests/unit/engine/test_frequency.py
+ M qra-platform/tests/unit/test_ocr_settings.py
+ M 项目计划书.md
+?? qra-platform/docs/contracts/part1-v1.md
+?? qra-platform/docs/project/stage1/README.md
+?? qra-platform/docs/project/stage1/真实资料盘点与数据字典.md
+?? qra-platform/docs/project/stage1/阶段1验收记录.md
+?? qra-platform/docs/project/stage1/需求问题与风险状态更新.md
+?? qra-platform/docs/project/stage1/黄金JSON与差异清单.md
+?? qra-platform/docs/project/stage2/README.md
+?? qra-platform/docs/project/stage2/数据补充清单.md
+?? qra-platform/docs/project/stage2/缺陷整改与回归记录.md
+?? qra-platform/docs/project/stage2/能力报告与动态执行清单.md
+?? qra-platform/docs/project/stage2/阶段2验收记录.md
+?? qra-platform/docs/project/stage2/需求问题与风险状态更新.md
+?? qra-platform/docs/project/stage2/风险结果业务解释与异常排查.md
+?? qra-platform/docs/project/stage4/real-qwen-smoke.json
+?? qra-platform/docs/project/stage4/stage4-acceptance.json
+?? qra-platform/docs/project/takeover-20260828/architecture-check.txt
+?? qra-platform/docs/project/takeover-20260828/dependencies.txt
+?? qra-platform/docs/project/takeover-20260828/environment.txt
+?? qra-platform/docs/project/takeover-20260828/test-results.txt
+?? qra-platform/docs/project/全合成QRA测试版_v1.md
+?? qra-platform/docs/project/当前定位与失效概率虚拟试算说明_v1.md
+?? qra-platform/resources/contracts/part1/v1/examples/candidate-fields.json
+?? qra-platform/resources/contracts/part1/v1/examples/evidence.json
+?? qra-platform/resources/contracts/part1/v1/examples/full-synthetic.json
+?? qra-platform/resources/contracts/part1/v1/examples/minimum-segments.json
+?? qra-platform/resources/contracts/part1/v1/examples/quality-issues.json
+?? qra-platform/resources/contracts/part1/v1/examples/review-decisions.json
+?? qra-platform/resources/contracts/part1/v1/examples/snapshot-manifest.json
+?? qra-platform/resources/contracts/part1/v1/field_dictionary.json
+?? qra-platform/resources/contracts/part1/v1/issue_catalog.json
+?? qra-platform/resources/contracts/part1/v1/manifest.json
+?? qra-platform/resources/contracts/part1/v1/schemas/candidate-field.schema.json
+?? qra-platform/resources/contracts/part1/v1/schemas/evidence.schema.json
+?? qra-platform/resources/contracts/part1/v1/schemas/qra-input.schema.json
+?? qra-platform/resources/contracts/part1/v1/schemas/quality-issue.schema.json
+?? qra-platform/resources/contracts/part1/v1/schemas/review-decision.schema.json
+?? qra-platform/resources/contracts/part1/v1/schemas/snapshot-manifest.schema.json
+?? qra-platform/resources/contracts/part1/v1/source_rank.json
+?? qra-platform/resources/contracts/part1/v1/term_aliases.json
+?? qra-platform/resources/contracts/part1/v1/unit_registry.json
+?? qra-platform/resources/extraction/part1/v1/document_classification.md
+?? qra-platform/resources/extraction/part1/v1/entity_extraction.md
+?? qra-platform/resources/extraction/part1/v1/field_extraction.md
+?? qra-platform/resources/extraction/part1/v1/prompt_manifest.json
+?? qra-platform/resources/extraction/part1/v1/relation_extraction.md
+?? qra-platform/resources/mappings/jiangxi-natural-gas/jiangxi-natural-gas.jiujiang.v1.json
+?? qra-platform/src/db_qra/file_intake.py
+?? qra-platform/src/qra_converter/contract_catalog.py
+?? qra-platform/src/qra_converter/extraction/__init__.py
+?? qra-platform/src/qra_converter/extraction/aliyun_bailian.py
+?? qra-platform/src/qra_converter/extraction/classifier.py
+?? qra-platform/src/qra_converter/extraction/entities.py
+?? qra-platform/src/qra_converter/extraction/fields.py
+?? qra-platform/src/qra_converter/extraction/fixture_provider.py
+?? qra-platform/src/qra_converter/extraction/output_validation.py
+?? qra-platform/src/qra_converter/extraction/ports.py
+?? qra-platform/src/qra_converter/extraction/prompts.py
+?? qra-platform/src/qra_converter/extraction/relationships.py
+?? qra-platform/src/qra_converter/fusion/__init__.py
+?? qra-platform/src/qra_converter/fusion/conflicts.py
+?? qra-platform/src/qra_converter/fusion/duplicates.py
+?? qra-platform/src/qra_converter/fusion/identities.py
+?? qra-platform/src/qra_converter/fusion/service.py
+?? qra-platform/src/qra_converter/fusion/source_policy.py
+?? qra-platform/src/qra_converter/normalization/__init__.py
+?? qra-platform/src/qra_converter/normalization/chainage.py
+?? qra-platform/src/qra_converter/normalization/coordinates.py
+?? qra-platform/src/qra_converter/normalization/dates.py
+?? qra-platform/src/qra_converter/normalization/enums.py
+?? qra-platform/src/qra_converter/normalization/numbers.py
+?? qra-platform/src/qra_converter/normalization/service.py
+?? qra-platform/src/qra_converter/normalization/units.py
+?? qra-platform/src/qra_converter/orchestration/__init__.py
+?? qra-platform/src/qra_converter/orchestration/contracts.py
+?? qra-platform/src/qra_converter/orchestration/state.py
+?? qra-platform/src/qra_converter/orchestration/workflow.py
+?? qra-platform/src/qra_converter/quality/__init__.py
+?? qra-platform/src/qra_converter/quality/completeness.py
+?? qra-platform/src/qra_converter/quality/metrics.py
+?? qra-platform/src/qra_converter/quality/rules.py
+?? qra-platform/src/qra_converter/schema_validation.py
+?? qra-platform/tests/fixtures/contracts_v1/expected-node-field-matrix.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/candidate-confidence.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/candidate-missing-evidence.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/evidence-location.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-duplicate-segment.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-missing-segments.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-non-finite.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-probability-not-normalized.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-reverse-chainage.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-unknown-field.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/qra-wrong-unit.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/quality-status.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/review-action.json
+?? qra-platform/tests/fixtures/contracts_v1/invalid/snapshot-unresolved.json
+?? qra-platform/tests/fixtures/converter_jiujiang_stage1/expected_business_case.json
+?? qra-platform/tests/fixtures/converter_jiujiang_stage1/脱敏高后果区.csv
+?? qra-platform/tests/fixtures/extraction_stage4/golden_manifest.json
+?? qra-platform/tests/fixtures/extraction_stage4/labelled_golden.json
+?? qra-platform/tests/fixtures/intake/README.md
+?? qra-platform/tests/fixtures/intake/damaged/damaged.xlsx
+?? qra-platform/tests/fixtures/intake/normal/资料.csv
+?? qra-platform/tests/fixtures/intake/unsupported/readme.txt
+?? qra-platform/tests/fixtures/intake/versions/v1/资料.csv
+?? qra-platform/tests/fixtures/intake/versions/v2/资料.csv
+?? qra-platform/tests/integration/test_converter_jiujiang_stage1.py
+?? qra-platform/tests/integration/test_file_intake_phase2.py
+?? qra-platform/tests/integration/test_stage2_jiujiang_trial.py
+?? qra-platform/tests/integration/test_stage4_labelled_golden.py
+?? qra-platform/tests/integration/test_stage4_pipeline.py
+?? qra-platform/tests/unit/converter/test_aliyun_bailian_extraction.py
+?? qra-platform/tests/unit/converter/test_contract_catalog.py
+?? qra-platform/tests/unit/converter/test_schema_validation.py
+?? qra-platform/tests/unit/converter/test_stage4_extraction.py
+?? qra-platform/tests/unit/converter/test_stage4_fusion.py
+?? qra-platform/tests/unit/converter/test_stage4_normalization.py
+?? qra-platform/tests/unit/engine/test_part1_contract_coverage.py
+?? qra-platform/tests/unit/test_file_intake.py
+?? qra-platform/tools/build_part1_contract.py
+?? qra-platform/tools/run_jiangxi_failure_probability_demo.py
+?? qra-platform/tools/run_stage1_acceptance.py
+?? qra-platform/tools/run_stage2_acceptance.py
+?? qra-platform/tools/run_stage4_acceptance.py
+?? qra-platform/tools/run_synthetic_test_edition.py
+?? qra-platform/tools/test_bailian_extraction.py
+?? qra-platform/第一部分项目计划书.md
+?? qra-platform/第一阶段实施说明.md
+?? qra-platform/第三阶段实施说明.md
+?? qra-platform/第二阶段实施说明.md
+?? qra-platform/第五阶段实施说明.md
+?? qra-platform/第六阶段实施说明.md
+?? qra-platform/第四阶段实施说明.md
+?? 后续安排.md

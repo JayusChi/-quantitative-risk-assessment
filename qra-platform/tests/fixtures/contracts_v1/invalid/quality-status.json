@@ -1,0 +1,8 @@
+{
+  "blocking": true,
+  "code": "EXTRACT.FIELD_MISSING",
+  "issue_id": "ISS-BAD",
+  "message": "bad",
+  "quality_status": "UNKNOWN_STATUS",
+  "target": "$"
+}

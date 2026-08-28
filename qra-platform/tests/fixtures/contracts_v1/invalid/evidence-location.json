@@ -1,0 +1,20 @@
+{
+  "evidence_id": "EVD-BAD",
+  "location": {
+    "bbox": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "coordinate_system": "PDF_POINTS",
+    "file_id": "F",
+    "kind": "PDF",
+    "page": 0,
+    "page_size": [
+      100,
+      100
+    ]
+  },
+  "source_type": "PDF"
+}

@@ -1,0 +1,90 @@
+{
+  "acceptance_id": "qra.stage4-extraction-fusion/1.0.0",
+  "deterministic_suite": "PASS",
+  "errors": 0,
+  "executed_at": "2026-08-28T08:03:40.788021+00:00",
+  "failures": 0,
+  "formal_test_edition_acceptance": true,
+  "framework_acceptance": true,
+  "gates": {
+    "candidate_contract_validation": "PASS",
+    "conflict_detection": "PASS",
+    "evidence_binding": "PASS",
+    "labelled_precision_recall": "PASS",
+    "prompt_injection_detection": "PASS",
+    "read_only_review_apis": "PASS",
+    "real_qwen_provider_smoke": "PASS",
+    "unit_normalization": "PASS"
+  },
+  "golden": {
+    "case_count": 22,
+    "case_ids": [
+      "UNIT-MPA",
+      "UNIT-KPA",
+      "UNIT-BAR",
+      "PRESSURE-SYNONYM",
+      "PRESSURE-CONCEPT",
+      "CHAINAGE-K",
+      "CHAINAGE-M",
+      "CHAINAGE-CROSS-PIPELINE",
+      "DUPLICATE-EXACT",
+      "DUPLICATE-NEAR",
+      "CONFLICT-VALUE",
+      "COORDINATE-NO-CRS",
+      "DATE-YEAR",
+      "PERCENT-AMBIGUOUS",
+      "EVIDENCE-MISSING",
+      "FIELD-UNKNOWN",
+      "EVIDENCE-FORGED",
+      "PROMPT-INJECTION",
+      "PROVIDER-RATE-LIMIT",
+      "PROVIDER-STRUCTURE",
+      "PROVIDER-OVERSIZE",
+      "PARTIAL-FILE-FAILURE"
+    ],
+    "golden_set_id": "qra.stage4-golden/1.0.0",
+    "layers": [
+      "COMPLEX_TABLE",
+      "NATIVE_DOCUMENT",
+      "PROVIDER_FAILURE",
+      "SCANNED_DOCUMENT",
+      "STRUCTURED_TABLE"
+    ]
+  },
+  "labelled_golden_metrics": {
+    "by_extraction_method": {
+      "MODEL_EXTRACTION": 7
+    },
+    "by_field_group": {
+      "pipeline": 5,
+      "segment": 2
+    },
+    "candidate_count": 7,
+    "conflict_count": 0,
+    "evidence_binding_rate": 1.0,
+    "golden_set_id": "qra.stage4-labelled-golden/1.0.0",
+    "labelled_fact_count": 7,
+    "manual_review_rate": 0.0,
+    "precision": 1.0,
+    "provider": "fixture",
+    "recall": 1.0
+  },
+  "live_model_required": true,
+  "real_model": {
+    "evidence_binding_rate": 1.0,
+    "executed_at": "2026-08-28T04:39:59.433431+00:00",
+    "failed_model_call_count": 0,
+    "model_call_count": 4,
+    "model_candidate_count": 1,
+    "model_version": "qwen3.8-max",
+    "provider_id": "aliyun-bailian-openai",
+    "result_sha256": "0d90e23122cfc68dea817f0ef87f5816be9301331531edbc0c853a1b721483d5",
+    "secret_or_endpoint_recorded": false,
+    "status": "PASS",
+    "synthetic_input_only": true
+  },
+  "remaining_gate": null,
+  "skipped": 0,
+  "stage": 4,
+  "tests_run": 21
+}

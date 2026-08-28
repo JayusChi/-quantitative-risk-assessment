@@ -1,0 +1,12 @@
+captured_at=2026-08-28T16:55:06.0303905+08:00
+os=Microsoft Windows NT 10.0.26200.0
+powershell=7.6.4
+python=Python 3.10.11
+python_executable=D:\风险定量评估\qra-platform\.venv\Scripts\python.exe
+pip=pip 23.0.1 from D:\���ն�������\qra-platform\.venv\lib\site-packages\pip (python 3.10)
+git=git version 2.51.0.windows.1
+initial_branch=main
+initial_head=4c0362129dcf84a2fc150e02e0a651ccb35c3a86
+origin=https://github.com/JayusChi/-quantitative-risk-assessment.git
+package_version=0.9.1
+pip_check=No broken requirements found.

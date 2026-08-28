@@ -8,7 +8,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from qra_converter.contract_catalog import load_contract_catalog
+from qra_converter.extraction.aliyun_bailian import configured_extraction_provider
 from qra_converter.mapping import load_profile
+from qra_converter.orchestration.contracts import StepResult
+from qra_converter.parsing.pipeline import configured_ocr_provider
 from qra_converter.service import CONVERTER_VERSION, convert_sources
 from qra_engine.dynamic import plan_dynamic_flow
 from qra_engine.validation import validate_import_contract
@@ -23,6 +26,7 @@ from .file_intake import (
     SUPPORTED_UPLOAD_SUFFIXES,
     intake_files,
 )
+from .ocr_settings import SUPPORTED_EXTRACTION_MODELS, SUPPORTED_OCR_MODELS
 from .paths import DEFAULT_RUNTIME_ROOT, PROJECT_ROOT
 
 MAPPING_ROOT = (PROJECT_ROOT / "resources" / "mappings").resolve()
@@ -90,11 +94,21 @@ def conversion_dedupe_key(
     profile_sha256: str,
     contract_sha256: str | None = None,
     intake_rules_version: str = INTAKE_RULES_VERSION,
+    external_sharing_allowed: bool = False,
+    ocr_provider_id: str | None = None,
+    ocr_model_version: str | None = None,
+    extraction_provider_id: str | None = None,
+    extraction_model_version: str | None = None,
 ) -> str:
     fingerprint = {
         "mapping_sha256": profile_sha256,
         "contract_sha256": contract_sha256,
         "intake_rules_version": intake_rules_version,
+        "external_sharing_allowed": bool(external_sharing_allowed),
+        "ocr_provider_id": ocr_provider_id,
+        "ocr_model_version": ocr_model_version,
+        "extraction_provider_id": extraction_provider_id,
+        "extraction_model_version": extraction_model_version,
         "sources": sorted(
             (
                 {
@@ -125,6 +139,9 @@ def submit_conversion(
     actor: str | None = None,
     contract: str | None = None,
     failure_policy: str = "ALL_OR_NOTHING",
+    external_sharing_allowed: bool = False,
+    ocr_model_version: str | None = None,
+    extraction_model_version: str | None = None,
 ) -> tuple[str, bool]:
     contract_request = contract
     if failure_policy not in {"ALL_OR_NOTHING", "QUARANTINE_AND_CONTINUE"}:
@@ -150,8 +167,44 @@ def submit_conversion(
         if intake.ready_count == 0 or (quarantined and failure_policy == "ALL_OR_NOTHING")
         else "QUEUED"
     )
+    requested_ocr_model = str(ocr_model_version or "").strip() or None
+    if requested_ocr_model is not None and requested_ocr_model not in SUPPORTED_OCR_MODELS:
+        raise ValueError("OCR模型不在当前业务空间允许的模型中")
+    requested_extraction_model = str(extraction_model_version or "").strip() or None
+    if (
+        requested_extraction_model is not None
+        and requested_extraction_model not in SUPPORTED_EXTRACTION_MODELS
+    ):
+        raise ValueError("信息提取模型不在当前业务空间允许的模型中")
+    ocr_provider = configured_ocr_provider(model_version=requested_ocr_model)
+    ocr_provider_id = (
+        ocr_provider.provider_id if ocr_provider.provider_id != "disabled" else None
+    )
+    selected_ocr_model = (
+        ocr_provider.model_version if ocr_provider_id is not None else requested_ocr_model
+    )
+    extraction_provider = configured_extraction_provider(
+        model_version=requested_extraction_model
+    )
+    extraction_provider_id = (
+        extraction_provider.provider_id if extraction_provider is not None else None
+    )
+    selected_extraction_model = (
+        extraction_provider.model_version
+        if extraction_provider is not None
+        else requested_extraction_model
+    )
     job_id, created = database.create_conversion_job(
-        dedupe_key=conversion_dedupe_key(sources, str(metadata["sha256"]), catalog.manifest_sha256),
+        dedupe_key=conversion_dedupe_key(
+            sources,
+            str(metadata["sha256"]),
+            catalog.manifest_sha256,
+            external_sharing_allowed=external_sharing_allowed,
+            ocr_provider_id=ocr_provider_id,
+            ocr_model_version=selected_ocr_model,
+            extraction_provider_id=extraction_provider_id,
+            extraction_model_version=selected_extraction_model,
+        ),
         profile_id=str(metadata["profile_id"]),
         profile_version=str(metadata["version"]),
         profile_sha256=str(metadata["sha256"]),
@@ -168,6 +221,11 @@ def submit_conversion(
         sources=sources,
         case_id=str(case_id).strip()[:160] if case_id else None,
         project_name=str(project_name).strip()[:160] if project_name else None,
+        external_sharing_allowed=external_sharing_allowed,
+        ocr_provider_id=ocr_provider_id,
+        ocr_model_version=selected_ocr_model,
+        extraction_provider_id=extraction_provider_id,
+        extraction_model_version=selected_extraction_model,
         review_decisions=review_decisions,
         batch_id=batch_id,
         actor=_clean_actor(actor),
@@ -178,6 +236,21 @@ def submit_conversion(
 
 class _ConversionCancelled(RuntimeError):
     pass
+
+
+class _DatabaseWorkflowStore:
+    def __init__(self, database: QraDatabase) -> None:
+        self.database = database
+
+    def load_step(self, job_id: str, step: str, input_sha256: str) -> StepResult | None:
+        value = self.database.get_extraction_step(job_id, step, input_sha256)
+        return StepResult(**value) if value is not None else None
+
+    def save_step(self, job_id: str, result: StepResult) -> None:
+        self.database.save_extraction_step(job_id, result.to_dict())
+
+    def is_cancel_requested(self, job_id: str) -> bool:
+        return self.database.is_conversion_cancel_requested(job_id)
 
 
 def _check_cancel(database: QraDatabase, job_id: str) -> None:
@@ -384,7 +457,10 @@ def run_conversion_job(
                     parser_id=execution.document.parser_id,
                     parser_version=execution.document.parser_version,
                     parse_sha256=execution.document.parse_sha256,
-                    quality_summary=dict(execution.quality_report.get("summary") or {}),
+                    quality_summary={
+                        **dict(execution.quality_report.get("summary") or {}),
+                        "cache_hit": bool(execution.cache_hit),
+                    },
                     artifacts=_parse_artifacts(execution),
                     issue_code=first_error.code if first_error else None,
                     issue_message=first_error.message if first_error else None,
@@ -405,6 +481,21 @@ def run_conversion_job(
                 cancel_check=lambda: _check_cancel(database, job_id),
                 parse_result_callback=parsed_source_callback,
                 parse_progress_callback=parse_progress,
+                ocr_provider=configured_ocr_provider(
+                    model_version=job.get("ocr_model_version")
+                ),
+                enable_stage4=True,
+                stage4_job_id=job_id,
+                extraction_provider=configured_extraction_provider(
+                    model_version=job.get("extraction_model_version")
+                ),
+                stage4_external_sharing_allowed=bool(
+                    job.get("external_sharing_allowed")
+                ),
+                stage4_store=_DatabaseWorkflowStore(database),
+                stage4_result_callback=lambda result: database.save_stage4_result(
+                    job_id, result
+                ),
             )
             _check_cancel(database, job_id)
             database.update_conversion_progress(job_id, 88, "正在固化转换预览与审计资料")

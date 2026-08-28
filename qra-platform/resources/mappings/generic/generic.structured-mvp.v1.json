@@ -2,6 +2,8 @@
   "profile_id": "generic.structured-mvp.v1",
   "version": "1.0.0",
   "schema_version": "1.0.0",
+  "contract_id": "qra.part1-input",
+  "contract_version": "1.0.0",
   "defaults": {
     "schema_version": "1.0.0",
     "metadata": {

@@ -1,0 +1,241 @@
+{
+  "nodes": [
+    {
+      "dependencies": [],
+      "explicit_required_inputs": [],
+      "node_id": "data_inventory",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "data_inventory"
+      ],
+      "explicit_required_inputs": [],
+      "node_id": "indicator_coverage",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "data_inventory"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": true,
+          "label_zh": "每段管段编号",
+          "path": "segments.*.segment_id"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段起点里程",
+          "path": "segments.*.start_km"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段终点里程",
+          "path": "segments.*.end_km"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段长度",
+          "path": "segments.*.length_km"
+        }
+      ],
+      "node_id": "segment_geometry",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": false,
+          "label_zh": "分机理基准频率库",
+          "path": "frequency_library.base_frequency_by_mechanism"
+        },
+        {
+          "all_items": false,
+          "label_zh": "分机理孔径比例",
+          "path": "frequency_library.loc_fraction_by_mechanism"
+        }
+      ],
+      "node_id": "failure_frequency",
+      "reviewed_implicit_inputs": [
+        "frequency_correction_model",
+        "segment_correction_factor",
+        "engineering_indicators.catalog_id"
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": false,
+          "label_zh": "泄漏点初始间距",
+          "path": "assessment.leak_point_initial_spacing_m"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段起点坐标",
+          "path": "segments.*.start_xy_m"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段终点坐标",
+          "path": "segments.*.end_xy_m"
+        }
+      ],
+      "node_id": "leak_point_discretization",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": false,
+          "label_zh": "运行压力",
+          "path": "pipeline.operating_pressure_mpa"
+        },
+        {
+          "all_items": false,
+          "label_zh": "运行温度",
+          "path": "pipeline.operating_temperature_k"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段外径",
+          "path": "segments.*.outside_diameter_mm"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段壁厚",
+          "path": "segments.*.wall_thickness_mm"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段上游阀里程",
+          "path": "segments.*.upstream_valve_km"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段下游阀里程",
+          "path": "segments.*.downstream_valve_km"
+        },
+        {
+          "all_items": false,
+          "label_zh": "环境绝压",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs"
+        },
+        {
+          "all_items": false,
+          "label_zh": "摩尔质量",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol"
+        },
+        {
+          "all_items": false,
+          "label_zh": "绝热指数",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gamma"
+        },
+        {
+          "all_items": false,
+          "label_zh": "气体泄放系数",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient"
+        },
+        {
+          "all_items": false,
+          "label_zh": "管壁绝对粗糙度",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm"
+        }
+      ],
+      "node_id": "aqt3046_source_term",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "aqt3046_source_term"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": false,
+          "label_zh": "燃烧热",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg"
+        },
+        {
+          "all_items": false,
+          "label_zh": "辐射分数",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction"
+        }
+      ],
+      "node_id": "jet_fire_thresholds",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "explicit_required_inputs": [
+        {
+          "all_items": false,
+          "label_zh": "运行压力",
+          "path": "pipeline.operating_pressure_mpa"
+        },
+        {
+          "all_items": false,
+          "label_zh": "运行温度",
+          "path": "pipeline.operating_temperature_k"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段外径",
+          "path": "segments.*.outside_diameter_mm"
+        },
+        {
+          "all_items": true,
+          "label_zh": "每段壁厚",
+          "path": "segments.*.wall_thickness_mm"
+        }
+      ],
+      "node_id": "gbt34346_annex_c",
+      "reviewed_implicit_inputs": [
+        "standard_formula_test_parameters.gbt34346_annex_c.segments"
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "explicit_required_inputs": [],
+      "node_id": "adaptive_evidence_qra",
+      "reviewed_implicit_inputs": []
+    },
+    {
+      "dependencies": [
+        "failure_frequency",
+        "leak_point_discretization",
+        "aqt3046_source_term"
+      ],
+      "explicit_required_inputs": [],
+      "node_id": "human_qra",
+      "reviewed_implicit_inputs": [
+        "weather_joint_probability.*.probability",
+        "population_cells.*.population_day",
+        "population_cells.*.population_night",
+        "ignition_model"
+      ]
+    },
+    {
+      "dependencies": [
+        "adaptive_evidence_qra"
+      ],
+      "explicit_required_inputs": [],
+      "node_id": "risk_matrix",
+      "reviewed_implicit_inputs": []
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source": "qra_engine.dynamic.dynamic_node_catalog + stage-1 review"
+}

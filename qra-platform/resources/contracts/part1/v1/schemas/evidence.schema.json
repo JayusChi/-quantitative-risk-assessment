@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "box": {
+      "items": false,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "type": "array"
+    },
+    "size": {
+      "items": false,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        }
+      ],
+      "type": "array"
+    }
+  },
+  "$id": "https://qra.local/contracts/part1/v1/evidence.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checksum_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_id": {
+      "pattern": "^EVD-",
+      "type": "string"
+    },
+    "excerpt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "cell_text": {
+              "type": "string"
+            },
+            "column": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "coordinate_system": {
+              "type": "string"
+            },
+            "file_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "TABLE"
+            },
+            "row": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "sheet_name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "cell_text",
+            "column",
+            "coordinate_system",
+            "file_id",
+            "row",
+            "sheet_name"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bbox": {
+              "$ref": "#/$defs/box"
+            },
+            "coordinate_system": {
+              "type": "string"
+            },
+            "file_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "PDF"
+            },
+            "page": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "page_size": {
+              "$ref": "#/$defs/size"
+            }
+          },
+          "required": [
+            "kind",
+            "bbox",
+            "coordinate_system",
+            "file_id",
+            "page",
+            "page_size"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "column": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "coordinate_system": {
+              "type": "string"
+            },
+            "file_id": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "DOCX"
+            },
+            "ooxml_part": {
+              "type": "string"
+            },
+            "paragraph_index": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "row": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "table_index": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "kind",
+            "coordinate_system",
+            "file_id",
+            "ooxml_part",
+            "paragraph_index"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bbox": {
+              "$ref": "#/$defs/box"
+            },
+            "coordinate_system": {
+              "type": "string"
+            },
+            "file_id": {
+              "type": "string"
+            },
+            "image_size": {
+              "$ref": "#/$defs/size"
+            },
+            "kind": {
+              "const": "IMAGE"
+            }
+          },
+          "required": [
+            "kind",
+            "bbox",
+            "coordinate_system",
+            "file_id",
+            "image_size"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "coordinate_system": {
+              "type": "string"
+            },
+            "entered_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "kind": {
+              "const": "MANUAL"
+            },
+            "operator": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "coordinate_system",
+            "entered_at",
+            "operator",
+            "reason"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "applicability": {
+              "type": "string"
+            },
+            "approval_ref": {
+              "type": "string"
+            },
+            "coordinate_system": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "PARAMETER_LIBRARY"
+            },
+            "library_id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "applicability",
+            "approval_ref",
+            "coordinate_system",
+            "library_id",
+            "version"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "source_type": {
+      "enum": [
+        "TABLE",
+        "PDF",
+        "DOCX",
+        "IMAGE",
+        "MANUAL",
+        "PARAMETER_LIBRARY"
+      ]
+    }
+  },
+  "required": [
+    "evidence_id",
+    "source_type",
+    "location"
+  ],
+  "type": "object"
+}

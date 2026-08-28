@@ -1,0 +1,33 @@
+{
+  "rank_set_id": "qra.part1-source-rank",
+  "ranks": [
+    {
+      "rank": 100,
+      "requires_approval_ref": true,
+      "source_type": "MANUAL_APPROVAL"
+    },
+    {
+      "rank": 90,
+      "source_type": "AS_BUILT_DRAWING"
+    },
+    {
+      "rank": 80,
+      "source_type": "DESIGN_DOCUMENT"
+    },
+    {
+      "rank": 75,
+      "source_type": "INSPECTION_RECORD"
+    },
+    {
+      "rank": 70,
+      "source_type": "OPERATING_RECORD"
+    },
+    {
+      "rank": 65,
+      "requires_approval_ref": true,
+      "source_type": "APPROVED_PARAMETER_LIBRARY"
+    }
+  ],
+  "rule": "来源排序只生成建议，不自动解决冲突。",
+  "version": "1.0.0"
+}

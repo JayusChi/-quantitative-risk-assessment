@@ -1,0 +1,59 @@
+{
+  "$id": "https://qra.local/contracts/part1/v1/snapshot-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "contract_id": {
+      "const": "qra.part1-input"
+    },
+    "contract_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "created_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "review_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "snapshot_id": {
+      "pattern": "^SNAP-",
+      "type": "string"
+    },
+    "unresolved_issue_ids": {
+      "maxItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "snapshot_id",
+    "contract_id",
+    "contract_version",
+    "contract_sha256",
+    "payload_sha256",
+    "created_at",
+    "candidate_ids",
+    "review_ids",
+    "unresolved_issue_ids"
+  ],
+  "type": "object"
+}

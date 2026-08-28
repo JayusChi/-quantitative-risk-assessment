@@ -232,6 +232,11 @@ def write_conversion_outputs(
     report = {
         "schema_version": REPORT_SCHEMA_VERSION,
         "converter_version": converter_version,
+        "contract": {
+            "contract_id": result.contract_id,
+            "version": result.contract_version,
+            "manifest_sha256": result.contract_sha256,
+        },
         "mapping_profile": {
             "profile_id": profile.profile_id,
             "version": profile.version,
@@ -270,10 +275,27 @@ def write_conversion_outputs(
         "pending_review_items": [item.to_dict() for item in result.review_items],
         "review_audit": [entry.to_dict() for entry in result.review_audit],
         "review_decision_source": result.review_decision_source,
+        "stage4": result.stage4_result,
     }
     manifest = _source_manifest(raw_tables, profile, converter_version)
+    manifest["contract"] = {
+        "contract_id": result.contract_id,
+        "version": result.contract_version,
+        "manifest_sha256": result.contract_sha256,
+    }
     manifest["review_decision_source"] = result.review_decision_source
     preview = _conversion_preview(result, raw_tables, outcome)
+    preview["stage4"] = (
+        {
+            "status": result.stage4_result.get("status"),
+            "metrics": result.stage4_result.get("metrics", {}),
+            "issue_count": len(result.stage4_result.get("issues", [])),
+            "candidate_count": len(result.stage4_result.get("candidates", [])),
+            "fusion_group_count": len(result.stage4_result.get("fusion_groups", [])),
+        }
+        if result.stage4_result is not None
+        else {"status": "NOT_RUN"}
+    )
     audit_document = {
         "schema_version": REPORT_SCHEMA_VERSION,
         "status": "PENDING" if result.review_items else "COMPLETE",

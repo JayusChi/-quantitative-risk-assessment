@@ -65,17 +65,37 @@ class ProfileMapper:
     ) -> tuple[RawRow | None, dict[str, int]]:
         alias_map = ProfileMapper._alias_map(definition)
         search_rows = int(definition.get("header_search_rows", 20))
+        row_span = int(definition.get("header_row_span", 1))
         minimum_matches = int(definition.get("minimum_header_matches", 1))
         best: tuple[int, RawRow | None, dict[str, int]] = (0, None, {})
-        for row in raw_table.rows[:search_rows]:
+        candidates = raw_table.rows[:search_rows]
+        for row_index, row in enumerate(candidates):
+            header_rows = candidates[row_index : row_index + row_span]
+            if len(header_rows) < row_span:
+                continue
             columns: dict[str, int] = {}
-            for index, value in enumerate(row.cells):
-                target = alias_map.get(normalize_header(value))
-                if target is not None and target not in columns:
-                    columns[target] = index
+            column_count = max((len(item.cells) for item in header_rows), default=0)
+            combined_cells: list[Any] = []
+            for index in range(column_count):
+                values = [
+                    item.cells[index]
+                    for item in header_rows
+                    if index < len(item.cells) and not _is_blank(item.cells[index])
+                ]
+                combined_cells.append(values[-1] if values else None)
+                for value in reversed(values):
+                    target = alias_map.get(normalize_header(value))
+                    if target is not None and target not in columns:
+                        columns[target] = index
+                        combined_cells[index] = value
+                        break
             score = len(columns)
             if score > best[0]:
-                best = (score, row, columns)
+                best = (
+                    score,
+                    RawRow(header_rows[-1].row_number, tuple(combined_cells)),
+                    columns,
+                )
         if best[0] < minimum_matches:
             return None, {}
         return best[1], best[2]
@@ -89,6 +109,57 @@ class ProfileMapper:
             "row_number": row_number,
             "mapping_profile": profile_id,
         }
+
+    @staticmethod
+    def _record_is_in_scope(
+        raw_table: RawTable,
+        definition: dict[str, Any],
+        row: RawRow,
+        columns: dict[str, int],
+        field_by_target: dict[str, dict[str, Any]],
+    ) -> tuple[bool, list[ConversionIssue]]:
+        filters = definition.get("record_filters") or []
+        if not filters:
+            return True, []
+        issues: list[ConversionIssue] = []
+        base_location = f"{raw_table.source.source_path}/{raw_table.sheet_name}"
+        for record_filter in filters:
+            field_name = str(record_filter["field"])
+            column_index = columns.get(field_name)
+            if column_index is None:
+                issues.append(
+                    ConversionIssue(
+                        IssueSeverity.ERROR,
+                        "ROW_FILTER_COLUMN_MISSING",
+                        f"无法执行行过滤，源表缺少字段{field_name}",
+                        raw_table.source.source_id,
+                        base_location,
+                        str(definition["target"]),
+                    )
+                )
+                return False, issues
+            original = row.cells[column_index] if column_index < len(row.cells) else None
+            if _is_blank(original):
+                return False, issues
+            field = field_by_target[field_name]
+            try:
+                actual = convert_value(original, field)
+                expected = convert_value(record_filter["equals"], field)
+            except ValueConversionError as exc:
+                issues.append(
+                    ConversionIssue(
+                        IssueSeverity.ERROR,
+                        "ROW_FILTER_VALUE_INVALID",
+                        f"行过滤字段{field_name}无法转换：{exc}",
+                        raw_table.source.source_id,
+                        f"{base_location}!R{row.row_number}C{column_index + 1}",
+                        str(definition["target"]),
+                    )
+                )
+                return False, issues
+            if actual != expected:
+                return False, issues
+        return True, issues
 
     def _map_table(
         self, raw_table: RawTable, definition: dict[str, Any]
@@ -181,6 +252,23 @@ class ProfileMapper:
                 column_index < len(row.cells) and not _is_blank(row.cells[column_index])
                 for column_index in columns.values()
             ):
+                continue
+            in_scope, filter_issues = self._record_is_in_scope(
+                raw_table, definition, row, columns, field_by_target
+            )
+            issues.extend(filter_issues)
+            if not in_scope:
+                if not filter_issues:
+                    issues.append(
+                        ConversionIssue(
+                            IssueSeverity.INFO,
+                            "ROW_FILTERED_OUT",
+                            "源记录不属于当前映射限定的试点范围，已确定性排除",
+                            source_id,
+                            f"{base_location}!R{row.row_number}",
+                            str(definition["target"]),
+                        )
+                    )
                 continue
             record: dict[str, Any] = {}
             row_has_mapped_value = False
@@ -277,7 +365,9 @@ class ProfileMapper:
                         )
                     )
                 continue
-            if len(matches) > 1:
+            if len(matches) > 1 and not all(
+                bool(definition.get("allow_shared_source")) for definition in matches
+            ):
                 issues.append(
                     ConversionIssue(
                         IssueSeverity.ERROR,
@@ -288,20 +378,21 @@ class ProfileMapper:
                     )
                 )
                 continue
-            definition = matches[0]
-            mapped, table_issues, table_lineage = self._map_table(raw_table, definition)
-            issues.extend(table_issues)
-            lineage.extend(table_lineage)
-            if mapped is not None:
-                mapped_tables.append(mapped)
-                match_counts[str(definition["id"])] += 1
-                matched_keys.append(
-                    (
-                        raw_table.source.source_id,
-                        raw_table.sheet_name,
-                        str(definition["id"]),
+            for definition in matches:
+                mapped, table_issues, table_lineage = self._map_table(raw_table, definition)
+                issues.extend(table_issues)
+                lineage.extend(table_lineage)
+                if mapped is not None:
+                    mapped_tables.append(mapped)
+                    if mapped.records:
+                        match_counts[str(definition["id"])] += 1
+                    matched_keys.append(
+                        (
+                            raw_table.source.source_id,
+                            raw_table.sheet_name,
+                            str(definition["id"]),
+                        )
                     )
-                )
         for definition in self.profile.tables:
             if definition.get("required") and not match_counts[str(definition["id"])]:
                 issues.append(

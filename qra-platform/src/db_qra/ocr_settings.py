@@ -25,6 +25,7 @@ SETTINGS_CONTRACT = "qra.ocr-settings/1.0.0"
 PROTECTION_SCHEME = "WINDOWS_DPAPI_CURRENT_USER"
 MAX_CONFIG_CSV_BYTES = 64 * 1024
 DEFAULT_OCR_TIMEOUT_SECONDS = 120
+DEFAULT_EXTRACTION_TIMEOUT_SECONDS = 120
 OCR_MODEL_OPTIONS = (
     ("qwen3.5-ocr", "Qwen3.5-OCR（专用高精OCR，推荐）"),
     ("qwen3.8-max", "Qwen3.8-Max（多模态通用识别）"),
@@ -32,6 +33,14 @@ OCR_MODEL_OPTIONS = (
     ("qwen3.7-max-2026-06-08", "Qwen3.7-Max-2026-06-08（固定版本）"),
 )
 SUPPORTED_OCR_MODELS = tuple(model_id for model_id, _label in OCR_MODEL_OPTIONS)
+EXTRACTION_MODEL_OPTIONS = (
+    ("qwen3.8-max", "Qwen3.8-Max（信息提取，推荐）"),
+    ("qwen3.7-max", "Qwen3.7-Max（信息提取）"),
+    ("qwen3.7-max-2026-06-08", "Qwen3.7-Max-2026-06-08（固定版本）"),
+)
+SUPPORTED_EXTRACTION_MODELS = tuple(
+    model_id for model_id, _label in EXTRACTION_MODEL_OPTIONS
+)
 _DPAPI_ENTROPY = b"qra-platform:bailian-ocr:v1"
 _MODEL_PATTERN = re.compile(r"[A-Za-z0-9._-]{1,100}")
 _HOST_PATTERN = re.compile(r"[A-Za-z0-9.-]{1,253}")
@@ -45,7 +54,10 @@ class BailianOcrSettings:
     openai_base_url: str
     ocr_model_version: str = "qwen3.5-ocr"
     vision_model_version: str = "qwen3.7-max"
+    extraction_model_version: str = "qwen3.8-max"
+    extraction_enabled: bool = True
     ocr_timeout_seconds: int = DEFAULT_OCR_TIMEOUT_SECONDS
+    extraction_timeout_seconds: int = DEFAULT_EXTRACTION_TIMEOUT_SECONDS
     workspace_name: str | None = None
     workspace_id: str | None = None
 
@@ -57,7 +69,10 @@ class BailianOcrSettings:
             "openai_base_url": self.openai_base_url,
             "ocr_model_version": self.ocr_model_version,
             "vision_model_version": self.vision_model_version,
+            "extraction_model_version": self.extraction_model_version,
+            "extraction_enabled": self.extraction_enabled,
             "ocr_timeout_seconds": self.ocr_timeout_seconds,
+            "extraction_timeout_seconds": self.extraction_timeout_seconds,
             "workspace_name": self.workspace_name,
             "key_stored": True,
             "protection": PROTECTION_SCHEME,
@@ -80,6 +95,15 @@ def _validated_ocr_model(value: str) -> str:
     return selected
 
 
+def _validated_extraction_model(value: str) -> str:
+    requested = _validated_model(value, "信息提取模型")
+    canonical = {model.casefold(): model for model in SUPPORTED_EXTRACTION_MODELS}
+    selected = canonical.get(requested.casefold())
+    if selected is None:
+        raise ValueError("信息提取模型不在当前业务空间允许的模型中")
+    return selected
+
+
 def _validated_timeout(value: object) -> int:
     try:
         timeout = int(value)
@@ -87,6 +111,16 @@ def _validated_timeout(value: object) -> int:
         raise ValueError("OCR超时必须是整数秒") from exc
     if not 30 <= timeout <= 600:
         raise ValueError("OCR超时必须在30至600秒之间")
+    return timeout
+
+
+def _validated_extraction_timeout(value: object) -> int:
+    try:
+        timeout = int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("信息提取超时必须是整数秒") from exc
+    if not 10 <= timeout <= 600:
+        raise ValueError("信息提取超时必须在10至600秒之间")
     return timeout
 
 
@@ -99,6 +133,18 @@ def _environment_timeout_seconds() -> int:
         return DEFAULT_OCR_TIMEOUT_SECONDS
 
 
+def _environment_extraction_timeout_seconds() -> int:
+    try:
+        return _validated_extraction_timeout(
+            os.environ.get(
+                "QRA_EXTRACTION_TIMEOUT_SECONDS",
+                DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
+            )
+        )
+    except ValueError:
+        return DEFAULT_EXTRACTION_TIMEOUT_SECONDS
+
+
 def public_ocr_model_options() -> list[dict[str, object]]:
     return [
         {
@@ -108,6 +154,18 @@ def public_ocr_model_options() -> list[dict[str, object]]:
             "mode": "STRUCTURED_OCR" if model_id == "qwen3.5-ocr" else "VISION_PROMPT",
         }
         for model_id, label in OCR_MODEL_OPTIONS
+    ]
+
+
+def public_extraction_model_options() -> list[dict[str, object]]:
+    return [
+        {
+            "id": model_id,
+            "label": label,
+            "recommended": model_id == "qwen3.8-max",
+            "mode": "JSON_SCHEMA_EXTRACTION",
+        }
+        for model_id, label in EXTRACTION_MODEL_OPTIONS
     ]
 
 
@@ -137,7 +195,10 @@ def validate_bailian_settings(
     openai_base_url: str,
     ocr_model_version: str = "qwen3.5-ocr",
     vision_model_version: str = "qwen3.7-max",
+    extraction_model_version: str = "qwen3.8-max",
+    extraction_enabled: bool = True,
     ocr_timeout_seconds: int = DEFAULT_OCR_TIMEOUT_SECONDS,
+    extraction_timeout_seconds: int = DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
     workspace_name: str | None = None,
     workspace_id: str | None = None,
 ) -> BailianOcrSettings:
@@ -166,7 +227,12 @@ def validate_bailian_settings(
         ),
         ocr_model_version=_validated_ocr_model(ocr_model_version),
         vision_model_version=_validated_model(vision_model_version, "视觉模型"),
+        extraction_model_version=_validated_extraction_model(extraction_model_version),
+        extraction_enabled=bool(extraction_enabled),
         ocr_timeout_seconds=_validated_timeout(ocr_timeout_seconds),
+        extraction_timeout_seconds=_validated_extraction_timeout(
+            extraction_timeout_seconds
+        ),
         workspace_name=safe_workspace_name or None,
         workspace_id=safe_workspace_id or None,
     )
@@ -177,7 +243,10 @@ def parse_bailian_config_csv(
     *,
     ocr_model_version: str = "qwen3.5-ocr",
     vision_model_version: str = "qwen3.7-max",
+    extraction_model_version: str = "qwen3.8-max",
+    extraction_enabled: bool = True,
     ocr_timeout_seconds: int = DEFAULT_OCR_TIMEOUT_SECONDS,
+    extraction_timeout_seconds: int = DEFAULT_EXTRACTION_TIMEOUT_SECONDS,
 ) -> BailianOcrSettings:
     if len(csv_text.encode("utf-8")) > MAX_CONFIG_CSV_BYTES:
         raise ValueError("OCR配置CSV不能超过64 KB")
@@ -208,7 +277,10 @@ def parse_bailian_config_csv(
         openai_base_url=settings["openaicompatible"],
         ocr_model_version=ocr_model_version,
         vision_model_version=vision_model_version,
+        extraction_model_version=extraction_model_version,
+        extraction_enabled=extraction_enabled,
         ocr_timeout_seconds=ocr_timeout_seconds,
+        extraction_timeout_seconds=extraction_timeout_seconds,
         workspace_name=settings.get("workspacename"),
         workspace_id=settings.get("workspaceid"),
     )
@@ -325,7 +397,10 @@ class OcrSettingsStore:
             "openai_base_url": settings.openai_base_url,
             "ocr_model_version": settings.ocr_model_version,
             "vision_model_version": settings.vision_model_version,
+            "extraction_model_version": settings.extraction_model_version,
+            "extraction_enabled": settings.extraction_enabled,
             "ocr_timeout_seconds": settings.ocr_timeout_seconds,
+            "extraction_timeout_seconds": settings.extraction_timeout_seconds,
             "workspace_name": settings.workspace_name,
             "workspace_id": settings.workspace_id,
             "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -359,8 +434,15 @@ class OcrSettingsStore:
             openai_base_url=str(payload.get("openai_base_url") or ""),
             ocr_model_version=str(payload.get("ocr_model_version") or "qwen3.5-ocr"),
             vision_model_version=str(payload.get("vision_model_version") or "qwen3.7-max"),
+            extraction_model_version=str(
+                payload.get("extraction_model_version") or "qwen3.8-max"
+            ),
+            extraction_enabled=bool(payload.get("extraction_enabled", True)),
             ocr_timeout_seconds=payload.get(
                 "ocr_timeout_seconds", DEFAULT_OCR_TIMEOUT_SECONDS
+            ),
+            extraction_timeout_seconds=payload.get(
+                "extraction_timeout_seconds", DEFAULT_EXTRACTION_TIMEOUT_SECONDS
             ),
             workspace_name=(
                 str(payload["workspace_name"]) if payload.get("workspace_name") else None
@@ -387,6 +469,16 @@ def environment_ocr_configured() -> bool:
     )
 
 
+def environment_extraction_configured() -> bool:
+    return (
+        os.environ.get("QRA_EXTRACTION_PROVIDER", "").strip().casefold()
+        in {"aliyun", "aliyun-bailian", "bailian"}
+        and bool(os.environ.get("QRA_ALIYUN_OPENAI_BASE_URL", "").strip())
+        and bool(os.environ.get("QRA_ALIYUN_API_KEY", "").strip())
+        and bool(os.environ.get("QRA_EXTRACTION_MODEL_VERSION", "").strip())
+    )
+
+
 def apply_ocr_settings(settings: BailianOcrSettings, *, source: str) -> None:
     os.environ.update(
         {
@@ -396,7 +488,16 @@ def apply_ocr_settings(settings: BailianOcrSettings, *, source: str) -> None:
             "QRA_ALIYUN_OPENAI_BASE_URL": settings.openai_base_url,
             "QRA_OCR_MODEL_VERSION": settings.ocr_model_version,
             "QRA_VISION_MODEL_VERSION": settings.vision_model_version,
+            "QRA_EXTRACTION_PROVIDER": (
+                "aliyun-bailian" if settings.extraction_enabled else "disabled"
+            ),
+            "QRA_EXTRACTION_MODEL_VERSION": settings.extraction_model_version,
             "QRA_OCR_TIMEOUT_SECONDS": str(settings.ocr_timeout_seconds),
+            "QRA_EXTRACTION_TIMEOUT_SECONDS": str(
+                settings.extraction_timeout_seconds
+            ),
+            "QRA_EXTRACTION_MAX_RETRIES": "2",
+            "QRA_EXTRACTION_MAX_CONCURRENCY": "2",
             "QRA_OCR_SETTINGS_SOURCE": source,
         }
     )
@@ -415,6 +516,7 @@ def load_ocr_settings_into_process(
 
 def ocr_settings_status(store: OcrSettingsStore) -> dict[str, object]:
     active = environment_ocr_configured()
+    extraction_active = environment_extraction_configured()
     persisted = store.path.exists()
     source = os.environ.get("QRA_OCR_SETTINGS_SOURCE") or (
         "environment" if active else "none"
@@ -440,18 +542,26 @@ def ocr_settings_status(store: OcrSettingsStore) -> dict[str, object]:
             "openai_base_url": os.environ.get("QRA_ALIYUN_OPENAI_BASE_URL"),
             "ocr_model_version": os.environ.get("QRA_OCR_MODEL_VERSION"),
             "vision_model_version": os.environ.get("QRA_VISION_MODEL_VERSION"),
+            "extraction_model_version": os.environ.get(
+                "QRA_EXTRACTION_MODEL_VERSION"
+            ),
+            "extraction_enabled": extraction_active,
             "ocr_timeout_seconds": _environment_timeout_seconds(),
+            "extraction_timeout_seconds": _environment_extraction_timeout_seconds(),
             "workspace_name": None,
             "key_stored": False,
             "protection": "PROCESS_ENVIRONMENT_ONLY",
         }
     status = {
         "configured": active,
+        "ocr_configured": active,
+        "extraction_configured": extraction_active,
         "persisted": persisted,
         "persisted_usable": persisted_usable,
         "reimport_required": reimport_required,
         "source": source,
         "available_models": public_ocr_model_options(),
+        "available_extraction_models": public_extraction_model_options(),
         **metadata,
     }
     if reimport_required:
@@ -461,20 +571,25 @@ def ocr_settings_status(store: OcrSettingsStore) -> dict[str, object]:
 
 __all__ = [
     "BailianOcrSettings",
+    "DEFAULT_EXTRACTION_TIMEOUT_SECONDS",
     "DEFAULT_OCR_TIMEOUT_SECONDS",
+    "EXTRACTION_MODEL_OPTIONS",
     "MAX_CONFIG_CSV_BYTES",
     "OcrSettingsStore",
     "OCR_MODEL_OPTIONS",
     "PROTECTION_SCHEME",
     "SETTINGS_CONTRACT",
     "SUPPORTED_OCR_MODELS",
+    "SUPPORTED_EXTRACTION_MODELS",
     "apply_ocr_settings",
     "environment_ocr_configured",
+    "environment_extraction_configured",
     "load_ocr_settings_into_process",
     "ocr_settings_status",
     "parse_bailian_config_csv",
     "protect_secret",
     "public_ocr_model_options",
+    "public_extraction_model_options",
     "settings_path_for_database",
     "unprotect_secret",
     "validate_bailian_settings",

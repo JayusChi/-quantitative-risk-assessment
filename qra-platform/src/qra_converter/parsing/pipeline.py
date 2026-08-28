@@ -30,28 +30,34 @@ from .quality import build_quality_report, link_table_continuations, validate_lo
 from .registry import ParseContext, ParsingRegistry, standalone_source
 
 
-def configured_ocr_provider() -> OcrProvider:
+def configured_ocr_provider(*, model_version: str | None = None) -> OcrProvider:
     provider_name = os.environ.get("QRA_OCR_PROVIDER", "").strip().casefold()
     if provider_name in {"aliyun", "aliyun-bailian", "bailian"}:
         dashscope_url = os.environ.get("QRA_ALIYUN_DASHSCOPE_URL", "").strip()
         api_key = os.environ.get("QRA_ALIYUN_API_KEY", "").strip()
-        model_version = os.environ.get("QRA_OCR_MODEL_VERSION", "qwen3.5-ocr").strip()
-        if not dashscope_url or not api_key or not model_version:
+        selected_model = (
+            str(model_version or "").strip()
+            or os.environ.get("QRA_OCR_MODEL_VERSION", "qwen3.5-ocr").strip()
+        )
+        if not dashscope_url or not api_key or not selected_model:
             return DisabledOcrProvider()
         return AliyunBailianOcrProvider(
             dashscope_url=dashscope_url,
             api_key=api_key,
-            model_version=model_version,
+            model_version=selected_model,
         )
     endpoint = os.environ.get("QRA_OCR_ENDPOINT", "").strip()
     api_key = os.environ.get("QRA_OCR_API_KEY", "").strip()
-    model_version = os.environ.get("QRA_OCR_MODEL_VERSION", "").strip()
-    if not endpoint or not api_key or not model_version:
+    selected_model = (
+        str(model_version or "").strip()
+        or os.environ.get("QRA_OCR_MODEL_VERSION", "").strip()
+    )
+    if not endpoint or not api_key or not selected_model:
         return DisabledOcrProvider()
     return JsonHttpOcrProvider(
         endpoint=endpoint,
         api_key=api_key,
-        model_version=model_version,
+        model_version=selected_model,
     )
 
 

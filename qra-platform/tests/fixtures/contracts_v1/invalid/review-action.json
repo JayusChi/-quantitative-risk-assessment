@@ -1,0 +1,16 @@
+{
+  "action": "EDIT_IN_PLACE",
+  "after_value": 7.8,
+  "before_value": null,
+  "candidate_ids": [
+    "CAND-0001"
+  ],
+  "evidence_ids": [
+    "EVD-0001"
+  ],
+  "reason": "与批准运行记录一致",
+  "review_id": "REV-0001",
+  "reviewed_at": "2026-08-26T10:00:00+08:00",
+  "reviewer": "reviewer@example",
+  "target": "pipeline.operating_pressure_mpa"
+}

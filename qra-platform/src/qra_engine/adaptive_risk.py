@@ -317,6 +317,7 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
     spec = _load_spec()
     defaults = spec["defaults"]
     cells, population_source = _population_cells(case)
+    spatial_population_available = population_source != "model_population_density_prior"
     cells_by_segment: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
     unassigned_cells: list[dict[str, Any]] = []
     segment_ids = {str(row["segment_id"]) for row in case.get("segments", [])}
@@ -456,7 +457,7 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
                 dominant_scenario = scenario_summary
 
         maximum_receptor = max(receptor_ir, key=receptor_ir.get) if receptor_ir else None
-        maximum_ir = receptor_ir[maximum_receptor] if maximum_receptor else 0.0
+        maximum_ir = receptor_ir[maximum_receptor] if maximum_receptor else None
         uncertainty_factor = float(evidence["uncertainty_factor"])
         if population_source == "model_population_density_prior":
             uncertainty_factor = min(
@@ -478,6 +479,11 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
                 "risk_density_fatalities_per_km_year": segment_pll / length if length > 0 else 0.0,
                 "maximum_segment_individual_risk_per_year": maximum_ir,
                 "maximum_segment_individual_risk_receptor_id": maximum_receptor,
+                "individual_risk_status": (
+                    "CALCULATED_FROM_SPATIAL_RECEPTORS"
+                    if maximum_ir is not None
+                    else "NOT_CALCULATED_MISSING_SPATIAL_RECEPTORS"
+                ),
                 "maximum_conditional_consequence": maximum_consequence or {"expected_fatalities": 0.0},
                 "dominant_risk_scenario": dominant_scenario,
                 "evidence_diagnostics": evidence,
@@ -501,7 +507,14 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
             float(row["risk_value_fatalities_per_year"]) / total_risk if total_risk > 0 else 0.0
         )
     by_density = sorted(ranking, key=lambda row: (-float(row["risk_density_fatalities_per_km_year"]), row["segment_id"]))
-    by_ir = sorted(ranking, key=lambda row: (-float(row["maximum_segment_individual_risk_per_year"]), row["segment_id"]))
+    by_ir = sorted(
+        ranking,
+        key=lambda row: (
+            row["maximum_segment_individual_risk_per_year"] is None,
+            -float(row["maximum_segment_individual_risk_per_year"] or 0.0),
+            row["segment_id"],
+        ),
+    )
     by_consequence = sorted(ranking, key=lambda row: (-float(row["maximum_conditional_consequence"]["expected_fatalities"]), row["segment_id"]))
     for index, row in enumerate(by_density, start=1):
         row["risk_density_rank"] = index
@@ -511,19 +524,33 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
         row["maximum_consequence_rank"] = index
 
     fn_curve = []
-    for threshold in (1.0, 5.0, 10.0, 30.0, 50.0, 100.0):
-        fn_curve.append(
-            {
-                "fatalities_at_least": threshold,
-                "cumulative_frequency_per_year": sum(
-                    event["annual_frequency"]
-                    for event in scenario_events
-                    if event["expected_fatalities"] >= threshold
-                ),
-            }
-        )
-    maximum_ir_row = max(ranking, key=lambda row: float(row["maximum_segment_individual_risk_per_year"]), default=None)
-    maximum_ir = float(maximum_ir_row["maximum_segment_individual_risk_per_year"]) if maximum_ir_row else 0.0
+    if spatial_population_available:
+        for threshold in (1.0, 5.0, 10.0, 30.0, 50.0, 100.0):
+            fn_curve.append(
+                {
+                    "fatalities_at_least": threshold,
+                    "cumulative_frequency_per_year": sum(
+                        event["annual_frequency"]
+                        for event in scenario_events
+                        if event["expected_fatalities"] >= threshold
+                    ),
+                }
+            )
+    ir_rows = [
+        row
+        for row in ranking
+        if row["maximum_segment_individual_risk_per_year"] is not None
+    ]
+    maximum_ir_row = max(
+        ir_rows,
+        key=lambda row: float(row["maximum_segment_individual_risk_per_year"]),
+        default=None,
+    )
+    maximum_ir = (
+        float(maximum_ir_row["maximum_segment_individual_risk_per_year"])
+        if maximum_ir_row
+        else None
+    )
     return {
         "model_id": spec["model_id"],
         "model_version": spec["version"],
@@ -539,6 +566,12 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
         "human_risk": {
             "judgement_status": "CALCULATED_NOT_ACCEPTANCE_JUDGED_PARTIAL_EVIDENCE",
             "individual_risk": {
+                "available": maximum_ir is not None,
+                "status": (
+                    "CALCULATED_NOT_ACCEPTANCE_JUDGED"
+                    if maximum_ir is not None
+                    else "NOT_CALCULATED_MISSING_SPATIAL_RECEPTORS"
+                ),
                 "maximum": {
                     "value_per_year": maximum_ir,
                     "segment_id": maximum_ir_row["segment_id"] if maximum_ir_row else None,
@@ -546,6 +579,15 @@ def calculate_adaptive_evidence_qra(case: dict[str, Any]) -> dict[str, Any]:
             },
             "societal_risk": {
                 "pipeline_pll_per_year": total_risk,
+                "pll_status": "SCREENING_ESTIMATE_WITH_MODEL_POPULATION_PRIOR"
+                if not spatial_population_available
+                else "CALCULATED_FROM_SPATIAL_RECEPTORS",
+                "fn_curve_available": spatial_population_available,
+                "fn_curve_status": (
+                    "CALCULATED_NOT_ACCEPTANCE_JUDGED"
+                    if spatial_population_available
+                    else "NOT_CALCULATED_MISSING_POPULATION_DISTRIBUTION"
+                ),
                 "fn_curve": fn_curve,
             },
             "segment_risk": {"ranking": ranking},

@@ -1,0 +1,16 @@
+[
+  {
+    "blocking": true,
+    "candidate_ids": [
+      "CAND-0001"
+    ],
+    "code": "EXTRACT.LOW_CONFIDENCE",
+    "evidence_ids": [
+      "EVD-0001"
+    ],
+    "issue_id": "ISS-0001",
+    "message": "置信度低于阈值",
+    "quality_status": "LOW_CONFIDENCE",
+    "target": "pipeline.operating_pressure_mpa"
+  }
+]

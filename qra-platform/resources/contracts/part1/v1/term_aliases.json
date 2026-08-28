@@ -1,0 +1,41 @@
+{
+  "alias_set_id": "qra.part1-terms",
+  "aliases": [
+    {
+      "auto_confirm": false,
+      "candidate_field_ids": [
+        "pipeline.operating_pressure_mpa"
+      ],
+      "term": "工作压力"
+    },
+    {
+      "auto_confirm": false,
+      "candidate_field_ids": [
+        "pipeline.operating_pressure_mpa"
+      ],
+      "term": "运行压力"
+    },
+    {
+      "auto_confirm": false,
+      "candidate_field_ids": [
+        "segment.outside_diameter_mm"
+      ],
+      "term": "管径"
+    },
+    {
+      "auto_confirm": false,
+      "normalization_rule": "CHAINAGE_KM_V1",
+      "term": "桩号"
+    }
+  ],
+  "chainage_rule": {
+    "accepted_examples": {
+      "12300m": 12.3,
+      "12km+300m": 12.3,
+      "K12+300": 12.3
+    },
+    "ambiguous_is_blocking": true,
+    "output": "chainage_km"
+  },
+  "version": "1.0.0"
+}

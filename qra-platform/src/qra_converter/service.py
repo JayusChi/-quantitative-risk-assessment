@@ -14,8 +14,11 @@ from .contracts import (
     RawTable,
     SourceReference,
 )
+from .extraction.ports import ExtractionProvider
 from .mapping import ProfileMapper, load_profile
 from .ocr.ports import OcrProvider
+from .orchestration.state import WorkflowStore
+from .orchestration.workflow import Stage4Workflow
 from .parsing.compatibility import document_to_raw_tables
 from .parsing.contracts import ParseExecution
 from .parsing.pipeline import ParsingPipeline
@@ -25,11 +28,12 @@ from .review import auxiliary_review_items, load_review_bundle, merge_mapped_tab
 from .schema_validation import validate_qra_input
 from .validation import validate_conversion_quality
 
-CONVERTER_VERSION = "0.4.0"
+CONVERTER_VERSION = "0.5.0"
 ContractValidator = Callable[[Any], Any]
 CapabilityPlanner = Callable[[dict[str, Any]], dict[str, Any]]
 ParseResultCallback = Callable[[Path, ParseExecution], None]
 ParseProgressCallback = Callable[[int, int, int, int, str], None]
+Stage4ResultCallback = Callable[[dict[str, Any]], None]
 
 
 def discover_sources(source_dir: Path, registry: ParsingRegistry) -> tuple[Path, ...]:
@@ -117,6 +121,12 @@ def convert_sources(
     cancel_check: Callable[[], None] | None = None,
     parse_result_callback: ParseResultCallback | None = None,
     parse_progress_callback: ParseProgressCallback | None = None,
+    enable_stage4: bool = False,
+    stage4_job_id: str | None = None,
+    extraction_provider: ExtractionProvider | None = None,
+    stage4_external_sharing_allowed: bool = False,
+    stage4_store: WorkflowStore | None = None,
+    stage4_result_callback: Stage4ResultCallback | None = None,
 ) -> dict[str, Any]:
     registry = ParsingRegistry()
     profile = load_profile(profile_path)
@@ -281,6 +291,39 @@ def convert_sources(
         else:
             converted, contract_status = _contract_issues(contract_report)
             issues.extend(converted)
+    stage4_document: dict[str, Any] | None = None
+    if enable_stage4:
+        if contract_catalog is None:
+            raise ValueError("第四阶段必须使用已校验的第一部分版本化合同")
+        effective_job_id = stage4_job_id or (
+            "STAGE4-"
+            + hashlib.sha256(
+                (profile.checksum_sha256 + "\0" + "\0".join(
+                    result.document.parse_sha256 for result in parse_results
+                )).encode("utf-8")
+            ).hexdigest()[:24]
+        )
+        stage4 = Stage4Workflow(
+            catalog=contract_catalog,
+            provider=extraction_provider,
+            store=stage4_store,
+        ).run(
+            job_id=effective_job_id,
+            documents=tuple(result.document for result in parse_results if result.succeeded),
+            lineage=outcome.lineage,
+            mapping_version=f"{profile.profile_id}/{profile.version}",
+            base_case=case,
+            engine_capability_plan={
+                "contract_status": contract_status,
+                "dynamic_plan": capability_plan or {},
+            },
+            external_sharing_allowed=stage4_external_sharing_allowed,
+            cancel_check=cancel_check,
+        )
+        stage4_document = stage4.to_dict()
+        stage4_document["result_sha256"] = stage4.sha256
+        if stage4_result_callback is not None:
+            stage4_result_callback(stage4_document)
     unique_sources: dict[str, SourceReference] = {}
     for table in raw_tables:
         unique_sources[table.source.source_id] = table.source
@@ -308,6 +351,7 @@ def convert_sources(
         review_audit=tuple(review_audit),
         review_decision_source=review_bundle.source,
         capability_plan=capability_plan,
+        stage4_result=stage4_document,
     )
     summary = write_conversion_outputs(
         output_dir,

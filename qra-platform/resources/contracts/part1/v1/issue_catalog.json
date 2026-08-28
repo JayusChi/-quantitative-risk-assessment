@@ -1,0 +1,62 @@
+{
+  "catalog_id": "qra.part1-issues",
+  "codes": [
+    {
+      "code": "INTAKE.FILE_INVALID",
+      "default_status": "INVALID"
+    },
+    {
+      "code": "PARSE.CONTENT_UNREADABLE",
+      "default_status": "INVALID"
+    },
+    {
+      "code": "EXTRACT.FIELD_MISSING",
+      "default_status": "MISSING"
+    },
+    {
+      "code": "EXTRACT.LOW_CONFIDENCE",
+      "default_status": "LOW_CONFIDENCE"
+    },
+    {
+      "code": "NORMALIZE.UNIT_UNSUPPORTED",
+      "default_status": "INVALID"
+    },
+    {
+      "code": "NORMALIZE.CHAINAGE_AMBIGUOUS",
+      "default_status": "INVALID"
+    },
+    {
+      "code": "FUSION.VALUE_CONFLICT",
+      "default_status": "CONFLICT"
+    },
+    {
+      "code": "CONTRACT.SCHEMA.INVALID",
+      "default_status": "INVALID"
+    },
+    {
+      "code": "CONTRACT.LEGACY_PROFILE",
+      "default_status": "WARNING"
+    },
+    {
+      "code": "GATE.PENDING_REVIEW",
+      "default_status": "PENDING_REVIEW"
+    },
+    {
+      "code": "DELIVERY.SNAPSHOT_BLOCKED",
+      "default_status": "INVALID"
+    }
+  ],
+  "immutable_meanings": true,
+  "quality_statuses": [
+    "PASS",
+    "INFO",
+    "WARNING",
+    "CONFLICT",
+    "LOW_CONFIDENCE",
+    "MISSING",
+    "INVALID",
+    "NOT_APPLICABLE",
+    "PENDING_REVIEW"
+  ],
+  "version": "1.0.0"
+}

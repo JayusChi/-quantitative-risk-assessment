@@ -1,0 +1,28 @@
+{
+  "golden_set_id": "qra.stage4-golden/1.0.0",
+  "provider": "fixture",
+  "cases": [
+    {"id": "UNIT-MPA", "layer": "STRUCTURED_TABLE", "expect": "5 MPa -> 5 MPa"},
+    {"id": "UNIT-KPA", "layer": "NATIVE_DOCUMENT", "expect": "5000 kPa -> 5 MPa"},
+    {"id": "UNIT-BAR", "layer": "SCANNED_DOCUMENT", "expect": "50 bar -> 5 MPa"},
+    {"id": "PRESSURE-SYNONYM", "layer": "NATIVE_DOCUMENT", "expect": "工作压力和运行压力映射运行压力"},
+    {"id": "PRESSURE-CONCEPT", "layer": "COMPLEX_TABLE", "expect": "设计压力与运行压力不构成同字段冲突"},
+    {"id": "CHAINAGE-K", "layer": "NATIVE_DOCUMENT", "expect": "K12+300 -> 12.3 km"},
+    {"id": "CHAINAGE-M", "layer": "STRUCTURED_TABLE", "expect": "12300m -> 12.3 km"},
+    {"id": "CHAINAGE-CROSS-PIPELINE", "layer": "STRUCTURED_TABLE", "expect": "跨管线相同桩号不匹配"},
+    {"id": "DUPLICATE-EXACT", "layer": "STRUCTURED_TABLE", "expect": "完全重复"},
+    {"id": "DUPLICATE-NEAR", "layer": "NATIVE_DOCUMENT", "expect": "容差内近似重复"},
+    {"id": "CONFLICT-VALUE", "layer": "SCANNED_DOCUMENT", "expect": "超容差冲突保留全部候选"},
+    {"id": "COORDINATE-NO-CRS", "layer": "NATIVE_DOCUMENT", "expect": "阻断空间映射"},
+    {"id": "DATE-YEAR", "layer": "NATIVE_DOCUMENT", "expect": "保留年精度"},
+    {"id": "PERCENT-AMBIGUOUS", "layer": "COMPLEX_TABLE", "expect": "无单位证据不除以100"},
+    {"id": "EVIDENCE-MISSING", "layer": "NATIVE_DOCUMENT", "expect": "拒绝候选"},
+    {"id": "FIELD-UNKNOWN", "layer": "NATIVE_DOCUMENT", "expect": "拒绝候选"},
+    {"id": "EVIDENCE-FORGED", "layer": "NATIVE_DOCUMENT", "expect": "拒绝候选"},
+    {"id": "PROMPT-INJECTION", "layer": "SCANNED_DOCUMENT", "expect": "记录问题并按普通文本处理"},
+    {"id": "PROVIDER-RATE-LIMIT", "layer": "PROVIDER_FAILURE", "expect": "有界重试"},
+    {"id": "PROVIDER-STRUCTURE", "layer": "PROVIDER_FAILURE", "expect": "一次修复后仍失败则阻断"},
+    {"id": "PROVIDER-OVERSIZE", "layer": "PROVIDER_FAILURE", "expect": "拒绝超大响应"},
+    {"id": "PARTIAL-FILE-FAILURE", "layer": "PROVIDER_FAILURE", "expect": "失败文件无伪候选，其他文件继续"}
+  ]
+}

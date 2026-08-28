@@ -101,6 +101,8 @@ class ConverterPhase3IntegrationTest(unittest.TestCase):
             self.assertEqual(metadata["conversion"]["confirmed_by"], "reviewer-a")
             with self.assertRaisesRegex(ValueError, "已确认转换"):
                 database.delete_snapshot(snapshot_id)
+            with self.assertRaisesRegex(ValueError, "不可变快照"):
+                database.delete_conversion_job(job_id, actor="reviewer-a")
 
             event_types = {row["event_type"] for row in database.list_audit_events(100)}
             self.assertTrue(
@@ -146,6 +148,9 @@ class ConverterPhase3IntegrationTest(unittest.TestCase):
             self.assertGreater(
                 retry_details["conversion_report"]["summary"]["review_audit_count"], 0
             )
+            deleted_parent = database.delete_conversion_job(job_id, actor="reviewer-b")
+            self.assertEqual(deleted_parent["status"], "DELETED")
+            self.assertIsNone(database.get_conversion_job(retry_id)["parent_job_id"])
 
             queued_id, _ = submit_conversion(
                 database,
@@ -158,7 +163,7 @@ class ConverterPhase3IntegrationTest(unittest.TestCase):
             self.assertIn(queued_id, recovered)
             self.assertEqual(database.get_conversion_job(queued_id)["status"], "QUEUED")
 
-    def test_zip_traversal_is_rejected_as_structured_failure(self) -> None:
+    def test_zip_traversal_is_quarantined_before_worker_execution(self) -> None:
         archive_bytes = io.BytesIO()
         with zipfile.ZipFile(archive_bytes, "w") as archive:
             archive.writestr("../管段台账.csv", "管段编号,起点里程,终点里程\nS1,0,1\n")
@@ -171,10 +176,13 @@ class ConverterPhase3IntegrationTest(unittest.TestCase):
                 files=[{"file_name": "unsafe.zip", "content": archive_bytes.getvalue()}],
                 project_name="恶意资料包测试",
             )
-            failed = run_conversion_job(database, job_id, runtime_root=root / "runtime")
-            self.assertEqual(failed["status"], "FAILED")
-            self.assertEqual(failed["error"]["code"], "CONVERSION_EXECUTION_FAILED")
-            self.assertIn("不安全路径", failed["error"]["message"])
+            blocked = run_conversion_job(database, job_id, runtime_root=root / "runtime")
+            self.assertEqual(blocked["status"], "BLOCKED")
+            details = database.get_conversion_job(job_id)
+            self.assertEqual(details["sources"][0]["security_status"], "QUARANTINED")
+            self.assertEqual(
+                details["intake_issues"][0]["code"], "INTAKE.ZIP_PATH_TRAVERSAL"
+            )
 
     def test_http_upload_preview_confirm_and_existing_json_compatibility(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

@@ -35,6 +35,41 @@ class LeakPoint:
         return asdict(self)
 
 
+def poisson_at_least_one_failure_probability(
+    annual_frequency: float,
+    exposure_years: float = 1.0,
+) -> float:
+    """Convert a constant annual failure frequency to P(N >= 1).
+
+    Failure frequency and failure probability are not interchangeable.  This
+    conversion assumes a homogeneous Poisson process over the requested
+    exposure period and uses ``expm1`` to preserve precision for rare events.
+    """
+    frequency = float(annual_frequency)
+    years = float(exposure_years)
+    if not math.isfinite(frequency) or frequency < 0.0:
+        raise ValueError("annual failure frequency must be a finite non-negative value")
+    if not math.isfinite(years) or years <= 0.0:
+        raise ValueError("failure probability exposure years must be finite and positive")
+    return -math.expm1(-frequency * years)
+
+
+def failure_probability_horizon_years(case: dict[str, Any]) -> float:
+    """Return the configured probability horizon, defaulting to one year."""
+    try:
+        years = float(case.get("assessment", {}).get(
+            "failure_probability_horizon_years",
+            1.0,
+        ))
+    except (TypeError, ValueError) as exc:
+        raise ValueError("assessment.failure_probability_horizon_years must be numeric") from exc
+    if not math.isfinite(years) or years <= 0.0:
+        raise ValueError(
+            "assessment.failure_probability_horizon_years must be finite and positive"
+        )
+    return years
+
+
 def calculate_loc_frequencies(
     case: dict[str, Any],
     correction_resolution: CorrectionFactorResolution | None = None,
@@ -98,3 +133,13 @@ def discretize_segment(segment: dict[str, Any], spacing_m: float) -> list[LeakPo
             )
         )
     return points
+
+
+__all__ = [
+    "LeakPoint",
+    "LocFrequency",
+    "calculate_loc_frequencies",
+    "discretize_segment",
+    "failure_probability_horizon_years",
+    "poisson_at_least_one_failure_probability",
+]
