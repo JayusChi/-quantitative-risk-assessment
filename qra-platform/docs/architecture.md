@@ -105,19 +105,29 @@ qra_converter/
 
 `file_intake.py` 是平台资料入口安全边界，负责文件签名/MIME 一致性、ZIP 安全展开、成员级哈希、隔离、重复/版本关系和不可变清单哈希。`conversion_adapter.py` 是平台转换组合根：只从受控映射目录选择配置，只把 `READY_FOR_PARSE` 源文件写入任务隔离临时目录，调用与命令行相同的 `convert_sources`，并把预览、报告、来源清单和审计结果交给数据库。HTTP 处理器只负责请求体限制、Base64 解码、后台线程调度和统一错误响应，不复制入口或转换规则。
 
+第五阶段把人工确认拆成四个确定性应用模块：`review_service` 管理会话、追加式决定、乐观锁、证据和
+原子确认；`review_assembly` 依据字段合同归一手工值并组装业务JSON；`review_gate` 组合Schema、引擎输入
+合同和动态节点能力；`review_ui` 提供无前端构建链的三栏业务页面。候选仍由 `qra_converter` 产生且只读，
+复核服务不能改写候选或提取事实。旧确认HTTP入口也进入同一复核门禁，不存在普通页面旁路。
+
 ## 4. 数据生命周期
 
 1. 源文件进入 `workspace/inputs`；
 2. 转换器生成 `ConversionResult`，保留文件哈希、位置和映射版本；
    在映射前，每个 `READY_FOR_PARSE` 文件独立生成 `ParsedDocument`、质量报告和
    预览资源，并立即写入 `PARSED/PARSE_FAILED`；
-3. 人工处理错误、警告和字段冲突，确认标准 JSON；
-4. `qra_engine.validation.validate_import_contract` 做最终输入合同校验；
-5. `db_qra` 以内容哈希写入不可变快照；
+3. `db_qra` 创建与候选集合哈希绑定的复核会话，人工查看证据并追加决定；
+4. 复核门禁重新组装JSON，执行Schema、`qra_engine.validation.validate_import_contract` 和目标节点检查；
+5. 门禁通过后在单一事务中以内容哈希写入或复用不可变快照，并保存完整复核来源；
 6. 计算任务只读取指定快照，并保存引擎版本、节点状态、结果哈希和报告资源；
 7. 历史转换和计算结果不原地覆盖，新版本形成新快照。
 
-转换任务状态为 `QUEUED → RUNNING → READY_FOR_CONFIRMATION → CONFIRMED`；入口/质量门禁使用 `BLOCKED`，执行异常使用 `FAILED`，未确认任务可协作式进入 `CANCELLED`。文件状态独立记录 `VALIDATED/QUARANTINED/DUPLICATE/READY_FOR_PARSE/PARSE_FAILED/PARSED`。只有至少一个 `READY_FOR_PARSE` 且符合隔离策略的任务可以排队，只有 `READY_FOR_CONFIRMATION` 可以在同一事务中确认并创建或复用快照。服务重启会完成待生效取消，并把其余 `QUEUED/RUNNING` 任务恢复为 `QUEUED`。
+转换任务状态为 `QUEUED → RUNNING → READY_FOR_CONFIRMATION/BLOCKED → CONFIRMED`；执行异常使用
+`FAILED`，未确认任务可协作式进入 `CANCELLED`。复核会话独立使用
+`OPEN → IN_REVIEW → READY_TO_CONFIRM → CONFIRMED`，候选集合变化进入 `STALE`。文件状态独立记录
+`VALIDATED/QUARANTINED/DUPLICATE/READY_FOR_PARSE/PARSE_FAILED/PARSED`。只有至少一个
+`READY_FOR_PARSE` 且符合隔离策略的任务可以排队；确认必须重新通过服务端门禁，并在同一事务中创建或
+复用快照。服务重启会完成待生效取消，并把其余 `QUEUED/RUNNING` 任务恢复为 `QUEUED`。
 
 ## 5. 工程规则
 

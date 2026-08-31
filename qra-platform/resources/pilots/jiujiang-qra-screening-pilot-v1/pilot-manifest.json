@@ -1,0 +1,126 @@
+{
+  "pilot_id": "jiujiang-qra-screening-pilot-v1",
+  "version": "1.0.0",
+  "project_name": "九江天然气支线资料理解与QRA筛查试点",
+  "asset_type": "ONSHORE_BURIED_NATURAL_GAS_TRANSMISSION_PIPELINE",
+  "pipeline_ids": [
+    "GDBZYQ-JJ-1"
+  ],
+  "segment_scope": {
+    "mode": "AUTHORITATIVE_SINGLE_HCA_BOUNDARY",
+    "segment_count": 1,
+    "segment_ids": [
+      "GDBZYQ-JJ-1"
+    ],
+    "start_km": 0.0,
+    "end_km": 10.938,
+    "length_km": 10.938,
+    "status": "CONFIRMED_FOR_INTERNAL_STAGE1_TEST",
+    "internal_subdivision_allowed": false
+  },
+  "authoritative_segmentation_source": {
+    "source_id": "SRC-JJ-001",
+    "basis": "九江支线三级高后果区识别台账中GDBZYQ-JJ-1记录的起止桩号和长度",
+    "authority_status": "APPROVED_BY_USER_FOR_INTERNAL_STAGE1_TEST_ON_2026-08-31",
+    "prohibited_inference": "现场照片和自由文本缺少权威里程或测绘坐标，不得据此生成内部计算管段"
+  },
+  "source_inventory_version": "1.0.0",
+  "mapping_profile_id": "jiangxi-natural-gas.jiujiang.v1",
+  "mapping_profile_version": "1.0.0",
+  "contract_id": "qra.part1-input",
+  "contract_version": "1.0.0",
+  "target_report_tier": "EVIDENCE_CONDITIONED_SCREENING_ESTIMATE",
+  "target_node_ids": [
+    "data_inventory",
+    "indicator_coverage",
+    "segment_geometry",
+    "adaptive_evidence_qra",
+    "risk_matrix"
+  ],
+  "target_report_outputs": [
+    "dynamic_dashboard_html",
+    "indicator_coverage_chart",
+    "segment_length_chart",
+    "adaptive_risk_ranking_chart",
+    "adaptive_uncertainty_chart",
+    "adaptive_evidence_factor_chart",
+    "risk_matrix_json",
+    "risk_matrix_csv",
+    "risk_matrix_chart"
+  ],
+  "allowed_file_types": [
+    "csv",
+    "xls",
+    "xlsx",
+    "docx",
+    "pdf",
+    "png",
+    "jpg",
+    "jpeg"
+  ],
+  "external_sharing_allowed": false,
+  "approved_real_source_root": "workspace/pilots/jiujiang-qra-screening-pilot-v1/sources",
+  "real_data_status": "REAL_PROJECT_DATA_APPROVED_FOR_INTERNAL_TEST_ONLY",
+  "approval_scope": "INTERNAL_STAGE1_TEST_ONLY_NOT_FORMAL_RELEASE",
+  "approval_record": {
+    "approved_at": "2026-08-31",
+    "approved_by": "USER_ON_BEHALF_OF_PROJECT_LEADERSHIP",
+    "source_use_approved": true,
+    "single_segment_scope_approved": true,
+    "virtual_test_roles_approved": true,
+    "formal_release_approval": false
+  },
+  "data_period": {
+    "start": "2024-10-27",
+    "end": "2026-04-25",
+    "status": "PARTIAL_FROM_STAGED_HCA_REGISTER"
+  },
+  "business_owner": "VIRTUAL_STAGE1_TEST_BUSINESS_OWNER",
+  "data_owner": "VIRTUAL_STAGE1_TEST_DATA_OWNER",
+  "qra_reviewer": "VIRTUAL_STAGE1_TEST_QRA_REVIEWER",
+  "acceptance_gates": [
+    {
+      "gate_id": "GATE-SCOPE",
+      "name_zh": "管线与权威管段签批",
+      "required": true,
+      "status": "PASSED_FOR_INTERNAL_STAGE1_TEST"
+    },
+    {
+      "gate_id": "GATE-SOURCE-CUSTODY",
+      "name_zh": "真实资料进入批准目录并完成哈希登记",
+      "required": true,
+      "status": "PASSED_FOR_INTERNAL_STAGE1_TEST"
+    },
+    {
+      "gate_id": "GATE-FIELD-NODE-COVERAGE",
+      "name_zh": "目标节点必需输入均有来源或显式缺口",
+      "required": true,
+      "status": "DEFINED"
+    },
+    {
+      "gate_id": "GATE-IMMUTABLE-SNAPSHOT",
+      "name_zh": "经证据和冲突复核后生成不可变输入快照",
+      "required": true,
+      "status": "NOT_STARTED"
+    },
+    {
+      "gate_id": "GATE-SCREENING-REPORT",
+      "name_zh": "仅生成证据条件化筛查报告并保留非正式声明",
+      "required": true,
+      "status": "NOT_STARTED"
+    }
+  ],
+  "exclusions": [
+    "FULL_SPATIAL_HUMAN_QRA",
+    "FORMAL_RISK_ACCEPTANCE_CONCLUSION",
+    "FORMAL_REGULATORY_REPORT",
+    "AQ_T_3046_COMPLETE_SOURCE_TERM_AS_PILOT_GATE",
+    "LEAK_POINT_DISCRETIZATION_AS_PILOT_GATE",
+    "FORMAL_FAILURE_FREQUENCY_AS_PILOT_GATE",
+    "GB_T_34346_COMPLETE_CHECK_AS_PILOT_GATE",
+    "EXTERNAL_OCR_OR_MODEL_PROCESSING_OF_REAL_DATA",
+    "SILENT_ZERO_OR_DEFAULT_IMPUTATION",
+    "PHOTO_DERIVED_UNAUTHORITATIVE_SEGMENTATION",
+    "SYNTHETIC_FIXTURE_AS_REAL_PROJECT_DATA"
+  ]
+}

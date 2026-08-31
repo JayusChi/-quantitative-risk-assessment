@@ -1,0 +1,20 @@
+{
+  "acceptance_id": "stage5-review-workbench",
+  "status": "REVIEW_WORKBENCH_ACCEPTED",
+  "executed_at": "2026-08-31T03:26:11.635466+00:00",
+  "cloud_model_calls": 0,
+  "tests_run": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "checks": {
+    "database_migration": true,
+    "immutable_decisions_and_snapshots": true,
+    "optimistic_locking": true,
+    "candidate_evidence_trace": true,
+    "deterministic_gate_and_hash": true,
+    "atomic_confirmation": true,
+    "calculation_and_report_trace": true,
+    "three_column_http_workbench": true
+  }
+}

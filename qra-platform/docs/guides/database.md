@@ -11,7 +11,9 @@
 
 ```mermaid
 flowchart LR
-    A[结构化 JSON] --> B[输入快照入库]
+    S[原始资料] --> R[候选与人工复核]
+    R --> B[不可变输入快照]
+    A[结构化 JSON兼容入口] --> B
     B --> C[从数据库还原内存字典]
     C --> D[调用原动态 QRA 引擎]
     D --> E[节点结果与风险矩阵入库]
@@ -60,7 +62,8 @@ http://127.0.0.1:8766/admin/
 ```
 
 管理中心支持JSON拖拽上传、上传预检、输入快照管理、后台计算任务、管段风险排序、
-完整报告、ZIP导出、数据库只读核查和操作审计。点击“打开报告”后，浏览器取得的
+资料自动转换、三栏人工复核工作台、完整报告、ZIP导出、数据库只读核查和操作审计。
+资料任务通过“打开复核工作台”完成候选确认，不要求粘贴决定JSON。点击“打开报告”后，浏览器取得的
 `report_dashboard.html` 和其中引用的SVG图表也全部来自数据库，不依赖原输出文件夹。
 
 如果服务已经在运行，需要先在原PowerShell窗口按 `Ctrl+C` 停止旧进程，再重新执行
@@ -140,6 +143,11 @@ python -m db_qra export --run-id "返回的RUN编号" --output-dir ".\exported_r
 | `input_indicator_observation` | 全局和分管段工程指标 |
 | `input_population_receptor` | 人口、高后果目标和空间受体 |
 | `input_raw_record` | 阴保、CIPS、DCVG、土壤、内检测、维修等分类原始记录 |
+| `review_session` | 人工复核状态、revision、候选集合、目标节点和确认快照 |
+| `review_decision` | 追加式接受、覆盖、驳回、不适用和重新提取决定 |
+| `review_gate_run` | 不可变门禁结果、组装哈希、节点能力和缺数清单 |
+| `reextraction_request` | 字段/来源/证据级重新提取请求状态 |
+| `input_snapshot_review_provenance` | 快照到会话、门禁、决定、合同、模型和确认人的重复来源记录 |
 | `calculation_run` | 一次计算任务、引擎版本、结果层级和摘要 |
 | `calculation_node` | 动态节点的完成、跳过、失败和缺失输入状态 |
 | `calculation_result_document` | 每个已完成计算节点的完整 JSON 结果 |
@@ -172,6 +180,13 @@ python -m db_qra export --run-id "返回的RUN编号" --output-dir ".\exported_r
 - `/admin/api/runs/{run_id}/export`：结果ZIP导出
 - `/admin/api/database`：数据库表清单和记录数
 - `/admin/api/audit`：操作审计事件
+- `/admin/reviews/{conversion_job_id}/`：三栏人工复核工作台
+- `/admin/api/conversions/{conversion_job_id}/review-sessions`：创建或恢复复核会话
+- `/admin/api/review-sessions/{session_id}/items`：复核字段组和候选
+- `/admin/api/review-sessions/{session_id}/decisions`：写入不可变复核决定
+- `/admin/api/review-sessions/{session_id}/gate`：执行最终门禁
+- `/admin/api/review-sessions/{session_id}/confirm`：原子创建快照及可选计算任务
+- `/admin/api/review-sessions/{session_id}/evidence/{evidence_id}`：任务隔离的证据与预览
 - `/runs/{run_id}/`：从数据库读取原报告网页
 - `/api/snapshots`：输入快照列表
 - `/api/runs`：计算任务列表
@@ -182,6 +197,11 @@ python -m db_qra export --run-id "返回的RUN编号" --output-dir ".\exported_r
 
 当前网页服务默认只监听 `127.0.0.1`，用于本机测试。如果后续部署到局域网或互联网，应在它前面增加
 身份认证、HTTPS、访问审计和反向代理。
+
+复核表的 `review_decision` 和 `review_gate_run` 由数据库触发器保护为追加式记录；
+`input_snapshot` 的名称、业务JSON和业务哈希在创建后禁止更新。需要调整已确认资料时创建新的复核会话和
+快照，历史计算任务继续引用旧 `snapshot_id`。完整操作、状态机和追溯说明见
+[`人工复核工作台`](review-workbench.md)。
 
 ## 原文件版仍然可用
 

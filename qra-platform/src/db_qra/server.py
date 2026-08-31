@@ -46,6 +46,8 @@ from .ocr_settings import (
     validate_bailian_settings,
 )
 from .paths import DEFAULT_RUNTIME_ROOT
+from .review_service import ReviewRevisionConflict, ReviewService
+from .review_ui import review_workbench_html
 
 MAX_UPLOAD_BYTES = 25 * 1024 * 1024
 RUNTIME_ROOT = DEFAULT_RUNTIME_ROOT
@@ -162,6 +164,9 @@ class QraRequestHandler(BaseHTTPRequestHandler):
             store = OcrSettingsStore(settings_path_for_database(self.database.path))
             type(self).ocr_settings_store = store
         return store
+
+    def _review_service(self) -> ReviewService:
+        return ReviewService(self.database)
 
     def _send(
         self,
@@ -373,6 +378,14 @@ class QraRequestHandler(BaseHTTPRequestHandler):
             if decoded_path == "/admin/":
                 self._send(200, "text/html; charset=utf-8", admin_html())
                 return
+            if len(parts) == 3 and parts[:2] == ["admin", "reviews"]:
+                self.database.get_conversion_job(parts[2], detailed=False)
+                self._send(
+                    200,
+                    "text/html; charset=utf-8",
+                    review_workbench_html(parts[2]),
+                )
+                return
             if decoded_path == "/favicon.ico":
                 self._send(204, "image/x-icon", b"")
                 return
@@ -501,6 +514,48 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 job["events"] = self.database.list_conversion_events(parts[3])
                 self._json(200, job)
                 return
+            if len(parts) >= 4 and parts[:3] == ["admin", "api", "review-sessions"]:
+                session_id = parts[3]
+                service = self._review_service()
+                if len(parts) == 4:
+                    self._json(200, service.get_session(session_id))
+                    return
+                if len(parts) == 5 and parts[4] == "items":
+                    blocking_text = str(query.get("blocking", [""])[0]).strip().lower()
+                    blocking = None
+                    if blocking_text in {"true", "1", "yes"}:
+                        blocking = True
+                    elif blocking_text in {"false", "0", "no"}:
+                        blocking = False
+                    self._json(
+                        200,
+                        service.list_items(
+                            session_id,
+                            status=str(query.get("status", [""])[0]).strip() or None,
+                            severity=str(query.get("severity", [""])[0]).strip() or None,
+                            blocking=blocking,
+                            field_group=str(query.get("field_group", [""])[0]).strip()
+                            or None,
+                            source_id=str(query.get("source_id", [""])[0]).strip() or None,
+                            node_id=str(query.get("node_id", [""])[0]).strip() or None,
+                            q=str(query.get("q", [""])[0]).strip() or None,
+                            offset=int(query.get("offset", ["0"])[0]),
+                            limit=int(query.get("limit", ["100"])[0]),
+                        ),
+                    )
+                    return
+                if len(parts) == 6 and parts[4] == "items":
+                    self._json(200, service.get_item(session_id, parts[5]))
+                    return
+                if len(parts) == 6 and parts[4] == "evidence":
+                    self._json(200, service.get_evidence(session_id, parts[5]))
+                    return
+                if len(parts) == 7 and parts[4] == "evidence" and parts[6] == "preview":
+                    content_type, content, headers = service.evidence_preview(
+                        session_id, parts[5]
+                    )
+                    self._send(200, content_type, content, headers=headers)
+                    return
             if parts == ["admin", "api", "snapshots"]:
                 self._json(200, self.database.list_snapshots())
                 return
@@ -619,6 +674,16 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 {
                     "error": "FORBIDDEN",
                     "message": _public_error_message(exc),
+                    "issues": [],
+                },
+            )
+        except ReviewRevisionConflict as exc:
+            self._json(
+                409,
+                {
+                    "error": exc.code,
+                    "message": str(exc),
+                    "session": exc.session,
                     "issues": [],
                 },
             )
@@ -770,6 +835,79 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     results.append({"index": index, **result})
                 self._json(202, {"batch_id": batch_id, "jobs": results})
                 return
+            if (
+                len(parts) == 5
+                and parts[:3] == ["admin", "api", "conversions"]
+                and parts[4] == "review-sessions"
+            ):
+                body = self._read_optional_json_body()
+                target_nodes = body.get("target_node_ids")
+                if target_nodes is not None and not isinstance(target_nodes, list):
+                    raise ValueError("target_node_ids必须是数组")
+                session, created = self._review_service().create_or_resume_session(
+                    parts[3],
+                    actor=self._actor(body),
+                    owner=str(body.get("owner") or self._actor(body)),
+                    target_node_ids=[str(value) for value in target_nodes]
+                    if target_nodes is not None
+                    else None,
+                )
+                self._json(201 if created else 200, {"created": created, "session": session})
+                return
+            if len(parts) == 5 and parts[:3] == ["admin", "api", "review-sessions"]:
+                session_id = parts[3]
+                body = self._read_optional_json_body()
+                service = self._review_service()
+                if parts[4] in {"decisions", "reextract"}:
+                    action = (
+                        "REQUEST_REEXTRACTION"
+                        if parts[4] == "reextract"
+                        else str(body.get("action") or "")
+                    )
+                    result = service.save_decision(
+                        session_id,
+                        review_item_key=str(body.get("review_item_key") or ""),
+                        action=action,
+                        selected_candidate_id=body.get("selected_candidate_id"),
+                        override_value=body.get("override_value"),
+                        override_unit=body.get("override_unit"),
+                        reason=str(body.get("reason") or ""),
+                        actor=self._actor(body),
+                        expected_revision=int(body.get("expected_revision", -1)),
+                        source_id=body.get("source_id"),
+                        evidence_id=body.get("evidence_id"),
+                    )
+                    self._json(201, result)
+                    return
+                if parts[4] == "gate":
+                    self._json(200, service.run_gate(session_id, actor=self._actor(body)))
+                    return
+                if parts[4] == "confirm":
+                    result = service.confirm(
+                        session_id,
+                        snapshot_name=str(body.get("snapshot_name") or ""),
+                        reviewer=str(body.get("reviewer") or self._actor(body)),
+                        reason=str(body.get("reason") or ""),
+                        expected_revision=int(body.get("expected_revision", -1)),
+                        expected_candidate_set_hash=str(
+                            body.get("expected_candidate_set_hash") or ""
+                        ),
+                        expected_decision_set_hash=str(
+                            body.get("expected_decision_set_hash") or ""
+                        ),
+                        run_after_confirm=bool(body.get("run_after_confirm", False)),
+                        generate_charts=bool(body.get("generate_charts", True)),
+                    )
+                    if result.get("run_id"):
+                        _start_run_thread(
+                            self.database,
+                            str(result["run_id"]),
+                            str(result["snapshot_id"]),
+                            targets=list(result.get("targets") or []),
+                            generate_charts=bool(result.get("generate_charts", True)),
+                        )
+                    self._json(201 if result.get("created") else 200, result)
+                    return
             if len(parts) == 5 and parts[:3] == ["admin", "api", "conversions"]:
                 job_id = parts[3]
                 body = self._read_optional_json_body()
@@ -804,28 +942,40 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         raise ValueError("确认人不能为空且不能超过120个字符")
                     if not reason or len(reason) > 500:
                         raise ValueError("确认原因不能为空且不能超过500个字符")
-                    job = self.database.get_conversion_job(job_id)
-                    payload = job.get("payload")
-                    if not isinstance(payload, dict):
-                        raise ValueError("转换任务没有可确认JSON")
-                    preview_case(payload)
-                    snapshot_id, created = self.database.confirm_conversion(
+                    service = self._review_service()
+                    session, _ = service.create_or_resume_session(
                         job_id,
-                        name=name,
+                        actor=reviewer,
+                    )
+                    service.run_gate(str(session["id"]), actor=reviewer)
+                    summary = service.get_session(str(session["id"]))
+                    result = service.confirm(
+                        str(session["id"]),
+                        snapshot_name=name,
                         reviewer=reviewer,
                         reason=reason,
+                        expected_revision=int(summary["revision"]),
+                        expected_candidate_set_hash=str(summary["candidate_set_hash"]),
+                        expected_decision_set_hash=str(summary["decision_set_hash"]),
+                        run_after_confirm=bool(body.get("run_after_confirm", False)),
+                        generate_charts=bool(body.get("generate_charts", True)),
                     )
+                    snapshot_id = str(result["snapshot_id"])
+                    created = bool(result["created"])
                     response: dict[str, Any] = {
                         "snapshot_id": snapshot_id,
                         "created": created,
                         "metadata": self.database.snapshot_metadata(snapshot_id),
                     }
-                    if bool(body.get("run_after_confirm", False)):
-                        metadata = response["metadata"]
-                        run_id = self.database.create_run(
-                            snapshot_id, str(metadata["payload_sha256"])
+                    if result.get("run_id"):
+                        run_id = str(result["run_id"])
+                        _start_run_thread(
+                            self.database,
+                            run_id,
+                            snapshot_id,
+                            targets=list(result.get("targets") or []),
+                            generate_charts=bool(result.get("generate_charts", True)),
                         )
-                        _start_run_thread(self.database, run_id, snapshot_id)
                         response["run"] = self.database.get_run(run_id)
                     self._json(201 if created else 200, response)
                     return
@@ -902,6 +1052,16 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 {
                     "error": "FORBIDDEN",
                     "message": _public_error_message(exc),
+                    "issues": [],
+                },
+            )
+        except ReviewRevisionConflict as exc:
+            self._json(
+                409,
+                {
+                    "error": exc.code,
+                    "message": str(exc),
+                    "session": exc.session,
                     "issues": [],
                 },
             )

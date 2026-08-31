@@ -12,7 +12,7 @@ from threading import Lock
 from typing import Any
 from uuid import uuid4
 
-SCHEMA_VERSION = "1.8.0"
+SCHEMA_VERSION = "2.0.0"
 
 ADMIN_BROWSABLE_TABLES = (
     "conversion_job",
@@ -26,6 +26,11 @@ ADMIN_BROWSABLE_TABLES = (
     "quality_issue",
     "fusion_group",
     "fusion_group_member",
+    "review_session",
+    "review_decision",
+    "review_gate_run",
+    "reextraction_request",
+    "input_snapshot_review_provenance",
     "input_snapshot_provenance",
     "input_snapshot",
     "input_segment",
@@ -378,6 +383,110 @@ class QraDatabase:
                 REFERENCES candidate_field(job_id, candidate_id) ON DELETE CASCADE
         );
 
+        CREATE TABLE IF NOT EXISTS review_session (
+            id TEXT PRIMARY KEY,
+            conversion_job_id TEXT NOT NULL REFERENCES conversion_job(id),
+            status TEXT NOT NULL,
+            revision INTEGER NOT NULL DEFAULT 1,
+            candidate_set_hash TEXT NOT NULL,
+            source_manifest_hash TEXT NOT NULL,
+            target_node_ids_json TEXT NOT NULL,
+            owner TEXT,
+            created_by TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            gate_status TEXT,
+            gate_result_hash TEXT,
+            decision_set_hash TEXT,
+            confirmed_snapshot_id TEXT REFERENCES input_snapshot(id),
+            confirmed_at TEXT,
+            superseded_by_session_id TEXT REFERENCES review_session(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS review_decision (
+            id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES review_session(id),
+            review_item_key TEXT NOT NULL,
+            entity_id TEXT,
+            field_id TEXT NOT NULL,
+            action TEXT NOT NULL,
+            selected_candidate_id TEXT,
+            override_raw_value_json TEXT,
+            override_normalized_value_json TEXT,
+            override_unit TEXT,
+            applicability_reason TEXT,
+            reason TEXT NOT NULL,
+            reviewer TEXT NOT NULL,
+            session_revision INTEGER NOT NULL,
+            candidate_set_hash TEXT NOT NULL,
+            decision_sha256 TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            supersedes_decision_id TEXT REFERENCES review_decision(id),
+            active INTEGER NOT NULL DEFAULT 1
+        );
+
+        CREATE TABLE IF NOT EXISTS review_gate_run (
+            id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES review_session(id),
+            session_revision INTEGER NOT NULL,
+            candidate_set_hash TEXT NOT NULL,
+            decision_set_hash TEXT NOT NULL,
+            status TEXT NOT NULL,
+            blocking_issue_count INTEGER NOT NULL,
+            warning_count INTEGER NOT NULL,
+            unresolved_field_count INTEGER NOT NULL,
+            accepted_field_count INTEGER NOT NULL,
+            overridden_field_count INTEGER NOT NULL,
+            rejected_field_count INTEGER NOT NULL,
+            not_applicable_count INTEGER NOT NULL,
+            runnable_node_ids_json TEXT NOT NULL,
+            blocked_node_ids_json TEXT NOT NULL,
+            missing_inputs_json TEXT NOT NULL,
+            assembled_payload_hash TEXT,
+            result_hash TEXT NOT NULL,
+            result_json TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS reextraction_request (
+            id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES review_session(id),
+            conversion_job_id TEXT NOT NULL REFERENCES conversion_job(id),
+            source_id TEXT,
+            field_id TEXT NOT NULL,
+            entity_id TEXT,
+            evidence_id TEXT,
+            requested_by TEXT NOT NULL,
+            reason TEXT NOT NULL,
+            status TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            finished_at TEXT,
+            replacement_extraction_run_id TEXT REFERENCES extraction_run(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS input_snapshot_review_provenance (
+            id TEXT PRIMARY KEY,
+            snapshot_id TEXT NOT NULL REFERENCES input_snapshot(id),
+            conversion_job_id TEXT NOT NULL REFERENCES conversion_job(id),
+            review_session_id TEXT NOT NULL REFERENCES review_session(id),
+            review_gate_run_id TEXT NOT NULL REFERENCES review_gate_run(id),
+            source_manifest_hash TEXT NOT NULL,
+            candidate_set_hash TEXT NOT NULL,
+            decision_set_hash TEXT NOT NULL,
+            mapping_version TEXT NOT NULL,
+            mapping_sha256 TEXT NOT NULL,
+            contract_version TEXT NOT NULL,
+            contract_sha256 TEXT NOT NULL,
+            extraction_model_version TEXT,
+            ocr_model_version TEXT,
+            prompt_version TEXT,
+            rule_version TEXT NOT NULL,
+            decision_summary_json TEXT NOT NULL,
+            confirmed_by TEXT NOT NULL,
+            confirmation_reason TEXT NOT NULL,
+            confirmed_at TEXT NOT NULL
+        );
+
         CREATE TABLE IF NOT EXISTS input_snapshot_provenance (
             snapshot_id TEXT PRIMARY KEY REFERENCES input_snapshot(id) ON DELETE CASCADE,
             conversion_job_id TEXT NOT NULL REFERENCES conversion_job(id),
@@ -489,6 +598,19 @@ class QraDatabase:
             ON quality_issue(job_id, severity, code, issue_id);
         CREATE INDEX IF NOT EXISTS idx_fusion_group_job
             ON fusion_group(job_id, group_type, fusion_group_id);
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_review_session_editable
+            ON review_session(conversion_job_id)
+            WHERE status IN ('OPEN', 'IN_REVIEW', 'READY_TO_CONFIRM');
+        CREATE INDEX IF NOT EXISTS idx_review_session_job
+            ON review_session(conversion_job_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_review_decision_session
+            ON review_decision(session_id, review_item_key, created_at, id);
+        CREATE INDEX IF NOT EXISTS idx_review_gate_session
+            ON review_gate_run(session_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_reextraction_session
+            ON reextraction_request(session_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_snapshot_review_provenance
+            ON input_snapshot_review_provenance(snapshot_id, confirmed_at DESC);
         CREATE INDEX IF NOT EXISTS idx_input_indicator_lookup
             ON input_indicator_observation(snapshot_id, segment_code, indicator_id);
         CREATE INDEX IF NOT EXISTS idx_input_raw_lookup
@@ -503,6 +625,30 @@ class QraDatabase:
             ON audit_event(created_at DESC, id DESC);
         CREATE INDEX IF NOT EXISTS idx_audit_entity
             ON audit_event(entity_type, entity_id, created_at DESC);
+
+        CREATE TRIGGER IF NOT EXISTS trg_input_snapshot_business_immutable
+        BEFORE UPDATE OF schema_version, payload_json, payload_sha256 ON input_snapshot
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_INPUT_SNAPSHOT');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_review_decision_immutable_update
+        BEFORE UPDATE ON review_decision
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_REVIEW_DECISION');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_review_decision_immutable_delete
+        BEFORE DELETE ON review_decision
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_REVIEW_DECISION');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_review_gate_immutable_update
+        BEFORE UPDATE ON review_gate_run
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_REVIEW_GATE_RUN');
+        END;
         """
         with self._initialize_lock:
             if self._initialized:
@@ -1582,24 +1728,18 @@ class QraDatabase:
                         "status": status,
                         "workflow_status": str(row["status"]),
                         "provider_id": safe_text(
-                            audit_value.get("provider_id")
-                            or job["extraction_provider_id"]
+                            audit_value.get("provider_id") or job["extraction_provider_id"]
                         ),
                         "model_version": safe_text(
-                            audit_value.get("model_version")
-                            or job["extraction_model_version"]
+                            audit_value.get("model_version") or job["extraction_model_version"]
                         ),
-                        "provider_request_id": safe_text(
-                            audit_value.get("provider_request_id")
-                        ),
+                        "provider_request_id": safe_text(audit_value.get("provider_request_id")),
                         "retry_count": int(audit_value.get("retry_count", 0) or 0),
                         "repair_count": int(audit_value.get("repair_count", 0) or 0),
                         "error_code": safe_text(
                             audit_value.get("error_code") or row["error_code"], 120
                         ),
-                        "finish_reason": safe_text(
-                            audit_value.get("finish_reason"), 80
-                        ),
+                        "finish_reason": safe_text(audit_value.get("finish_reason"), 80),
                         "prompt_template_version": safe_text(
                             audit_value.get("prompt_template_version"), 120
                         ),
@@ -1636,9 +1776,7 @@ class QraDatabase:
                 quality = {}
             cache_hit = bool(quality.get("cache_hit")) if isinstance(quality, dict) else False
             for index, audit_value in enumerate(raw_calls, start=1):
-                provider_id = safe_text(
-                    audit_value.get("provider_id") or job["ocr_provider_id"]
-                )
+                provider_id = safe_text(audit_value.get("provider_id") or job["ocr_provider_id"])
                 model_version = safe_text(
                     audit_value.get("model_version") or job["ocr_model_version"]
                 )
@@ -1664,9 +1802,7 @@ class QraDatabase:
                         "workflow_status": "PARSED",
                         "provider_id": provider_id,
                         "model_version": model_version,
-                        "provider_request_id": safe_text(
-                            audit_value.get("provider_request_id")
-                        ),
+                        "provider_request_id": safe_text(audit_value.get("provider_request_id")),
                         "retry_count": 0,
                         "repair_count": 0,
                         "error_code": None,
@@ -1698,9 +1834,7 @@ class QraDatabase:
             "summary": {
                 "record_count": len(items),
                 "ocr_record_count": sum(item["call_kind"] == "OCR" for item in items),
-                "extraction_record_count": sum(
-                    item["call_kind"] == "EXTRACTION" for item in items
-                ),
+                "extraction_record_count": sum(item["call_kind"] == "EXTRACTION" for item in items),
                 "failed_record_count": sum(
                     item["status"] in {"FAILED", "STRUCTURE_FAILED"} for item in items
                 ),
@@ -1740,10 +1874,9 @@ class QraDatabase:
                 (job_id, step),
             ).fetchone()
             if existing is not None:
-                if (
-                    str(existing["input_sha256"]) == str(result["input_sha256"])
-                    and str(existing["output_sha256"]) == str(result["output_sha256"])
-                ):
+                if str(existing["input_sha256"]) == str(result["input_sha256"]) and str(
+                    existing["output_sha256"]
+                ) == str(result["output_sha256"]):
                     return
                 raise ValueError("已固化步骤不能写入不同输入或输出")
             connection.execute(
@@ -1799,25 +1932,17 @@ class QraDatabase:
         result_hash = str(result.get("result_sha256") or "")
         if len(result_hash) != 64:
             raise ValueError("第四阶段结果哈希无效")
-        evidence = {
-            str(item["evidence_id"]): dict(item) for item in result.get("evidence", [])
-        }
+        evidence = {str(item["evidence_id"]): dict(item) for item in result.get("evidence", [])}
         candidates = {
             str(item["candidate_id"]): dict(item) for item in result.get("candidates", [])
         }
-        entities = {
-            str(item["entity_id"]): dict(item) for item in result.get("entities", [])
-        }
+        entities = {str(item["entity_id"]): dict(item) for item in result.get("entities", [])}
         relationships = {
-            str(item["relationship_id"]): dict(item)
-            for item in result.get("relationships", [])
+            str(item["relationship_id"]): dict(item) for item in result.get("relationships", [])
         }
-        issues = {
-            str(item["issue_id"]): dict(item) for item in result.get("issues", [])
-        }
+        issues = {str(item["issue_id"]): dict(item) for item in result.get("issues", [])}
         groups = {
-            str(item["fusion_group_id"]): dict(item)
-            for item in result.get("fusion_groups", [])
+            str(item["fusion_group_id"]): dict(item) for item in result.get("fusion_groups", [])
         }
 
         def issue_severity(item: dict[str, Any]) -> str:
@@ -2049,8 +2174,7 @@ class QraDatabase:
             "status": job.get("stage4_status") or "NOT_RUN",
             "result_sha256": job.get("stage4_result_sha256"),
             "candidate_counts": {
-                str(row["quality_status"]): int(row["count"])
-                for row in candidate_rows
+                str(row["quality_status"]): int(row["count"]) for row in candidate_rows
             },
             "issue_counts": {str(row["severity"]): int(row["count"]) for row in issue_rows},
             "entity_count": entity_count,
@@ -2092,7 +2216,7 @@ class QraDatabase:
                        extraction_method, confidence, quality_status, review_status,
                        source_unit, canonical_unit, normalized_value_json
                 FROM candidate_field
-                WHERE {' AND '.join(filters)}
+                WHERE {" AND ".join(filters)}
                 ORDER BY candidate_id LIMIT ?
                 """,
                 (*parameters, safe_limit + 1),
@@ -2167,7 +2291,7 @@ class QraDatabase:
             rows = connection.execute(
                 f"""
                 SELECT payload_json FROM quality_issue
-                WHERE {' AND '.join(filters)} ORDER BY issue_id LIMIT ?
+                WHERE {" AND ".join(filters)} ORDER BY issue_id LIMIT ?
                 """,
                 (*parameters, safe_limit + 1),
             ).fetchall()
@@ -2213,9 +2337,7 @@ class QraDatabase:
             result.append(item)
         return result
 
-    def delete_conversion_job(
-        self, job_id: str, *, actor: str = "local-admin"
-    ) -> dict[str, Any]:
+    def delete_conversion_job(self, job_id: str, *, actor: str = "local-admin") -> dict[str, Any]:
         """Permanently delete one terminal conversion/OCR record and its payloads."""
         self.initialize()
         deletable_statuses = {
@@ -2353,20 +2475,23 @@ class QraDatabase:
         self,
         source_id: str,
         *,
+        job_id: str | None = None,
         allowed_statuses: set[str] | None = None,
     ) -> dict[str, Any]:
         """Read one protected source by ID for an in-process parser, never by user path."""
         self.initialize()
         statuses = allowed_statuses or {"READY_FOR_PARSE"}
         with self.session() as connection:
+            where = "id = ? AND job_id = ?" if job_id is not None else "id = ?"
+            parameters = (source_id, job_id) if job_id is not None else (source_id,)
             row = connection.execute(
-                """
+                f"""
                 SELECT job_id, id, relative_path, original_file_name,
                        detected_media_type, byte_count, sha256, source_kind,
                        security_status, archive_name, archive_member_path, content
-                FROM conversion_source WHERE id = ?
+                FROM conversion_source WHERE {where}
                 """,
-                (source_id,),
+                parameters,
             ).fetchone()
         if row is None:
             raise KeyError(f"源文件不存在：{source_id}")
@@ -2972,6 +3097,19 @@ class QraDatabase:
                 """,
                 (snapshot_id,),
             ).fetchone()
+            review_provenance_rows = connection.execute(
+                """
+                SELECT id, conversion_job_id, review_session_id, review_gate_run_id,
+                       source_manifest_hash, candidate_set_hash, decision_set_hash,
+                       mapping_version, mapping_sha256, contract_version,
+                       contract_sha256, extraction_model_version, ocr_model_version,
+                       prompt_version, rule_version, decision_summary_json,
+                       confirmed_by, confirmation_reason, confirmed_at
+                FROM input_snapshot_review_provenance
+                WHERE snapshot_id = ? ORDER BY confirmed_at, id
+                """,
+                (snapshot_id,),
+            ).fetchall()
         result = dict(row)
         result.pop("payload_json", None)
         result["counts"] = counts
@@ -2981,6 +3119,11 @@ class QraDatabase:
             result["conversion"]["source_manifest"] = json.loads(
                 result["conversion"].pop("source_manifest_json")
             )
+        result["review_confirmations"] = []
+        for row in review_provenance_rows:
+            item = dict(row)
+            item["decision_summary"] = json.loads(item.pop("decision_summary_json"))
+            result["review_confirmations"].append(item)
         return result
 
     def list_snapshots(self) -> list[dict[str, Any]]:
