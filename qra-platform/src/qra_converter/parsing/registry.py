@@ -35,6 +35,7 @@ class ParseContext:
     low_confidence_threshold: float = 0.75
     cancel_check: Callable[[], None] | None = None
     page_progress: Callable[[int, int, str], None] | None = None
+    selected_pages: frozenset[int] | None = None
 
 
 class DocumentReader(Protocol):

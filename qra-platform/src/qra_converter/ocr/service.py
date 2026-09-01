@@ -6,8 +6,11 @@ import hashlib
 import json
 import time
 from collections.abc import Callable
+from datetime import datetime, timezone
 from pathlib import Path
+from uuid import uuid4
 
+from ..model_audit import ModelAuditCallback, sanitized_error_message
 from ..parsing.contracts import BoundingBox, canonical_json
 from .ports import (
     OcrCell,
@@ -15,6 +18,7 @@ from .ports import (
     OcrProvider,
     OcrProviderError,
     OcrRequest,
+    OcrRequestTooLarge,
     OcrResponse,
     OcrTable,
     OcrTextBlock,
@@ -28,6 +32,11 @@ def ocr_cache_key(request: OcrRequest, provider: OcrProvider) -> str:
         "model_version": provider.model_version,
         "languages": list(request.languages),
         "detect_tables": request.detect_tables,
+        "task_type": request.task_type,
+        "region_kind": request.region_kind,
+        "region_id": request.region_id,
+        "tile_id": request.tile_id,
+        "payload_policy_version": request.payload_policy_version,
     }
     return hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest()
 
@@ -42,6 +51,8 @@ class OcrService:
         backoff_seconds: float = 0.25,
         sleep: Callable[[float], None] = time.sleep,
         cancel_check: Callable[[], None] | None = None,
+        audit_callback: ModelAuditCallback | None = None,
+        job_id: str | None = None,
     ):
         self.provider = provider
         self.cache_dir = cache_dir
@@ -49,6 +60,25 @@ class OcrService:
         self.backoff_seconds = max(0.0, float(backoff_seconds))
         self._sleep = sleep
         self._cancel_check = cancel_check
+        self._audit_callback = audit_callback
+        self._job_id = job_id
+
+    @staticmethod
+    def _now() -> str:
+        return datetime.now(timezone.utc).isoformat()
+
+    def request_bytes(self, request: OcrRequest) -> bytes:
+        builder = getattr(self.provider, "build_request_bytes", None)
+        if callable(builder):
+            return bytes(builder(request))
+        return request.image_bytes
+
+    def request_byte_count(self, request: OcrRequest) -> int:
+        return len(self.request_bytes(request))
+
+    def _audit(self, value: dict[str, object]) -> None:
+        if self._audit_callback is not None:
+            self._audit_callback(value)
 
     @staticmethod
     def _validate(response: OcrResponse) -> None:
@@ -77,6 +107,8 @@ class OcrService:
             "warnings": list(response.warnings),
             "raw_response_sha256": response.raw_response_sha256,
             "provider_request_id": response.provider_request_id,
+            "finish_reason": response.finish_reason,
+            "usage": response.usage,
             "text_blocks": [
                 {
                     "text": block.text,
@@ -139,6 +171,8 @@ class OcrService:
             provider_request_id=(
                 str(value["provider_request_id"]) if value.get("provider_request_id") else None
             ),
+            finish_reason=str(value.get("finish_reason") or "stop"),
+            usage=(dict(value.get("usage") or {})),  # type: ignore[arg-type]
             text_blocks=tuple(
                 OcrTextBlock(
                     text=str(item["text"]),
@@ -188,15 +222,188 @@ class OcrService:
             except (KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
                 raise OcrContractInvalid("OCR缓存内容不符合响应合同") from exc
             self._validate(response)
+            now = self._now()
+            self._audit(
+                {
+                    "id": f"MCALL-{uuid4()}",
+                    "job_id": self._job_id,
+                    "source_id": request.source_id,
+                    "call_kind": "OCR",
+                    "task_type": request.task_type,
+                    "logical_request_id": request.request_id,
+                    "parent_call_id": request.parent_call_id,
+                    "page_number": request.page_number,
+                    "region_id": request.region_id,
+                    "tile_id": request.tile_id,
+                    "attempt_number": 0,
+                    "provider_id": self.provider.provider_id,
+                    "model_version": self.provider.model_version,
+                    "status": "CACHED",
+                    "started_at": now,
+                    "finished_at": now,
+                    "elapsed_ms": 0,
+                    "input_sha256": key,
+                    "input_byte_count": 0,
+                    "media_sha256": request.media_sha256
+                    or hashlib.sha256(request.image_bytes).hexdigest(),
+                    "media_content_type": request.image_content_type,
+                    "width": request.width,
+                    "height": request.height,
+                    "payload_policy_version": request.payload_policy_version,
+                    "raw_response_sha256": response.raw_response_sha256,
+                    "retryable": False,
+                    "provider_request_id": response.provider_request_id,
+                    "usage": response.usage,
+                    "cache_hit": True,
+                }
+            )
             return response, True
         for attempt in range(self.max_retries + 1):
             if self._cancel_check is not None:
                 self._cancel_check()
+            outbound = b""
             try:
+                started_iso = self._now()
+                started = time.perf_counter()
+                call_id = f"MCALL-{uuid4()}"
+                try:
+                    outbound = self.request_bytes(request)
+                except OcrProviderError as exc:
+                    self._audit(
+                        {
+                            "id": call_id,
+                            "job_id": self._job_id,
+                            "source_id": request.source_id,
+                            "call_kind": "OCR",
+                            "task_type": request.task_type,
+                            "logical_request_id": request.request_id,
+                            "parent_call_id": request.parent_call_id,
+                            "page_number": request.page_number,
+                            "region_id": request.region_id,
+                            "tile_id": request.tile_id,
+                            "attempt_number": attempt + 1,
+                            "provider_id": self.provider.provider_id,
+                            "model_version": self.provider.model_version,
+                            "status": "SKIPPED",
+                            "started_at": started_iso,
+                            "finished_at": self._now(),
+                            "elapsed_ms": 0,
+                            "input_sha256": hashlib.sha256(request.image_bytes).hexdigest(),
+                            "input_byte_count": 0,
+                            "media_sha256": request.media_sha256
+                            or hashlib.sha256(request.image_bytes).hexdigest(),
+                            "media_content_type": request.image_content_type,
+                            "width": request.width,
+                            "height": request.height,
+                            "payload_policy_version": request.payload_policy_version,
+                            "retryable": exc.retryable,
+                            "error_code": exc.code,
+                            "sanitized_error_message": sanitized_error_message(exc),
+                        }
+                    )
+                    raise
+                self._audit(
+                    {
+                        "id": call_id,
+                        "job_id": self._job_id,
+                        "source_id": request.source_id,
+                        "call_kind": "OCR",
+                        "task_type": request.task_type,
+                        "logical_request_id": request.request_id,
+                        "parent_call_id": request.parent_call_id,
+                        "page_number": request.page_number,
+                        "region_id": request.region_id,
+                        "tile_id": request.tile_id,
+                        "attempt_number": attempt + 1,
+                        "provider_id": self.provider.provider_id,
+                        "model_version": self.provider.model_version,
+                        "status": "STARTED",
+                        "started_at": started_iso,
+                        "input_sha256": hashlib.sha256(outbound).hexdigest(),
+                        "input_byte_count": len(outbound),
+                        "media_sha256": request.media_sha256
+                        or hashlib.sha256(request.image_bytes).hexdigest(),
+                        "media_content_type": request.image_content_type,
+                        "width": request.width,
+                        "height": request.height,
+                        "payload_policy_version": request.payload_policy_version,
+                        "retryable": False,
+                    }
+                )
                 response = self.provider.recognize(request)
                 self._validate(response)
+                self._audit(
+                    {
+                        "id": call_id,
+                        "job_id": self._job_id,
+                        "source_id": request.source_id,
+                        "call_kind": "OCR",
+                        "task_type": request.task_type,
+                        "logical_request_id": request.request_id,
+                        "parent_call_id": request.parent_call_id,
+                        "page_number": request.page_number,
+                        "region_id": request.region_id,
+                        "tile_id": request.tile_id,
+                        "attempt_number": attempt + 1,
+                        "provider_id": response.provider_id,
+                        "model_version": response.model_version,
+                        "status": "COMPLETED",
+                        "started_at": started_iso,
+                        "finished_at": self._now(),
+                        "elapsed_ms": round((time.perf_counter() - started) * 1000),
+                        "input_sha256": hashlib.sha256(outbound).hexdigest(),
+                        "input_byte_count": len(outbound),
+                        "media_sha256": request.media_sha256
+                        or hashlib.sha256(request.image_bytes).hexdigest(),
+                        "media_content_type": request.image_content_type,
+                        "width": request.width,
+                        "height": request.height,
+                        "payload_policy_version": request.payload_policy_version,
+                        "provider_request_id": response.provider_request_id,
+                        "raw_response_sha256": response.raw_response_sha256,
+                        "retryable": False,
+                        "usage": response.usage,
+                    }
+                )
                 break
             except OcrProviderError as exc:
+                if outbound:
+                    self._audit(
+                        {
+                            "id": call_id,
+                            "job_id": self._job_id,
+                            "source_id": request.source_id,
+                            "call_kind": "OCR",
+                            "task_type": request.task_type,
+                            "logical_request_id": request.request_id,
+                            "parent_call_id": request.parent_call_id,
+                            "page_number": request.page_number,
+                            "region_id": request.region_id,
+                            "tile_id": request.tile_id,
+                            "attempt_number": attempt + 1,
+                            "provider_id": self.provider.provider_id,
+                            "model_version": self.provider.model_version,
+                            "status": (
+                                "SKIPPED"
+                                if isinstance(exc, OcrRequestTooLarge)
+                                else "FAILED"
+                            ),
+                            "started_at": started_iso,
+                            "finished_at": self._now(),
+                            "elapsed_ms": round((time.perf_counter() - started) * 1000),
+                            "input_sha256": hashlib.sha256(outbound).hexdigest(),
+                            "input_byte_count": len(outbound),
+                            "media_sha256": request.media_sha256
+                            or hashlib.sha256(request.image_bytes).hexdigest(),
+                            "media_content_type": request.image_content_type,
+                            "width": request.width,
+                            "height": request.height,
+                            "payload_policy_version": request.payload_policy_version,
+                            "retryable": exc.retryable,
+                            "error_code": exc.code,
+                            "sanitized_error_message": sanitized_error_message(exc),
+                        }
+                    )
                 if not exc.retryable or attempt >= self.max_retries:
                     raise
                 self._sleep(self.backoff_seconds * (2**attempt))

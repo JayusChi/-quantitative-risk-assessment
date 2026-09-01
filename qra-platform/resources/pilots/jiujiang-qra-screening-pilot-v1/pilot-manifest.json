@@ -1,6 +1,6 @@
 {
   "pilot_id": "jiujiang-qra-screening-pilot-v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "project_name": "九江天然气支线资料理解与QRA筛查试点",
   "asset_type": "ONSHORE_BURIED_NATURAL_GAS_TRANSMISSION_PIPELINE",
   "pipeline_ids": [
@@ -26,7 +26,7 @@
   },
   "source_inventory_version": "1.0.0",
   "mapping_profile_id": "jiangxi-natural-gas.jiujiang.v1",
-  "mapping_profile_version": "1.0.0",
+  "mapping_profile_version": "1.0.1",
   "contract_id": "qra.part1-input",
   "contract_version": "1.0.0",
   "target_report_tier": "EVIDENCE_CONDITIONED_SCREENING_ESTIMATE",

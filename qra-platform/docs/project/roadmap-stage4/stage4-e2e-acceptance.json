@@ -1,0 +1,262 @@
+{
+  "acceptance_mode": "pilot",
+  "authorization_scope": "APPROVED_INTERNAL_PILOT_NO_EXTERNAL_SHARING",
+  "browser_acceptance_status": "PASS",
+  "browser_evidence": {
+    "checks": [
+      {
+        "code": "BROWSER.CONVERSION_COMPLETE",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.XLS_EVIDENCE_LOCATOR",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.PDF_PREVIEW",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.EXPLICIT_REVIEW_DECISIONS",
+        "count": 5,
+        "status": "PASS"
+      },
+      {
+        "blockers": 0,
+        "code": "BROWSER.GATE",
+        "status": "PASS",
+        "warnings": 0
+      },
+      {
+        "code": "BROWSER.RUN_AFTER_CONFIRM",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.REPORT_BOUNDARY",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.MISSING_VALUES_NOT_ZERO",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.NARROW_LAYOUT",
+        "status": "PASS",
+        "viewport_width": 720
+      },
+      {
+        "code": "BROWSER.KEYBOARD_FOCUS",
+        "status": "PASS"
+      },
+      {
+        "code": "BROWSER.CONSOLE",
+        "errors": 0,
+        "status": "PASS",
+        "warnings": 0
+      }
+    ],
+    "screenshot_hashes": [
+      "ef8c97ec03b52697e1d155912cf231d986bd0628c3bfb3734597d340c65e6505",
+      "ec323222acbf0893f906a20c1a7b0a63ba41de7561237eccabb7107d3f0ef385",
+      "a37fdf3823dcd0da98ea07c67613a2985dd2613b3bfc9c96eb285ee944b9a110",
+      "c1460620850f38b7cd01afcd9ec7cd304d3cde518eb1dce3e1a33b7d204340e8"
+    ],
+    "status": "PASS"
+  },
+  "calculation_run_id": "RUN-20260831T082059Z-4297033e",
+  "calculation_status": "COMPLETED",
+  "candidate_evidence_link_count": 5,
+  "candidate_field_count": 5,
+  "candidate_set_hash": "12a8920346eb0f39088e946697c8f336bb417d7d3152f281fb24b5fca6afd084",
+  "checks": [],
+  "completed_target_nodes": [
+    "data_inventory",
+    "indicator_coverage",
+    "segment_geometry",
+    "adaptive_evidence_qra",
+    "risk_matrix"
+  ],
+  "conversion_job_id": "CONV-20260831T074458Z-fd2d0320",
+  "conversion_status": "CONFIRMED",
+  "decision_set_hash": "e2f01c1fc939670cf76d33137d20bf3ab47f5c4e9fc3e1cae98fb878b9ae1250",
+  "determinism_repeat_run_id": "RUN-20260831T082837Z-10c0ddc0",
+  "determinism_status": "PASS",
+  "executed_at": "2026-08-31T08:28:37.602291+00:00",
+  "extracted_entity_count": 1,
+  "failed_nodes": [],
+  "final_status": "M1_INTERNAL_PILOT_PASS",
+  "gate_run_id": "RGATE-637fe18a-0ef5-48c4-813a-558f820404a8",
+  "gate_status": "PASS",
+  "input_snapshot_provenance_count": 1,
+  "input_snapshot_review_provenance_count": 1,
+  "milestone": "Roadmap Stage 4 / M1：原始资料到筛查报告闭环",
+  "model_calls": {
+    "audit_failure_count": 0,
+    "audit_record_count": 0,
+    "by_status": {},
+    "external_call_count": 0,
+    "failure_count": 0,
+    "prevented_before_dispatch_count": 0
+  },
+  "parse_artifact_count": 303,
+  "payload_sha256": "fa52f9c1a5813ae5fdc91d6d598f7954664295c3c85f6cc315a65bb662715624",
+  "pilot_id": "jiujiang-qra-screening-pilot-v1",
+  "quality_issue_counts": {
+    "WARNING": 6
+  },
+  "remaining_business_approvals": [
+    "FORMAL_BUSINESS_SIGNOFF",
+    "COMPLETE_11_OF_11_QRA_DATA_AND_EXPERT_APPROVAL"
+  ],
+  "report_artifacts": [
+    {
+      "byte_count": 9127,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "capability_report.json",
+      "sha256": "cff5e9aa980a50f5c92b18cdba6193b60a309dbd6ac35c0100d292dc71add557"
+    },
+    {
+      "byte_count": 4222,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/01_指标组覆盖率.svg",
+      "sha256": "fd4ef39e838215cc69d20551ac2781f61ae10430c2fe17f8155f110fcb271745"
+    },
+    {
+      "byte_count": 759,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/02_管段长度.svg",
+      "sha256": "9f2d94d87fa3432c16a84141ed8fe20da5450020502ad755a47d759cd8b29953"
+    },
+    {
+      "byte_count": 816,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/08_证据定量风险排序.svg",
+      "sha256": "3d0a22de7ea49ba8ad563ff4a56665a2b5f9f2b3db63ae995defe307508b74a7"
+    },
+    {
+      "byte_count": 803,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/09_风险不确定性上界.svg",
+      "sha256": "d31e1e815073c8c35f5818de21c46a90ef802bcba950c5eb95498dc2008f5f13"
+    },
+    {
+      "byte_count": 812,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/10_证据更新因子.svg",
+      "sha256": "5462eab8ab4f33d2345da686bee3dc56f33d6b369c0ac232efa0eaabfb57bd84"
+    },
+    {
+      "byte_count": 953,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/adaptive_evidence_qra/02_管段PLL排序.svg",
+      "sha256": "5e49ad079b3b8add74b2e59196ef1558636311c43e690b70c4f1546422c26252"
+    },
+    {
+      "byte_count": 6223,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/adaptive_evidence_qra/03_风险矩阵.svg",
+      "sha256": "81f584ac3910c054050e966ecf956aa8b0df19dc68d9843cef11aa8ccefd4ead"
+    },
+    {
+      "byte_count": 2645,
+      "integrity_status": "PASS",
+      "kind": "SVG",
+      "path": "charts/adaptive_evidence_qra/04_沿线风险剖面.svg",
+      "sha256": "efecf092c325a15a883fa64fb1bc56f37c5e9b8d57dbfe7fb4307b07009a6548"
+    },
+    {
+      "byte_count": 546,
+      "integrity_status": "PASS",
+      "kind": "CSV",
+      "path": "derived/risk_matrix.csv",
+      "sha256": "f616884916409bc7ad31a0fc05e76136407ec81496501848e77d3d00e3b6b6db"
+    },
+    {
+      "byte_count": 6940,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "derived/risk_matrix.json",
+      "sha256": "57e434b90f87adc88d15facb64095bfb278f637fbd12fe659c0c4193530c3e5c"
+    },
+    {
+      "byte_count": 7026,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "dynamic_manifest.json",
+      "sha256": "aa0af51889a3bab7ecb6c633d16ed0916099af76686ec855dc4317e785db1e99"
+    },
+    {
+      "byte_count": 2663,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "execution_plan.json",
+      "sha256": "2f60177658059ac723622ec65f3a8213f79b4b684442d2afdbf472b87a21c378"
+    },
+    {
+      "byte_count": 9072,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "nodes/adaptive_evidence_qra.json",
+      "sha256": "dab274bfac76c58a6a41b95b5d142e92dd9cf0399cc012dc46b81cb1c052809f"
+    },
+    {
+      "byte_count": 6373,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "nodes/data_inventory.json",
+      "sha256": "e1f876cda56398a91030fea3931c370a46e0f03deb3183607aaa199ca871f1dc"
+    },
+    {
+      "byte_count": 6917,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "nodes/indicator_coverage.json",
+      "sha256": "6e77d6cdb9a24f53874512ceb525b323e3b19a6c6f850892e8501cb96f5fe1cc"
+    },
+    {
+      "byte_count": 6940,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "nodes/risk_matrix.json",
+      "sha256": "57e434b90f87adc88d15facb64095bfb278f637fbd12fe659c0c4193530c3e5c"
+    },
+    {
+      "byte_count": 215,
+      "integrity_status": "PASS",
+      "kind": "JSON",
+      "path": "nodes/segment_geometry.json",
+      "sha256": "079a61f3aad053113efc8357372ca6ffff3eb1908b3b8dab6d50abb3733e5e5e"
+    },
+    {
+      "byte_count": 21802,
+      "integrity_status": "PASS",
+      "kind": "HTML",
+      "path": "report_dashboard.html",
+      "sha256": "d5f86b26def7ee79a7b1cb85cfc3408ec3152f18e03ffea4a6ac0b34e32a04cc"
+    }
+  ],
+  "reverse_trace_status": "PASS",
+  "review_decision_count": 5,
+  "review_session_id": "RSESS-2acf8d67-0025-4e33-8ed3-1ff294e02ddb",
+  "review_status": "CONFIRMED",
+  "schema_version": "qra.roadmap-stage4-acceptance/1.0.0",
+  "segment_result_count": 1,
+  "skipped_nodes_with_reasons": [],
+  "snapshot_id": "SNAP-76dfc18b-9350-45e2-811e-08b8941a5033",
+  "software_versions": {
+    "converter": "0.6.0",
+    "database_schema": "2.1.0",
+    "engine": "0.6.1"
+  },
+  "source_chain_status": "PASS",
+  "source_count": 6,
+  "source_manifest_sha256": "8fafffe9801e850d766c1c20928885d46cba79d686f4cf0fca68e68f876ec812"
+}

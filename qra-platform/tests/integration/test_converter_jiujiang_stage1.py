@@ -66,7 +66,11 @@ class JiujiangStage1ConversionTests(unittest.TestCase):
         self.assertEqual(case["segments"][0]["end_km"], 10.938)
         self.assertEqual(case["segments"][0]["length_km"], 10.938)
         self.assertEqual(case["segments"][0]["outside_diameter_mm"], 273.0)
-        self.assertEqual(case["pipeline"]["operating_pressure_source_range_mpa"], "3.0-3.8")
+        self.assertNotIn("operating_pressure_source_range_mpa", case["pipeline"])
+        operating_records = case["raw_data_categories"]["operating_condition_register"][
+            "records"
+        ]
+        self.assertEqual(operating_records[0]["operating_pressure_range_mpa"], "3.0-3.8")
         self.assertNotIn("operating_pressure_mpa", case["pipeline"])
         self.assertNotIn("population_cells", case)
         self.assertEqual(case["data_category_manifest"]["category_count"], 6)

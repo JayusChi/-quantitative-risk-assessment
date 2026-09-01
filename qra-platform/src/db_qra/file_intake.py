@@ -284,21 +284,35 @@ def _decode_csv(content: bytes) -> str:
 def _validate_csv(content: bytes) -> None:
     text = _decode_csv(content)
     lines = [line for line in text.splitlines() if line.strip()]
-    sample = "\n".join(lines[:50])[:65536]
-    try:
-        dialect = csv.Sniffer().sniff(sample, delimiters=",\t;|")
-    except csv.Error:
+    sample_lines = lines[:50]
+    sample = "\n".join(sample_lines)[:65536]
+    delimiter = max(
+        ",\t;|",
+        key=lambda value: sum(line.count(value) for line in sample_lines),
+    )
+    if sum(line.count(delimiter) for line in sample_lines) == 0:
         if len(lines) > 1:
-            raise _DetectionError("INTAKE.INVALID_CSV", "CSV分隔符无法识别") from None
+            raise _DetectionError("INTAKE.INVALID_CSV", "CSV分隔符无法识别")
         dialect = csv.excel
+        reader_options: dict[str, Any] = {"dialect": dialect}
+    else:
+        try:
+            dialect = csv.Sniffer().sniff(sample, delimiters=delimiter)
+            reader_options = {"dialect": dialect}
+        except csv.Error:
+            reader_options = {"delimiter": delimiter}
     try:
-        rows = list(csv.reader(io.StringIO(text), dialect=dialect, strict=True))
+        rows = list(csv.reader(io.StringIO(text), strict=True, **reader_options))
     except csv.Error as exc:
         raise _DetectionError("INTAKE.INVALID_CSV", "CSV行列结构无法解析") from exc
     widths = [len(row) for row in rows if any(cell.strip() for cell in row)]
     if not widths:
         raise _DetectionError("INTAKE.EMPTY_FILE", "CSV没有有效记录")
-    if len(widths) > 1 and (min(widths) < 1 or max(widths) != min(widths)):
+    tabular_widths = [width for width in widths if width >= 2]
+    modal_width = max(set(tabular_widths), key=tabular_widths.count) if tabular_widths else 0
+    if not modal_width or tabular_widths.count(modal_width) < 2:
+        raise _DetectionError("INTAKE.INVALID_CSV", "CSV各行字段数量不一致")
+    if any(width not in {1, modal_width} for width in widths):
         raise _DetectionError("INTAKE.INVALID_CSV", "CSV各行字段数量不一致")
 
 

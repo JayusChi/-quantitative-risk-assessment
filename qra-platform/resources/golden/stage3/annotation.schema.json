@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qra.golden.roadmap-stage3.annotation/1.0.0",
+  "title": "Roadmap Stage 3 business annotation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["document_id", "annotation_status", "fields"],
+  "properties": {
+    "document_id": {"type": "string", "pattern": "^[A-Z0-9_.-]{3,100}$"},
+    "annotation_status": {"type": "string", "enum": ["DRAFT", "APPROVED"]},
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field_id", "entity_key", "state", "evidence", "conflict_expected", "do_not_infer"],
+        "properties": {
+          "field_id": {"type": "string", "minLength": 1},
+          "entity_key": {"type": "string", "minLength": 1},
+          "state": {"type": "string", "enum": ["VALUE", "BLANK", "UNKNOWN", "NOT_APPLICABLE"]},
+          "raw_value": {},
+          "normalized_value": {},
+          "unit": {"type": ["string", "null"]},
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["page_number"],
+              "properties": {
+                "page_number": {"type": "integer", "minimum": 1},
+                "cell": {"type": ["string", "null"]},
+                "bbox": {
+                  "type": ["array", "null"],
+                  "prefixItems": [
+                    {"type": "number"}, {"type": "number"},
+                    {"type": "number", "minimum": 0}, {"type": "number", "minimum": 0}
+                  ],
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              }
+            }
+          },
+          "conflict_expected": {"type": "boolean"},
+          "do_not_infer": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "enum": ["coordinate_system", "unit", "date"]}
+          }
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"state": {"const": "VALUE"}}},
+            "then": {"required": ["raw_value"]}
+          }
+        ]
+      }
+    }
+  }
+}

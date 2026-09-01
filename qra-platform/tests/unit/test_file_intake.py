@@ -78,6 +78,18 @@ class FileIntakeTest(unittest.TestCase):
                 self.assertEqual(result.sources[0]["security_status"], "QUARANTINED")
                 self.assertEqual(result.issues[0].code, "INTAKE.INVALID_CSV")
 
+    def test_csv_with_title_and_grouped_header_rows_is_accepted(self) -> None:
+        content = (
+            "高后果区管理表\n"
+            "基础信息,,,管道信息,,\n"
+            "序号,管道名称,起点,终点,长度(m),管径(mm)\n"
+            "1,脱敏试点支线,0+000,10+938,10938,273\n"
+        ).encode()
+        batch = intake_files([{"file_name": "试点台账.csv", "content": content}])
+        self.assertEqual(batch.ready_count, 1)
+        self.assertEqual(batch.quarantined_count, 0)
+        self.assertEqual(batch.sources[0]["security_status"], "READY_FOR_PARSE")
+
     def test_decodable_jpeg_small_trailing_metadata_is_accepted_silently(self) -> None:
         content = image_bytes("JPEG") + b"wechat-trailing-metadata"
         batch = intake_files(

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Protocol, runtime_checkable
+from typing import Any, Protocol, runtime_checkable
 
 from ..parsing.contracts import BoundingBox
 
@@ -46,6 +46,16 @@ class OcrRequest:
     detect_tables: bool
     request_id: str
     timeout_seconds: float
+    image_content_type: str = "image/png"
+    source_id: str | None = None
+    page_number: int | None = None
+    region_id: str | None = None
+    tile_id: str | None = None
+    region_kind: str = "PAGE"
+    task_type: str = "advanced_recognition"
+    media_sha256: str | None = None
+    payload_policy_version: str | None = None
+    parent_call_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -57,6 +67,8 @@ class OcrResponse:
     warnings: tuple[str, ...] = field(default_factory=tuple)
     raw_response_sha256: str = ""
     provider_request_id: str | None = None
+    finish_reason: str = "stop"
+    usage: dict[str, Any] = field(default_factory=dict)
 
 
 class OcrProviderError(RuntimeError):
@@ -95,6 +107,20 @@ class OcrContractInvalid(OcrProviderError):
     code = "PARSE.OCR_OUTPUT_INVALID"
 
 
+class OcrRequestTooLarge(OcrProviderError):
+    code = "PARSE.OCR_REQUEST_TOO_LARGE"
+
+
+class OcrOutputTruncated(OcrProviderError):
+    """Retains a partial response while asking the caller to split the region."""
+
+    code = "PARSE.OCR_OUTPUT_TRUNCATED"
+
+    def __init__(self, message: str, response: OcrResponse | None = None):
+        super().__init__(message)
+        self.response = response
+
+
 @runtime_checkable
 class OcrProvider(Protocol):
     provider_id: str
@@ -113,9 +139,11 @@ __all__ = [
     "OcrProviderNotConfigured",
     "OcrRateLimited",
     "OcrRequest",
+    "OcrRequestTooLarge",
     "OcrResponse",
     "OcrTable",
     "OcrTextBlock",
     "OcrTimeout",
     "OcrUnreadable",
+    "OcrOutputTruncated",
 ]

@@ -134,7 +134,7 @@ class FileIntakePhase2IntegrationTest(unittest.TestCase):
                 project_name="入口登记一",
             )
             first = database.get_conversion_job(first_id)
-            self.assertEqual(SCHEMA_VERSION, "2.0.0")
+            self.assertEqual(SCHEMA_VERSION, "2.1.0")
             self.assertEqual(first["failure_policy"], "ALL_OR_NOTHING")
             self.assertEqual(first["contract_id"], "qra.part1-input")
             self.assertEqual(first["contract_version"], "1.0.0")

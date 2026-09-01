@@ -1,6 +1,6 @@
 {
   "profile_id": "jiangxi-natural-gas.jiujiang.v1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "schema_version": "1.0.0",
   "contract_id": "qra.part1-input",
   "contract_version": "1.0.0",
@@ -86,18 +86,10 @@
       ],
       "fields": [
         {"target": "pipeline_id", "aliases": ["高后果区编号"], "type": "string", "required": true},
-        {"target": "pipeline_name", "aliases": ["管道名称"], "type": "string"},
-        {"target": "operator_area", "aliases": ["作业区"], "type": "string"},
         {"target": "service", "aliases": ["输送介质"], "type": "enum", "enum_map": {"天然气": "natural_gas_transmission"}},
-        {"target": "city", "aliases": ["市"], "type": "string"},
-        {"target": "county", "aliases": ["县（区）"], "type": "string"},
         {"target": "total_length_km", "aliases": ["高后果区长度(m)"], "type": "number", "source_unit": "m", "target_unit": "km", "minimum": 0},
         {"target": "design_pressure_mpa", "aliases": ["设计压力"], "type": "number", "source_unit": "MPa", "target_unit": "MPa", "minimum": 0},
-        {"target": "operating_pressure_source_range_mpa", "aliases": ["运行压力"], "type": "string"},
-        {"target": "outside_diameter_mm", "aliases": ["管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "source_unit_aliases": ["mm", "毫米"], "strip_source_unit_suffix": true, "minimum": 0},
-        {"target": "steel_grade", "aliases": ["管材"], "type": "string"},
-        {"target": "hca_start_marker", "aliases": ["高后果区起点"], "type": "string"},
-        {"target": "hca_end_marker", "aliases": ["高后果区终点"], "type": "string"}
+        {"target": "outside_diameter_mm", "aliases": ["管径"], "type": "number", "source_unit": "mm", "target_unit": "mm", "source_unit_aliases": ["mm", "毫米"], "strip_source_unit_suffix": true, "minimum": 0}
       ]
     },
     {

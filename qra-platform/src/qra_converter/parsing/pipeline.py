@@ -11,10 +11,13 @@ from dataclasses import replace
 from pathlib import Path, PurePosixPath
 
 from ..contracts import IssueSeverity, SourceReference
+from ..image_processing.ocr_planner import IMAGE_DERIVATION_VERSION
 from ..image_processing.preprocess import PREPROCESSING_VERSION
+from ..model_audit import ModelAuditCallback
 from ..ocr.aliyun_bailian import AliyunBailianOcrProvider
 from ..ocr.disabled import DisabledOcrProvider
 from ..ocr.http_provider import JsonHttpOcrProvider
+from ..ocr.payload_policy import OcrPayloadPolicy
 from ..ocr.ports import OcrProvider
 from ..ocr.service import OcrService
 from .cache import ParsingCache, parsing_cache_key
@@ -95,6 +98,8 @@ class ParsingPipeline:
         ocr_provider: OcrProvider | None = None,
         cancel_check=None,
         page_progress=None,
+        audit_callback: ModelAuditCallback | None = None,
+        job_id: str | None = None,
     ):
         self.output_root = output_root
         self.cache = ParsingCache(cache_root) if cache_root else None
@@ -102,6 +107,8 @@ class ParsingPipeline:
         self.ocr_provider = ocr_provider or configured_ocr_provider()
         self.cancel_check = cancel_check
         self.page_progress = page_progress
+        self.audit_callback = audit_callback
+        self.job_id = job_id
 
     @staticmethod
     def _source_directory_name(source_id: str) -> str:
@@ -169,6 +176,8 @@ class ParsingPipeline:
             "ocr_provider_id": self.ocr_provider.provider_id,
             "ocr_model_version": self.ocr_provider.model_version,
             "preprocessing_profile": PREPROCESSING_VERSION,
+            "image_derivation_version": IMAGE_DERIVATION_VERSION,
+            "payload_policy": ocr_parameters["payload_policy"],
             "contract_version": PARSING_CONTRACT_VERSION,
             "ocr_parameters": ocr_parameters,
             "cache_key": cache_key,
@@ -185,6 +194,7 @@ class ParsingPipeline:
         *,
         detected_media_type: str | None = None,
         source: SourceReference | None = None,
+        selected_pages: frozenset[int] | None = None,
     ) -> ParseExecution:
         if self.cancel_check:
             self.cancel_check()
@@ -199,10 +209,16 @@ class ParsingPipeline:
             ocr_timeout_seconds = 120.0
         if ocr_timeout_seconds <= 0:
             ocr_timeout_seconds = 120.0
+        provider_policy = getattr(self.ocr_provider, "payload_policy", None)
+        if not isinstance(provider_policy, OcrPayloadPolicy):
+            provider_policy = OcrPayloadPolicy.from_environment()
         ocr_parameters: dict[str, object] = {
             "languages": ["zh-Hans", "en"],
             "detect_tables": True,
             "timeout_seconds": ocr_timeout_seconds,
+            "payload_policy": provider_policy.to_metadata(),
+            "image_derivation_version": IMAGE_DERIVATION_VERSION,
+            "selected_pages": sorted(selected_pages) if selected_pages else None,
         }
         cache_key = parsing_cache_key(
             source_sha256=effective_source.checksum_sha256,
@@ -259,6 +275,8 @@ class ParsingPipeline:
             cache_dir=ocr_cache_dir,
             max_retries=max_retries,
             cancel_check=self.cancel_check,
+            audit_callback=self.audit_callback,
+            job_id=self.job_id,
         )
         context = ParseContext(
             source=effective_source,
@@ -267,6 +285,7 @@ class ParsingPipeline:
             ocr_timeout_seconds=ocr_timeout_seconds,
             cancel_check=self.cancel_check,
             page_progress=self.page_progress,
+            selected_pages=selected_pages,
         )
         try:
             output = reader.parse(path, context)

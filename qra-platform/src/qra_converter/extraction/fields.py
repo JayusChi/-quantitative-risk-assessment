@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
@@ -39,18 +39,69 @@ def chunk_document_blocks(
     *,
     max_characters: int = 60_000,
     overlap_blocks: int = 1,
+    max_request_bytes: int | None = None,
+    request_size: Callable[[tuple[dict[str, Any], ...]], int] | None = None,
 ) -> tuple[tuple[dict[str, Any], ...], ...]:
     if max_characters < 1 or overlap_blocks < 0:
         raise ValueError("分块参数无效")
+    if (max_request_bytes is None) != (request_size is None):
+        raise ValueError("字节预算与请求计量函数必须同时提供")
+
+    def split_text_block(block: dict[str, Any]) -> list[dict[str, Any]]:
+        text = str(block.get("text") or "")
+        if len(text) <= max_characters:
+            return [block]
+        result = []
+        start = 0
+        parent_id = str(block.get("parent_evidence_id") or block.get("evidence_id") or "")
+        while start < len(text):
+            hard_end = min(len(text), start + max_characters)
+            end = hard_end
+            if hard_end < len(text):
+                search_start = start + max(1, max_characters // 2)
+                candidates = [
+                    text.rfind("\n\n", search_start, hard_end),
+                    text.rfind("\n", search_start, hard_end),
+                    text.rfind("。", search_start, hard_end),
+                    text.rfind("；", search_start, hard_end),
+                ]
+                boundary = max(candidates)
+                if boundary >= search_start:
+                    end = boundary + (2 if text[boundary : boundary + 2] == "\n\n" else 1)
+            child = dict(block)
+            child["parent_evidence_id"] = parent_id
+            child["character_start"] = start
+            child["character_end"] = end
+            child["evidence_id"] = _stable_id("EVD-SUB", [parent_id, start, end])
+            child["text"] = text[start:end]
+            result.append(child)
+            start = end
+        return result
+
+    expanded = [child for block in blocks for child in split_text_block(block)]
     batches: list[tuple[dict[str, Any], ...]] = []
     current: list[dict[str, Any]] = []
     characters = 0
-    for block in blocks:
+    for block in expanded:
         size = len(str(block.get("text") or ""))
-        if current and characters + size > max_characters:
+        proposed = tuple((*current, block))
+        byte_over = bool(
+            max_request_bytes is not None
+            and request_size is not None
+            and request_size(proposed) > max_request_bytes
+        )
+        if current and (characters + size > max_characters or byte_over):
             batches.append(tuple(current))
             current = current[-overlap_blocks:] if overlap_blocks else []
             characters = sum(len(str(item.get("text") or "")) for item in current)
+            if (
+                max_request_bytes is not None
+                and request_size is not None
+                and current
+                and request_size(tuple((*current, block))) > max_request_bytes
+            ):
+                current = []
+                characters = 0
         current.append(block)
         characters += size
     if current:

@@ -1055,6 +1055,9 @@ class ReviewWorkbenchIntegrationTests(unittest.TestCase):
         self.assertIn('id="fieldGroupFilter"', review)
         self.assertIn('id="sourceFilter"', review)
         self.assertIn('id="nodeFilter"', review)
+        self.assertIn('id="runAfter" checked', review)
+        self.assertIn('id="generateCharts" checked', review)
+        self.assertIn("打开本次筛查报告", review)
         self.assertIn("context-table", review)
 
 

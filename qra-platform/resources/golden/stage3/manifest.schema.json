@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qra.golden.roadmap-stage3.manifest-entry/1.0.0",
+  "title": "Roadmap Stage 3 golden document manifest entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document_id",
+    "file_sha256",
+    "document_type",
+    "page_count",
+    "is_real_business_document",
+    "features",
+    "annotation_status"
+  ],
+  "properties": {
+    "document_id": {"type": "string", "pattern": "^[A-Z0-9_.-]{3,100}$"},
+    "file_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "document_type": {
+      "type": "string",
+      "enum": ["IMAGE", "SCANNED_PDF", "MIXED_PDF", "SPREADSHEET", "OTHER"]
+    },
+    "page_count": {"type": "integer", "minimum": 1},
+    "is_real_business_document": {"type": "boolean"},
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["table", "scanned", "long_image", "conflict", "prompt_injection"],
+      "properties": {
+        "table": {"type": "boolean"},
+        "scanned": {"type": "boolean"},
+        "long_image": {"type": "boolean"},
+        "conflict": {"type": "boolean"},
+        "prompt_injection": {"type": "boolean"}
+      }
+    },
+    "annotation_status": {"type": "string", "enum": ["UNANNOTATED", "DRAFT", "APPROVED"]},
+    "annotation_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+  }
+}

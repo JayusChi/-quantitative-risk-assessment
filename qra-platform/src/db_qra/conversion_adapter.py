@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import tempfile
 from pathlib import Path, PurePosixPath
@@ -10,6 +11,7 @@ from typing import Any
 from qra_converter.contract_catalog import load_contract_catalog
 from qra_converter.extraction.aliyun_bailian import configured_extraction_provider
 from qra_converter.mapping import load_profile
+from qra_converter.ocr.payload_policy import OcrPayloadPolicy
 from qra_converter.orchestration.contracts import StepResult
 from qra_converter.parsing.pipeline import configured_ocr_provider
 from qra_converter.service import CONVERTER_VERSION, convert_sources
@@ -28,6 +30,7 @@ from .file_intake import (
 )
 from .ocr_settings import SUPPORTED_EXTRACTION_MODELS, SUPPORTED_OCR_MODELS
 from .paths import DEFAULT_RUNTIME_ROOT, PROJECT_ROOT
+from .pilot_registry import resolve_pilot_for_profile
 
 MAPPING_ROOT = (PROJECT_ROOT / "resources" / "mappings").resolve()
 CONTRACT_ROOT = (PROJECT_ROOT / "resources" / "contracts" / "part1" / "v1").resolve()
@@ -99,6 +102,10 @@ def conversion_dedupe_key(
     ocr_model_version: str | None = None,
     extraction_provider_id: str | None = None,
     extraction_model_version: str | None = None,
+    ocr_payload_policy: dict[str, Any] | None = None,
+    extraction_max_request_bytes: int | None = None,
+    pilot_manifest_sha256: str | None = None,
+    target_node_ids: list[str] | None = None,
 ) -> str:
     fingerprint = {
         "mapping_sha256": profile_sha256,
@@ -109,6 +116,19 @@ def conversion_dedupe_key(
         "ocr_model_version": ocr_model_version,
         "extraction_provider_id": extraction_provider_id,
         "extraction_model_version": extraction_model_version,
+        "converter_version": CONVERTER_VERSION,
+        "pilot_manifest_sha256": pilot_manifest_sha256,
+        "target_node_ids": list(target_node_ids or []),
+        "ocr_payload_policy": ocr_payload_policy
+        or OcrPayloadPolicy.from_environment().to_metadata(),
+        "extraction_request_policy": {
+            "version": "qra.extraction-request-budget/1.0.0",
+            "max_request_bytes": int(
+                extraction_max_request_bytes
+                if extraction_max_request_bytes is not None
+                else os.environ.get("QRA_EXTRACTION_MAX_REQUEST_BYTES", "7500000")
+            ),
+        },
         "sources": sorted(
             (
                 {
@@ -157,6 +177,7 @@ def submit_conversion(
         expected_version=str(metadata["contract_version"]),
     )
     expected_contract = f"{catalog.contract_id}/{catalog.version}"
+    pilot = resolve_pilot_for_profile(str(metadata["profile_id"]))
     if contract_request is not None:
         requested_contract = str(contract_request).strip()
         if requested_contract and requested_contract != expected_contract:
@@ -204,6 +225,15 @@ def submit_conversion(
             ocr_model_version=selected_ocr_model,
             extraction_provider_id=extraction_provider_id,
             extraction_model_version=selected_extraction_model,
+            ocr_payload_policy=(
+                ocr_provider.payload_policy.to_metadata()
+                if isinstance(
+                    getattr(ocr_provider, "payload_policy", None), OcrPayloadPolicy
+                )
+                else OcrPayloadPolicy.from_environment().to_metadata()
+            ),
+            pilot_manifest_sha256=(str(pilot["manifest_sha256"]) if pilot else None),
+            target_node_ids=(list(pilot["target_node_ids"]) if pilot else None),
         ),
         profile_id=str(metadata["profile_id"]),
         profile_version=str(metadata["version"]),
@@ -226,6 +256,10 @@ def submit_conversion(
         ocr_model_version=selected_ocr_model,
         extraction_provider_id=extraction_provider_id,
         extraction_model_version=selected_extraction_model,
+        pilot_id=str(pilot["pilot_id"]) if pilot else None,
+        pilot_version=str(pilot["version"]) if pilot else None,
+        pilot_manifest_sha256=str(pilot["manifest_sha256"]) if pilot else None,
+        target_node_ids=list(pilot["target_node_ids"]) if pilot else None,
         review_decisions=review_decisions,
         batch_id=batch_id,
         actor=_clean_actor(actor),
@@ -496,6 +530,7 @@ def run_conversion_job(
                 stage4_result_callback=lambda result: database.save_stage4_result(
                     job_id, result
                 ),
+                model_audit_callback=database.record_model_call_audit,
             )
             _check_cancel(database, job_id)
             database.update_conversion_progress(job_id, 88, "正在固化转换预览与审计资料")

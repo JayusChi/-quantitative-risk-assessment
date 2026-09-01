@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from collections import defaultdict
 from collections.abc import Callable, Mapping
 from datetime import datetime, timezone
@@ -270,6 +271,32 @@ class Stage4Workflow:
         self.fields = field_index(catalog.field_dictionary)
         unit_path = catalog.root / "unit_registry.json"
         self.unit_registry = json.loads(unit_path.read_text(encoding="utf-8"))
+        self._active_evidence: dict[str, dict[str, Any]] = {}
+
+    def _register_sub_evidence(self, blocks: tuple[dict[str, Any], ...]) -> None:
+        for block in blocks:
+            parent_id = str(block.get("parent_evidence_id") or "")
+            evidence_id = str(block.get("evidence_id") or "")
+            if not parent_id or not evidence_id or evidence_id in self._active_evidence:
+                continue
+            parent = self._active_evidence.get(parent_id)
+            if parent is None:
+                continue
+            self._active_evidence[evidence_id] = {
+                **parent,
+                "evidence_id": evidence_id,
+                "excerpt": str(block.get("text") or "")[:500],
+                "checksum_sha256": _sha256(
+                    [
+                        parent.get("checksum_sha256"),
+                        block.get("character_start"),
+                        block.get("character_end"),
+                    ]
+                ),
+                "parent_evidence_id": parent_id,
+                "character_start": block.get("character_start"),
+                "character_end": block.get("character_end"),
+            }
 
     def _check_cancel(self, job_id: str, callback: Callable[[], None] | None) -> None:
         if callback is not None:
@@ -323,38 +350,32 @@ class Stage4Workflow:
         if self.executor is None or not self._provider_enabled_for_run or not blocks:
             return [], None
         self._check_cancel(job_id, cancel_check)
+        request = self._build_request(
+            job_id=job_id,
+            task_type=task_type,
+            blocks=blocks,
+            field_subset=field_subset,
+            entities=entities,
+        )
         evidence_text = {str(item["evidence_id"]): str(item["text"]) for item in blocks}
         known_entities = {str(item["entity_id"]) for item in entities}
-        schema = _task_schema(
-            task_type,
-            evidence_ids=tuple(sorted(evidence_text)),
-            source_ids=tuple(sorted({str(item["source_id"]) for item in blocks})),
-            field_ids=tuple(sorted(field_subset)),
-            entity_ids=tuple(sorted(known_entities)),
-        )
-        request = ExtractionRequest(
-            task_type=task_type,
-            request_id=f"{job_id}:{task_type}:{_sha256(blocks)[:16]}",
-            system_policy_version=SYSTEM_POLICY_VERSION,
-            prompt_template_version=self.prompts.version,
-            schema=schema,
-            field_subset=field_subset,
-            document_blocks=blocks,
-            instructions=(
-                UNTRUSTED_CONTENT_NOTICE
-                + "\n\n"
-                + self.prompts.templates[task_type]
-            ),
-            field_definitions=tuple(
-                _plain_json(self.fields[field_id])
-                for field_id in field_subset
-                if field_id in self.fields
-            ),
-            entity_context=entities,
-            timeout_seconds=float(
-                getattr(self.provider, "default_timeout_seconds", 30.0)
-            ),
-        )
+        schema = request.schema
+        max_request_bytes = self._max_request_bytes()
+        input_byte_count = self.executor.request_byte_count(request)
+        if input_byte_count > max_request_bytes:
+            self.executor.record_local_skip(
+                request,
+                error_code="EXTRACT.REQUEST_TOO_LARGE",
+                input_byte_count=input_byte_count,
+            )
+            return [], {
+                "task_type": task_type,
+                "status": "SKIPPED",
+                "error_code": "EXTRACT.REQUEST_TOO_LARGE",
+                "retry_count": 0,
+                "input_sha256": _sha256(request.to_dict()),
+                "input_byte_count": input_byte_count,
+            }
         try:
             response, retry_count = self.executor.call(request)
         except ProviderCallError as exc:
@@ -365,6 +386,7 @@ class Stage4Workflow:
                 "error_code": exc.code,
                 "retry_count": self.executor.max_retries if exc.retryable else 0,
                 "input_sha256": _sha256(request.to_dict()),
+                "input_byte_count": input_byte_count,
             }
         valid, validation_issues = validate_structured_output(
             task_type,
@@ -388,6 +410,8 @@ class Stage4Workflow:
                 entity_context=request.entity_context,
                 timeout_seconds=request.timeout_seconds,
                 repair_of_request_id=request.request_id,
+                job_id=job_id,
+                parent_call_id=request.request_id,
             )
             try:
                 repaired, repaired_retries = self.executor.call(repair)
@@ -423,12 +447,68 @@ class Stage4Workflow:
             "prompt_manifest_sha256": self.prompts.manifest_sha256,
             "schema_sha256": _sha256(schema),
             "input_sha256": _sha256(request.to_dict()),
+            "input_byte_count": input_byte_count,
             "retry_count": retry_count,
             "repair_count": repair_count,
             "usage": response.usage,
             "finish_reason": response.finish_reason,
         }
         return valid, audit
+
+    @staticmethod
+    def _max_request_bytes() -> int:
+        try:
+            value = int(os.environ.get("QRA_EXTRACTION_MAX_REQUEST_BYTES", "7500000"))
+        except ValueError as exc:
+            raise ValueError("QRA_EXTRACTION_MAX_REQUEST_BYTES必须是整数") from exc
+        if not 128 * 1024 <= value <= 32 * 1024 * 1024:
+            raise ValueError("QRA_EXTRACTION_MAX_REQUEST_BYTES超出安全范围")
+        return value
+
+    def _build_request(
+        self,
+        *,
+        job_id: str,
+        task_type: str,
+        blocks: tuple[dict[str, Any], ...],
+        field_subset: tuple[str, ...],
+        entities: tuple[dict[str, Any], ...],
+        parent_call_id: str | None = None,
+    ) -> ExtractionRequest:
+        evidence_text = {str(item["evidence_id"]): str(item["text"]) for item in blocks}
+        known_entities = {str(item["entity_id"]) for item in entities}
+        schema = _task_schema(
+            task_type,
+            evidence_ids=tuple(sorted(evidence_text)),
+            source_ids=tuple(sorted({str(item["source_id"]) for item in blocks})),
+            field_ids=tuple(sorted(field_subset)),
+            entity_ids=tuple(sorted(known_entities)),
+        )
+        return ExtractionRequest(
+            task_type=task_type,
+            request_id=f"{job_id}:{task_type}:{_sha256(blocks)[:16]}",
+            system_policy_version=SYSTEM_POLICY_VERSION,
+            prompt_template_version=self.prompts.version,
+            schema=schema,
+            field_subset=field_subset,
+            document_blocks=blocks,
+            instructions=(
+                UNTRUSTED_CONTENT_NOTICE
+                + "\n\n"
+                + self.prompts.templates[task_type]
+            ),
+            field_definitions=tuple(
+                _plain_json(self.fields[field_id])
+                for field_id in field_subset
+                if field_id in self.fields
+            ),
+            entity_context=entities,
+            timeout_seconds=float(
+                getattr(self.provider, "default_timeout_seconds", 30.0)
+            ),
+            job_id=job_id,
+            parent_call_id=parent_call_id,
+        )
 
     def _request_batched(
         self,
@@ -443,21 +523,108 @@ class Stage4Workflow:
     ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         items: dict[str, dict[str, Any]] = {}
         calls: list[dict[str, Any]] = []
-        batches = chunk_document_blocks(blocks) or ((),)
-        for batch in batches:
-            extracted, audit = self._request_items(
+        if self.executor is None or not blocks:
+            return [], []
+        max_bytes = self._max_request_bytes()
+
+        def request_size(batch: tuple[dict[str, Any], ...]) -> int:
+            request = self._build_request(
                 job_id=job_id,
                 task_type=task_type,
                 blocks=batch,
                 field_subset=field_subset,
+                entities=entities,
+            )
+            return self.executor.request_byte_count(request)
+
+        batches = chunk_document_blocks(
+            blocks,
+            max_characters=60_000,
+            overlap_blocks=1,
+            max_request_bytes=max_bytes,
+            request_size=request_size,
+        ) or ((),)
+        queue: list[tuple[tuple[dict[str, Any], ...], tuple[str, ...], int]] = [
+            (batch, field_subset, 0) for batch in batches
+        ]
+        failed_leaf_count = 0
+        while queue:
+            batch, fields, depth = queue.pop(0)
+            self._register_sub_evidence(batch)
+            if depth > 8:
+                failed_leaf_count += 1
+                calls.append(
+                    {
+                        "task_type": task_type,
+                        "status": "FAILED",
+                        "error_code": "EXTRACT.REQUEST_TOO_LARGE",
+                        "retry_count": 0,
+                        "input_sha256": _sha256([batch, fields]),
+                    }
+                )
+                continue
+            extracted, audit = self._request_items(
+                job_id=job_id,
+                task_type=task_type,
+                blocks=batch,
+                field_subset=fields,
                 entities=entities,
                 issues=issues,
                 cancel_check=cancel_check,
             )
             if audit is not None:
                 calls.append(audit)
+            if audit and audit.get("error_code") == "EXTRACT.REQUEST_TOO_LARGE":
+                parent_id = str(audit.get("input_sha256") or _sha256([batch, fields]))
+                if len(batch) > 1:
+                    middle = len(batch) // 2
+                    queue[0:0] = [
+                        (batch[:middle], fields, depth + 1),
+                        (batch[middle:], fields, depth + 1),
+                    ]
+                    continue
+                if len(fields) > 1:
+                    middle = len(fields) // 2
+                    queue[0:0] = [
+                        (batch, fields[:middle], depth + 1),
+                        (batch, fields[middle:], depth + 1),
+                    ]
+                    continue
+                if batch:
+                    text_length = len(str(batch[0].get("text") or ""))
+                    smaller = chunk_document_blocks(
+                        batch,
+                        max_characters=max(128, text_length // 2),
+                        overlap_blocks=0,
+                    )
+                    if len(smaller) > 1:
+                        queue[0:0] = [
+                            (
+                                tuple(
+                                    {
+                                        **block,
+                                        "split_parent_request_id": parent_id,
+                                    }
+                                    for block in child_batch
+                                ),
+                                fields,
+                                depth + 1,
+                            )
+                            for child_batch in smaller
+                        ]
+                        continue
+                failed_leaf_count += 1
+                continue
             for item in extracted:
                 items.setdefault(_sha256(item), item)
+        if failed_leaf_count:
+            issues.append(
+                _model_issue(
+                    "EXTRACT.PARTIAL",
+                    f"{task_type}有{failed_leaf_count}个最小批次失败，已保留其他成功结果",
+                    blocking=False,
+                )
+            )
         return list(items.values()), calls
 
     def _relevant_field_subset(
@@ -498,7 +665,10 @@ class Stage4Workflow:
         golden_candidates: list[dict[str, Any]] | None = None,
         external_sharing_allowed: bool = False,
         cancel_check: Callable[[], None] | None = None,
+        audit_callback: Callable[[dict[str, Any]], None] | None = None,
     ) -> Stage4Result:
+        if self.executor is not None:
+            self.executor.audit_callback = audit_callback
         steps: list[StepResult] = []
         evidence_bundle = evidence_from_documents(documents)
         deterministic, deterministic_evidence = deterministic_candidates_from_lineage(
@@ -508,6 +678,7 @@ class Stage4Workflow:
         )
         evidence_by_id = {item["evidence_id"]: item for item in evidence_bundle.evidence}
         evidence_by_id.update({item["evidence_id"]: item for item in deterministic_evidence})
+        self._active_evidence = evidence_by_id
         base_issues: list[dict[str, Any]] = []
         if base_case is not None:
             for issue in validate_conversion_quality(base_case):
@@ -894,6 +1065,128 @@ class Stage4Workflow:
                 WorkflowStatus.FUSION_READY.value,
                 WorkflowStatus.QUALITY_CHECKING.value,
                 final_status.value,
+            ),
+        )
+
+    def reextract_field(
+        self,
+        *,
+        job_id: str,
+        documents: tuple[ParsedDocument, ...],
+        field_id: str,
+        entities: tuple[dict[str, Any], ...],
+        external_sharing_allowed: bool,
+        audit_callback: Callable[[dict[str, Any]], None] | None = None,
+        cancel_check: Callable[[], None] | None = None,
+    ) -> Stage4Result:
+        """Run only field extraction/normalization/fusion against current evidence."""
+
+        if field_id not in self.fields:
+            raise ValueError(f"未知重提取字段：{field_id}")
+        if not entities:
+            raise ValueError("字段重提取缺少现有实体，必须改用完整范围重提取")
+        if self.executor is not None:
+            self.executor.audit_callback = audit_callback
+        self._provider_enabled_for_run = self.provider is not None and (
+            str(getattr(self.provider, "deployment_scope", "EXTERNAL")).upper() == "LOCAL"
+            or bool(external_sharing_allowed)
+        )
+        evidence_bundle = evidence_from_documents(documents)
+        self._active_evidence = {
+            str(item["evidence_id"]): item for item in evidence_bundle.evidence
+        }
+        model_blocks = list(evidence_bundle.blocks)
+        represented = {str(item["evidence_id"]) for item in model_blocks}
+        for item in evidence_bundle.evidence:
+            if item["evidence_id"] in represented or item.get("source_type") != "TABLE":
+                continue
+            location = item.get("location") or {}
+            model_blocks.append(
+                {
+                    "evidence_id": item["evidence_id"],
+                    "source_id": str(location.get("file_id") or ""),
+                    "content_type": "TABLE_CELL",
+                    "text": str(item.get("excerpt") or ""),
+                }
+            )
+        field_blocks = tuple(model_blocks)
+        issues: list[dict[str, Any]] = []
+        detected = detect_untrusted_instructions(field_blocks)
+        if detected:
+            issue = _model_issue(
+                "EXTRACT.UNTRUSTED_INSTRUCTION_DETECTED",
+                "资料包含指令性文字，字段重提取仍按普通不可信文本处理",
+                blocking=False,
+            )
+            issue["quality_status"] = "INFO"
+            issue["evidence_ids"] = detected
+            issues.append(issue)
+        if not self._provider_enabled_for_run:
+            issues.append(
+                _model_issue(
+                    "EXTRACT.PROVIDER_NOT_CONFIGURED",
+                    "字段重提取未调用模型，当前证据和旧候选保持可读",
+                    blocking=False,
+                )
+            )
+            items: list[dict[str, Any]] = []
+            audits: list[dict[str, Any]] = []
+        else:
+            items, audits = self._request_batched(
+                job_id=job_id,
+                task_type="EXTRACT_FIELDS",
+                blocks=field_blocks,
+                field_subset=(field_id,),
+                entities=entities,
+                issues=issues,
+                cancel_check=cancel_check,
+            )
+        entity_lookup = {str(item["entity_id"]): item for item in entities}
+        versions = {
+            "provider": str(audits[-1].get("provider_id")) if audits else "none",
+            "model": str(audits[-1].get("model_version")) if audits else "none",
+            "prompt": self.prompts.version,
+            "schema": self.catalog.version,
+        }
+        candidates = model_candidates(items, entities=entity_lookup, model_versions=versions)
+        normalized, normalize_issues = normalize_candidates(
+            candidates, fields=self.fields, unit_registry=self.unit_registry
+        )
+        fused, groups, fusion_issues = fuse_candidates(normalized, fields=self.fields)
+        issues.extend(normalize_issues)
+        issues.extend(fusion_issues)
+        issues.extend(
+            validate_candidate_quality(
+                fused,
+                [],
+                list(entities),
+                fields=self.fields,
+            )
+        )
+        status = (
+            WorkflowStatus.BLOCKED
+            if any(bool(issue.get("blocking")) for issue in issues)
+            else WorkflowStatus.READY_FOR_REVIEW
+        )
+        return Stage4Result(
+            job_id=job_id,
+            status=status,
+            entities=entities,
+            candidates=tuple(fused),
+            evidence=tuple(self._active_evidence[key] for key in sorted(self._active_evidence)),
+            fusion_groups=tuple(groups),
+            issues=tuple(issues),
+            metrics=extraction_metrics(fused, issues),
+            capability_plan={},
+            state_history=(
+                WorkflowStatus.PARSED.value,
+                WorkflowStatus.EXTRACTING_FIELDS.value,
+                WorkflowStatus.CANDIDATES_READY.value,
+                WorkflowStatus.NORMALIZING.value,
+                WorkflowStatus.NORMALIZED.value,
+                WorkflowStatus.FUSING.value,
+                WorkflowStatus.FUSION_READY.value,
+                status.value,
             ),
         )
 

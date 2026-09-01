@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import re
 import sqlite3
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -12,13 +13,14 @@ from threading import Lock
 from typing import Any
 from uuid import uuid4
 
-SCHEMA_VERSION = "2.0.0"
+SCHEMA_VERSION = "2.1.0"
 
 ADMIN_BROWSABLE_TABLES = (
     "conversion_job",
     "conversion_source",
     "conversion_parse_artifact",
     "extraction_run",
+    "model_call_audit",
     "extracted_entity",
     "candidate_field",
     "candidate_evidence_link",
@@ -66,6 +68,20 @@ def json_sha256(value: Any) -> str:
 
 def bytes_sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def normalize_artifact_path(value: str) -> str:
+    raw = str(value).replace("\\", "/")
+    path = PurePosixPath(raw)
+    if (
+        not raw
+        or raw.startswith("/")
+        or path.is_absolute()
+        or any(part in {"", ".", ".."} for part in path.parts)
+        or any(":" in part or any(ord(character) < 32 for character in part) for part in path.parts)
+    ):
+        raise ValueError("报告资源路径无效")
+    return path.as_posix()
 
 
 class QraDatabase:
@@ -208,6 +224,10 @@ class QraDatabase:
             ocr_model_version TEXT,
             extraction_provider_id TEXT,
             extraction_model_version TEXT,
+            pilot_id TEXT,
+            pilot_version TEXT,
+            pilot_manifest_sha256 TEXT,
+            target_node_ids_json TEXT,
             source_count INTEGER NOT NULL,
             source_bytes INTEGER NOT NULL,
             review_decisions_json TEXT,
@@ -297,6 +317,39 @@ class QraDatabase:
             started_at TEXT NOT NULL,
             finished_at TEXT NOT NULL,
             UNIQUE(job_id, step)
+        );
+
+        CREATE TABLE IF NOT EXISTS model_call_audit (
+            id TEXT PRIMARY KEY,
+            job_id TEXT REFERENCES conversion_job(id) ON DELETE CASCADE,
+            source_id TEXT,
+            call_kind TEXT NOT NULL,
+            task_type TEXT NOT NULL,
+            logical_request_id TEXT NOT NULL,
+            parent_call_id TEXT,
+            page_number INTEGER,
+            region_id TEXT,
+            tile_id TEXT,
+            attempt_number INTEGER NOT NULL,
+            provider_id TEXT,
+            model_version TEXT,
+            status TEXT NOT NULL,
+            started_at TEXT NOT NULL,
+            finished_at TEXT,
+            elapsed_ms INTEGER,
+            input_sha256 TEXT NOT NULL,
+            input_byte_count INTEGER NOT NULL,
+            media_sha256 TEXT,
+            media_content_type TEXT,
+            width INTEGER,
+            height INTEGER,
+            payload_policy_version TEXT,
+            provider_request_id TEXT,
+            raw_response_sha256 TEXT,
+            retryable INTEGER NOT NULL DEFAULT 0,
+            error_code TEXT,
+            sanitized_error_message TEXT,
+            usage_json TEXT NOT NULL DEFAULT '{}'
         );
 
         CREATE TABLE IF NOT EXISTS extracted_entity (
@@ -399,6 +452,7 @@ class QraDatabase:
             gate_result_hash TEXT,
             decision_set_hash TEXT,
             confirmed_snapshot_id TEXT REFERENCES input_snapshot(id),
+            confirmed_run_id TEXT REFERENCES calculation_run(id),
             confirmed_at TEXT,
             superseded_by_session_id TEXT REFERENCES review_session(id)
         );
@@ -452,16 +506,58 @@ class QraDatabase:
             id TEXT PRIMARY KEY,
             session_id TEXT NOT NULL REFERENCES review_session(id),
             conversion_job_id TEXT NOT NULL REFERENCES conversion_job(id),
+            scope TEXT NOT NULL DEFAULT 'FIELD',
             source_id TEXT,
             field_id TEXT NOT NULL,
             entity_id TEXT,
+            page_number INTEGER,
             evidence_id TEXT,
+            requested_parameters_json TEXT NOT NULL DEFAULT '{}',
             requested_by TEXT NOT NULL,
             reason TEXT NOT NULL,
             status TEXT NOT NULL,
             created_at TEXT NOT NULL,
+            started_at TEXT,
             finished_at TEXT,
+            error_json TEXT,
+            base_parse_sha256 TEXT,
+            result_parse_sha256 TEXT,
             replacement_extraction_run_id TEXT REFERENCES extraction_run(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS conversion_parse_version (
+            id TEXT PRIMARY KEY,
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            source_id TEXT NOT NULL,
+            reextraction_request_id TEXT REFERENCES reextraction_request(id),
+            scope TEXT NOT NULL,
+            page_number INTEGER,
+            parser_id TEXT NOT NULL,
+            parser_version TEXT NOT NULL,
+            parse_sha256 TEXT NOT NULL,
+            active INTEGER NOT NULL,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS conversion_parse_artifact_version (
+            version_id TEXT NOT NULL REFERENCES conversion_parse_version(id) ON DELETE CASCADE,
+            path TEXT NOT NULL,
+            artifact_kind TEXT NOT NULL,
+            content_type TEXT NOT NULL,
+            content BLOB NOT NULL,
+            byte_count INTEGER NOT NULL,
+            sha256 TEXT NOT NULL,
+            PRIMARY KEY(version_id, path)
+        );
+
+        CREATE TABLE IF NOT EXISTS candidate_set_version (
+            id TEXT PRIMARY KEY,
+            job_id TEXT NOT NULL REFERENCES conversion_job(id) ON DELETE CASCADE,
+            reextraction_request_id TEXT REFERENCES reextraction_request(id),
+            candidate_set_sha256 TEXT NOT NULL,
+            candidates_json TEXT NOT NULL,
+            active INTEGER NOT NULL,
+            created_at TEXT NOT NULL
         );
 
         CREATE TABLE IF NOT EXISTS input_snapshot_review_provenance (
@@ -513,6 +609,10 @@ class QraDatabase:
             result_sha256 TEXT,
             summary_json TEXT,
             error_message TEXT,
+            review_session_id TEXT REFERENCES review_session(id),
+            review_provenance_id TEXT REFERENCES input_snapshot_review_provenance(id),
+            target_node_ids_json TEXT,
+            generate_charts INTEGER NOT NULL DEFAULT 1,
             created_at TEXT NOT NULL,
             started_at TEXT,
             finished_at TEXT
@@ -592,6 +692,12 @@ class QraDatabase:
             ON conversion_job(batch_id, created_at);
         CREATE INDEX IF NOT EXISTS idx_extraction_run_job
             ON extraction_run(job_id, step);
+        CREATE INDEX IF NOT EXISTS idx_model_call_job_started
+            ON model_call_audit(job_id, started_at);
+        CREATE INDEX IF NOT EXISTS idx_model_call_logical
+            ON model_call_audit(logical_request_id, attempt_number);
+        CREATE INDEX IF NOT EXISTS idx_model_call_status
+            ON model_call_audit(status, started_at);
         CREATE INDEX IF NOT EXISTS idx_candidate_filter
             ON candidate_field(job_id, quality_status, field_id, entity_key, candidate_id);
         CREATE INDEX IF NOT EXISTS idx_quality_issue_filter
@@ -609,6 +715,12 @@ class QraDatabase:
             ON review_gate_run(session_id, created_at DESC);
         CREATE INDEX IF NOT EXISTS idx_reextraction_session
             ON reextraction_request(session_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_reextraction_status
+            ON reextraction_request(status, created_at);
+        CREATE INDEX IF NOT EXISTS idx_parse_version_source
+            ON conversion_parse_version(job_id, source_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_candidate_set_version_job
+            ON candidate_set_version(job_id, created_at DESC);
         CREATE INDEX IF NOT EXISTS idx_snapshot_review_provenance
             ON input_snapshot_review_provenance(snapshot_id, confirmed_at DESC);
         CREATE INDEX IF NOT EXISTS idx_input_indicator_lookup
@@ -678,6 +790,10 @@ class QraDatabase:
                     "ocr_model_version": "TEXT",
                     "extraction_provider_id": "TEXT",
                     "extraction_model_version": "TEXT",
+                    "pilot_id": "TEXT",
+                    "pilot_version": "TEXT",
+                    "pilot_manifest_sha256": "TEXT",
+                    "target_node_ids_json": "TEXT",
                     "stage4_status": "TEXT",
                     "stage4_result_sha256": "TEXT",
                     "stage4_metrics_json": "TEXT",
@@ -769,9 +885,72 @@ class QraDatabase:
                         connection.execute(
                             f'ALTER TABLE input_snapshot_provenance ADD COLUMN "{column}" TEXT'
                         )
+                existing_reextraction_columns = {
+                    str(row["name"])
+                    for row in connection.execute(
+                        'PRAGMA table_info("reextraction_request")'
+                    ).fetchall()
+                }
+                reextraction_migration_columns = {
+                    "scope": "TEXT NOT NULL DEFAULT 'FIELD'",
+                    "page_number": "INTEGER",
+                    "requested_parameters_json": "TEXT NOT NULL DEFAULT '{}'",
+                    "started_at": "TEXT",
+                    "error_json": "TEXT",
+                    "base_parse_sha256": "TEXT",
+                    "result_parse_sha256": "TEXT",
+                }
+                for column, declaration in reextraction_migration_columns.items():
+                    if column not in existing_reextraction_columns:
+                        connection.execute(
+                            f'ALTER TABLE reextraction_request ADD COLUMN "{column}" {declaration}'
+                        )
+                existing_review_columns = {
+                    str(row["name"])
+                    for row in connection.execute(
+                        'PRAGMA table_info("review_session")'
+                    ).fetchall()
+                }
+                if "confirmed_run_id" not in existing_review_columns:
+                    connection.execute(
+                        'ALTER TABLE review_session ADD COLUMN "confirmed_run_id" TEXT'
+                    )
+                existing_run_columns = {
+                    str(row["name"])
+                    for row in connection.execute(
+                        'PRAGMA table_info("calculation_run")'
+                    ).fetchall()
+                }
+                run_migration_columns = {
+                    "review_session_id": "TEXT",
+                    "review_provenance_id": "TEXT",
+                    "target_node_ids_json": "TEXT",
+                    "generate_charts": "INTEGER NOT NULL DEFAULT 1",
+                }
+                for column, declaration in run_migration_columns.items():
+                    if column not in existing_run_columns:
+                        connection.execute(
+                            f'ALTER TABLE calculation_run ADD COLUMN "{column}" {declaration}'
+                        )
+                connection.execute(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS idx_run_review_confirmation "
+                    "ON calculation_run(review_session_id) WHERE review_session_id IS NOT NULL"
+                )
                 connection.execute(
                     "INSERT OR IGNORE INTO db_schema(version, applied_at) VALUES (?, ?)",
                     (SCHEMA_VERSION, utc_now()),
+                )
+                connection.execute(
+                    """
+                    UPDATE model_call_audit
+                    SET status = 'INTERRUPTED', finished_at = ?, retryable = 1,
+                        error_code = coalesce(error_code, 'MODEL_CALL_PROCESS_INTERRUPTED'),
+                        sanitized_error_message = coalesce(
+                            sanitized_error_message, '进程恢复时发现未完成的模型调用'
+                        )
+                    WHERE status = 'STARTED'
+                    """,
+                    (utc_now(),),
                 )
                 connection.execute("PRAGMA optimize")
             self._initialized = True
@@ -1063,6 +1242,10 @@ class QraDatabase:
         ocr_model_version: str | None = None,
         extraction_provider_id: str | None = None,
         extraction_model_version: str | None = None,
+        pilot_id: str | None = None,
+        pilot_version: str | None = None,
+        pilot_manifest_sha256: str | None = None,
+        target_node_ids: list[str] | None = None,
         review_decisions: dict[str, Any] | None = None,
         batch_id: str | None = None,
         parent_job_id: str | None = None,
@@ -1119,12 +1302,14 @@ class QraDatabase:
                     case_id, project_name, external_sharing_allowed,
                     ocr_provider_id, ocr_model_version,
                     extraction_provider_id, extraction_model_version,
+                    pilot_id, pilot_version, pilot_manifest_sha256,
+                    target_node_ids_json,
                     source_count, source_bytes,
                     review_decisions_json, retry_count, created_by, created_at
                 ) VALUES (
                     ?, ?, ?, ?, ?, 0,
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
                 """,
                 (
@@ -1154,6 +1339,10 @@ class QraDatabase:
                     ocr_model_version,
                     extraction_provider_id,
                     extraction_model_version,
+                    pilot_id,
+                    pilot_version,
+                    pilot_manifest_sha256,
+                    canonical_json(target_node_ids) if target_node_ids else None,
                     len(sources),
                     source_bytes,
                     canonical_json(review_decisions) if review_decisions else None,
@@ -1343,6 +1532,7 @@ class QraDatabase:
             "review_audit_json",
             "stage4_metrics_json",
             "stage4_capability_json",
+            "target_node_ids_json",
             "error_json",
         )
         for field_name in json_fields:
@@ -1410,7 +1600,9 @@ class QraDatabase:
                        converter_version, case_id, project_name, source_count,
                        external_sharing_allowed, ocr_provider_id, ocr_model_version,
                        extraction_provider_id,
-                       extraction_model_version, source_bytes, case_sha256,
+                       extraction_model_version, pilot_id, pilot_version,
+                       pilot_manifest_sha256, target_node_ids_json,
+                       source_bytes, case_sha256,
                        snapshot_id, retry_count,
                        stage4_status, stage4_result_sha256,
                        created_by, created_at, started_at, finished_at,
@@ -1426,6 +1618,8 @@ class QraDatabase:
             item = dict(row)
             error = item.pop("error_json")
             item["error"] = json.loads(str(error)) if error is not None else None
+            targets = item.pop("target_node_ids_json", None)
+            item["target_node_ids"] = json.loads(str(targets)) if targets else []
             result.append(item)
         return result
 
@@ -1646,6 +1840,112 @@ class QraDatabase:
         item["output"] = json.loads(item.pop("output_json"))
         return item
 
+    def record_model_call_audit(self, event: dict[str, Any]) -> None:
+        """Upsert one sanitized attempt state; request/response bodies are never accepted."""
+
+        self.initialize()
+        call_id = str(event.get("id") or "")
+        if not call_id or len(call_id) > 160:
+            raise ValueError("模型调用审计ID无效")
+        status = str(event.get("status") or "")
+        if status not in {
+            "STARTED",
+            "COMPLETED",
+            "FAILED",
+            "INTERRUPTED",
+            "CACHED",
+            "SKIPPED",
+        }:
+            raise ValueError("模型调用审计状态无效")
+        call_kind = str(event.get("call_kind") or "")
+        if call_kind not in {"OCR", "EXTRACTION"}:
+            raise ValueError("模型调用审计类型无效")
+        message = str(event.get("sanitized_error_message") or "")
+        message = re.sub(r"sk-[A-Za-z0-9_-]+", "[REDACTED_SECRET]", message)
+        message = re.sub(r"https?://\S+", "[REDACTED_URL]", message)
+        message = re.sub(
+            r"(?:[A-Za-z]:[\\/]|/)(?:[^\s:]+[\\/])*[^\s:]*",
+            "[REDACTED_PATH]",
+            message,
+        )[:300]
+        usage_value = event.get("usage")
+        usage = (
+            {
+                str(key)[:80]: value
+                for key, value in usage_value.items()
+                if isinstance(value, int | float) and not isinstance(value, bool)
+            }
+            if isinstance(usage_value, dict)
+            else {}
+        )
+        input_hash = str(event.get("input_sha256") or "")
+        if len(input_hash) != 64:
+            input_hash = hashlib.sha256(input_hash.encode()).hexdigest()
+        values = (
+            call_id,
+            event.get("job_id"),
+            event.get("source_id"),
+            call_kind,
+            str(event.get("task_type") or call_kind)[:100],
+            str(event.get("logical_request_id") or call_id)[:300],
+            event.get("parent_call_id"),
+            event.get("page_number"),
+            event.get("region_id"),
+            event.get("tile_id"),
+            max(0, int(event.get("attempt_number", 0) or 0)),
+            event.get("provider_id"),
+            event.get("model_version"),
+            status,
+            str(event.get("started_at") or utc_now()),
+            event.get("finished_at"),
+            event.get("elapsed_ms"),
+            input_hash,
+            max(0, int(event.get("input_byte_count", 0) or 0)),
+            event.get("media_sha256"),
+            event.get("media_content_type"),
+            event.get("width"),
+            event.get("height"),
+            event.get("payload_policy_version"),
+            event.get("provider_request_id"),
+            event.get("raw_response_sha256"),
+            int(bool(event.get("retryable"))),
+            event.get("error_code"),
+            message or None,
+            canonical_json(usage),
+        )
+        with self.session() as connection:
+            connection.execute(
+                """
+                INSERT INTO model_call_audit(
+                    id, job_id, source_id, call_kind, task_type,
+                    logical_request_id, parent_call_id, page_number, region_id,
+                    tile_id, attempt_number, provider_id, model_version, status,
+                    started_at, finished_at, elapsed_ms, input_sha256,
+                    input_byte_count, media_sha256, media_content_type, width,
+                    height, payload_policy_version, provider_request_id,
+                    raw_response_sha256, retryable, error_code,
+                    sanitized_error_message, usage_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                          ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    status = excluded.status,
+                    finished_at = excluded.finished_at,
+                    elapsed_ms = excluded.elapsed_ms,
+                    provider_id = coalesce(excluded.provider_id, model_call_audit.provider_id),
+                    model_version = coalesce(
+                        excluded.model_version,
+                        model_call_audit.model_version
+                    ),
+                    provider_request_id = excluded.provider_request_id,
+                    raw_response_sha256 = excluded.raw_response_sha256,
+                    retryable = excluded.retryable,
+                    error_code = excluded.error_code,
+                    sanitized_error_message = excluded.sanitized_error_message,
+                    usage_json = excluded.usage_json
+                """,
+                values,
+            )
+
     def list_conversion_model_calls(self, job_id: str) -> dict[str, Any]:
         """Return a text-free audit view of OCR and extraction provider calls."""
 
@@ -1689,6 +1989,17 @@ class QraDatabase:
                     "SELECT count(*) FROM candidate_field WHERE job_id = ?", (job_id,)
                 ).fetchone()[0]
             )
+            audit_rows = connection.execute(
+                """
+                SELECT audit.*, source.relative_path AS source_path
+                FROM model_call_audit AS audit
+                LEFT JOIN conversion_source AS source
+                  ON source.job_id = audit.job_id AND source.id = audit.source_id
+                WHERE audit.job_id = ?
+                ORDER BY audit.started_at, audit.attempt_number, audit.id
+                """,
+                (job_id,),
+            ).fetchall()
 
         def safe_text(value: object, limit: int = 240) -> str | None:
             if value is None:
@@ -1822,6 +2133,56 @@ class QraDatabase:
                     }
                 )
 
+        if audit_rows:
+            items = []
+            for row in audit_rows:
+                try:
+                    usage = json.loads(str(row["usage_json"] or "{}"))
+                except (TypeError, ValueError, json.JSONDecodeError):
+                    usage = {}
+                items.append(
+                    {
+                        "call_id": str(row["id"]),
+                        "call_kind": str(row["call_kind"]),
+                        "step": str(row["task_type"]),
+                        "task_type": str(row["task_type"]),
+                        "logical_request_id": str(row["logical_request_id"]),
+                        "parent_call_id": row["parent_call_id"],
+                        "status": str(row["status"]),
+                        "workflow_status": None,
+                        "provider_id": row["provider_id"],
+                        "model_version": row["model_version"],
+                        "provider_request_id": row["provider_request_id"],
+                        "attempt_number": int(row["attempt_number"]),
+                        "retry_count": max(0, int(row["attempt_number"]) - 1),
+                        "repair_count": 0,
+                        "error_code": row["error_code"],
+                        "sanitized_error_message": row["sanitized_error_message"],
+                        "finish_reason": None,
+                        "prompt_template_version": None,
+                        "raw_response_sha256": row["raw_response_sha256"],
+                        "usage": usage if isinstance(usage, dict) else {},
+                        "source_id": row["source_id"],
+                        "source_path": safe_text(row["source_path"], 500),
+                        "page_number": row["page_number"],
+                        "region_id": row["region_id"],
+                        "tile_id": row["tile_id"],
+                        "input_byte_count": int(row["input_byte_count"]),
+                        "media_sha256": row["media_sha256"],
+                        "media_content_type": row["media_content_type"],
+                        "width": row["width"],
+                        "height": row["height"],
+                        "payload_policy_version": row["payload_policy_version"],
+                        "retryable": bool(row["retryable"]),
+                        "cache_hit": str(row["status"]) == "CACHED",
+                        "started_at": str(row["started_at"]),
+                        "finished_at": (
+                            str(row["finished_at"]) if row["finished_at"] else None
+                        ),
+                        "elapsed_ms": row["elapsed_ms"],
+                    }
+                )
+
         items.sort(
             key=lambda item: (
                 str(item.get("finished_at") or item.get("started_at") or ""),
@@ -1836,7 +2197,8 @@ class QraDatabase:
                 "ocr_record_count": sum(item["call_kind"] == "OCR" for item in items),
                 "extraction_record_count": sum(item["call_kind"] == "EXTRACTION" for item in items),
                 "failed_record_count": sum(
-                    item["status"] in {"FAILED", "STRUCTURE_FAILED"} for item in items
+                    item["status"] in {"FAILED", "INTERRUPTED", "STRUCTURE_FAILED"}
+                    for item in items
                 ),
                 "cached_record_count": sum(bool(item.get("cache_hit")) for item in items),
                 "candidate_count": candidate_count,
@@ -1925,6 +2287,467 @@ class QraDatabase:
                     "model_version": call.get("model_version"),
                 },
             )
+
+    def apply_reextraction_result(
+        self,
+        request_id: str,
+        *,
+        document: dict[str, Any] | None,
+        artifacts: list[dict[str, Any]],
+        stage4_result: dict[str, Any],
+        actor: str,
+        partial: bool = False,
+        replace_candidates: bool = True,
+    ) -> dict[str, Any]:
+        """Atomically version artifacts and replace only candidates inside the request scope."""
+
+        def candidate_snapshot(connection: sqlite3.Connection, job_id: str) -> list[dict[str, Any]]:
+            rows = connection.execute(
+                "SELECT candidate_id, payload_json FROM candidate_field "
+                "WHERE job_id = ? ORDER BY candidate_id",
+                (job_id,),
+            ).fetchall()
+            result = []
+            for row in rows:
+                evidence = [
+                    json.loads(str(link["evidence_json"]))
+                    for link in connection.execute(
+                        """
+                        SELECT evidence_json FROM candidate_evidence_link
+                        WHERE job_id = ? AND candidate_id = ? ORDER BY evidence_id
+                        """,
+                        (job_id, row["candidate_id"]),
+                    ).fetchall()
+                ]
+                result.append(
+                    {
+                        "candidate": json.loads(str(row["payload_json"])),
+                        "evidence": evidence,
+                    }
+                )
+            return result
+
+        safe_actor = str(actor).strip() or "reextraction-worker"
+        with self.transaction() as connection:
+            request = connection.execute(
+                "SELECT * FROM reextraction_request WHERE id = ?", (request_id,)
+            ).fetchone()
+            if request is None:
+                raise KeyError(f"重新提取请求不存在：{request_id}")
+            if str(request["status"]) != "RUNNING":
+                raise ValueError("重新提取请求不在运行中")
+            job_id = str(request["conversion_job_id"])
+            scope = str(request["scope"])
+            source_id = str(request["source_id"] or "")
+            page_number = int(request["page_number"] or 0)
+            field_id = str(request["field_id"] or "")
+            entity_id = str(request["entity_id"] or "")
+            before = candidate_snapshot(connection, job_id)
+            before_hash = json_sha256(before)
+            connection.execute(
+                "UPDATE candidate_set_version SET active = 0 WHERE job_id = ?",
+                (job_id,),
+            )
+            connection.execute(
+                """
+                INSERT INTO candidate_set_version(
+                    id, job_id, reextraction_request_id, candidate_set_sha256,
+                    candidates_json, active, created_at
+                ) VALUES (?, ?, ?, ?, ?, 0, ?)
+                """,
+                (
+                    f"CSET-{uuid4()}",
+                    job_id,
+                    request_id,
+                    before_hash,
+                    canonical_json(before),
+                    utc_now(),
+                ),
+            )
+
+            entity_key = None
+            if entity_id:
+                entity_row = connection.execute(
+                    "SELECT business_key FROM extracted_entity WHERE job_id = ? AND entity_id = ?",
+                    (job_id, entity_id),
+                ).fetchone()
+                entity_key = (
+                    str(entity_row["business_key"] or "") if entity_row else entity_id
+                )
+
+            def evidence_matches(value: dict[str, Any]) -> bool:
+                location = value.get("location") or {}
+                if str(location.get("file_id") or "") != source_id:
+                    return False
+                return scope != "PAGE" or int(location.get("page") or 0) == page_number
+
+            target_ids: set[str] = set()
+            candidate_rows = connection.execute(
+                "SELECT candidate_id, field_id, entity_key FROM candidate_field WHERE job_id = ?",
+                (job_id,),
+            ).fetchall()
+            for row in candidate_rows:
+                candidate_id = str(row["candidate_id"])
+                if scope == "FIELD":
+                    if str(row["field_id"]) == field_id and (
+                        not entity_key or str(row["entity_key"]) == entity_key
+                    ):
+                        target_ids.add(candidate_id)
+                    continue
+                links = connection.execute(
+                    """
+                    SELECT evidence_json FROM candidate_evidence_link
+                    WHERE job_id = ? AND candidate_id = ?
+                    """,
+                    (job_id, candidate_id),
+                ).fetchall()
+                if any(evidence_matches(json.loads(str(link["evidence_json"]))) for link in links):
+                    target_ids.add(candidate_id)
+
+            if target_ids and replace_candidates:
+                placeholders = ",".join("?" for _ in target_ids)
+                parameters = (job_id, *sorted(target_ids))
+                connection.execute(
+                    "DELETE FROM fusion_group_member WHERE job_id = ? "
+                    f"AND candidate_id IN ({placeholders})",
+                    parameters,
+                )
+                connection.execute(
+                    "DELETE FROM candidate_evidence_link WHERE job_id = ? "
+                    f"AND candidate_id IN ({placeholders})",
+                    parameters,
+                )
+                connection.execute(
+                    "DELETE FROM candidate_field WHERE job_id = ? "
+                    f"AND candidate_id IN ({placeholders})",
+                    parameters,
+                )
+                connection.execute(
+                    """
+                    DELETE FROM fusion_group
+                    WHERE job_id = ? AND NOT EXISTS(
+                        SELECT 1 FROM fusion_group_member member
+                        WHERE member.job_id = fusion_group.job_id
+                          AND member.fusion_group_id = fusion_group.fusion_group_id
+                    )
+                    """,
+                    (job_id,),
+                )
+
+            evidence = {
+                str(item["evidence_id"]): dict(item)
+                for item in stage4_result.get("evidence", [])
+            }
+            new_candidates = []
+            for item_value in stage4_result.get("candidates", []):
+                item = dict(item_value)
+                if not item.get("evidence_ids"):
+                    continue
+                if scope == "FIELD":
+                    matches = str(item.get("field_id")) == field_id and (
+                        not entity_key
+                        or str((item.get("entity") or {}).get("entity_key") or "") == entity_key
+                    )
+                else:
+                    matches = any(
+                        evidence_id in evidence and evidence_matches(evidence[evidence_id])
+                        for evidence_id in item.get("evidence_ids", [])
+                    )
+                if matches:
+                    new_candidates.append(item)
+            if not replace_candidates:
+                new_candidates = []
+            for item in new_candidates:
+                candidate_id = str(item["candidate_id"])
+                connection.execute(
+                    """
+                    INSERT INTO candidate_field(
+                        job_id, candidate_id, field_id, entity_type, entity_key,
+                        extraction_method, confidence, quality_status, review_status,
+                        source_unit, canonical_unit, normalized_value_json, payload_json
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        job_id,
+                        candidate_id,
+                        str(item["field_id"]),
+                        str((item.get("entity") or {})["entity_type"]),
+                        str((item.get("entity") or {})["entity_key"]),
+                        str(item["extraction_method"]),
+                        float(item["confidence"]),
+                        str(item["quality_status"]),
+                        str(item["review_status"]),
+                        item.get("source_unit"),
+                        item.get("canonical_unit"),
+                        canonical_json(item.get("normalized_value")),
+                        canonical_json(item),
+                    ),
+                )
+                for evidence_id_value in sorted(set(item.get("evidence_ids") or [])):
+                    evidence_id_value = str(evidence_id_value)
+                    if evidence_id_value not in evidence:
+                        raise ValueError("重提取候选引用了未持久化证据")
+                    connection.execute(
+                        """
+                        INSERT INTO candidate_evidence_link(
+                            job_id, candidate_id, evidence_id, evidence_json
+                        ) VALUES (?, ?, ?, ?)
+                        """,
+                        (
+                            job_id,
+                            candidate_id,
+                            evidence_id_value,
+                            canonical_json(evidence[evidence_id_value]),
+                        ),
+                    )
+
+            result_parse_sha256 = None
+            if document is not None and source_id:
+                result_parse_sha256 = str(document.get("parse_sha256") or "")
+                if len(result_parse_sha256) != 64:
+                    raise ValueError("重提取解析哈希无效")
+                current_artifacts = {
+                    str(row["path"]): dict(row)
+                    for row in connection.execute(
+                        """
+                        SELECT path, artifact_kind, content_type, content, byte_count, sha256
+                        FROM conversion_parse_artifact WHERE job_id = ? AND source_id = ?
+                        """,
+                        (job_id, source_id),
+                    ).fetchall()
+                }
+                base_version_id = f"PVER-{uuid4()}"
+                source_row = connection.execute(
+                    """
+                    SELECT parser_id, parser_version, parse_sha256
+                    FROM conversion_source WHERE job_id = ? AND id = ?
+                    """,
+                    (job_id, source_id),
+                ).fetchone()
+                connection.execute(
+                    """
+                    INSERT INTO conversion_parse_version(
+                        id, job_id, source_id, reextraction_request_id, scope,
+                        page_number, parser_id, parser_version, parse_sha256, active, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)
+                    """,
+                    (
+                        base_version_id,
+                        job_id,
+                        source_id,
+                        request_id,
+                        scope,
+                        page_number or None,
+                        str(source_row["parser_id"] or "unknown"),
+                        str(source_row["parser_version"] or "unknown"),
+                        str(source_row["parse_sha256"] or request["base_parse_sha256"] or "0" * 64),
+                        utc_now(),
+                    ),
+                )
+                for row in current_artifacts.values():
+                    connection.execute(
+                        """
+                        INSERT INTO conversion_parse_artifact_version(
+                            version_id, path, artifact_kind, content_type,
+                            content, byte_count, sha256
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            base_version_id,
+                            row["path"],
+                            row["artifact_kind"],
+                            row["content_type"],
+                            row["content"],
+                            row["byte_count"],
+                            row["sha256"],
+                        ),
+                    )
+                for artifact in artifacts:
+                    content = bytes(artifact["content"])
+                    current_artifacts[str(artifact["path"])] = {
+                        "path": str(artifact["path"]),
+                        "artifact_kind": str(artifact.get("artifact_kind") or "RESOURCE"),
+                        "content_type": str(
+                            artifact.get("content_type") or "application/octet-stream"
+                        ),
+                        "content": content,
+                        "byte_count": len(content),
+                        "sha256": bytes_sha256(content),
+                    }
+                connection.execute(
+                    "UPDATE conversion_parse_version SET active = 0 "
+                    "WHERE job_id = ? AND source_id = ?",
+                    (job_id, source_id),
+                )
+                new_version_id = f"PVER-{uuid4()}"
+                connection.execute(
+                    """
+                    INSERT INTO conversion_parse_version(
+                        id, job_id, source_id, reextraction_request_id, scope,
+                        page_number, parser_id, parser_version, parse_sha256, active, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+                    """,
+                    (
+                        new_version_id,
+                        job_id,
+                        source_id,
+                        request_id,
+                        scope,
+                        page_number or None,
+                        str(document.get("parser_id") or "unknown"),
+                        str(document.get("parser_version") or "unknown"),
+                        result_parse_sha256,
+                        utc_now(),
+                    ),
+                )
+                connection.execute(
+                    "DELETE FROM conversion_parse_artifact WHERE job_id = ? AND source_id = ?",
+                    (job_id, source_id),
+                )
+                for row in current_artifacts.values():
+                    connection.execute(
+                        """
+                        INSERT INTO conversion_parse_artifact_version(
+                            version_id, path, artifact_kind, content_type,
+                            content, byte_count, sha256
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            new_version_id,
+                            row["path"],
+                            row["artifact_kind"],
+                            row["content_type"],
+                            row["content"],
+                            row["byte_count"],
+                            row["sha256"],
+                        ),
+                    )
+                    connection.execute(
+                        """
+                        INSERT INTO conversion_parse_artifact(
+                            job_id, source_id, path, artifact_kind, content_type,
+                            content, byte_count, sha256, parse_sha256, created_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            job_id,
+                            source_id,
+                            row["path"],
+                            row["artifact_kind"],
+                            row["content_type"],
+                            row["content"],
+                            row["byte_count"],
+                            row["sha256"],
+                            result_parse_sha256,
+                            utc_now(),
+                        ),
+                    )
+                connection.execute(
+                    """
+                    UPDATE conversion_source
+                    SET parser_id = ?, parser_version = ?, parse_sha256 = ?, parsed_at = ?,
+                        security_status = ?
+                    WHERE job_id = ? AND id = ?
+                    """,
+                    (
+                        document.get("parser_id"),
+                        document.get("parser_version"),
+                        result_parse_sha256,
+                        utc_now(),
+                        "PARSED" if not partial else "PARSED_PARTIAL",
+                        job_id,
+                        source_id,
+                    ),
+                )
+
+            after = candidate_snapshot(connection, job_id)
+            after_hash = json_sha256(after)
+            connection.execute(
+                """
+                INSERT INTO candidate_set_version(
+                    id, job_id, reextraction_request_id, candidate_set_sha256,
+                    candidates_json, active, created_at
+                ) VALUES (?, ?, ?, ?, ?, 1, ?)
+                """,
+                (
+                    f"CSET-{uuid4()}",
+                    job_id,
+                    request_id,
+                    after_hash,
+                    canonical_json(after),
+                    utc_now(),
+                ),
+            )
+            now = utc_now()
+            run_id = f"XRUN-{uuid4()}"
+            output = {
+                "request_id": request_id,
+                "scope": scope,
+                "removed_candidate_count": len(target_ids),
+                "new_candidate_count": len(new_candidates),
+                "candidate_set_sha256": after_hash,
+            }
+            connection.execute(
+                """
+                INSERT INTO extraction_run(
+                    id, job_id, step, task_type, status, input_sha256, output_sha256,
+                    retry_count, input_json, output_json, started_at, finished_at
+                ) VALUES (?, ?, ?, 'REEXTRACTION', ?, ?, ?, 0, NULL, ?, ?, ?)
+                """,
+                (
+                    run_id,
+                    job_id,
+                    f"REEXTRACT:{request_id}",
+                    "PARTIAL" if partial else "COMPLETED",
+                    str(request["base_parse_sha256"] or before_hash),
+                    json_sha256(output),
+                    canonical_json(output),
+                    str(request["started_at"] or now),
+                    now,
+                ),
+            )
+            changed = before_hash != after_hash
+            if changed:
+                connection.execute(
+                    """
+                    UPDATE review_session
+                    SET status = 'STALE', gate_status = NULL, gate_result_hash = NULL,
+                        updated_at = ?
+                    WHERE id = ? AND status IN ('OPEN', 'IN_REVIEW', 'READY_TO_CONFIRM')
+                    """,
+                    (now, request["session_id"]),
+                )
+            final_status = "PARTIAL" if partial else "COMPLETED"
+            connection.execute(
+                """
+                UPDATE reextraction_request
+                SET status = ?, finished_at = ?, error_json = NULL,
+                    result_parse_sha256 = ?, replacement_extraction_run_id = ?
+                WHERE id = ?
+                """,
+                (final_status, now, result_parse_sha256, run_id, request_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="REVIEW_REEXTRACTION_COMPLETED",
+                entity_type="reextraction_request",
+                entity_id=request_id,
+                actor=safe_actor,
+                detail={
+                    **output,
+                    "status": final_status,
+                    "candidate_set_changed": changed,
+                    "result_parse_sha256": result_parse_sha256,
+                },
+            )
+        return {
+            "id": request_id,
+            "status": final_status,
+            "candidate_set_changed": changed,
+            "candidate_set_sha256": after_hash,
+            "replacement_extraction_run_id": run_id,
+            "result_parse_sha256": result_parse_sha256,
+        }
 
     def save_stage4_result(self, job_id: str, result: dict[str, Any]) -> None:
         """Atomically materialize candidate facts separately from conversion payload JSON."""
@@ -2853,6 +3676,10 @@ class QraDatabase:
             ocr_model_version=job.get("ocr_model_version"),
             extraction_provider_id=job.get("extraction_provider_id"),
             extraction_model_version=job.get("extraction_model_version"),
+            pilot_id=job.get("pilot_id"),
+            pilot_version=job.get("pilot_version"),
+            pilot_manifest_sha256=job.get("pilot_manifest_sha256"),
+            target_node_ids=job.get("target_node_ids") or None,
             review_decisions=decisions,
             batch_id=job.get("batch_id"),
             parent_job_id=job_id,
@@ -2938,6 +3765,40 @@ class QraDatabase:
                         detail={"reason": "service_restart"},
                     )
         return job_ids
+
+    def requeue_interrupted_reextractions(self) -> list[str]:
+        """Resume durable reextraction requests after a process restart."""
+
+        self.initialize()
+        with self.transaction() as connection:
+            rows = connection.execute(
+                """
+                SELECT id, status FROM reextraction_request
+                WHERE status IN ('QUEUED', 'RUNNING')
+                ORDER BY created_at, id
+                """
+            ).fetchall()
+            request_ids = [str(row["id"]) for row in rows]
+            if request_ids:
+                connection.execute(
+                    """
+                    UPDATE reextraction_request
+                    SET status = 'QUEUED', started_at = NULL, finished_at = NULL,
+                        error_json = NULL
+                    WHERE status IN ('QUEUED', 'RUNNING')
+                    """
+                )
+                for row in rows:
+                    if str(row["status"]) == "RUNNING":
+                        self._record_event_in_connection(
+                            connection,
+                            event_type="REVIEW_REEXTRACTION_REQUEUED",
+                            entity_type="reextraction_request",
+                            entity_id=str(row["id"]),
+                            actor="system",
+                            detail={"reason": "service_restart"},
+                        )
+        return request_ids
 
     def confirm_conversion(
         self,
@@ -3185,25 +4046,84 @@ class QraDatabase:
                 detail={"name": str(row["name"])},
             )
 
-    def create_run(self, snapshot_id: str, input_sha256: str) -> str:
+    def create_run(
+        self,
+        snapshot_id: str,
+        input_sha256: str,
+        *,
+        targets: list[str] | None = None,
+        generate_charts: bool = True,
+        review_session_id: str | None = None,
+        review_provenance_id: str | None = None,
+    ) -> str:
         run_id = f"RUN-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{uuid4().hex[:8]}"
         with self.transaction() as connection:
+            snapshot = connection.execute(
+                "SELECT payload_sha256 FROM input_snapshot WHERE id = ?", (snapshot_id,)
+            ).fetchone()
+            if snapshot is None:
+                raise KeyError(f"输入快照不存在：{snapshot_id}")
+            if str(snapshot["payload_sha256"]) != str(input_sha256):
+                raise ValueError("计算输入哈希必须等于不可变快照哈希")
             connection.execute(
                 """
                 INSERT INTO calculation_run(
-                    id, snapshot_id, status, input_sha256, created_at
-                ) VALUES (?, ?, 'QUEUED', ?, ?)
+                    id, snapshot_id, status, input_sha256, review_session_id,
+                    review_provenance_id, target_node_ids_json, generate_charts, created_at
+                ) VALUES (?, ?, 'QUEUED', ?, ?, ?, ?, ?, ?)
                 """,
-                (run_id, snapshot_id, input_sha256, utc_now()),
+                (
+                    run_id,
+                    snapshot_id,
+                    input_sha256,
+                    review_session_id,
+                    review_provenance_id,
+                    canonical_json(targets) if targets else None,
+                    int(bool(generate_charts)),
+                    utc_now(),
+                ),
             )
             self._record_event_in_connection(
                 connection,
                 event_type="RUN_QUEUED",
                 entity_type="calculation_run",
                 entity_id=run_id,
-                detail={"snapshot_id": snapshot_id},
+                detail={
+                    "snapshot_id": snapshot_id,
+                    "review_session_id": review_session_id,
+                    "targets": list(targets or []),
+                    "generate_charts": bool(generate_charts),
+                },
             )
         return run_id
+
+    def requeue_interrupted_runs(self) -> list[str]:
+        """Recover queued/running process-local calculations after a service restart."""
+
+        self.initialize()
+        with self.transaction() as connection:
+            rows = connection.execute(
+                "SELECT id FROM calculation_run WHERE status IN ('QUEUED','RUNNING')"
+            ).fetchall()
+            run_ids = [str(row["id"]) for row in rows]
+            if run_ids:
+                connection.execute(
+                    """
+                    UPDATE calculation_run
+                    SET status = 'QUEUED', engine_version = NULL, started_at = NULL,
+                        error_message = NULL
+                    WHERE status IN ('QUEUED','RUNNING')
+                    """
+                )
+                for run_id in run_ids:
+                    self._record_event_in_connection(
+                        connection,
+                        event_type="RUN_RECOVERED",
+                        entity_type="calculation_run",
+                        entity_id=run_id,
+                        detail={"reason": "service_restart"},
+                    )
+        return run_ids
 
     def set_run_running(self, run_id: str, engine_version: str) -> None:
         with self.transaction() as connection:
@@ -3427,7 +4347,7 @@ class QraDatabase:
                 )
 
             for artifact_path in sorted(artifacts):
-                relative = artifact_path.relative_to(root).as_posix()
+                relative = normalize_artifact_path(artifact_path.relative_to(root).as_posix())
                 content = artifact_path.read_bytes()
                 connection.execute(
                     """
@@ -3506,6 +4426,9 @@ class QraDatabase:
         else:
             result.pop("summary_json", None)
             result["summary"] = None
+        targets = result.pop("target_node_ids_json", None)
+        result["target_node_ids"] = json.loads(str(targets)) if targets else []
+        result["generate_charts"] = bool(result.get("generate_charts", 1))
         return result
 
     def latest_run_id(self) -> str:
@@ -3548,6 +4471,7 @@ class QraDatabase:
         return [dict(row) for row in rows]
 
     def get_artifact(self, run_id: str, path: str) -> tuple[str, bytes] | None:
+        safe_path = normalize_artifact_path(path)
         with self.session() as connection:
             row = connection.execute(
                 """
@@ -3555,7 +4479,7 @@ class QraDatabase:
                 FROM calculation_artifact
                 WHERE run_id = ? AND path = ?
                 """,
-                (run_id, path),
+                (run_id, safe_path),
             ).fetchone()
         if row is None:
             return None
@@ -3719,6 +4643,7 @@ __all__ = [
     "ADMIN_BROWSABLE_TABLES",
     "QraDatabase",
     "SCHEMA_VERSION",
+    "normalize_artifact_path",
     "bytes_sha256",
     "canonical_json",
     "json_sha256",

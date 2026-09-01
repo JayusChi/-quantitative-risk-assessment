@@ -111,7 +111,7 @@ class AliyunBailianExtractionProvider:
     def _schema_name(task_type: str) -> str:
         return "qra_" + re.sub(r"[^a-z0-9_]+", "_", task_type.casefold()).strip("_")
 
-    def _request_bytes(self, request: ExtractionRequest) -> bytes:
+    def build_request_bytes(self, request: ExtractionRequest) -> bytes:
         user_payload = {
             "task_type": request.task_type,
             "request_id": request.request_id,
@@ -176,6 +176,13 @@ class AliyunBailianExtractionProvider:
                 code="EXTRACT.REQUEST_INVALID",
                 retryable=False,
             ) from exc
+
+    # Compatibility alias retained for existing tests and smoke tools.
+    def _request_bytes(self, request: ExtractionRequest) -> bytes:
+        return self.build_request_bytes(request)
+
+    def request_byte_count(self, request: ExtractionRequest) -> int:
+        return len(self.build_request_bytes(request))
 
     @staticmethod
     def _http_error_detail(exc: HTTPError) -> str:
@@ -248,9 +255,22 @@ class AliyunBailianExtractionProvider:
         )
 
     def extract(self, request: ExtractionRequest) -> ExtractionResponse:
+        body = self.build_request_bytes(request)
+        max_request_bytes = _bounded_integer(
+            "QRA_EXTRACTION_MAX_REQUEST_BYTES",
+            7_500_000,
+            128 * 1024,
+            32 * 1024 * 1024,
+        )
+        if len(body) > max_request_bytes:
+            raise ProviderCallError(
+                "信息提取请求在本地最终序列化校验时超过外发预算",
+                code="EXTRACT.REQUEST_TOO_LARGE",
+                retryable=False,
+            )
         outbound = Request(
             self._endpoint,
-            data=self._request_bytes(request),
+            data=body,
             method="POST",
             headers={
                 "Authorization": f"Bearer {self._api_key}",
@@ -273,6 +293,16 @@ class AliyunBailianExtractionProvider:
                 code, retryable = "EXTRACT.PROVIDER_TIMEOUT", True
             elif 500 <= exc.code < 600:
                 code, retryable = "EXTRACT.PROVIDER_SERVICE_ERROR", True
+            elif exc.code == 413 or (
+                exc.code in {400, 422}
+                and re.search(
+                    r"(?:request body too large|payload too large|max(?:imum)? bytes|"
+                    r"file too large|exceed(?:ed|s)?.*bytes)",
+                    detail,
+                    flags=re.IGNORECASE,
+                )
+            ):
+                code, retryable = "EXTRACT.REQUEST_TOO_LARGE", False
             else:
                 code, retryable = "EXTRACT.PROVIDER_REQUEST_REJECTED", False
             raise ProviderCallError(

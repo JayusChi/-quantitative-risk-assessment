@@ -171,6 +171,65 @@ class AliyunBailianOcrProviderTests(unittest.TestCase):
         self.assertEqual(response.text_blocks[0].block_type, "UNLOCATED_PAGE_TEXT")
         self.assertIn("管道检测结果", response.text_blocks[0].text)
 
+    def test_table_task_maps_provider_html_to_cells_with_bounded_coordinates(self) -> None:
+        captured = {}
+
+        def opener(outbound, *, timeout):
+            captured["body"] = json.loads(outbound.data.decode("utf-8"))
+            return FakeResponse(
+                {
+                    "status_code": 200,
+                    "request_id": "provider-table-1",
+                    "output": {
+                        "choices": [
+                            {
+                                "finish_reason": "stop",
+                                "message": {
+                                    "content": [
+                                        {
+                                            "text": (
+                                                "<table><tr><th>项目</th><th>数值</th></tr>"
+                                                "<tr><td rowspan='2'>壁厚</td><td>12</td></tr>"
+                                                "<tr><td>13</td></tr></table>"
+                                            )
+                                        }
+                                    ]
+                                },
+                            }
+                        ]
+                    },
+                }
+            )
+
+        provider = AliyunBailianOcrProvider(
+            dashscope_url="https://workspace.cn-beijing.maas.aliyuncs.com/api/v1",
+            api_key="secret",
+            opener=opener,
+        )
+        response = provider.recognize(
+            OcrRequest(
+                b"png",
+                1200,
+                800,
+                ("zh-Hans",),
+                True,
+                "REQ-TABLE",
+                9,
+                task_type="table_parsing",
+            )
+        )
+
+        self.assertEqual(
+            captured["body"]["parameters"]["ocr_options"], {"task": "table_parsing"}
+        )
+        self.assertFalse(response.text_blocks)
+        self.assertEqual(len(response.tables), 1)
+        self.assertEqual((response.tables[0].row_count, response.tables[0].column_count), (3, 2))
+        self.assertEqual(response.tables[0].cells[2].row_span, 2)
+        self.assertTrue(all(cell.bbox for cell in response.tables[0].cells))
+        self.assertLessEqual(response.tables[0].cells[-1].bbox.right, 1200)
+        self.assertLessEqual(response.tables[0].cells[-1].bbox.bottom, 800)
+
     def test_environment_selects_bailian_without_exposing_key_in_model_metadata(self) -> None:
         values = {
             "QRA_OCR_PROVIDER": "aliyun-bailian",

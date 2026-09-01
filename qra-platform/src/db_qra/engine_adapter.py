@@ -2,15 +2,16 @@ from __future__ import annotations
 
 import json
 import tempfile
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
-from .database import QraDatabase, json_sha256
 from qra_engine import ENGINE_VERSION
 from qra_engine.data_categories import resolve_data_categories
 from qra_engine.dynamic import plan_dynamic_flow, run_dynamic_flow
 from qra_engine.validation import validate_import_contract
 
+from .database import QraDatabase, json_sha256
 
 DB_ADAPTER_VERSION = "0.1.0"
 
@@ -80,6 +81,14 @@ def execute_run(
     runtime_root: Path | str | None = None,
 ) -> dict[str, Any]:
     """Execute a previously queued run, allowing an Admin API to return early."""
+    run = database.get_run(run_id)
+    if str(run["snapshot_id"]) != str(snapshot_id):
+        raise ValueError("计算任务与输入快照不匹配")
+    snapshot = database.snapshot_metadata(snapshot_id)
+    if str(run["input_sha256"]) != str(snapshot["payload_sha256"]):
+        raise ValueError("计算任务输入哈希与不可变快照不一致")
+    if targets is None and run.get("target_node_ids"):
+        targets = list(run["target_node_ids"])
     case = database.load_snapshot(snapshot_id)
     database.set_run_running(
         run_id,
@@ -123,7 +132,12 @@ def calculate_snapshot(
 ) -> dict[str, Any]:
     """Load one DB snapshot, call the unchanged engine, and persist all outputs."""
     case = database.load_snapshot(snapshot_id)
-    run_id = database.create_run(snapshot_id, json_sha256(case))
+    run_id = database.create_run(
+        snapshot_id,
+        json_sha256(case),
+        targets=list(targets) if targets is not None else None,
+        generate_charts=generate_charts,
+    )
     return execute_run(
         database,
         run_id,

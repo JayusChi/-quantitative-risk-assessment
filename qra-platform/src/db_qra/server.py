@@ -15,6 +15,7 @@ from typing import Any
 from urllib.parse import parse_qs, quote, unquote, urlparse
 from uuid import uuid4
 
+from qra_converter.ocr.payload_policy import OcrPayloadPolicy
 from qra_engine.errors import InputValidationError
 
 from .admin_ui import admin_html
@@ -46,13 +47,21 @@ from .ocr_settings import (
     validate_bailian_settings,
 )
 from .paths import DEFAULT_RUNTIME_ROOT
+from .reextraction_worker import ReextractionWorker
 from .review_service import ReviewRevisionConflict, ReviewService
 from .review_ui import review_workbench_html
+from .roadmap_stage4 import build_m1_summary
 
-MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+# JSON uploads contain base64 source bytes. Keep the ordinary 25 MiB ceiling,
+# but derive an exact larger ceiling when a controlled process raises intake limits.
+MAX_UPLOAD_BYTES = max(
+    25 * 1024 * 1024,
+    4 * ((MAX_UPLOAD_TOTAL_BYTES + 2) // 3) + 1024 * 1024,
+)
 RUNTIME_ROOT = DEFAULT_RUNTIME_ROOT
 RUN_SLOTS = threading.BoundedSemaphore(value=2)
 CONVERSION_SLOTS = threading.BoundedSemaphore(value=2)
+REEXTRACTION_SLOTS = threading.BoundedSemaphore(value=2)
 
 
 def _public_error_message(value: object) -> str:
@@ -101,6 +110,20 @@ def _start_conversion_thread(database: QraDatabase, job_id: str) -> None:
         target=_conversion_background,
         args=(database, job_id),
         name=f"qra-converter-{job_id}",
+        daemon=True,
+    ).start()
+
+
+def _reextraction_background(database: QraDatabase, request_id: str) -> None:
+    with REEXTRACTION_SLOTS:
+        ReextractionWorker(database, runtime_root=RUNTIME_ROOT).run(request_id)
+
+
+def _start_reextraction_thread(database: QraDatabase, request_id: str) -> None:
+    threading.Thread(
+        target=_reextraction_background,
+        args=(database, request_id),
+        name=f"qra-reextraction-{request_id}",
         daemon=True,
     ).start()
 
@@ -214,7 +237,7 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         if length <= 0:
             raise ValueError("请求体不能为空")
         if length > MAX_UPLOAD_BYTES:
-            raise ValueError("上传内容超过25 MB限制")
+            raise ValueError(f"上传内容超过{MAX_UPLOAD_BYTES}字节入口限制")
         raw = self.rfile.read(length)
         try:
             return json.loads(raw.decode("utf-8-sig"))
@@ -415,6 +438,36 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 overview["storage_engine"] = "SQLite"
                 self._json(200, overview)
                 return
+            if parts == ["admin", "api", "intake-policy"]:
+                ocr_policy = OcrPayloadPolicy.from_environment()
+                try:
+                    extraction_budget = int(
+                        os.environ.get("QRA_EXTRACTION_MAX_REQUEST_BYTES", "7500000")
+                    )
+                except ValueError:
+                    extraction_budget = 7_500_000
+                self._json(
+                    200,
+                    {
+                        "raw_upload": {
+                            "max_file_bytes": MAX_UPLOAD_FILE_BYTES,
+                            "max_total_bytes": MAX_UPLOAD_TOTAL_BYTES,
+                            "max_source_files": MAX_SOURCE_FILES,
+                        },
+                        "outbound_model_request": {
+                            "ocr_max_data_uri_bytes": ocr_policy.max_data_uri_bytes,
+                            "ocr_max_http_body_bytes": ocr_policy.max_http_body_bytes,
+                            "ocr_policy_version": ocr_policy.version,
+                            "extraction_max_http_body_bytes": extraction_budget,
+                        },
+                        "adaptation": {
+                            "images": "LOCAL_RESIZE_COMPRESS_OR_TILE",
+                            "pdf": "PAGE_BY_PAGE",
+                            "partial_success_preserved": True,
+                        },
+                    },
+                )
+                return
             if parts == ["admin", "api", "ocr-settings"]:
                 self._json(200, ocr_settings_status(self._get_ocr_settings_store()))
                 return
@@ -470,6 +523,21 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     return
                 if parts[4] == "review-summary":
                     self._json(200, self.database.conversion_review_summary(parts[3]))
+                    return
+                if parts[4] == "m1-summary":
+                    self._json(
+                        200,
+                        build_m1_summary(
+                            self.database,
+                            parts[3],
+                            review_session_id=(
+                                str(query.get("review_session_id", [""])[0]).strip() or None
+                            ),
+                            calculation_run_id=(
+                                str(query.get("run_id", [""])[0]).strip() or None
+                            ),
+                        ),
+                    )
                     return
                 if parts[4] == "candidates":
                     self._json(
@@ -556,6 +624,12 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     )
                     self._send(200, content_type, content, headers=headers)
                     return
+                if len(parts) == 5 and parts[4] == "reextractions":
+                    self._json(200, service.list_reextractions(session_id))
+                    return
+            if len(parts) == 4 and parts[:3] == ["admin", "api", "reextractions"]:
+                self._json(200, self._review_service().get_reextraction(parts[3]))
+                return
             if parts == ["admin", "api", "snapshots"]:
                 self._json(200, self.database.list_snapshots())
                 return
@@ -877,7 +951,32 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         source_id=body.get("source_id"),
                         evidence_id=body.get("evidence_id"),
                     )
-                    self._json(201, result)
+                    if result.get("reextraction_request_id"):
+                        _start_reextraction_thread(
+                            self.database, str(result["reextraction_request_id"])
+                        )
+                    self._json(202 if result.get("reextraction_request_id") else 201, result)
+                    return
+                if parts[4] == "reextractions":
+                    request, created = service.enqueue_reextraction(
+                        session_id,
+                        scope=str(body.get("scope") or "FIELD"),
+                        source_id=body.get("source_id"),
+                        page_number=(
+                            int(body["page_number"])
+                            if body.get("page_number") is not None
+                            else None
+                        ),
+                        field_id=body.get("field_id"),
+                        entity_id=body.get("entity_id"),
+                        evidence_id=body.get("evidence_id"),
+                        requested_parameters=body.get("requested_parameters"),
+                        reason=str(body.get("reason") or ""),
+                        actor=self._actor(body),
+                    )
+                    if created:
+                        _start_reextraction_thread(self.database, str(request["id"]))
+                    self._json(202, {"created": created, "request": request})
                     return
                 if parts[4] == "gate":
                     self._json(200, service.run_gate(session_id, actor=self._actor(body)))
@@ -908,6 +1007,19 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         )
                     self._json(201 if result.get("created") else 200, result)
                     return
+            if (
+                len(parts) == 5
+                and parts[:3] == ["admin", "api", "reextractions"]
+                and parts[4] == "cancel"
+            ):
+                body = self._read_optional_json_body()
+                self._json(
+                    200,
+                    self._review_service().cancel_reextraction(
+                        parts[3], actor=self._actor(body)
+                    ),
+                )
+                return
             if len(parts) == 5 and parts[:3] == ["admin", "api", "conversions"]:
                 job_id = parts[3]
                 body = self._read_optional_json_body()
@@ -1026,7 +1138,12 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     isinstance(targets, list) and all(isinstance(item, str) for item in targets)
                 ):
                     raise ValueError("targets必须是字符串数组或null")
-                run_id = self.database.create_run(snapshot_id, str(metadata["payload_sha256"]))
+                run_id = self.database.create_run(
+                    snapshot_id,
+                    str(metadata["payload_sha256"]),
+                    targets=list(targets) if targets is not None else None,
+                    generate_charts=bool(body.get("generate_charts", True)),
+                )
 
                 _start_run_thread(
                     self.database,
@@ -1160,6 +1277,8 @@ def serve(database: QraDatabase, host: str, port: int) -> None:
         restored_ocr = None
         print(f"[QRA-OCR] 无法加载本机加密配置：{type(exc).__name__}: {_public_error_message(exc)}")
     recovered_jobs = database.requeue_interrupted_conversions()
+    recovered_reextractions = database.requeue_interrupted_reextractions()
+    recovered_runs = database.requeue_interrupted_runs()
     handler = type(
         "ConfiguredQraRequestHandler",
         (QraRequestHandler,),
@@ -1176,6 +1295,17 @@ def serve(database: QraDatabase, host: str, port: int) -> None:
         print("OCR：未配置，可在资料自动转换页面导入阿里云百炼CSV")
     for job_id in recovered_jobs:
         _start_conversion_thread(database, job_id)
+    for request_id in recovered_reextractions:
+        _start_reextraction_thread(database, request_id)
+    for run_id in recovered_runs:
+        run = database.get_run(run_id)
+        _start_run_thread(
+            database,
+            run_id,
+            str(run["snapshot_id"]),
+            targets=list(run.get("target_node_ids") or []),
+            generate_charts=bool(run.get("generate_charts", True)),
+        )
     try:
         server.serve_forever()
     except KeyboardInterrupt:

@@ -17,6 +17,7 @@ from openpyxl import load_workbook
 from PIL import Image, ImageDraw
 
 from qra_converter.contract_catalog import load_contract_catalog
+from qra_engine.dynamic import dynamic_node_catalog
 
 from .database import QraDatabase, canonical_json, json_sha256, utc_now
 from .review_assembly import (
@@ -181,12 +182,46 @@ class ReviewService:
 
     @staticmethod
     def _default_targets(job: sqlite3.Row) -> list[str]:
+        manifest_targets = [
+            str(value) for value in _json(job["target_node_ids_json"], []) if value
+        ]
+        if manifest_targets:
+            known = {str(row["node_id"]) for row in dynamic_node_catalog()["nodes"]}
+            unknown = sorted(set(manifest_targets) - known)
+            if unknown:
+                raise ValueError(f"试点清单包含未知目标节点：{', '.join(unknown)}")
+            return list(dict.fromkeys(manifest_targets))
         capability = _json(job["stage4_capability_json"], {})
         plan = capability.get("engine_import_preflight", {}).get("dynamic_plan", {})
         targets = [str(value) for value in plan.get("runnable_node_ids", []) if value]
         if "segment_geometry" not in targets:
             targets.insert(0, "segment_geometry")
         return list(dict.fromkeys(targets))
+
+    @classmethod
+    def _validated_targets(
+        cls, job: sqlite3.Row, requested_targets: list[str] | None
+    ) -> list[str]:
+        manifest_targets = cls._default_targets(job)
+        targets = (
+            [str(value).strip() for value in requested_targets]
+            if requested_targets is not None
+            else manifest_targets
+        )
+        if not targets or any(not value for value in targets):
+            raise ValueError("复核会话必须声明至少一个目标计算节点")
+        if len(set(targets)) != len(targets):
+            raise ValueError("目标计算节点不得重复")
+        known = {str(row["node_id"]) for row in dynamic_node_catalog()["nodes"]}
+        unknown = sorted(set(targets) - known)
+        if unknown:
+            raise ValueError(f"目标计算节点未知：{', '.join(unknown)}")
+        versioned_targets = [
+            str(value) for value in _json(job["target_node_ids_json"], []) if value
+        ]
+        if versioned_targets and targets != manifest_targets:
+            raise ValueError("目标计算节点与版本化试点清单不一致")
+        return targets
 
     def create_or_resume_session(
         self,
@@ -208,6 +243,7 @@ class ReviewService:
                 "SELECT 1 FROM candidate_field WHERE job_id = ? LIMIT 1", (job_id,)
             ).fetchone():
                 raise ValueError("转换任务尚未产生候选字段")
+            targets = self._validated_targets(job, target_node_ids)
             current = connection.execute(
                 """
                 SELECT * FROM review_session
@@ -218,8 +254,7 @@ class ReviewService:
             ).fetchone()
             if current is not None and str(current["candidate_set_hash"]) == candidate_hash:
                 current_doc = self._session_document(current)
-                requested = target_node_ids or current_doc["target_node_ids"]
-                if list(requested) != list(current_doc["target_node_ids"]):
+                if targets != list(current_doc["target_node_ids"]):
                     raise ValueError("已有活动会话的目标节点范围不同；请先完成或废弃该会话")
                 self.database._record_event_in_connection(
                     connection,
@@ -249,9 +284,6 @@ class ReviewService:
                     actor=safe_actor,
                     detail={"conversion_job_id": job_id, "new_candidate_set_hash": candidate_hash},
                 )
-            targets = [str(value) for value in (target_node_ids or self._default_targets(job))]
-            if not targets:
-                raise ValueError("复核会话必须声明至少一个目标计算节点")
             connection.execute(
                 """
                 INSERT INTO review_session(
@@ -804,9 +836,10 @@ class ReviewService:
                 connection.execute(
                     """
                     INSERT INTO reextraction_request(
-                        id, session_id, conversion_job_id, source_id, field_id,
-                        entity_id, evidence_id, requested_by, reason, status, created_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'QUEUED', ?)
+                        id, session_id, conversion_job_id, scope, source_id, field_id,
+                        entity_id, evidence_id, requested_parameters_json,
+                        requested_by, reason, status, created_at
+                    ) VALUES (?, ?, ?, 'FIELD', ?, ?, ?, ?, '{}', ?, ?, 'QUEUED', ?)
                     """,
                     (
                         request_id,
@@ -862,6 +895,174 @@ class ReviewService:
             "session": updated,
             "item": self.get_item(session_id, review_item_key),
         }
+
+    def enqueue_reextraction(
+        self,
+        session_id: str,
+        *,
+        scope: str,
+        source_id: str | None,
+        page_number: int | None,
+        field_id: str | None,
+        entity_id: str | None,
+        evidence_id: str | None,
+        requested_parameters: dict[str, Any] | None,
+        reason: str,
+        actor: str,
+    ) -> tuple[dict[str, Any], bool]:
+        scope = str(scope).strip().upper()
+        if scope not in {"FILE", "PAGE", "FIELD"}:
+            raise ValueError("重提取scope必须为FILE、PAGE或FIELD")
+        safe_actor = str(actor).strip()
+        safe_reason = str(reason).strip()
+        if not safe_actor or not safe_reason:
+            raise ValueError("重提取必须提供操作人和原因")
+        if scope in {"FILE", "PAGE"} and not source_id:
+            raise ValueError("文件或页面重提取必须指定source_id")
+        if scope == "PAGE" and (page_number is None or int(page_number) < 1):
+            raise ValueError("页面重提取必须提供正整数page_number")
+        if scope == "FIELD" and not field_id:
+            raise ValueError("字段重提取必须指定field_id")
+        parameters = requested_parameters or {}
+        if not isinstance(parameters, dict):
+            raise ValueError("requested_parameters必须是对象")
+        with self.database.transaction() as connection:
+            session = connection.execute(
+                "SELECT * FROM review_session WHERE id = ?", (session_id,)
+            ).fetchone()
+            if session is None:
+                raise KeyError(f"复核会话不存在：{session_id}")
+            if str(session["status"]) not in EDITABLE_SESSION_STATUSES:
+                raise ValueError("已失效或已确认的复核会话不能原地重提取")
+            job_id = str(session["conversion_job_id"])
+            source = None
+            if source_id:
+                source = connection.execute(
+                    """
+                    SELECT id, media_type, parse_sha256 FROM conversion_source
+                    WHERE job_id = ? AND id = ?
+                    """,
+                    (job_id, source_id),
+                ).fetchone()
+                if source is None:
+                    raise ValueError("重提取源文件不属于当前转换任务")
+            if scope == "PAGE" and str(source["media_type"]) != "application/pdf":
+                raise ValueError("PAGE范围只适用于PDF源文件")
+            duplicate = connection.execute(
+                """
+                SELECT id FROM reextraction_request
+                WHERE session_id = ? AND scope = ?
+                  AND coalesce(source_id, '') = coalesce(?, '')
+                  AND coalesce(page_number, 0) = coalesce(?, 0)
+                  AND coalesce(field_id, '') = coalesce(?, '')
+                  AND coalesce(entity_id, '') = coalesce(?, '')
+                  AND status IN ('QUEUED', 'RUNNING')
+                ORDER BY created_at DESC LIMIT 1
+                """,
+                (session_id, scope, source_id, page_number, field_id, entity_id),
+            ).fetchone()
+            if duplicate is not None:
+                request_id = str(duplicate["id"])
+                created = False
+            else:
+                request_id = f"REXT-{uuid4()}"
+                connection.execute(
+                    """
+                    INSERT INTO reextraction_request(
+                        id, session_id, conversion_job_id, scope, source_id,
+                        page_number, field_id, entity_id, evidence_id,
+                        requested_parameters_json, requested_by, reason, status,
+                        created_at, base_parse_sha256
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'QUEUED', ?, ?)
+                    """,
+                    (
+                        request_id,
+                        session_id,
+                        job_id,
+                        scope,
+                        source_id,
+                        page_number,
+                        field_id or "__SCOPE__",
+                        entity_id,
+                        evidence_id,
+                        canonical_json(parameters),
+                        safe_actor,
+                        safe_reason,
+                        utc_now(),
+                        source["parse_sha256"] if source is not None else None,
+                    ),
+                )
+                self.database._record_event_in_connection(
+                    connection,
+                    event_type="REVIEW_REEXTRACTION_REQUESTED",
+                    entity_type="reextraction_request",
+                    entity_id=request_id,
+                    actor=safe_actor,
+                    detail={
+                        "conversion_job_id": job_id,
+                        "review_session_id": session_id,
+                        "scope": scope,
+                        "source_id": source_id,
+                        "page_number": page_number,
+                        "field_id": field_id,
+                        "entity_id": entity_id,
+                    },
+                )
+                created = True
+        return self.get_reextraction(request_id), created
+
+    def get_reextraction(self, request_id: str) -> dict[str, Any]:
+        with self.database.session() as connection:
+            row = connection.execute(
+                "SELECT * FROM reextraction_request WHERE id = ?", (request_id,)
+            ).fetchone()
+        if row is None:
+            raise KeyError(f"重新提取请求不存在：{request_id}")
+        item = dict(row)
+        item["requested_parameters"] = _json(item.pop("requested_parameters_json", None), {})
+        item["error"] = _json(item.pop("error_json", None), None)
+        return item
+
+    def list_reextractions(self, session_id: str) -> list[dict[str, Any]]:
+        self.get_session(session_id)
+        with self.database.session() as connection:
+            rows = connection.execute(
+                """
+                SELECT id FROM reextraction_request
+                WHERE session_id = ? ORDER BY created_at DESC, id DESC
+                """,
+                (session_id,),
+            ).fetchall()
+        return [self.get_reextraction(str(row["id"])) for row in rows]
+
+    def cancel_reextraction(self, request_id: str, *, actor: str) -> dict[str, Any]:
+        safe_actor = str(actor).strip()
+        if not safe_actor:
+            raise ValueError("取消重提取必须提供操作人")
+        with self.database.transaction() as connection:
+            row = connection.execute(
+                "SELECT status FROM reextraction_request WHERE id = ?", (request_id,)
+            ).fetchone()
+            if row is None:
+                raise KeyError(f"重新提取请求不存在：{request_id}")
+            if str(row["status"]) != "QUEUED":
+                raise ValueError("只有排队中的重提取可以取消")
+            connection.execute(
+                """
+                UPDATE reextraction_request
+                SET status = 'CANCELLED', finished_at = ? WHERE id = ?
+                """,
+                (utc_now(), request_id),
+            )
+            self.database._record_event_in_connection(
+                connection,
+                event_type="REVIEW_REEXTRACTION_CANCELLED",
+                entity_type="reextraction_request",
+                entity_id=request_id,
+                actor=safe_actor,
+                detail={},
+            )
+        return self.get_reextraction(request_id)
 
     def complete_reextraction(
         self,
@@ -1130,10 +1331,26 @@ class ReviewService:
                 )
                 if session["status"] not in EDITABLE_SESSION_STATUSES:
                     if session["status"] == "CONFIRMED" and session.get("confirmed_snapshot_id"):
+                        existing_run = None
+                        if session.get("confirmed_run_id"):
+                            existing_run = connection.execute(
+                                "SELECT * FROM calculation_run WHERE id = ?",
+                                (session["confirmed_run_id"],),
+                            ).fetchone()
                         return {
                             "snapshot_id": session["confirmed_snapshot_id"],
                             "created": False,
-                            "run_id": None,
+                            "run_id": session.get("confirmed_run_id"),
+                            "targets": (
+                                _json(existing_run["target_node_ids_json"], [])
+                                if existing_run is not None
+                                else session["target_node_ids"]
+                            ),
+                            "generate_charts": (
+                                bool(existing_run["generate_charts"])
+                                if existing_run is not None
+                                else bool(generate_charts)
+                            ),
                             "gate": None,
                         }
                     raise ValueError("复核会话当前不能确认")
@@ -1293,11 +1510,26 @@ class ReviewService:
                     connection.execute(
                         """
                         INSERT INTO calculation_run(
-                            id, snapshot_id, status, input_sha256, created_at
+                            id, snapshot_id, status, input_sha256,
+                            review_session_id, review_provenance_id,
+                            target_node_ids_json, generate_charts, created_at
                         )
-                        VALUES (?, ?, 'QUEUED', ?, ?)
+                        VALUES (?, ?, 'QUEUED', ?, ?, ?, ?, ?, ?)
                         """,
-                        (run_id, snapshot_id, payload_hash, utc_now()),
+                        (
+                            run_id,
+                            snapshot_id,
+                            payload_hash,
+                            session_id,
+                            provenance_id,
+                            canonical_json(session["target_node_ids"]),
+                            int(bool(generate_charts)),
+                            utc_now(),
+                        ),
+                    )
+                    connection.execute(
+                        "UPDATE review_session SET confirmed_run_id = ? WHERE id = ?",
+                        (run_id, session_id),
                     )
                     self.database._record_event_in_connection(
                         connection,

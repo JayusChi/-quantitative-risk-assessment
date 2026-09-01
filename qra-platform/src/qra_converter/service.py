@@ -16,6 +16,7 @@ from .contracts import (
 )
 from .extraction.ports import ExtractionProvider
 from .mapping import ProfileMapper, load_profile
+from .model_audit import ModelAuditCallback, sanitized_error_message
 from .ocr.ports import OcrProvider
 from .orchestration.state import WorkflowStore
 from .orchestration.workflow import Stage4Workflow
@@ -28,7 +29,7 @@ from .review import auxiliary_review_items, load_review_bundle, merge_mapped_tab
 from .schema_validation import validate_qra_input
 from .validation import validate_conversion_quality
 
-CONVERTER_VERSION = "0.5.0"
+CONVERTER_VERSION = "0.6.0"
 ContractValidator = Callable[[Any], Any]
 CapabilityPlanner = Callable[[dict[str, Any]], dict[str, Any]]
 ParseResultCallback = Callable[[Path, ParseExecution], None]
@@ -127,6 +128,7 @@ def convert_sources(
     stage4_external_sharing_allowed: bool = False,
     stage4_store: WorkflowStore | None = None,
     stage4_result_callback: Stage4ResultCallback | None = None,
+    model_audit_callback: ModelAuditCallback | None = None,
 ) -> dict[str, Any]:
     registry = ParsingRegistry()
     profile = load_profile(profile_path)
@@ -170,6 +172,8 @@ def convert_sources(
         ocr_provider=ocr_provider,
         cancel_check=cancel_check,
         page_progress=page_progress,
+        audit_callback=model_audit_callback,
+        job_id=stage4_job_id,
     )
     for path_index, path in enumerate(paths, start=1):
         current_index = path_index
@@ -203,7 +207,12 @@ def convert_sources(
                         ),
                     )
                 )
-            if execution.succeeded:
+            if (
+                execution.succeeded
+                or execution.document.text_blocks
+                or execution.document.tables
+                or any(page.text_blocks or page.table_ids for page in execution.document.pages)
+            ):
                 raw_tables.extend(document_to_raw_tables(execution.document))
         except (OSError, RuntimeError, ValueError) as exc:
             issues.append(
@@ -303,27 +312,49 @@ def convert_sources(
                 )).encode("utf-8")
             ).hexdigest()[:24]
         )
-        stage4 = Stage4Workflow(
-            catalog=contract_catalog,
-            provider=extraction_provider,
-            store=stage4_store,
-        ).run(
-            job_id=effective_job_id,
-            documents=tuple(result.document for result in parse_results if result.succeeded),
-            lineage=outcome.lineage,
-            mapping_version=f"{profile.profile_id}/{profile.version}",
-            base_case=case,
-            engine_capability_plan={
-                "contract_status": contract_status,
-                "dynamic_plan": capability_plan or {},
-            },
-            external_sharing_allowed=stage4_external_sharing_allowed,
-            cancel_check=cancel_check,
-        )
-        stage4_document = stage4.to_dict()
-        stage4_document["result_sha256"] = stage4.sha256
-        if stage4_result_callback is not None:
-            stage4_result_callback(stage4_document)
+        try:
+            stage4 = Stage4Workflow(
+                catalog=contract_catalog,
+                provider=extraction_provider,
+                store=stage4_store,
+            ).run(
+                job_id=effective_job_id,
+                documents=tuple(
+                    result.document
+                    for result in parse_results
+                    if result.succeeded
+                    or result.document.text_blocks
+                    or result.document.tables
+                    or any(page.text_blocks or page.table_ids for page in result.document.pages)
+                ),
+                lineage=outcome.lineage,
+                mapping_version=f"{profile.profile_id}/{profile.version}",
+                base_case=case,
+                engine_capability_plan={
+                    "contract_status": contract_status,
+                    "dynamic_plan": capability_plan or {},
+                },
+                external_sharing_allowed=stage4_external_sharing_allowed,
+                cancel_check=cancel_check,
+                audit_callback=model_audit_callback,
+            )
+        except Exception as exc:
+            if cancel_check is not None:
+                cancel_check()
+            issues.append(
+                ConversionIssue(
+                    IssueSeverity.ERROR,
+                    "EXTRACT.PARTIAL",
+                    "字段提取工作流异常；解析与OCR产物已保留，可人工复核或重新提取。"
+                    + sanitized_error_message(exc, limit=120),
+                    target_path="stage4",
+                )
+            )
+        else:
+            stage4_document = stage4.to_dict()
+            stage4_document["result_sha256"] = stage4.sha256
+            if stage4_result_callback is not None:
+                stage4_result_callback(stage4_document)
     unique_sources: dict[str, SourceReference] = {}
     for table in raw_tables:
         unique_sources[table.source.source_id] = table.source

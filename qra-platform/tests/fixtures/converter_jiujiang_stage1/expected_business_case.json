@@ -52,21 +52,13 @@
     "warning": "本黄金候选只采用台账可直接追溯的全线边界。现场照片变化点缺少权威里程，不生成11个内部计算管段；人口坐标、昼夜分布和室内外比例未获证据，不生成population_cells。"
   },
   "pipeline": {
-    "city": "某市",
-    "county": "某区",
     "design_pressure_mpa": 6.3,
-    "hca_end_marker": "JJ041G（10+938）",
-    "hca_start_marker": "JJ001（0+0）",
     "operating_pressure_data_status": "SOURCE_RANGE_ONLY_NOT_COLLAPSED",
-    "operating_pressure_source_range_mpa": "3.0-3.8",
     "operating_temperature_data_status": "MISSING",
-    "operator_area": "脱敏作业区",
     "outside_diameter_mm": 273.0,
     "pipeline_id": "GDBZYQ-JJ-1",
-    "pipeline_name": "试点支线",
     "population_spatial_data_status": "MISSING",
     "service": "natural_gas_transmission",
-    "steel_grade": "L360MB",
     "total_length_km": 10.938,
     "wall_thickness_data_status": "MISSING"
   },

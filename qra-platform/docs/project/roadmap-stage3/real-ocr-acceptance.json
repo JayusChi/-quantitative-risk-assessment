@@ -1,0 +1,64 @@
+{
+  "acceptance_id": "qra.roadmap-stage3-robustness/1.0.0",
+  "deterministic_suite": "PASS",
+  "errors": 0,
+  "executed_at": "2026-08-31T06:14:24.950637+00:00",
+  "failures": 0,
+  "p0_gates": {
+    "final_serialized_request_budget": "PASS",
+    "large_image_adaptation": "PASS",
+    "long_image_tiling_and_coordinates": "PASS",
+    "overlap_merge": "PASS",
+    "oversize_error_classification": "PASS",
+    "real_bailian_smoke": "PASS",
+    "synthetic_golden_tool_contract": "PASS",
+    "table_task_cell_contract": "PASS",
+    "versioned_scoped_reextraction": "PASS"
+  },
+  "passed_for_requested_mode": true,
+  "real_ocr": {
+    "completed_model_call_count": 2,
+    "failed_model_call_count": 0,
+    "input_sha256": "5f565ade8187ff9f6cceae75ca72150b333dfecc7657665709b0e5d04bbce563",
+    "issue_codes": [
+      "PARSE.IMAGE_SKEWED"
+    ],
+    "model_call_count": 2,
+    "model_version": "qwen3.5-ocr",
+    "page_count": 1,
+    "parse_sha256": "701b60b0dff5f1916dba0170233ef199017231d590e7f0f66ee9e6df500b00e0",
+    "provider_id": "aliyun-bailian-dashscope",
+    "secret_or_source_content_recorded": false,
+    "status": "PASS",
+    "table_count": 0,
+    "text_block_count": 22
+  },
+  "real_ocr_configuration": {
+    "configured": true,
+    "protection": "PROCESS_MEMORY_ONLY",
+    "source": "authorized-csv"
+  },
+  "skipped": 0,
+  "synthetic_golden": {
+    "document_counts": {
+      "approved": 2,
+      "manifest": 2,
+      "missing_real_documents": 0,
+      "real_business": 0,
+      "required_real_minimum": 0,
+      "synthetic": 2
+    },
+    "metrics": {
+      "blank_to_zero_violation_count": 0,
+      "conflict_detection_rate": 1.0,
+      "evidence_binding_rate": 1.0,
+      "no_evidence_candidate_count": 0,
+      "precision": 1.0,
+      "prompt_injection_workflow_violation_count": 0,
+      "recall": 1.0,
+      "unsupported_inference_violation_count": 0
+    },
+    "synthetic_only": true
+  },
+  "tests_run": 21
+}

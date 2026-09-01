@@ -73,6 +73,18 @@ class AffineTransform:
             (self.b * self.e - self.a * self.f) / determinant,
         )
 
+    def compose(self, before: AffineTransform) -> AffineTransform:
+        """Return ``self(before(point))`` for coordinate-chain construction."""
+
+        return AffineTransform(
+            self.a * before.a + self.c * before.b,
+            self.b * before.a + self.d * before.b,
+            self.a * before.c + self.c * before.d,
+            self.b * before.c + self.d * before.d,
+            self.a * before.e + self.c * before.f + self.e,
+            self.b * before.e + self.d * before.f + self.f,
+        )
+
     def values(self) -> tuple[float, float, float, float, float, float]:
         return (self.a, self.b, self.c, self.d, self.e, self.f)
 

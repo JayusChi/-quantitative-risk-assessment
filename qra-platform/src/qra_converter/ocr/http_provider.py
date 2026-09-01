@@ -9,12 +9,14 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from ..parsing.contracts import BoundingBox, canonical_json
+from .payload_policy import OcrPayloadPolicy
 from .ports import (
     OcrAuthenticationFailed,
     OcrCell,
     OcrContractInvalid,
     OcrRateLimited,
     OcrRequest,
+    OcrRequestTooLarge,
     OcrResponse,
     OcrTable,
     OcrTextBlock,
@@ -28,12 +30,20 @@ class JsonHttpOcrProvider:
 
     provider_id = "json-http"
 
-    def __init__(self, *, endpoint: str, api_key: str, model_version: str):
+    def __init__(
+        self,
+        *,
+        endpoint: str,
+        api_key: str,
+        model_version: str,
+        payload_policy: OcrPayloadPolicy | None = None,
+    ):
         if not endpoint.lower().startswith("https://"):
             raise ValueError("OCR端点必须使用HTTPS")
         self._endpoint = endpoint
         self._api_key = api_key
         self.model_version = model_version
+        self.payload_policy = payload_policy or OcrPayloadPolicy.from_environment()
 
     @staticmethod
     def _bbox(value: object) -> BoundingBox:
@@ -47,8 +57,8 @@ class JsonHttpOcrProvider:
             raise OcrContractInvalid("OCR bbox不能为负")
         return bbox
 
-    def recognize(self, request: OcrRequest) -> OcrResponse:
-        body = canonical_json(
+    def build_request_bytes(self, request: OcrRequest) -> bytes:
+        return canonical_json(
             {
                 "image_base64": base64.b64encode(request.image_bytes).decode("ascii"),
                 "width": request.width,
@@ -59,6 +69,14 @@ class JsonHttpOcrProvider:
                 "model_version": self.model_version,
             }
         ).encode("utf-8")
+
+    def request_byte_count(self, request: OcrRequest) -> int:
+        return len(self.build_request_bytes(request))
+
+    def recognize(self, request: OcrRequest) -> OcrResponse:
+        body = self.build_request_bytes(request)
+        if len(body) > self.payload_policy.max_http_body_bytes:
+            raise OcrRequestTooLarge("OCR请求在本地最终序列化校验时超过外发预算")
         outbound = Request(
             self._endpoint,
             data=body,
@@ -78,6 +96,8 @@ class JsonHttpOcrProvider:
                 raise OcrRateLimited("OCR提供方限流") from exc
             if exc.code in {408, 504}:
                 raise OcrTimeout("OCR提供方超时") from exc
+            if exc.code == 413:
+                raise OcrRequestTooLarge("OCR提供方拒绝过大请求") from exc
             if exc.code == 422:
                 raise OcrUnreadable("OCR提供方无法读取图像") from exc
             raise OcrUnreadable(f"OCR提供方返回HTTP {exc.code}") from exc

@@ -4,22 +4,23 @@ import hashlib
 import json
 import math
 from collections import defaultdict
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from html import escape
 from pathlib import Path
-from typing import Any, Callable, Iterable
+from typing import Any
 
 from .adaptive_risk import calculate_adaptive_evidence_qra
-from .audit import sha256_json, sha256_numerical_result
 from .aqt3046 import (
     adiabatic_pipe_rupture_mass_flow_rate,
     fanning_friction_factor_fully_rough,
     gas_orifice_mass_flow_rate,
     horizontal_jet_fire_threshold_distance_m,
 )
-from .engine import QRAEngine
+from .audit import sha256_json, sha256_numerical_result
 from .data_categories import resolve_data_categories
+from .engine import QRAEngine
 from .frequency import (
     calculate_loc_frequencies,
     discretize_segment,
@@ -27,13 +28,12 @@ from .frequency import (
     poisson_at_least_one_failure_probability,
 )
 from .frequency_correction import resolve_segment_correction_factors
-from .gbt34346 import calculate_annex_c_secondary_assessment
 from .gas_properties import gas_properties_from_case
-from .indicators import build_indicator_coverage, load_indicator_catalog
+from .gbt34346 import calculate_annex_c_secondary_assessment
+from .indicators import build_indicator_coverage
 from .model_registry import MODEL_SPEC_ROOT
 from .reporting import build_risk_matrix, render_charts, write_risk_matrix_files
 from .validation import validate_case
-
 
 DYNAMIC_SCHEMA_VERSION = "1.3.0"
 
@@ -1278,19 +1278,31 @@ def _write_dynamic_dashboard(
             risk_row = ranking_by_segment.get(segment_id, {})
             point_label = segment_display_label(segment)
             cells = receptors_by_segment.get(segment_id, [])
-            day = sum(float(cell.get("population_day") or 0.0) for cell in cells)
-            night = sum(float(cell.get("population_night") or 0.0) for cell in cells)
+            day_values = [
+                float(cell["population_day"])
+                for cell in cells
+                if cell.get("population_day") is not None
+            ]
+            night_values = [
+                float(cell["population_night"])
+                for cell in cells
+                if cell.get("population_night") is not None
+            ]
+            day_text = f"{sum(day_values):g}" if day_values else "未记录"
+            night_text = f"{sum(night_values):g}" if night_values else "未记录"
             targets = segment_target_labels(segment_id)
             target_summary = "、".join(targets[:5]) + (f" 等{len(targets)}项" if len(targets) > 5 else "")
+            risk_value = risk_row.get("risk_value_fatalities_per_year")
+            risk_text = f"{float(risk_value):.4e}" if risk_value is not None else "不可算"
             locator_rows.append(
                 f'<tr id="segment-{escape(segment_id, quote=True)}"><td><b>{escape(segment_id)}</b></td>'
                 f'<td>{escape(point_label)}</td>'
                 f'<td class="number">{_format_chainage(segment.get("start_km"))}–{_format_chainage(segment.get("end_km"))} km</td>'
                 f'<td class="number">{float(segment.get("length_km") or 0.0):.4f} km</td>'
                 f'<td>{escape(target_summary or "未记录")}</td>'
-                f'<td class="number">{day:g} / {night:g}</td>'
+                f'<td class="number">{day_text} / {night_text}</td>'
                 f'<td><span class="rank">{escape(str(risk_row.get("risk_value_rank") or "—"))}</span></td>'
-                f'<td class="number">{float(risk_row.get("risk_value_fatalities_per_year") or 0.0):.4e}</td></tr>'
+                f'<td class="number">{risk_text}</td></tr>'
             )
         distance_note = (
             f"统一受体代理距离：{_format_dashboard_number(receptor_distance)} m。{receptor_basis}"
@@ -1488,7 +1500,12 @@ def _write_dynamic_dashboard(
     details_html = f"""<section id="details"><div class="section-heading"><div><div class="eyebrow">可追溯性</div><h2>计算与数据明细</h2></div><p>默认折叠，审查或补数时展开。</p></div>
 <details><summary>输入数据类别 <span>{category_count} 类</span></summary><div class="table-wrap"><table><thead><tr><th>数据类别</th><th>类别ID</th><th>记录数</th></tr></thead><tbody>{category_rows}</tbody></table></div></details>
 <details><summary>动态计算节点 <span>{len(completed)} 已完成 / {len(node_records)} 总计</span></summary><div class="table-wrap"><table><thead><tr><th>#</th><th>节点</th><th>标准/依据</th><th>状态</th><th>说明</th><th>结果</th></tr></thead><tbody>{''.join(node_rows)}</tbody></table></div></details>
-<details><summary>继续升级完整QRA所需数据 <span>{len(capability.get('missing_inputs', []))} 项</span></summary><div class="table-wrap"><table><thead><tr><th>数据项</th><th>JSON路径</th></tr></thead><tbody>{missing_rows}</tbody></table></div></details>
+<details>
+<summary>本次执行计划待补数据
+<span>{len(capability.get('missing_inputs', []))} 项</span></summary>
+<div class="table-wrap"><table><thead><tr><th>数据项</th><th>JSON路径</th></tr></thead>
+<tbody>{missing_rows}</tbody></table></div>
+</details>
 <details><summary>指标组与算法使用情况</summary><div class="table-wrap"><table><thead><tr><th>指标组</th><th>已注册算法</th><th>本次完成算法</th><th>已进入计算</th></tr></thead><tbody>{usage_rows}</tbody></table></div></details></section>"""
 
     blockers = dashboard_source.get("formal_report_blockers") or dashboard_source.get("run", {}).get("formal_report_blockers", [])

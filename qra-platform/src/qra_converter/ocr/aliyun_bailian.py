@@ -16,17 +16,20 @@ from urllib.parse import urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 from ..parsing.contracts import BoundingBox, canonical_json
+from .payload_policy import OcrPayloadPolicy
 from .ports import (
     OcrAuthenticationFailed,
     OcrConnectionFailed,
     OcrContractInvalid,
     OcrRateLimited,
     OcrRequest,
+    OcrRequestTooLarge,
     OcrResponse,
     OcrTextBlock,
     OcrTimeout,
     OcrUnreadable,
 )
+from .table_text import tables_from_provider_text
 
 _GENERATION_PATH = "/api/v1/services/aigc/multimodal-generation/generation"
 _VISION_OCR_PROMPT = (
@@ -47,6 +50,7 @@ class AliyunBailianOcrProvider:
         dashscope_url: str,
         api_key: str,
         model_version: str = "qwen3.5-ocr",
+        payload_policy: OcrPayloadPolicy | None = None,
         opener: Callable[..., object] = urlopen,
     ):
         self._endpoint = self._generation_endpoint(dashscope_url)
@@ -56,6 +60,7 @@ class AliyunBailianOcrProvider:
             raise ValueError("OCR模型名称不能为空")
         self._api_key = api_key.strip()
         self.model_version = model_version.strip()
+        self.payload_policy = payload_policy or OcrPayloadPolicy.from_environment()
         self._opener = opener
 
     @staticmethod
@@ -141,21 +146,25 @@ class AliyunBailianOcrProvider:
             raise OcrContractInvalid("百炼OCR响应content不是对象数组")
         return (content, str(finish_reason) if finish_reason else None)
 
-    def _request_bytes(self, request: OcrRequest) -> bytes:
-        data_url = "data:image/png;base64," + base64.b64encode(request.image_bytes).decode(
-            "ascii"
+    def data_uri_bytes(self, request: OcrRequest) -> bytes:
+        return (
+            f"data:{request.image_content_type};base64,".encode("ascii")
+            + base64.b64encode(request.image_bytes)
         )
+
+    def build_request_bytes(self, request: OcrRequest) -> bytes:
+        data_url = self.data_uri_bytes(request).decode("ascii")
         content: list[dict[str, object]] = [
             {
                 "image": data_url,
-                "min_pixels": 3072,
-                "max_pixels": 8388608,
+                "min_pixels": self.payload_policy.model_min_pixels,
+                "max_pixels": self.payload_policy.model_max_pixels,
                 "enable_rotate": False,
             }
         ]
         parameters: dict[str, object] = {"max_tokens": 16384, "seed": 1}
         if self.model_version.casefold() == "qwen3.5-ocr":
-            parameters["ocr_options"] = {"task": "advanced_recognition"}
+            parameters["ocr_options"] = {"task": request.task_type}
         else:
             content.append({"text": _VISION_OCR_PROMPT})
         return canonical_json(
@@ -172,6 +181,13 @@ class AliyunBailianOcrProvider:
                 "parameters": parameters,
             }
         ).encode("utf-8")
+
+    # Kept as a compatibility alias for existing adapter tests and tooling.
+    def _request_bytes(self, request: OcrRequest) -> bytes:
+        return self.build_request_bytes(request)
+
+    def request_byte_count(self, request: OcrRequest) -> int:
+        return len(self.build_request_bytes(request))
 
     @staticmethod
     def _http_error_detail(exc: HTTPError) -> str:
@@ -195,9 +211,18 @@ class AliyunBailianOcrProvider:
         return detail[:300]
 
     def recognize(self, request: OcrRequest) -> OcrResponse:
+        data_uri_count = len(self.data_uri_bytes(request))
+        body = self.build_request_bytes(request)
+        if (
+            data_uri_count > self.payload_policy.max_data_uri_bytes
+            or len(body) > self.payload_policy.max_http_body_bytes
+        ):
+            raise OcrRequestTooLarge(
+                "OCR请求在本地最终序列化校验时超过单次外发预算"
+            )
         outbound = Request(
             self._endpoint,
-            data=self._request_bytes(request),
+            data=body,
             method="POST",
             headers={
                 "Authorization": f"Bearer {self._api_key}",
@@ -217,7 +242,20 @@ class AliyunBailianOcrProvider:
                 raise OcrRateLimited(f"阿里云百炼OCR触发限流（{detail}）") from exc
             if exc.code in {408, 504}:
                 raise OcrTimeout(f"阿里云百炼OCR调用超时（{detail}）") from exc
-            if exc.code in {400, 413, 415, 422}:
+            oversized = exc.code == 413 or (
+                exc.code in {400, 422}
+                and re.search(
+                    r"(?:data[ -]?uri|max(?:imum)? bytes|file too large|"
+                    r"request body too large|payload too large|exceed(?:ed|s)?.*bytes)",
+                    detail,
+                    flags=re.IGNORECASE,
+                )
+            )
+            if oversized:
+                raise OcrRequestTooLarge(
+                    f"阿里云百炼OCR拒绝过大请求（{detail}）"
+                ) from exc
+            if exc.code in {400, 415, 422}:
                 raise OcrUnreadable(f"阿里云百炼OCR拒绝图像（{detail}）") from exc
             if 500 <= exc.code < 600:
                 raise OcrConnectionFailed(f"阿里云百炼OCR服务异常（{detail}）") from exc
@@ -283,7 +321,16 @@ class AliyunBailianOcrProvider:
             warnings.append(f"百炼响应中有{missing_locations}行缺少坐标，已从证据块中排除")
         if finish_reason == "length":
             warnings.append("百炼OCR输出达到长度上限，识别结果可能被截断")
-        if not blocks and fallback_texts:
+        tables = (
+            tables_from_provider_text(
+                "\n".join(fallback_texts), width=request.width, height=request.height
+            )
+            if request.task_type == "table_parsing" and fallback_texts
+            else ()
+        )
+        if tables:
+            warnings.append("表格任务返回结构文本；单元格坐标按受控表格网格回填并要求复核")
+        elif not blocks and fallback_texts:
             warnings.append("百炼未返回逐行坐标，整页文本按低置信度证据保留")
             blocks.append(
                 OcrTextBlock(
@@ -298,11 +345,14 @@ class AliyunBailianOcrProvider:
             provider_id=self.provider_id,
             model_version=self.model_version,
             text_blocks=tuple(blocks),
+            tables=tables,
             warnings=tuple(warnings),
             raw_response_sha256=hashlib.sha256(raw).hexdigest(),
             provider_request_id=(
                 str(payload["request_id"]) if payload.get("request_id") else None
             ),
+            finish_reason=finish_reason or "stop",
+            usage=(dict(payload["usage"]) if isinstance(payload.get("usage"), dict) else {}),
         )
 
 

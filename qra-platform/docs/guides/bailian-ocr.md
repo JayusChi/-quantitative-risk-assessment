@@ -8,6 +8,18 @@
 
 第四阶段信息提取通过同一业务空间的 OpenAI 兼容地址调用 `qwen3.8-max`，用于资料分类、实体、字段和关系候选。OCR 与信息提取复用同一个 API Key，但分别保存模型版本、调用哈希和状态。
 
+## Roadmap Stage 3：上传与外发预算
+
+原始上传上限和模型请求上限是两层不同的安全边界。平台默认允许单个原始文件最多 18 MiB；这不表示会把 18 MiB 文件作为单次模型请求发送。图片会先在本地安全解码、EXIF 转正、按最大像素缩放并尝试受控 PNG/JPEG 编码；扫描 PDF 始终逐页渲染，绝不发送整个 PDF。超长页或编码后仍超限的页面会带重叠切片，且切片坐标可回到原图或 PDF 页。
+
+默认保守外发预算为：data URI 9,000,000 字节、完整 HTTP body 9,500,000 字节、目标最大像素 8,388,608。每次发送前都使用真实供应商请求的最终 JSON 字节数检查，不按原图大小估算，也不记录 Base64。管理页“入口/外发策略”会分别显示原始上传和单次外发限制。
+
+当单页、单切片或信息提取叶子批次失败时，已成功页面、文字块、表格和候选不会被清空。页面会标为 `COMPLETE/PARTIAL/FAILED`，并产生结构化问题供复核。OCR 成功而字段提取失败时，解析/OCR JSON、质量报告和预览仍可打开。
+
+模型调用记录现在来自持久化的尝试级审计：真实外发前记录 `STARTED`，终态为 `COMPLETED/FAILED`；本地预算拒绝为 `SKIPPED`，缓存命中为 `CACHED`，异常中断的遗留调用在恢复时转为 `INTERRUPTED`。页面显示任务类型、页/切片、最终请求字节数、重试和稳定错误码，不显示密钥、端点、正文、完整提示词或完整响应。
+
+复核工作台的“请求重新提取”会入队后台执行。管理 API 还支持 `FILE/PAGE/FIELD` 三种范围；同一会话和目标的活动请求幂等复用。成功结果生成新的解析/候选版本，非目标候选不变；候选集合实际改变时，旧复核会话变为 `STALE`。已确认快照、历史决定和已完成计算任务不会被原地修改。
+
 API Key 不得复制到源码、配置样例、日志或 Git。管理页面首次导入领导提供的 CSV 后，平台使用
 Windows 当前用户 DPAPI 加密密钥，并保存到 `workspace/state/ocr-settings.json`；该文件已被 Git
 忽略。页面和状态接口只返回服务商、模型与脱敏状态，不返回 API Key。
@@ -98,12 +110,20 @@ $env:QRA_ALIYUN_API_KEY = "由密钥管理系统注入"
 $env:QRA_OCR_MODEL_VERSION = "qwen3.5-ocr"
 $env:QRA_OCR_TIMEOUT_SECONDS = "120"
 $env:QRA_OCR_MAX_RETRIES = "2"
+$env:QRA_OCR_MAX_DATA_URI_BYTES = "9000000"
+$env:QRA_OCR_MAX_REQUEST_BYTES = "9500000"
+$env:QRA_OCR_TARGET_MAX_PIXELS = "8388608"
+$env:QRA_OCR_MAX_TILES_PER_PAGE = "32"
+$env:QRA_OCR_TILE_OVERLAP_PIXELS = "96"
 $env:QRA_EXTRACTION_PROVIDER = "aliyun-bailian"
 $env:QRA_ALIYUN_OPENAI_BASE_URL = "https://<WorkspaceId>.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
 $env:QRA_EXTRACTION_MODEL_VERSION = "qwen3.8-max"
 $env:QRA_EXTRACTION_TIMEOUT_SECONDS = "120"
 $env:QRA_EXTRACTION_MAX_RETRIES = "2"
 $env:QRA_EXTRACTION_MAX_CONCURRENCY = "2"
+$env:QRA_EXTRACTION_MAX_REQUEST_BYTES = "7500000"
 ```
 
 通用 `QRA_OCR_ENDPOINT` 配置仍保留，用于兼容平台原有的供应商无关 JSON OCR 合同。
+
+请求预算变量均使用十进制字节，必须是整数。OCR data URI 可配置范围为 65,536～10,485,760，HTTP body 为 131,072～33,554,432，目标像素为 100,000～50,000,000，单页切片数为 1～256，重叠像素为 0～4,096；HTTP body 预算必须大于 data URI 预算。信息提取预算小于最终序列化请求时会先拆文本块、字段或批次，达到有界拆分下限后记录 `EXTRACT.REQUEST_TOO_LARGE`，不会绕过预算发送。
