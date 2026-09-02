@@ -1,0 +1,6 @@
+M1.5 stage 0 architecture check
+recorded_on=2026-09-01
+command=.\.venv\Scripts\python.exe .\tools\check_architecture.py
+exit_code=0
+result=ARCHITECTURE CHECK PASSED
+

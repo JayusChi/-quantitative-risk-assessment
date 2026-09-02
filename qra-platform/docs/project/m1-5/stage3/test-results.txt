@@ -1,0 +1,17 @@
+阶段3验证时间：2026-09-01
+
+1. Ruff
+   ruff check src/qra_converter/synthetic_stage3.py tools/build_full_chain_stage3_contract.py tools/run_full_chain_stage3.py tools/run_stage3_acceptance.py tests/unit/test_full_chain_stage3_raw_to_snapshot.py
+   结果：All checks passed
+
+2. 阶段3专项
+   pytest tests/unit/test_full_chain_stage3_raw_to_snapshot.py -q
+   结果：11 passed
+
+3. 阶段门
+   .\.venv\Scripts\python.exe tools/run_full_chain_stage3_acceptance.py
+   结果：S3_RAW_TO_SNAPSHOT_PASS，18/18 checks passed
+
+4. 全量回归
+   项目虚拟环境 + pytest 运行器执行 pytest -q
+   结果：278 passed, 1 skipped

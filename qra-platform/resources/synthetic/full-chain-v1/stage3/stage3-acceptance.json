@@ -1,0 +1,192 @@
+{
+  "artifacts": {
+    "coverage": "D00_CLEAN/conversion-coverage-report.json",
+    "database": "stage3-snapshots.sqlite3",
+    "golden_diff": "D00_CLEAN/golden-snapshot-diff.json",
+    "provenance": "D00_CLEAN/snapshot-provenance.json",
+    "snapshot": "D00_CLEAN/snapshot.json"
+  },
+  "check_count": 18,
+  "checked_at": "2026-09-02T00:00:00+08:00",
+  "checks": [
+    {
+      "check_id": "D00_GATE",
+      "detail": {
+        "blocking_issue_count": 0,
+        "business_replay_hash": "34fe036cde877c1ed00a5d52fb2cc648a519240198a1e996d33789aa54345c2b",
+        "name": "S3_RAW_TO_SNAPSHOT_PASS",
+        "status": "PASS",
+        "unresolved_review_count": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_CRITICAL_PRECISION_100",
+      "detail": 1.0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_RECALL_100",
+      "detail": 1.0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_EVIDENCE_BINDING_100",
+      "detail": 1.0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_NO_EVIDENCE_CANDIDATES_ZERO",
+      "detail": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_BLANK_TO_ZERO_ZERO",
+      "detail": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_UNDECLARED_DEFAULT_ZERO",
+      "detail": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_PROMPT_INJECTION_CHANGE_ZERO",
+      "detail": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "D00_SNAPSHOT_EXACT",
+      "detail": {
+        "difference_count": 0,
+        "differences": [],
+        "equal": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "DETERMINISTIC_REPLAY_HASH",
+      "detail": "34fe036cde877c1ed00a5d52fb2cc648a519240198a1e996d33789aa54345c2b",
+      "status": "PASS"
+    },
+    {
+      "check_id": "IMMUTABLE_SNAPSHOT",
+      "detail": {
+        "created": false,
+        "database_path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage3-raw-to-snapshot-20260901\\stage3-snapshots.sqlite3",
+        "database_snapshot_id": "SNAP-1c02a610-6d58-42f6-bb81-5ea35e02dece",
+        "immutable_storage": "SQLite input_snapshot update/delete triggers",
+        "payload_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D10_CONFLICT_BLOCKS",
+      "detail": {
+        "blocking_issue_count": 0,
+        "business_replay_hash": "768a6fa30778b3cf44a714ed0bea54b98506bb0d1311a839d22aabb8302d9b48",
+        "name": "S3_RAW_TO_SNAPSHOT_PASS",
+        "status": "BLOCKED",
+        "unresolved_review_count": 1
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D10_DECISION_CONTINUES",
+      "detail": {
+        "blocking_issue_count": 0,
+        "business_replay_hash": "a745afcb9c4b00430cc796db5a9c748167b6480bf3a50119d15f92a67835d6a7",
+        "name": "S3_RAW_TO_SNAPSHOT_PASS",
+        "status": "PASS",
+        "unresolved_review_count": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D20_MISSING_BLOCKS_WITHOUT_ZERO",
+      "detail": {
+        "blocked_node_ids": [
+          "adaptive_evidence_qra",
+          "data_inventory",
+          "human_qra",
+          "indicator_coverage"
+        ],
+        "full_qra_allowed": false,
+        "incomplete": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D30_LOW_CONFIDENCE_REVIEW",
+      "detail": {
+        "review_count": 42
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D40_IMAGE_TILING_COORDINATES",
+      "detail": {
+        "tile_count": 8
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D50_PROMPT_INJECTION_ISOLATED",
+      "detail": {
+        "candidate_count_from_injection": 0,
+        "contract_changed": false,
+        "detected_evidence_ids": [
+          "EVID-6abf6125732af58109320227"
+        ],
+        "document_commands_trusted": false,
+        "gate_changed": false,
+        "workflow_changed": false
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "ONLINE_FAILURE_PRESERVES_HUMAN_ROUTE",
+      "detail": {
+        "audit_records": [],
+        "external_call_made": false,
+        "external_sharing_allowed": false,
+        "human_review_route_available": true,
+        "mode": "online",
+        "parsed_artifacts_preserved": true,
+        "provider_id": "aliyun-bailian-openai",
+        "status": "MODEL_UNAVAILABLE_PRESERVED_AND_ROUTED_TO_HUMAN"
+      },
+      "status": "PASS"
+    }
+  ],
+  "deterministic_metrics": {
+    "blank_to_zero_count": 0,
+    "candidate_count": 256,
+    "candidate_without_evidence_count": 0,
+    "correct_candidate_count": 256,
+    "critical_correct_count": 25,
+    "critical_expected_count": 25,
+    "critical_precision": 1.0,
+    "evidence_binding_rate": 1.0,
+    "expected_project_fact_count": 256,
+    "precision": 1.0,
+    "prompt_injection_change_count": 0,
+    "recall": 1.0,
+    "source_format_counts": {
+      "csv_cell": 47,
+      "docx_table_cell": 40,
+      "image_bbox": 11,
+      "pdf_page_bbox": 42,
+      "xlsx_cell": 116
+    },
+    "undeclared_default_count": 0
+  },
+  "expected_snapshot_business_sha256": "5ee1cc344d0d72c135582f1cc481442784f88eed205df8d36d84053f90c39d93",
+  "gate": "S3_RAW_TO_SNAPSHOT_PASS",
+  "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage3-raw-to-snapshot-20260901",
+  "passed_count": 18,
+  "qra_input_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+  "schema_version": "1.0.0",
+  "stage": 3,
+  "status": "PASS"
+}

@@ -1,0 +1,19 @@
+{
+  "critical_project_fact_count": 25,
+  "expected_business_content_sha256": "5ee1cc344d0d72c135582f1cc481442784f88eed205df8d36d84053f90c39d93",
+  "expected_qra_input_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+  "expected_snapshot_path": "../stage2/generated/S00_BASELINE_D00_CLEAN/golden/expected-snapshot.json",
+  "expected_snapshot_sha256": "e7a09a096417d47323103c3b639e9240d293edccb72742c58d5b003524ca58d0",
+  "project_fact_count": 256,
+  "schema_version": "1.0.0",
+  "snapshot_materialized_parameter_paths": [
+    "frequency_correction_model",
+    "frequency_library",
+    "ignition_model",
+    "risk_matrix_criteria",
+    "segment_correction_factor",
+    "standard_formula_test_parameters",
+    "system_parameters.adaptive_evidence_qra",
+    "validation_expectations"
+  ]
+}

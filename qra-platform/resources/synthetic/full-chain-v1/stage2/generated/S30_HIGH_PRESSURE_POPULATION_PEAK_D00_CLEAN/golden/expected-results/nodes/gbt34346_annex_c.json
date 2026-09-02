@@ -1,0 +1,1263 @@
+{
+  "formal_report_allowed": false,
+  "formal_report_blockers": [
+    "测试物性、修正因子、点火概率和人口密度不是项目实测或批准参数",
+    "该配置是附录C二级评价，不替代SY/T 6891.2完整空间QRA的IR与F-N计算"
+  ],
+  "formula_trace": [
+    "C.1",
+    "C.2",
+    "C.3",
+    "C.12-C.15",
+    "C.40-C.43"
+  ],
+  "gas_mixture_properties": {
+    "composition_mole_fraction": {
+      "carbon_dioxide": 0.012,
+      "ethane": 0.035,
+      "methane": 0.93,
+      "n_butane": 0.003,
+      "nitrogen": 0.008,
+      "propane": 0.012
+    },
+    "heat_capacity_ratio": 1.2922757692664293,
+    "lfl_volume_fraction": 0.04876915931258708,
+    "lower_heating_value_j_kg": 47544676.62323673,
+    "mixing_rules": {
+      "heat_capacity": "ideal-gas mole-fraction weighted Cp at approximately 288-298 K",
+      "lfl": "Le Chatelier rule over combustible components",
+      "lower_heating_value": "mole-fraction weighted molar LHV divided by mixture molar mass",
+      "molar_mass": "mole-fraction weighted"
+    },
+    "molar_mass_kg_mol": 0.017428197200000002,
+    "property_model_id": "natural_gas.ideal_mixture.lhv.v1"
+  },
+  "method_type": "QUANTITATIVE_SECONDARY_ASSESSMENT_NOT_FULL_SPATIAL_QRA",
+  "model_id": "pipeline.gbt34346.annex_c.secondary.v1",
+  "model_status": "STANDARD_FORMULAS_SYNTHETIC_PARAMETERS",
+  "parameter_data_classification": "SYNTHETIC_TEST_ONLY",
+  "pipeline_risk_fatalities_per_year": 0.00019298934472958761,
+  "segment_ranking": [
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.92,
+      "failure_probability_per_km_year": 2.8834008184808085e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.4417004092404043e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 4.036761145873133e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 0.7644222742526002,
+      "point_ignition_probability": 0.05,
+      "population_density_per_m2": 0.001,
+      "risk_density_fatalities_per_km_year": 8.521410708148676e-05,
+      "risk_rank": 1,
+      "segment_id": "SEG-011",
+      "segment_risk_fatalities_per_year": 2.9824937478520365e-05,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.92,
+      "failure_probability_per_km_year": 2.8834008184808085e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.4417004092404043e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 4.036761145873133e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 0.7644222742526002,
+      "point_ignition_probability": 0.05,
+      "population_density_per_m2": 0.001,
+      "risk_density_fatalities_per_km_year": 8.521410708148676e-05,
+      "risk_rank": 2,
+      "segment_id": "SEG-012",
+      "segment_risk_fatalities_per_year": 2.9824937478520365e-05,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.92,
+      "failure_probability_per_km_year": 2.8834008184808085e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.4417004092404043e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 4.036761145873133e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.3,
+      "management_correction_factor": 0.7644222742526002,
+      "point_ignition_probability": 0.05,
+      "population_density_per_m2": 0.001,
+      "risk_density_fatalities_per_km_year": 8.521410708148676e-05,
+      "risk_rank": 3,
+      "segment_id": "SEG-009",
+      "segment_risk_fatalities_per_year": 2.5564232124446026e-05,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.92,
+      "failure_probability_per_km_year": 2.8834008184808085e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.4417004092404043e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 5.190121473265455e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 4.036761145873133e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.3,
+      "management_correction_factor": 0.7644222742526002,
+      "point_ignition_probability": 0.05,
+      "population_density_per_m2": 0.001,
+      "risk_density_fatalities_per_km_year": 8.521410708148676e-05,
+      "risk_rank": 4,
+      "segment_id": "SEG-010",
+      "segment_risk_fatalities_per_year": 2.5564232124446026e-05,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.78,
+      "failure_probability_per_km_year": 1.0919727298519863e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 5.459863649259931e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 1.5287618217927809e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.45,
+      "management_correction_factor": 0.3414548873833603,
+      "point_ignition_probability": 0.08,
+      "population_density_per_m2": 0.0008,
+      "risk_density_fatalities_per_km_year": 4.130743637344608e-05,
+      "risk_rank": 5,
+      "segment_id": "SEG-015",
+      "segment_risk_fatalities_per_year": 1.8588346368050736e-05,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.78,
+      "failure_probability_per_km_year": 1.0919727298519863e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 5.459863649259931e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 1.5287618217927809e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.45,
+      "management_correction_factor": 0.3414548873833603,
+      "point_ignition_probability": 0.08,
+      "population_density_per_m2": 0.0008,
+      "risk_density_fatalities_per_km_year": 4.130743637344608e-05,
+      "risk_rank": 6,
+      "segment_id": "SEG-016",
+      "segment_risk_fatalities_per_year": 1.8588346368050736e-05,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.78,
+      "failure_probability_per_km_year": 1.0919727298519863e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 5.459863649259931e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 1.5287618217927809e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 0.3414548873833603,
+      "point_ignition_probability": 0.08,
+      "population_density_per_m2": 0.0008,
+      "risk_density_fatalities_per_km_year": 4.130743637344608e-05,
+      "risk_rank": 7,
+      "segment_id": "SEG-013",
+      "segment_risk_fatalities_per_year": 1.6522974549378434e-05,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.78,
+      "failure_probability_per_km_year": 1.0919727298519863e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 5.459863649259931e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 1.965550913733575e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 1.5287618217927809e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 0.3414548873833603,
+      "point_ignition_probability": 0.08,
+      "population_density_per_m2": 0.0008,
+      "risk_density_fatalities_per_km_year": 4.130743637344608e-05,
+      "risk_rank": 8,
+      "segment_id": "SEG-014",
+      "segment_risk_fatalities_per_year": 1.6522974549378434e-05,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.8200000000000001,
+      "failure_probability_per_km_year": 2.204267897743245e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.1021339488716226e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 3.0859750568405433e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 0.6556418494179789,
+      "point_ignition_probability": 0.03,
+      "population_density_per_m2": 0.0002,
+      "risk_density_fatalities_per_km_year": 7.817215815602438e-06,
+      "risk_rank": 9,
+      "segment_id": "SEG-007",
+      "segment_risk_fatalities_per_year": 3.126886326240975e-06,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.8200000000000001,
+      "failure_probability_per_km_year": 2.204267897743245e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.1021339488716226e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 3.0859750568405433e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 0.6556418494179789,
+      "point_ignition_probability": 0.03,
+      "population_density_per_m2": 0.0002,
+      "risk_density_fatalities_per_km_year": 7.817215815602438e-06,
+      "risk_rank": 10,
+      "segment_id": "SEG-008",
+      "segment_risk_fatalities_per_year": 3.126886326240975e-06,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.8200000000000001,
+      "failure_probability_per_km_year": 2.204267897743245e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.1021339488716226e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 3.0859750568405433e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 0.6556418494179789,
+      "point_ignition_probability": 0.03,
+      "population_density_per_m2": 0.0002,
+      "risk_density_fatalities_per_km_year": 7.817215815602438e-06,
+      "risk_rank": 11,
+      "segment_id": "SEG-005",
+      "segment_risk_fatalities_per_year": 2.736025535460853e-06,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.8200000000000001,
+      "failure_probability_per_km_year": 2.204267897743245e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 1.1021339488716226e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 3.967682215937841e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 3.0859750568405433e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 0.6556418494179789,
+      "point_ignition_probability": 0.03,
+      "population_density_per_m2": 0.0002,
+      "risk_density_fatalities_per_km_year": 7.817215815602438e-06,
+      "risk_rank": 12,
+      "segment_id": "SEG-006",
+      "segment_risk_fatalities_per_year": 2.736025535460853e-06,
+      "weighted_human_consequence_area_m2": 59106.6677482487,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 1.04,
+      "failure_probability_per_km_year": 4.6041612921653544e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.3020806460826772e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.445825809031497e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 1.0797751623277096,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 5e-06,
+      "risk_density_fatalities_per_km_year": 1.3606831587768255e-07,
+      "risk_rank": 13,
+      "segment_id": "SEG-019",
+      "segment_risk_fatalities_per_year": 5.442732635107302e-08,
+      "weighted_human_consequence_area_m2": 59106.667748248714,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 1.04,
+      "failure_probability_per_km_year": 4.6041612921653544e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.3020806460826772e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.445825809031497e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.4,
+      "management_correction_factor": 1.0797751623277096,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 5e-06,
+      "risk_density_fatalities_per_km_year": 1.3606831587768255e-07,
+      "risk_rank": 14,
+      "segment_id": "SEG-020",
+      "segment_risk_fatalities_per_year": 5.442732635107302e-08,
+      "weighted_human_consequence_area_m2": 59106.667748248714,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 1.04,
+      "failure_probability_per_km_year": 4.6041612921653544e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.3020806460826772e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.445825809031497e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 1.0797751623277096,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 5e-06,
+      "risk_density_fatalities_per_km_year": 1.3606831587768255e-07,
+      "risk_rank": 15,
+      "segment_id": "SEG-017",
+      "segment_risk_fatalities_per_year": 4.762391055718889e-08,
+      "weighted_human_consequence_area_m2": 59106.667748248714,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 1.04,
+      "failure_probability_per_km_year": 4.6041612921653544e-05,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.3020806460826772e-05,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.287490325897638e-06,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.445825809031497e-06,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.35,
+      "management_correction_factor": 1.0797751623277096,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 5e-06,
+      "risk_density_fatalities_per_km_year": 1.3606831587768255e-07,
+      "risk_rank": 16,
+      "segment_id": "SEG-018",
+      "segment_risk_fatalities_per_year": 4.762391055718889e-08,
+      "weighted_human_consequence_area_m2": 59106.667748248714,
+      "weighted_leak_rate_kg_s": 323.9076848780795
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.48,
+      "failure_probability_per_km_year": 4.943392497210852e-06,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.471696248605426e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.920749496095194e-07,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.5,
+      "management_correction_factor": 0.25118864315095796,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 1e-05,
+      "risk_density_fatalities_per_km_year": 2.9218745788182732e-08,
+      "risk_rank": 17,
+      "segment_id": "SEG-001",
+      "segment_risk_fatalities_per_year": 1.4609372894091366e-08,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.90768487807946
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.48,
+      "failure_probability_per_km_year": 4.943392497210852e-06,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.471696248605426e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.920749496095194e-07,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.5,
+      "management_correction_factor": 0.25118864315095796,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 1e-05,
+      "risk_density_fatalities_per_km_year": 2.9218745788182732e-08,
+      "risk_rank": 18,
+      "segment_id": "SEG-002",
+      "segment_risk_fatalities_per_year": 1.4609372894091366e-08,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.90768487807946
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.48,
+      "failure_probability_per_km_year": 4.943392497210852e-06,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.471696248605426e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.920749496095194e-07,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.5,
+      "management_correction_factor": 0.25118864315095796,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 1e-05,
+      "risk_density_fatalities_per_km_year": 2.9218745788182732e-08,
+      "risk_rank": 19,
+      "segment_id": "SEG-003",
+      "segment_risk_fatalities_per_year": 1.4609372894091366e-08,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.90768487807946
+    },
+    {
+      "average_failure_frequency_per_km_year": 4.1e-05,
+      "damage_correction_factor": 0.48,
+      "failure_probability_per_km_year": 4.943392497210852e-06,
+      "leak_scenarios": [
+        {
+          "fatal_heat_flux_distance_m": 2.4170318309216654,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 5.0,
+          "human_consequence_area_m2": 73.41327587061332,
+          "mass_flow_rate_kg_s": 0.3047108982860578,
+          "probability_fraction": 0.5,
+          "scenario_failure_frequency_per_km_year": 2.471696248605426e-06,
+          "scenario_id": "small_5mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 11.510697483804087,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 25.0,
+          "human_consequence_area_m2": 1664.9958083570307,
+          "mass_flow_rate_kg_s": 7.617772457151446,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "medium_25mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 65.02681706683464,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 150.0,
+          "human_consequence_area_m2": 53136.733998919124,
+          "mass_flow_rate_kg_s": 274.23980845745206,
+          "probability_fraction": 0.18,
+          "scenario_failure_frequency_per_km_year": 8.898106494979533e-07,
+          "scenario_id": "large_150mm"
+        },
+        {
+          "fatal_heat_flux_distance_m": 167.23937490236858,
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "flow_regime": "sonic",
+          "hole_diameter_mm": 400.0,
+          "human_consequence_area_m2": 351468.92675002635,
+          "mass_flow_rate_kg_s": 1950.1497490307702,
+          "probability_fraction": 0.14,
+          "scenario_failure_frequency_per_km_year": 6.920749496095194e-07,
+          "scenario_id": "rupture"
+        }
+      ],
+      "length_km": 0.5,
+      "management_correction_factor": 0.25118864315095796,
+      "point_ignition_probability": 0.01,
+      "population_density_per_m2": 1e-05,
+      "risk_density_fatalities_per_km_year": 2.9218745788182732e-08,
+      "risk_rank": 20,
+      "segment_id": "SEG-004",
+      "segment_risk_fatalities_per_year": 1.4609372894091366e-08,
+      "weighted_human_consequence_area_m2": 59106.66774824871,
+      "weighted_leak_rate_kg_s": 323.90768487807946
+    }
+  ],
+  "source": "GB/T 34346—2017 normative Annex C"
+}

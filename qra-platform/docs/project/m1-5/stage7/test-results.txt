@@ -1,0 +1,42 @@
+阶段7验证时间：2026-09-01（Asia/Shanghai）
+
+1. 阶段7最终门禁
+   .\.venv\Scripts\python.exe tools\run_full_chain_stage7_acceptance.py
+   结果：M1_5_FULL_SYNTHETIC_END_TO_END_ACCEPTED，19/19 checks passed
+
+2. 阶段7专项测试
+   .\.venv\Scripts\python.exe -m pytest tests\unit\test_full_chain_stage7_release.py -q
+   结果：3 passed
+   .\.venv\Scripts\python.exe -m pytest tests\integration\test_full_chain_stage7_end_to_end.py -q
+   结果：2 passed
+
+3. 阶段5、阶段6兼容性回归
+   结果：10 passed
+
+4. 全量回归
+   .\.venv\Scripts\python.exe -m pytest -q
+   结果：301 passed, 1 skipped in 165.65s
+
+5. 真实浏览器验收
+   使用 headed Chromium 和 Playwright CLI，从空数据库执行一键加载、10份资料展示、11/11计算、受控报告生成/内嵌查看/导出入口/人工确认。
+   桌面视口：1440×900；手机视口：390×844，无水平溢出。
+   结果：PASS；控制台错误 0、警告 0；人工确认后 formal_report_allowed=false。
+
+6. 发布目录冷启动
+   阶段7验收从全新发布目录和空运行目录安装包源，使用 CLI 幂等加载演示，再启动 HTTP 服务检查项目页和报告页。
+   另在独立验收副本中实际执行 Install-Demo.ps1、Start-Demo.ps1 -Port 8788、Backup-Demo.ps1、Restore-Demo.ps1 -Input <backup> -Replace 和恢复后再次 Start-Demo.ps1。
+   结果：PASS；首次隔离安装、HTTP 200、11/11、在线备份、quick_check、原子恢复和幂等重启全部通过；恢复前后项目、快照、任务、报告ID和数值哈希不变；无需手工编辑数据库或 JSON。
+
+7. 静态和结构检查
+   .\.venv\Scripts\ruff.exe check src\db_qra\backup.py src\db_qra\cli.py src\db_qra\controlled_reporting.py src\db_qra\demo_release.py src\db_qra\paths.py tools\build_full_synthetic_demo_release.py tools\run_full_chain_stage7_acceptance.py tests\unit\test_full_chain_stage7_release.py tests\integration\test_full_chain_stage7_end_to_end.py
+   .\.venv\Scripts\python.exe -m compileall -q src tests tools
+   .\.venv\Scripts\python.exe tools\check_architecture.py
+   git diff --check
+   PowerShell AST parser：Install/Start/Backup/Restore 共4个脚本
+   结果：全部通过
+
+8. 数值和追溯
+   实际数值哈希：4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c
+   黄金数值哈希：4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c
+   追溯账本哈希：b26da97754ec02a8f20ebc597df841c350db43964e5d9da91c4509f245a872a6
+   结果：无数值差异；证据、决策、快照、计算和报告双向追溯通过。

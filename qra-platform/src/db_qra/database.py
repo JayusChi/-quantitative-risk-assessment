@@ -13,9 +13,10 @@ from threading import Lock
 from typing import Any
 from uuid import uuid4
 
-SCHEMA_VERSION = "2.1.0"
+SCHEMA_VERSION = "2.3.0"
 
 ADMIN_BROWSABLE_TABLES = (
+    "business_project",
     "conversion_job",
     "conversion_source",
     "conversion_parse_artifact",
@@ -44,6 +45,7 @@ ADMIN_BROWSABLE_TABLES = (
     "calculation_result_document",
     "calculation_segment_result",
     "calculation_artifact",
+    "controlled_report",
     "audit_event",
 )
 
@@ -680,6 +682,51 @@ class QraDatabase:
             created_at TEXT NOT NULL
         );
 
+        CREATE TABLE IF NOT EXISTS business_project (
+            id TEXT PRIMARY KEY,
+            name TEXT NOT NULL,
+            case_id TEXT,
+            data_classification TEXT NOT NULL,
+            is_demo INTEGER NOT NULL DEFAULT 0,
+            archived INTEGER NOT NULL DEFAULT 0,
+            conversion_job_id TEXT REFERENCES conversion_job(id),
+            snapshot_id TEXT REFERENCES input_snapshot(id),
+            run_id TEXT REFERENCES calculation_run(id),
+            created_by TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS controlled_report (
+            id TEXT PRIMARY KEY,
+            project_id TEXT NOT NULL REFERENCES business_project(id),
+            run_id TEXT NOT NULL REFERENCES calculation_run(id),
+            version_no INTEGER NOT NULL,
+            status TEXT NOT NULL,
+            generation_mode TEXT NOT NULL,
+            provider_id TEXT NOT NULL,
+            prompt_version TEXT NOT NULL,
+            context_schema_version TEXT NOT NULL,
+            context_json TEXT NOT NULL,
+            context_sha256 TEXT NOT NULL,
+            draft_schema_version TEXT NOT NULL,
+            draft_json TEXT NOT NULL,
+            draft_sha256 TEXT NOT NULL,
+            validation_json TEXT NOT NULL,
+            html_content BLOB NOT NULL,
+            html_sha256 TEXT NOT NULL,
+            pdf_content BLOB NOT NULL,
+            pdf_sha256 TEXT NOT NULL,
+            docx_content BLOB NOT NULL,
+            docx_sha256 TEXT NOT NULL,
+            created_by TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            confirmed_by TEXT,
+            confirmation_reason TEXT,
+            confirmed_at TEXT,
+            UNIQUE(project_id, run_id, version_no)
+        );
+
         CREATE INDEX IF NOT EXISTS idx_input_segment_snapshot
             ON input_segment(snapshot_id, start_km);
         CREATE INDEX IF NOT EXISTS idx_conversion_dedupe
@@ -737,6 +784,14 @@ class QraDatabase:
             ON audit_event(created_at DESC, id DESC);
         CREATE INDEX IF NOT EXISTS idx_audit_entity
             ON audit_event(entity_type, entity_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_business_project_updated
+            ON business_project(archived, updated_at DESC, id);
+        CREATE INDEX IF NOT EXISTS idx_business_project_conversion
+            ON business_project(conversion_job_id);
+        CREATE INDEX IF NOT EXISTS idx_controlled_report_project
+            ON controlled_report(project_id, created_at DESC, version_no DESC);
+        CREATE INDEX IF NOT EXISTS idx_controlled_report_run
+            ON controlled_report(run_id, created_at DESC, version_no DESC);
 
         CREATE TRIGGER IF NOT EXISTS trg_input_snapshot_business_immutable
         BEFORE UPDATE OF schema_version, payload_json, payload_sha256 ON input_snapshot
@@ -760,6 +815,23 @@ class QraDatabase:
         BEFORE UPDATE ON review_gate_run
         BEGIN
             SELECT RAISE(ABORT, 'IMMUTABLE_REVIEW_GATE_RUN');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_controlled_report_payload_immutable
+        BEFORE UPDATE OF project_id, run_id, version_no, generation_mode,
+            provider_id, prompt_version, context_schema_version, context_json,
+            context_sha256, draft_schema_version, draft_json, draft_sha256,
+            validation_json, html_content, html_sha256, pdf_content, pdf_sha256,
+            docx_content, docx_sha256, created_by, created_at
+        ON controlled_report
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_CONTROLLED_REPORT_PAYLOAD');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS trg_controlled_report_immutable_delete
+        BEFORE DELETE ON controlled_report
+        BEGIN
+            SELECT RAISE(ABORT, 'IMMUTABLE_CONTROLLED_REPORT');
         END;
         """
         with self._initialize_lock:
@@ -4516,6 +4588,20 @@ class QraDatabase:
             raise KeyError(f"节点结果不存在：{run_id}/{node_id}")
         return json.loads(str(row["result_json"]))
 
+    def list_result_documents(self, run_id: str) -> list[dict[str, Any]]:
+        """List immutable node-result references without returning large payloads."""
+
+        with self.session() as connection:
+            rows = connection.execute(
+                """
+                SELECT node_id, schema_version, result_sha256
+                FROM calculation_result_document
+                WHERE run_id = ? ORDER BY node_id
+                """,
+                (run_id,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
     def overview(self) -> dict[str, Any]:
         self.initialize()
         with self.session() as connection:
@@ -4595,6 +4681,453 @@ class QraDatabase:
             item["detail"] = json.loads(item.pop("detail_json"))
             result.append(item)
         return result
+
+    @staticmethod
+    def _decode_project_row(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
+        item = dict(row)
+        item["is_demo"] = bool(item.get("is_demo"))
+        item["archived"] = bool(item.get("archived"))
+        return item
+
+    def create_project(
+        self,
+        *,
+        name: str,
+        case_id: str | None = None,
+        data_classification: str = "PROJECT_DATA",
+        is_demo: bool = False,
+        actor: str = "local-user",
+    ) -> dict[str, Any]:
+        self.initialize()
+        safe_name = str(name).strip()
+        safe_case_id = str(case_id or "").strip() or None
+        safe_actor = str(actor).strip()[:120] or "local-user"
+        if not safe_name or len(safe_name) > 160:
+            raise ValueError("项目名称不能为空且不能超过160个字符")
+        if safe_case_id and len(safe_case_id) > 120:
+            raise ValueError("项目编号不能超过120个字符")
+        classification = str(data_classification).strip()[:80] or "PROJECT_DATA"
+        project_id = f"PROJECT-{uuid4()}"
+        now = utc_now()
+        with self.transaction() as connection:
+            connection.execute(
+                """
+                INSERT INTO business_project(
+                    id, name, case_id, data_classification, is_demo, archived,
+                    created_by, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?)
+                """,
+                (
+                    project_id,
+                    safe_name,
+                    safe_case_id,
+                    classification,
+                    int(bool(is_demo)),
+                    safe_actor,
+                    now,
+                    now,
+                ),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="PROJECT_CREATED",
+                entity_type="business_project",
+                entity_id=project_id,
+                detail={
+                    "name": safe_name,
+                    "case_id": safe_case_id,
+                    "is_demo": bool(is_demo),
+                    "data_classification": classification,
+                },
+                actor=safe_actor,
+            )
+        return self.get_project(project_id)
+
+    def get_project(self, project_id: str) -> dict[str, Any]:
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                "SELECT * FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone()
+        if row is None:
+            raise KeyError(f"项目不存在：{project_id}")
+        return self._decode_project_row(row)
+
+    def list_projects(self, *, include_archived: bool = False) -> list[dict[str, Any]]:
+        self.initialize()
+        where = "" if include_archived else "WHERE archived = 0"
+        with self.session() as connection:
+            rows = connection.execute(
+                f"""
+                SELECT * FROM business_project
+                {where}
+                ORDER BY updated_at DESC, id DESC
+                """
+            ).fetchall()
+        return [self._decode_project_row(row) for row in rows]
+
+    def project_for_conversion(self, conversion_job_id: str) -> dict[str, Any] | None:
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                """
+                SELECT * FROM business_project
+                WHERE conversion_job_id = ? ORDER BY updated_at DESC LIMIT 1
+                """,
+                (conversion_job_id,),
+            ).fetchone()
+        return self._decode_project_row(row) if row is not None else None
+
+    def attach_project_conversion(self, project_id: str, conversion_job_id: str) -> None:
+        self.initialize()
+        with self.transaction() as connection:
+            if connection.execute(
+                "SELECT 1 FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone() is None:
+                raise KeyError(f"项目不存在：{project_id}")
+            if connection.execute(
+                "SELECT 1 FROM conversion_job WHERE id = ?", (conversion_job_id,)
+            ).fetchone() is None:
+                raise KeyError(f"转换任务不存在：{conversion_job_id}")
+            connection.execute(
+                """
+                UPDATE business_project
+                SET conversion_job_id = ?, snapshot_id = NULL, run_id = NULL,
+                    updated_at = ? WHERE id = ?
+                """,
+                (conversion_job_id, utc_now(), project_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="PROJECT_SOURCE_PROCESSING_ATTACHED",
+                entity_type="business_project",
+                entity_id=project_id,
+                detail={"conversion_job_id": conversion_job_id},
+            )
+
+    def attach_project_snapshot(self, project_id: str, snapshot_id: str) -> None:
+        self.initialize()
+        with self.transaction() as connection:
+            if connection.execute(
+                "SELECT 1 FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone() is None:
+                raise KeyError(f"项目不存在：{project_id}")
+            if connection.execute(
+                "SELECT 1 FROM input_snapshot WHERE id = ?", (snapshot_id,)
+            ).fetchone() is None:
+                raise KeyError(f"输入快照不存在：{snapshot_id}")
+            connection.execute(
+                """
+                UPDATE business_project
+                SET snapshot_id = ?, run_id = NULL, updated_at = ? WHERE id = ?
+                """,
+                (snapshot_id, utc_now(), project_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="PROJECT_DATA_CONFIRMED",
+                entity_type="business_project",
+                entity_id=project_id,
+                detail={"snapshot_id": snapshot_id},
+            )
+
+    def attach_project_run(self, project_id: str, run_id: str) -> None:
+        self.initialize()
+        with self.transaction() as connection:
+            project = connection.execute(
+                "SELECT snapshot_id FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone()
+            if project is None:
+                raise KeyError(f"项目不存在：{project_id}")
+            run = connection.execute(
+                "SELECT snapshot_id FROM calculation_run WHERE id = ?", (run_id,)
+            ).fetchone()
+            if run is None:
+                raise KeyError(f"计算任务不存在：{run_id}")
+            if project["snapshot_id"] and str(project["snapshot_id"]) != str(run["snapshot_id"]):
+                raise ValueError("计算结果与项目已确认数据不匹配")
+            connection.execute(
+                """
+                UPDATE business_project
+                SET snapshot_id = ?, run_id = ?, updated_at = ? WHERE id = ?
+                """,
+                (str(run["snapshot_id"]), run_id, utc_now(), project_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="PROJECT_CALCULATION_ATTACHED",
+                entity_type="business_project",
+                entity_id=project_id,
+                detail={"run_id": run_id, "snapshot_id": str(run["snapshot_id"])},
+            )
+
+    def archive_project(
+        self, project_id: str, *, archived: bool = True, actor: str = "local-user"
+    ) -> dict[str, Any]:
+        self.initialize()
+        with self.transaction() as connection:
+            row = connection.execute(
+                "SELECT archived FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone()
+            if row is None:
+                raise KeyError(f"项目不存在：{project_id}")
+            connection.execute(
+                "UPDATE business_project SET archived = ?, updated_at = ? WHERE id = ?",
+                (int(bool(archived)), utc_now(), project_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="PROJECT_ARCHIVED" if archived else "PROJECT_RESTORED",
+                entity_type="business_project",
+                entity_id=project_id,
+                detail={"archived": bool(archived)},
+                actor=str(actor).strip()[:120] or "local-user",
+            )
+        return self.get_project(project_id)
+
+    @staticmethod
+    def _decode_controlled_report_row(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
+        item = dict(row)
+        for field in ("context_json", "draft_json", "validation_json"):
+            raw = item.pop(field, None)
+            if raw is not None:
+                item[field.removesuffix("_json")] = json.loads(str(raw))
+        for format_name in ("html", "pdf", "docx"):
+            content = item.pop(f"{format_name}_content", None)
+            if content is not None:
+                item[f"{format_name}_byte_count"] = len(bytes(content))
+        item["formats"] = {
+            format_name.upper(): bool(item.get(f"{format_name}_sha256"))
+            for format_name in ("html", "pdf", "docx")
+        }
+        item["formats"]["ZIP"] = all(item["formats"].values())
+        return item
+
+    def create_controlled_report(
+        self,
+        *,
+        project_id: str,
+        run_id: str,
+        generation_mode: str,
+        provider_id: str,
+        prompt_version: str,
+        context: dict[str, Any],
+        draft: dict[str, Any],
+        validation: dict[str, Any],
+        html_content: bytes,
+        pdf_content: bytes,
+        docx_content: bytes,
+        actor: str = "local-user",
+    ) -> dict[str, Any]:
+        """Persist one immutable controlled-report version and its deliverables."""
+
+        self.initialize()
+        if validation.get("status") != "PASS":
+            raise ValueError("受控报告校验未通过，不能保存报告版本")
+        report_id = f"REPORT-{uuid4()}"
+        safe_actor = str(actor).strip()[:120] or "local-user"
+        context_hash = json_sha256(context)
+        draft_hash = json_sha256(draft)
+        html_hash = bytes_sha256(html_content)
+        pdf_hash = bytes_sha256(pdf_content)
+        docx_hash = bytes_sha256(docx_content)
+        with self.transaction() as connection:
+            project = connection.execute(
+                "SELECT run_id FROM business_project WHERE id = ?", (project_id,)
+            ).fetchone()
+            if project is None:
+                raise KeyError(f"项目不存在：{project_id}")
+            run = connection.execute(
+                "SELECT status FROM calculation_run WHERE id = ?", (run_id,)
+            ).fetchone()
+            if run is None:
+                raise KeyError(f"计算任务不存在：{run_id}")
+            if str(run["status"]) != "COMPLETED":
+                raise ValueError("只有已完成计算才能生成受控报告")
+            if project["run_id"] and str(project["run_id"]) != run_id:
+                raise ValueError("报告计算任务不是项目当前结果")
+            version_no = int(
+                connection.execute(
+                    """
+                    SELECT coalesce(max(version_no), 0) + 1
+                    FROM controlled_report WHERE project_id = ? AND run_id = ?
+                    """,
+                    (project_id, run_id),
+                ).fetchone()[0]
+            )
+            connection.execute(
+                """
+                INSERT INTO controlled_report(
+                    id, project_id, run_id, version_no, status, generation_mode,
+                    provider_id, prompt_version, context_schema_version,
+                    context_json, context_sha256, draft_schema_version,
+                    draft_json, draft_sha256, validation_json,
+                    html_content, html_sha256, pdf_content, pdf_sha256,
+                    docx_content, docx_sha256, created_by, created_at
+                ) VALUES (?, ?, ?, ?, 'DRAFT', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    report_id,
+                    project_id,
+                    run_id,
+                    version_no,
+                    str(generation_mode),
+                    str(provider_id),
+                    str(prompt_version),
+                    str(context.get("schema_version") or ""),
+                    canonical_json(context),
+                    context_hash,
+                    str(draft.get("schema_version") or ""),
+                    canonical_json(draft),
+                    draft_hash,
+                    canonical_json(validation),
+                    html_content,
+                    html_hash,
+                    pdf_content,
+                    pdf_hash,
+                    docx_content,
+                    docx_hash,
+                    safe_actor,
+                    utc_now(),
+                ),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="CONTROLLED_REPORT_CREATED",
+                entity_type="controlled_report",
+                entity_id=report_id,
+                detail={
+                    "project_id": project_id,
+                    "run_id": run_id,
+                    "version_no": version_no,
+                    "generation_mode": generation_mode,
+                    "context_sha256": context_hash,
+                    "draft_sha256": draft_hash,
+                    "html_sha256": html_hash,
+                    "pdf_sha256": pdf_hash,
+                    "docx_sha256": docx_hash,
+                },
+                actor=safe_actor,
+            )
+        return self.get_controlled_report(report_id)
+
+    def get_controlled_report(self, report_id: str) -> dict[str, Any]:
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                "SELECT * FROM controlled_report WHERE id = ?", (report_id,)
+            ).fetchone()
+        if row is None:
+            raise KeyError(f"受控报告不存在：{report_id}")
+        return self._decode_controlled_report_row(row)
+
+    def list_project_reports(self, project_id: str) -> list[dict[str, Any]]:
+        self.initialize()
+        with self.session() as connection:
+            rows = connection.execute(
+                """
+                SELECT id, project_id, run_id, version_no, status, generation_mode,
+                       provider_id, prompt_version, context_schema_version,
+                       context_sha256, draft_schema_version, draft_sha256,
+                       validation_json, html_sha256, length(html_content) AS html_byte_count,
+                       pdf_sha256, length(pdf_content) AS pdf_byte_count,
+                       docx_sha256, length(docx_content) AS docx_byte_count,
+                       created_by, created_at, confirmed_by,
+                       confirmation_reason, confirmed_at
+                FROM controlled_report WHERE project_id = ?
+                ORDER BY created_at DESC, version_no DESC, id DESC
+                """,
+                (project_id,),
+            ).fetchall()
+        return [self._decode_controlled_report_row(row) for row in rows]
+
+    def latest_project_report(self, project_id: str) -> dict[str, Any] | None:
+        reports = self.list_project_reports(project_id)
+        return reports[0] if reports else None
+
+    def get_controlled_report_artifact(
+        self, report_id: str, format_name: str
+    ) -> tuple[str, bytes, str]:
+        safe_format = str(format_name).lower()
+        formats = {
+            "html": ("text/html; charset=utf-8", "html_content", "html"),
+            "pdf": ("application/pdf", "pdf_content", "pdf"),
+            "docx": (
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "docx_content",
+                "docx",
+            ),
+        }
+        if safe_format not in formats:
+            raise ValueError("报告格式必须是HTML、PDF或DOCX")
+        content_type, column, extension = formats[safe_format]
+        self.initialize()
+        with self.session() as connection:
+            row = connection.execute(
+                f'SELECT {column} AS content FROM controlled_report WHERE id = ?',
+                (report_id,),
+            ).fetchone()
+        if row is None:
+            raise KeyError(f"受控报告不存在：{report_id}")
+        return content_type, bytes(row["content"]), extension
+
+    def confirm_controlled_report(
+        self,
+        report_id: str,
+        *,
+        reviewer: str,
+        reason: str,
+    ) -> dict[str, Any]:
+        self.initialize()
+        safe_reviewer = str(reviewer).strip()[:120]
+        safe_reason = str(reason).strip()[:1000]
+        if not safe_reviewer:
+            raise ValueError("报告确认人不能为空")
+        if len(safe_reason) < 4:
+            raise ValueError("报告确认原因至少需要4个字符")
+        with self.transaction() as connection:
+            row = connection.execute(
+                """
+                SELECT status, context_json, validation_json
+                FROM controlled_report WHERE id = ?
+                """,
+                (report_id,),
+            ).fetchone()
+            if row is None:
+                raise KeyError(f"受控报告不存在：{report_id}")
+            if str(row["status"]) != "DRAFT":
+                raise ValueError("只有草稿报告可以人工确认")
+            validation = json.loads(str(row["validation_json"]))
+            if validation.get("status") != "PASS":
+                raise ValueError("报告校验未通过，不能人工确认")
+            context = json.loads(str(row["context_json"]))
+            status = (
+                "CONFIRMED_TEST_ONLY"
+                if context.get("data_classification") == "SYNTHETIC_TEST_ONLY"
+                else "HUMAN_CONFIRMED"
+            )
+            now = utc_now()
+            connection.execute(
+                """
+                UPDATE controlled_report
+                SET status = ?, confirmed_by = ?, confirmation_reason = ?, confirmed_at = ?
+                WHERE id = ?
+                """,
+                (status, safe_reviewer, safe_reason, now, report_id),
+            )
+            self._record_event_in_connection(
+                connection,
+                event_type="CONTROLLED_REPORT_CONFIRMED",
+                entity_type="controlled_report",
+                entity_id=report_id,
+                detail={
+                    "status": status,
+                    "formal_report_allowed": bool(context.get("formal_report_allowed")),
+                    "reason": safe_reason,
+                },
+                actor=safe_reviewer,
+            )
+        return self.get_controlled_report(report_id)
 
     def table_overview(self) -> list[dict[str, Any]]:
         self.initialize()

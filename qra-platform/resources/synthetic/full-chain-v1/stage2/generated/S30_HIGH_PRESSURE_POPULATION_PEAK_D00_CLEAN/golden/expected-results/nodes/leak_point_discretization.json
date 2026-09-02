@@ -1,0 +1,1469 @@
+{
+  "initial_spacing_m": 50.0,
+  "leak_point_count": 160,
+  "leak_point_count_by_segment": {
+    "SEG-001": 10,
+    "SEG-002": 10,
+    "SEG-003": 10,
+    "SEG-004": 10,
+    "SEG-005": 7,
+    "SEG-006": 7,
+    "SEG-007": 8,
+    "SEG-008": 8,
+    "SEG-009": 6,
+    "SEG-010": 6,
+    "SEG-011": 7,
+    "SEG-012": 7,
+    "SEG-013": 8,
+    "SEG-014": 8,
+    "SEG-015": 9,
+    "SEG-016": 9,
+    "SEG-017": 7,
+    "SEG-018": 7,
+    "SEG-019": 8,
+    "SEG-020": 8
+  },
+  "leak_points": [
+    {
+      "chainage_km": 0.025,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0001",
+      "segment_id": "SEG-001",
+      "sequence": 1,
+      "x_m": 25.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.075,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0002",
+      "segment_id": "SEG-001",
+      "sequence": 2,
+      "x_m": 75.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.125,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0003",
+      "segment_id": "SEG-001",
+      "sequence": 3,
+      "x_m": 125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.175,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0004",
+      "segment_id": "SEG-001",
+      "sequence": 4,
+      "x_m": 175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.225,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0005",
+      "segment_id": "SEG-001",
+      "sequence": 5,
+      "x_m": 225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.275,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0006",
+      "segment_id": "SEG-001",
+      "sequence": 6,
+      "x_m": 275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.325,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0007",
+      "segment_id": "SEG-001",
+      "sequence": 7,
+      "x_m": 325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.375,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0008",
+      "segment_id": "SEG-001",
+      "sequence": 8,
+      "x_m": 375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.425,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0009",
+      "segment_id": "SEG-001",
+      "sequence": 9,
+      "x_m": 425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.475,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-001-LP-0010",
+      "segment_id": "SEG-001",
+      "sequence": 10,
+      "x_m": 475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.525,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0001",
+      "segment_id": "SEG-002",
+      "sequence": 1,
+      "x_m": 525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.575,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0002",
+      "segment_id": "SEG-002",
+      "sequence": 2,
+      "x_m": 575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.625,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0003",
+      "segment_id": "SEG-002",
+      "sequence": 3,
+      "x_m": 625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.675,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0004",
+      "segment_id": "SEG-002",
+      "sequence": 4,
+      "x_m": 675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.725,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0005",
+      "segment_id": "SEG-002",
+      "sequence": 5,
+      "x_m": 725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.775,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0006",
+      "segment_id": "SEG-002",
+      "sequence": 6,
+      "x_m": 775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.825,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0007",
+      "segment_id": "SEG-002",
+      "sequence": 7,
+      "x_m": 825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.875,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0008",
+      "segment_id": "SEG-002",
+      "sequence": 8,
+      "x_m": 875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.925,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0009",
+      "segment_id": "SEG-002",
+      "sequence": 9,
+      "x_m": 925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 0.975,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-002-LP-0010",
+      "segment_id": "SEG-002",
+      "sequence": 10,
+      "x_m": 975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.025,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0001",
+      "segment_id": "SEG-003",
+      "sequence": 1,
+      "x_m": 1025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.075,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0002",
+      "segment_id": "SEG-003",
+      "sequence": 2,
+      "x_m": 1075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.125,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0003",
+      "segment_id": "SEG-003",
+      "sequence": 3,
+      "x_m": 1125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.175,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0004",
+      "segment_id": "SEG-003",
+      "sequence": 4,
+      "x_m": 1175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.225,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0005",
+      "segment_id": "SEG-003",
+      "sequence": 5,
+      "x_m": 1225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.275,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0006",
+      "segment_id": "SEG-003",
+      "sequence": 6,
+      "x_m": 1275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.325,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0007",
+      "segment_id": "SEG-003",
+      "sequence": 7,
+      "x_m": 1325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.375,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0008",
+      "segment_id": "SEG-003",
+      "sequence": 8,
+      "x_m": 1375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.425,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0009",
+      "segment_id": "SEG-003",
+      "sequence": 9,
+      "x_m": 1425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.475,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-003-LP-0010",
+      "segment_id": "SEG-003",
+      "sequence": 10,
+      "x_m": 1475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.525,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0001",
+      "segment_id": "SEG-004",
+      "sequence": 1,
+      "x_m": 1525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.575,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0002",
+      "segment_id": "SEG-004",
+      "sequence": 2,
+      "x_m": 1575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.625,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0003",
+      "segment_id": "SEG-004",
+      "sequence": 3,
+      "x_m": 1625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.675,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0004",
+      "segment_id": "SEG-004",
+      "sequence": 4,
+      "x_m": 1675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.725,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0005",
+      "segment_id": "SEG-004",
+      "sequence": 5,
+      "x_m": 1725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.775,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0006",
+      "segment_id": "SEG-004",
+      "sequence": 6,
+      "x_m": 1775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.825,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0007",
+      "segment_id": "SEG-004",
+      "sequence": 7,
+      "x_m": 1825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.875,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0008",
+      "segment_id": "SEG-004",
+      "sequence": 8,
+      "x_m": 1875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.925,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0009",
+      "segment_id": "SEG-004",
+      "sequence": 9,
+      "x_m": 1925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 1.975,
+      "frequency_share": 0.1,
+      "leak_point_id": "SEG-004-LP-0010",
+      "segment_id": "SEG-004",
+      "sequence": 10,
+      "x_m": 1975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.025,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0001",
+      "segment_id": "SEG-005",
+      "sequence": 1,
+      "x_m": 2025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.075,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0002",
+      "segment_id": "SEG-005",
+      "sequence": 2,
+      "x_m": 2075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.125,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0003",
+      "segment_id": "SEG-005",
+      "sequence": 3,
+      "x_m": 2125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.175,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0004",
+      "segment_id": "SEG-005",
+      "sequence": 4,
+      "x_m": 2175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.225,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0005",
+      "segment_id": "SEG-005",
+      "sequence": 5,
+      "x_m": 2225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.275,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0006",
+      "segment_id": "SEG-005",
+      "sequence": 6,
+      "x_m": 2275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.325,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-005-LP-0007",
+      "segment_id": "SEG-005",
+      "sequence": 7,
+      "x_m": 2325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.375,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0001",
+      "segment_id": "SEG-006",
+      "sequence": 1,
+      "x_m": 2375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.4250000000000003,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0002",
+      "segment_id": "SEG-006",
+      "sequence": 2,
+      "x_m": 2425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.475,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0003",
+      "segment_id": "SEG-006",
+      "sequence": 3,
+      "x_m": 2475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.525,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0004",
+      "segment_id": "SEG-006",
+      "sequence": 4,
+      "x_m": 2525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.575,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0005",
+      "segment_id": "SEG-006",
+      "sequence": 5,
+      "x_m": 2575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.625,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0006",
+      "segment_id": "SEG-006",
+      "sequence": 6,
+      "x_m": 2625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.6750000000000003,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-006-LP-0007",
+      "segment_id": "SEG-006",
+      "sequence": 7,
+      "x_m": 2675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.725,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0001",
+      "segment_id": "SEG-007",
+      "sequence": 1,
+      "x_m": 2725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.7750000000000004,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0002",
+      "segment_id": "SEG-007",
+      "sequence": 2,
+      "x_m": 2775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.825,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0003",
+      "segment_id": "SEG-007",
+      "sequence": 3,
+      "x_m": 2825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.875,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0004",
+      "segment_id": "SEG-007",
+      "sequence": 4,
+      "x_m": 2875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.9250000000000003,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0005",
+      "segment_id": "SEG-007",
+      "sequence": 5,
+      "x_m": 2925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 2.975,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0006",
+      "segment_id": "SEG-007",
+      "sequence": 6,
+      "x_m": 2975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.0250000000000004,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0007",
+      "segment_id": "SEG-007",
+      "sequence": 7,
+      "x_m": 3025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.075,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-007-LP-0008",
+      "segment_id": "SEG-007",
+      "sequence": 8,
+      "x_m": 3075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.125,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0001",
+      "segment_id": "SEG-008",
+      "sequence": 1,
+      "x_m": 3125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.1750000000000003,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0002",
+      "segment_id": "SEG-008",
+      "sequence": 2,
+      "x_m": 3175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.225,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0003",
+      "segment_id": "SEG-008",
+      "sequence": 3,
+      "x_m": 3225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.275,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0004",
+      "segment_id": "SEG-008",
+      "sequence": 4,
+      "x_m": 3275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.325,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0005",
+      "segment_id": "SEG-008",
+      "sequence": 5,
+      "x_m": 3325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.375,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0006",
+      "segment_id": "SEG-008",
+      "sequence": 6,
+      "x_m": 3375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.4250000000000003,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0007",
+      "segment_id": "SEG-008",
+      "sequence": 7,
+      "x_m": 3425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.475,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-008-LP-0008",
+      "segment_id": "SEG-008",
+      "sequence": 8,
+      "x_m": 3475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.525,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0001",
+      "segment_id": "SEG-009",
+      "sequence": 1,
+      "x_m": 3525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.575,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0002",
+      "segment_id": "SEG-009",
+      "sequence": 2,
+      "x_m": 3575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.625,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0003",
+      "segment_id": "SEG-009",
+      "sequence": 3,
+      "x_m": 3625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.675,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0004",
+      "segment_id": "SEG-009",
+      "sequence": 4,
+      "x_m": 3675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.725,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0005",
+      "segment_id": "SEG-009",
+      "sequence": 5,
+      "x_m": 3725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.775,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-009-LP-0006",
+      "segment_id": "SEG-009",
+      "sequence": 6,
+      "x_m": 3775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.8249999999999997,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0001",
+      "segment_id": "SEG-010",
+      "sequence": 1,
+      "x_m": 3825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.875,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0002",
+      "segment_id": "SEG-010",
+      "sequence": 2,
+      "x_m": 3875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.925,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0003",
+      "segment_id": "SEG-010",
+      "sequence": 3,
+      "x_m": 3925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 3.9749999999999996,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0004",
+      "segment_id": "SEG-010",
+      "sequence": 4,
+      "x_m": 3975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.0249999999999995,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0005",
+      "segment_id": "SEG-010",
+      "sequence": 5,
+      "x_m": 4025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.075,
+      "frequency_share": 0.16666666666666666,
+      "leak_point_id": "SEG-010-LP-0006",
+      "segment_id": "SEG-010",
+      "sequence": 6,
+      "x_m": 4075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.125,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0001",
+      "segment_id": "SEG-011",
+      "sequence": 1,
+      "x_m": 4125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.175,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0002",
+      "segment_id": "SEG-011",
+      "sequence": 2,
+      "x_m": 4175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.225,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0003",
+      "segment_id": "SEG-011",
+      "sequence": 3,
+      "x_m": 4225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.2749999999999995,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0004",
+      "segment_id": "SEG-011",
+      "sequence": 4,
+      "x_m": 4275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.324999999999999,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0005",
+      "segment_id": "SEG-011",
+      "sequence": 5,
+      "x_m": 4325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.375,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0006",
+      "segment_id": "SEG-011",
+      "sequence": 6,
+      "x_m": 4375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.425,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-011-LP-0007",
+      "segment_id": "SEG-011",
+      "sequence": 7,
+      "x_m": 4425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.4750000000000005,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0001",
+      "segment_id": "SEG-012",
+      "sequence": 1,
+      "x_m": 4475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.525,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0002",
+      "segment_id": "SEG-012",
+      "sequence": 2,
+      "x_m": 4525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.575,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0003",
+      "segment_id": "SEG-012",
+      "sequence": 3,
+      "x_m": 4575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.625,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0004",
+      "segment_id": "SEG-012",
+      "sequence": 4,
+      "x_m": 4625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.675,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0005",
+      "segment_id": "SEG-012",
+      "sequence": 5,
+      "x_m": 4675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.7250000000000005,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0006",
+      "segment_id": "SEG-012",
+      "sequence": 6,
+      "x_m": 4725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.775,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-012-LP-0007",
+      "segment_id": "SEG-012",
+      "sequence": 7,
+      "x_m": 4775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.825,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0001",
+      "segment_id": "SEG-013",
+      "sequence": 1,
+      "x_m": 4825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.875,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0002",
+      "segment_id": "SEG-013",
+      "sequence": 2,
+      "x_m": 4875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.925,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0003",
+      "segment_id": "SEG-013",
+      "sequence": 3,
+      "x_m": 4925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 4.975,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0004",
+      "segment_id": "SEG-013",
+      "sequence": 4,
+      "x_m": 4975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.0249999999999995,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0005",
+      "segment_id": "SEG-013",
+      "sequence": 5,
+      "x_m": 5025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.075,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0006",
+      "segment_id": "SEG-013",
+      "sequence": 6,
+      "x_m": 5075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.125,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0007",
+      "segment_id": "SEG-013",
+      "sequence": 7,
+      "x_m": 5125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.175,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-013-LP-0008",
+      "segment_id": "SEG-013",
+      "sequence": 8,
+      "x_m": 5175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.2250000000000005,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0001",
+      "segment_id": "SEG-014",
+      "sequence": 1,
+      "x_m": 5225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.275,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0002",
+      "segment_id": "SEG-014",
+      "sequence": 2,
+      "x_m": 5275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.325,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0003",
+      "segment_id": "SEG-014",
+      "sequence": 3,
+      "x_m": 5325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.375,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0004",
+      "segment_id": "SEG-014",
+      "sequence": 4,
+      "x_m": 5375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.425,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0005",
+      "segment_id": "SEG-014",
+      "sequence": 5,
+      "x_m": 5425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.4750000000000005,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0006",
+      "segment_id": "SEG-014",
+      "sequence": 6,
+      "x_m": 5475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.525,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0007",
+      "segment_id": "SEG-014",
+      "sequence": 7,
+      "x_m": 5525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.575,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-014-LP-0008",
+      "segment_id": "SEG-014",
+      "sequence": 8,
+      "x_m": 5575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.625,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0001",
+      "segment_id": "SEG-015",
+      "sequence": 1,
+      "x_m": 5625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.675,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0002",
+      "segment_id": "SEG-015",
+      "sequence": 2,
+      "x_m": 5675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.725,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0003",
+      "segment_id": "SEG-015",
+      "sequence": 3,
+      "x_m": 5725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.7749999999999995,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0004",
+      "segment_id": "SEG-015",
+      "sequence": 4,
+      "x_m": 5775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.824999999999999,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0005",
+      "segment_id": "SEG-015",
+      "sequence": 5,
+      "x_m": 5825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.875,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0006",
+      "segment_id": "SEG-015",
+      "sequence": 6,
+      "x_m": 5875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.925,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0007",
+      "segment_id": "SEG-015",
+      "sequence": 7,
+      "x_m": 5925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 5.975,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0008",
+      "segment_id": "SEG-015",
+      "sequence": 8,
+      "x_m": 5975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.0249999999999995,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-015-LP-0009",
+      "segment_id": "SEG-015",
+      "sequence": 9,
+      "x_m": 6025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.075,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0001",
+      "segment_id": "SEG-016",
+      "sequence": 1,
+      "x_m": 6075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.125,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0002",
+      "segment_id": "SEG-016",
+      "sequence": 2,
+      "x_m": 6125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.175,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0003",
+      "segment_id": "SEG-016",
+      "sequence": 3,
+      "x_m": 6175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.225,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0004",
+      "segment_id": "SEG-016",
+      "sequence": 4,
+      "x_m": 6225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.2749999999999995,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0005",
+      "segment_id": "SEG-016",
+      "sequence": 5,
+      "x_m": 6275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.325,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0006",
+      "segment_id": "SEG-016",
+      "sequence": 6,
+      "x_m": 6325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.375,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0007",
+      "segment_id": "SEG-016",
+      "sequence": 7,
+      "x_m": 6375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.425,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0008",
+      "segment_id": "SEG-016",
+      "sequence": 8,
+      "x_m": 6425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.475,
+      "frequency_share": 0.1111111111111111,
+      "leak_point_id": "SEG-016-LP-0009",
+      "segment_id": "SEG-016",
+      "sequence": 9,
+      "x_m": 6475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.525,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0001",
+      "segment_id": "SEG-017",
+      "sequence": 1,
+      "x_m": 6525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.575,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0002",
+      "segment_id": "SEG-017",
+      "sequence": 2,
+      "x_m": 6575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.625,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0003",
+      "segment_id": "SEG-017",
+      "sequence": 3,
+      "x_m": 6625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.675,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0004",
+      "segment_id": "SEG-017",
+      "sequence": 4,
+      "x_m": 6675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.725,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0005",
+      "segment_id": "SEG-017",
+      "sequence": 5,
+      "x_m": 6725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.775,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0006",
+      "segment_id": "SEG-017",
+      "sequence": 6,
+      "x_m": 6775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.825,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-017-LP-0007",
+      "segment_id": "SEG-017",
+      "sequence": 7,
+      "x_m": 6825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.875,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0001",
+      "segment_id": "SEG-018",
+      "sequence": 1,
+      "x_m": 6875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.925,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0002",
+      "segment_id": "SEG-018",
+      "sequence": 2,
+      "x_m": 6925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 6.975,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0003",
+      "segment_id": "SEG-018",
+      "sequence": 3,
+      "x_m": 6975.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.0249999999999995,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0004",
+      "segment_id": "SEG-018",
+      "sequence": 4,
+      "x_m": 7025.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.074999999999999,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0005",
+      "segment_id": "SEG-018",
+      "sequence": 5,
+      "x_m": 7075.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.125,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0006",
+      "segment_id": "SEG-018",
+      "sequence": 6,
+      "x_m": 7125.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.175,
+      "frequency_share": 0.14285714285714285,
+      "leak_point_id": "SEG-018-LP-0007",
+      "segment_id": "SEG-018",
+      "sequence": 7,
+      "x_m": 7175.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.2250000000000005,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0001",
+      "segment_id": "SEG-019",
+      "sequence": 1,
+      "x_m": 7225.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.275,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0002",
+      "segment_id": "SEG-019",
+      "sequence": 2,
+      "x_m": 7275.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.325,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0003",
+      "segment_id": "SEG-019",
+      "sequence": 3,
+      "x_m": 7325.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.375,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0004",
+      "segment_id": "SEG-019",
+      "sequence": 4,
+      "x_m": 7375.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.425,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0005",
+      "segment_id": "SEG-019",
+      "sequence": 5,
+      "x_m": 7425.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.4750000000000005,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0006",
+      "segment_id": "SEG-019",
+      "sequence": 6,
+      "x_m": 7475.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.525,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0007",
+      "segment_id": "SEG-019",
+      "sequence": 7,
+      "x_m": 7525.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.575,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-019-LP-0008",
+      "segment_id": "SEG-019",
+      "sequence": 8,
+      "x_m": 7575.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.625,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0001",
+      "segment_id": "SEG-020",
+      "sequence": 1,
+      "x_m": 7625.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.675,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0002",
+      "segment_id": "SEG-020",
+      "sequence": 2,
+      "x_m": 7675.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.725,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0003",
+      "segment_id": "SEG-020",
+      "sequence": 3,
+      "x_m": 7725.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.7749999999999995,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0004",
+      "segment_id": "SEG-020",
+      "sequence": 4,
+      "x_m": 7775.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.824999999999999,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0005",
+      "segment_id": "SEG-020",
+      "sequence": 5,
+      "x_m": 7825.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.875,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0006",
+      "segment_id": "SEG-020",
+      "sequence": 6,
+      "x_m": 7875.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.925,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0007",
+      "segment_id": "SEG-020",
+      "sequence": 7,
+      "x_m": 7925.0,
+      "y_m": 0.0
+    },
+    {
+      "chainage_km": 7.975,
+      "frequency_share": 0.125,
+      "leak_point_id": "SEG-020-LP-0008",
+      "segment_id": "SEG-020",
+      "sequence": 8,
+      "x_m": 7975.0,
+      "y_m": 0.0
+    }
+  ],
+  "model_id": "pipeline.syt6891.2.leak_point_discretization.v1"
+}

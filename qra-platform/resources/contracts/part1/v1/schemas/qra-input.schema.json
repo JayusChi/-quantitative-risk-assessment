@@ -407,6 +407,9 @@
     "raw_data_categories": {
       "type": "object"
     },
+    "risk_matrix_criteria": {
+      "type": "object"
+    },
     "schema_version": {
       "type": "string"
     },
@@ -659,6 +662,9 @@
       "type": "array"
     },
     "standard_formula_test_parameters": {
+      "type": "object"
+    },
+    "system_parameters": {
       "type": "object"
     },
     "validation_expectations": {

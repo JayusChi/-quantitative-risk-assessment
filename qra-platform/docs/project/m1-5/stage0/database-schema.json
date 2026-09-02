@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "recorded_on": "2026-09-01",
+  "database_engine": "SQLite",
+  "application_schema_version": "2.1.0",
+  "version_source": "src/db_qra/database.py:SCHEMA_VERSION",
+  "fresh_database_recorded_versions": [
+    "2.1.0"
+  ],
+  "fresh_database_application_table_count": 33,
+  "initialization_smoke": "PASS"
+}
+

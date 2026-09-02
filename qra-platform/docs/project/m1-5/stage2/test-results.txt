@@ -1,0 +1,30 @@
+M1.5 Stage 2 validation summary
+Date: 2026-09-01
+
+Static checks:
+- Ruff: PASS
+- Python py_compile: PASS
+- Node --check: PASS
+
+Artifact freshness:
+- build_synthetic_source_pack.py --check: PASS
+- errors: []
+
+Stage 2 focused tests:
+- Ran 9 tests in 0.241s
+- OK
+
+Full regression suite:
+- Ran 268 tests in 101.241s
+- OK (skipped=1)
+- failures=0
+- errors=0
+
+Determinism:
+- business_content_sha256 run A: 819c36a2a7ed98eb930a334fb14a183a53d681a26b2d0bb7d0e4b68966e4b710
+- business_content_sha256 run B: 819c36a2a7ed98eb930a334fb14a183a53d681a26b2d0bb7d0e4b68966e4b710
+- numerical_result_sha256 run A: 4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c
+- numerical_result_sha256 run B: 4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c
+
+Stage gate:
+- S2_SYNTHETIC_SOURCE_PACK_ACCEPTED

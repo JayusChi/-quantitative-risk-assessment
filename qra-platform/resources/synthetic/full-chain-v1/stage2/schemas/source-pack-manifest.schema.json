@@ -1,0 +1,167 @@
+{
+  "$id": "https://qra.local/synthetic/full-chain-v1/stage2/source-pack-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "business_content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "byte_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "data_classification": {
+      "const": "SYNTHETIC_TEST_ONLY"
+    },
+    "data_condition_id": {
+      "const": "D00_CLEAN"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "business_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "media_type": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "synthetic_marker_verified": {
+            "const": true
+          }
+        },
+        "required": [
+          "path",
+          "role",
+          "media_type",
+          "size_bytes",
+          "sha256",
+          "business_sha256",
+          "synthetic_marker_verified"
+        ],
+        "type": "object"
+      },
+      "minItems": 10,
+      "type": "array"
+    },
+    "generator": {
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": {
+          "const": true
+        },
+        "id": {
+          "const": "build_synthetic_source_pack.py"
+        },
+        "random_seed": {
+          "type": "null"
+        },
+        "version": {
+          "const": "qra.synthetic-source-pack/1.1.0"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "deterministic",
+        "random_seed"
+      ],
+      "type": "object"
+    },
+    "golden": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_manifest": {
+          "type": "string"
+        },
+        "expected_result": {
+          "type": "string"
+        },
+        "expected_snapshot": {
+          "type": "string"
+        },
+        "ground_truth": {
+          "type": "string"
+        },
+        "numerical_result_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ground_truth",
+        "evidence_manifest",
+        "expected_snapshot",
+        "expected_result",
+        "numerical_result_sha256"
+      ],
+      "type": "object"
+    },
+    "pack_id": {
+      "pattern": "^SYNTHETIC-SOURCE-PACK-S[0-9]{2}-D00-v1$",
+      "type": "string"
+    },
+    "parameter_packs": {
+      "items": {
+        "pattern": "-v[0-9]+$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "scenario_id": {
+      "enum": [
+        "S00_BASELINE",
+        "S10_CORROSION_DEGRADATION",
+        "S20_THIRD_PARTY_SURGE",
+        "S30_HIGH_PRESSURE_POPULATION_PEAK",
+        "S40_MITIGATION_PACKAGE"
+      ]
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "variants": {
+      "items": {
+        "pattern": "^D[1-7]0_",
+        "type": "string"
+      },
+      "maxItems": 7,
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "pack_id",
+    "scenario_id",
+    "data_condition_id",
+    "data_classification",
+    "generator",
+    "files",
+    "parameter_packs",
+    "golden",
+    "variants",
+    "business_content_sha256",
+    "byte_manifest_sha256"
+  ],
+  "type": "object"
+}

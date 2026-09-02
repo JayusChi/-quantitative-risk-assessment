@@ -1,0 +1,21 @@
+{
+  "deterministic": {
+    "network_allowed": false,
+    "provider_id": "synthetic-deterministic-replay",
+    "provider_version": "1.0.0",
+    "replay_contract": "deterministic-replay.json",
+    "temperature": 0
+  },
+  "online_demo": {
+    "api_key_env": "QRA_ALIYUN_API_KEY",
+    "base_url_env": "QRA_ALIYUN_OPENAI_BASE_URL",
+    "external_sharing_requires_explicit_opt_in": true,
+    "failure_policy": "PRESERVE_PARSED_ARTIFACTS_AND_ROUTE_TO_HUMAN",
+    "model_env": "QRA_EXTRACTION_MODEL_VERSION",
+    "provider_id": "aliyun-bailian-openai",
+    "structured_output_required": true,
+    "temperature": 0,
+    "tools_allowed": []
+  },
+  "schema_version": "1.0.0"
+}

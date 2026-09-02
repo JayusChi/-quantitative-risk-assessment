@@ -7,10 +7,13 @@ import io
 import json
 import os
 import re
+import secrets
+import ssl
 import threading
 import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from ipaddress import ip_address
+from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, quote, unquote, urlparse
 from uuid import uuid4
@@ -19,6 +22,7 @@ from qra_converter.ocr.payload_policy import OcrPayloadPolicy
 from qra_engine.errors import InputValidationError
 
 from .admin_ui import admin_html
+from .controlled_reporting import ControlledReportService, build_controlled_report_zip
 from .conversion_adapter import (
     list_mapping_profiles,
     run_conversion_job,
@@ -47,6 +51,8 @@ from .ocr_settings import (
     validate_bailian_settings,
 )
 from .paths import DEFAULT_RUNTIME_ROOT
+from .project_service import ProjectService
+from .project_ui import project_workspace_html
 from .reextraction_worker import ReextractionWorker
 from .review_service import ReviewRevisionConflict, ReviewService
 from .review_ui import review_workbench_html
@@ -62,6 +68,43 @@ RUNTIME_ROOT = DEFAULT_RUNTIME_ROOT
 RUN_SLOTS = threading.BoundedSemaphore(value=2)
 CONVERSION_SLOTS = threading.BoundedSemaphore(value=2)
 REEXTRACTION_SLOTS = threading.BoundedSemaphore(value=2)
+
+
+def _truthy_environment(name: str) -> bool:
+    return os.environ.get(name, "").strip().casefold() in {"1", "true", "yes", "on"}
+
+
+def _loopback_host(host: str) -> bool:
+    if host.strip().casefold() == "localhost":
+        return True
+    try:
+        return ip_address(host).is_loopback
+    except ValueError:
+        return False
+
+
+def _validate_deployment_security(
+    host: str,
+    *,
+    tls_cert: Path | None,
+    tls_key: Path | None,
+    trust_proxy_tls: bool,
+) -> str:
+    mode = os.environ.get("QRA_DEPLOYMENT_MODE", "development").strip().casefold()
+    if mode not in {"development", "production"}:
+        raise ValueError("QRA_DEPLOYMENT_MODE必须是development或production")
+    if bool(tls_cert) != bool(tls_key):
+        raise ValueError("--tls-cert与--tls-key必须同时提供")
+    has_tls_boundary = bool(tls_cert and tls_key) or trust_proxy_tls
+    if not _loopback_host(host) and not os.environ.get("QRA_ADMIN_TOKEN"):
+        raise ValueError("非本机监听必须配置QRA_ADMIN_TOKEN")
+    if not _loopback_host(host) and not has_tls_boundary:
+        raise ValueError("非本机监听必须启用TLS或明确使用可信TLS反向代理")
+    if mode == "production" and not os.environ.get("QRA_ADMIN_TOKEN"):
+        raise ValueError("生产模式必须配置QRA_ADMIN_TOKEN")
+    if mode == "production" and not has_tls_boundary:
+        raise ValueError("生产模式必须启用TLS或明确使用可信TLS反向代理")
+    return mode
 
 
 def _public_error_message(value: object) -> str:
@@ -180,6 +223,9 @@ def _zip_run(database: QraDatabase, run_id: str) -> bytes:
 class QraRequestHandler(BaseHTTPRequestHandler):
     database: QraDatabase
     ocr_settings_store: OcrSettingsStore | None = None
+    deployment_mode = "development"
+    tls_enabled = False
+    trust_proxy_tls = False
 
     def _get_ocr_settings_store(self) -> OcrSettingsStore:
         store = self.ocr_settings_store
@@ -191,6 +237,9 @@ class QraRequestHandler(BaseHTTPRequestHandler):
     def _review_service(self) -> ReviewService:
         return ReviewService(self.database)
 
+    def _project_service(self) -> ProjectService:
+        return ProjectService(self.database)
+
     def _send(
         self,
         status: int,
@@ -200,6 +249,11 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         cache_control: str = "no-store",
         headers: dict[str, str] | None = None,
     ) -> None:
+        csp_nonce = secrets.token_urlsafe(18)
+        if content_type.startswith("text/html"):
+            content = content.replace(
+                b"<script>", f'<script nonce="{csp_nonce}">'.encode("ascii")
+            )
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(content)))
@@ -208,10 +262,22 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         self.send_header("X-Frame-Options", "SAMEORIGIN")
         self.send_header("Referrer-Policy", "same-origin")
         self.send_header(
+            "Permissions-Policy",
+            "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        )
+        self.send_header(
             "Content-Security-Policy",
             "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; "
-            "script-src 'self' 'unsafe-inline'; frame-ancestors 'self'",
+            f"script-src 'self' 'nonce-{csp_nonce}'; frame-ancestors 'self'; "
+            "base-uri 'self'; form-action 'self'; object-src 'none'",
         )
+        forwarded_https = (
+            self.trust_proxy_tls
+            and self.headers.get("X-Forwarded-Proto", "").split(",", 1)[0].strip().casefold()
+            == "https"
+        )
+        if self.tls_enabled or forwarded_https:
+            self.send_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
         for name, value in (headers or {}).items():
             self.send_header(name, value)
         self.end_headers()
@@ -393,7 +459,24 @@ class QraRequestHandler(BaseHTTPRequestHandler):
             if parts[:2] == ["admin", "api"]:
                 self._require_write_access()
             if decoded_path == "/":
-                self._redirect("/admin/")
+                self._redirect("/projects/")
+                return
+            if decoded_path == "/projects":
+                self._redirect("/projects/")
+                return
+            if decoded_path == "/projects/":
+                self._send(200, "text/html; charset=utf-8", project_workspace_html())
+                return
+            if len(parts) == 2 and parts[0] == "projects":
+                self.database.get_project(parts[1])
+                if not decoded_path.endswith("/"):
+                    self._redirect(f"/projects/{quote(parts[1], safe='')}/")
+                    return
+                self._send(
+                    200,
+                    "text/html; charset=utf-8",
+                    project_workspace_html(parts[1]),
+                )
                 return
             if decoded_path == "/admin":
                 self._redirect("/admin/")
@@ -418,7 +501,7 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     200,
                     {
                         "status": "ok",
-                        "database": str(self.database.path),
+                        "deployment_mode": self.deployment_mode,
                         "engine_version": ENGINE_VERSION,
                         "providers": {
                             "ocr_configured": bool(
@@ -437,6 +520,18 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                 overview["engine_version"] = ENGINE_VERSION
                 overview["storage_engine"] = "SQLite"
                 self._json(200, overview)
+                return
+            if parts == ["admin", "api", "projects"]:
+                include_archived = str(
+                    query.get("include_archived", ["false"])[0]
+                ).lower() in {"1", "true", "yes"}
+                self._json(
+                    200,
+                    self._project_service().list(include_archived=include_archived),
+                )
+                return
+            if len(parts) == 4 and parts[:3] == ["admin", "api", "projects"]:
+                self._json(200, self._project_service().get(parts[3]))
                 return
             if parts == ["admin", "api", "intake-policy"]:
                 ocr_policy = OcrPayloadPolicy.from_environment()
@@ -682,6 +777,46 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         headers={"Content-Disposition": f'attachment; filename="QRA-{run_id}.zip"'},
                     )
                     return
+            if len(parts) >= 4 and parts[:3] == ["admin", "api", "reports"]:
+                report_id = parts[3]
+                if len(parts) == 4:
+                    self._json(200, self.database.get_controlled_report(report_id))
+                    return
+                if len(parts) == 5 and parts[4] == "export":
+                    content = build_controlled_report_zip(self.database, report_id)
+                    self.database.record_event(
+                        event_type="CONTROLLED_REPORT_EXPORTED",
+                        entity_type="controlled_report",
+                        entity_id=report_id,
+                        detail={"format": "zip", "bytes": len(content)},
+                    )
+                    self._send(
+                        200,
+                        "application/zip",
+                        content,
+                        headers={
+                            "Content-Disposition": (
+                                f'attachment; filename="QRA-controlled-{report_id}.zip"'
+                            )
+                        },
+                    )
+                    return
+                if len(parts) == 6 and parts[4] == "artifacts":
+                    content_type, content, extension = (
+                        self.database.get_controlled_report_artifact(report_id, parts[5])
+                    )
+                    disposition = "inline" if extension == "html" else "attachment"
+                    self._send(
+                        200,
+                        content_type,
+                        content,
+                        headers={
+                            "Content-Disposition": (
+                                f'{disposition}; filename="QRA-controlled-{report_id}.{extension}"'
+                            )
+                        },
+                    )
+                    return
             if parts == ["admin", "api", "database"]:
                 self._json(200, self.database.table_overview())
                 return
@@ -733,6 +868,22 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     cache_control="private, max-age=60",
                 )
                 return
+            if len(parts) >= 2 and parts[0] == "reports":
+                report_id = parts[1]
+                if len(parts) == 2 and not decoded_path.endswith("/"):
+                    self._redirect(f"/reports/{quote(report_id, safe='')}/")
+                    return
+                if len(parts) == 2:
+                    content_type, content, _ = self.database.get_controlled_report_artifact(
+                        report_id, "html"
+                    )
+                    self._send(
+                        200,
+                        content_type,
+                        content,
+                        cache_control="private, max-age=60",
+                    )
+                    return
             self._json(
                 404,
                 {"error": "NOT_FOUND", "message": "未找到页面", "issues": []},
@@ -799,6 +950,171 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         parts = self._parts(decoded_path)
         try:
             self._require_write_access()
+            if parts == ["admin", "api", "projects"]:
+                body = self._read_json_body()
+                if not isinstance(body, dict):
+                    raise ValueError("请求体必须是JSON对象")
+                project = self._project_service().create(
+                    name=str(body.get("name") or ""),
+                    case_id=body.get("case_id"),
+                    actor=self._actor(body),
+                )
+                self._json(201, project)
+                return
+            if parts == ["admin", "api", "projects", "demo"]:
+                body = self._read_optional_json_body()
+                result = self._project_service().create_demo(actor=self._actor(body))
+                if result.get("run_id"):
+                    project = result["project"]
+                    _start_run_thread(
+                        self.database,
+                        str(result["run_id"]),
+                        str(project["advanced_audit"]["snapshot_id"]),
+                        generate_charts=True,
+                    )
+                self._json(201 if result["created"] else 200, result)
+                return
+            if len(parts) == 5 and parts[:3] == ["admin", "api", "projects"]:
+                project_id = parts[3]
+                body = self._read_optional_json_body()
+                if parts[4] == "reports":
+                    build = ControlledReportService(self.database).generate(
+                        project_id,
+                        actor=self._actor(body),
+                    )
+                    self._json(
+                        201,
+                        {
+                            "message": "受控报告草稿已生成，等待人工确认",
+                            "report": build.report,
+                            "project": self._project_service().get(project_id),
+                        },
+                    )
+                    return
+                if parts[4] == "files":
+                    if not body:
+                        raise ValueError("上传请求不能为空")
+                    project = self.database.get_project(project_id)
+                    body["project_name"] = project["name"]
+                    body["case_id"] = body.get("case_id") or project.get("case_id")
+                    result = self._submit_conversion_body(body)
+                    self.database.attach_project_conversion(
+                        project_id, str(result["job"]["id"])
+                    )
+                    result["project"] = self._project_service().get(project_id)
+                    self._json(202 if result["created"] else 200, result)
+                    return
+                if parts[4] == "archive":
+                    archived = body.get("archived", True)
+                    if not isinstance(archived, bool):
+                        raise ValueError("archived必须是布尔值")
+                    project = self.database.archive_project(
+                        project_id,
+                        archived=archived,
+                        actor=self._actor(body),
+                    )
+                    self._json(200, project)
+                    return
+                if parts[4] == "continue":
+                    project = self._project_service().get(project_id)
+                    action = str(project["next_action"]["id"])
+                    if action == "RETRY_SOURCE_PROCESSING":
+                        conversion_id = str(project["advanced_audit"]["conversion_job_id"])
+                        retry_id = self.database.retry_conversion_job(
+                            conversion_id, actor=self._actor(body)
+                        )
+                        self.database.attach_project_conversion(project_id, retry_id)
+                        retry = self.database.get_conversion_job(retry_id, detailed=False)
+                        if retry["status"] == "QUEUED":
+                            _start_conversion_thread(self.database, retry_id)
+                        self._json(
+                            202,
+                            {
+                                "message": "已重新开始资料处理",
+                                "project": self._project_service().get(project_id),
+                            },
+                        )
+                        return
+                    if action == "OPEN_REVIEW":
+                        conversion_id = str(project["advanced_audit"]["conversion_job_id"])
+                        self._review_service().create_or_resume_session(
+                            conversion_id,
+                            actor=self._actor(body),
+                            owner=self._actor(body),
+                        )
+                        self._json(
+                            200,
+                            {
+                                "message": "请处理标出的复核项",
+                                "redirect_url": (
+                                    f"/admin/reviews/{quote(conversion_id, safe='')}/"
+                                    f"?project_id={quote(project_id, safe='')}"
+                                ),
+                            },
+                        )
+                        return
+                    if action in {"START_CALCULATION", "RETRY_CALCULATION"}:
+                        snapshot_id = str(project["advanced_audit"]["snapshot_id"] or "")
+                        metadata = self.database.snapshot_metadata(snapshot_id)
+                        run_id = self.database.create_run(
+                            snapshot_id,
+                            str(metadata["payload_sha256"]),
+                            generate_charts=True,
+                        )
+                        self.database.attach_project_run(project_id, run_id)
+                        _start_run_thread(
+                            self.database,
+                            run_id,
+                            snapshot_id,
+                            generate_charts=True,
+                        )
+                        self._json(
+                            202,
+                            {
+                                "message": "风险计算已开始",
+                                "project": self._project_service().get(project_id),
+                            },
+                        )
+                        return
+                    if action == "OPEN_REPORT":
+                        self._json(
+                            200,
+                            {
+                                "message": "报告已就绪",
+                                "project": project,
+                            },
+                        )
+                        return
+                    self._json(
+                        200,
+                        {
+                            "message": "当前步骤正在处理中，请稍后刷新",
+                            "project": project,
+                        },
+                    )
+                    return
+            if (
+                len(parts) == 5
+                and parts[:3] == ["admin", "api", "reports"]
+                and parts[4] == "confirm"
+            ):
+                body = self._read_json_body()
+                if not isinstance(body, dict):
+                    raise ValueError("请求体必须是JSON对象")
+                report = ControlledReportService(self.database).confirm(
+                    parts[3],
+                    reviewer=str(body.get("reviewer") or self._actor(body)),
+                    reason=str(body.get("reason") or ""),
+                )
+                self._json(
+                    200,
+                    {
+                        "message": "测试报告已人工确认，正式发布许可仍保持关闭",
+                        "report": report,
+                        "project": self._project_service().get(str(report["project_id"])),
+                    },
+                )
+                return
             if parts == ["admin", "api", "ocr-settings"]:
                 body = self._read_json_body()
                 if not isinstance(body, dict):
@@ -982,6 +1298,7 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     self._json(200, service.run_gate(session_id, actor=self._actor(body)))
                     return
                 if parts[4] == "confirm":
+                    session_before = service.get_session(session_id)
                     result = service.confirm(
                         session_id,
                         snapshot_name=str(body.get("snapshot_name") or ""),
@@ -997,6 +1314,18 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                         run_after_confirm=bool(body.get("run_after_confirm", False)),
                         generate_charts=bool(body.get("generate_charts", True)),
                     )
+                    project = self.database.project_for_conversion(
+                        str(session_before["conversion_job_id"])
+                    )
+                    if project is not None:
+                        project_id = str(project["id"])
+                        self.database.attach_project_snapshot(
+                            project_id, str(result["snapshot_id"])
+                        )
+                        if result.get("run_id"):
+                            self.database.attach_project_run(
+                                project_id, str(result["run_id"])
+                            )
                     if result.get("run_id"):
                         _start_run_thread(
                             self.database,
@@ -1074,6 +1403,14 @@ class QraRequestHandler(BaseHTTPRequestHandler):
                     )
                     snapshot_id = str(result["snapshot_id"])
                     created = bool(result["created"])
+                    project = self.database.project_for_conversion(job_id)
+                    if project is not None:
+                        project_id = str(project["id"])
+                        self.database.attach_project_snapshot(project_id, snapshot_id)
+                        if result.get("run_id"):
+                            self.database.attach_project_run(
+                                project_id, str(result["run_id"])
+                            )
                     response: dict[str, Any] = {
                         "snapshot_id": snapshot_id,
                         "created": created,
@@ -1268,7 +1605,26 @@ class QraRequestHandler(BaseHTTPRequestHandler):
         print(f"[QRA-Web] {self.address_string()} - {format % args}")
 
 
-def serve(database: QraDatabase, host: str, port: int) -> None:
+def serve(
+    database: QraDatabase,
+    host: str,
+    port: int,
+    *,
+    tls_cert: Path | None = None,
+    tls_key: Path | None = None,
+    trust_proxy_tls: bool | None = None,
+) -> None:
+    trusted_proxy = (
+        _truthy_environment("QRA_TRUST_PROXY_TLS")
+        if trust_proxy_tls is None
+        else bool(trust_proxy_tls)
+    )
+    deployment_mode = _validate_deployment_security(
+        host,
+        tls_cert=tls_cert,
+        tls_key=tls_key,
+        trust_proxy_tls=trusted_proxy,
+    )
     database.initialize()
     ocr_settings_store = OcrSettingsStore(settings_path_for_database(database.path))
     try:
@@ -1282,10 +1638,23 @@ def serve(database: QraDatabase, host: str, port: int) -> None:
     handler = type(
         "ConfiguredQraRequestHandler",
         (QraRequestHandler,),
-        {"database": database, "ocr_settings_store": ocr_settings_store},
+        {
+            "database": database,
+            "ocr_settings_store": ocr_settings_store,
+            "deployment_mode": deployment_mode,
+            "tls_enabled": bool(tls_cert and tls_key),
+            "trust_proxy_tls": trusted_proxy,
+        },
     )
     server = ThreadingHTTPServer((host, port), handler)
-    print(f"QRA企业管理中心：http://{host}:{port}/admin/")
+    if tls_cert is not None and tls_key is not None:
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.minimum_version = ssl.TLSVersion.TLSv1_2
+        context.load_cert_chain(certfile=str(tls_cert), keyfile=str(tls_key))
+        server.socket = context.wrap_socket(server.socket, server_side=True)
+    scheme = "https" if tls_cert is not None or trusted_proxy else "http"
+    print(f"QRA项目工作台：{scheme}://{host}:{port}/projects/")
+    print(f"QRA高级管理中心：{scheme}://{host}:{port}/admin/")
     print(f"数据库：{database.path}")
     if restored_ocr is not None:
         print(f"OCR：已从本机加密配置加载 {restored_ocr.ocr_model_version}")

@@ -1,0 +1,101 @@
+{
+  "schema_version": "qra.synthetic-stage3-real-online-acceptance/1.0.0",
+  "accepted_at": "2026-09-02T11:08:15+08:00",
+  "status": "PASS",
+  "scope": {
+    "scenario_id": "S00_BASELINE",
+    "conditions": [
+      "D00_CLEAN",
+      "D10_CONFLICT"
+    ],
+    "data_classification": "FULLY_SYNTHETIC_ONLY"
+  },
+  "authorization": {
+    "external_sharing_explicitly_authorized": true,
+    "account_charges_acknowledged": true,
+    "secret_logged": false,
+    "settings_protection": "WINDOWS_DPAPI_CURRENT_USER"
+  },
+  "provider": {
+    "provider_id": "aliyun-bailian-openai",
+    "model_version": "qwen3.8-max",
+    "tools_allowed": [],
+    "online_result_requires_human_review": true
+  },
+  "thresholds": {
+    "critical_precision_minimum": 0.95,
+    "critical_recall_minimum": 0.9,
+    "evidence_binding_rate_minimum": 1.0,
+    "all_conflicts_human_confirmed": true
+  },
+  "results": [
+    {
+      "condition_id": "D00_CLEAN",
+      "online_status": "COMPLETED_REVIEW_REQUIRED",
+      "external_call_made": true,
+      "chunk_count": 5,
+      "completed_chunk_count": 5,
+      "retry_count": 0,
+      "expected_count": 69,
+      "returned_count": 69,
+      "correct_count": 69,
+      "critical_precision": 1.0,
+      "critical_recall": 1.0,
+      "evidence_binding_rate": 1.0,
+      "invalid_item_count": 0,
+      "total_tokens": 32553,
+      "artifact": "workspace/outputs/m1-5-stage3-online-real-chunked-20260902/D00_CLEAN/stage3-result.json",
+      "artifact_sha256": "a73a1b224b236f2b6c7daee104f226ec6a26dd14622b64a1ec110f623b07409c"
+    },
+    {
+      "condition_id": "D10_CONFLICT",
+      "decision": "BASE",
+      "conflict_target_path": "pipeline.operating_pressure_mpa",
+      "conflict_resolution_status": "HUMAN_CONFIRMED",
+      "online_status": "COMPLETED_REVIEW_REQUIRED",
+      "external_call_made": true,
+      "chunk_count": 5,
+      "completed_chunk_count": 5,
+      "retry_count": 0,
+      "expected_count": 69,
+      "returned_count": 69,
+      "correct_count": 69,
+      "critical_precision": 1.0,
+      "critical_recall": 1.0,
+      "evidence_binding_rate": 1.0,
+      "invalid_item_count": 0,
+      "total_tokens": 32723,
+      "artifact": "workspace/outputs/m1-5-stage3-online-real-chunked-20260902/D10_CONFLICT_BASE_CONFIRMED/stage3-result.json",
+      "artifact_sha256": "0b8d508a2ca35bc40478d8c4d6e5f19846a05b5a5d8a4c471f3d738202b1cf4f"
+    }
+  ],
+  "failure_fallback_observation": {
+    "condition_id": "D00_CLEAN",
+    "request_strategy": "SINGLE_69_FIELD_REQUEST",
+    "attempt_count": 3,
+    "timeout_seconds_per_attempt": 120,
+    "error_code": "EXTRACT.PROVIDER_TIMEOUT",
+    "parsed_artifacts_preserved": true,
+    "human_review_route_available": true,
+    "snapshot_created": false,
+    "artifact": "workspace/outputs/m1-5-stage3-online-real-20260902/D00_CLEAN/stage3-result.json",
+    "artifact_sha256": "5b8162c6f84d4372870d05f827113967cb5c9c4a1dbcab7ed220172f83ec1450"
+  },
+  "verification": {
+    "stage3_test_passed": 13,
+    "full_test_passed": 311,
+    "full_test_skipped": 1,
+    "full_test_failed": 0,
+    "changed_file_ruff_status": "PASS",
+    "architecture_check_status": "PASS",
+    "repository_wide_ruff_baseline_issue_count": 943
+  },
+  "assessment": {
+    "critical_precision_pass": true,
+    "critical_recall_pass": true,
+    "evidence_binding_pass": true,
+    "all_conflicts_human_confirmed_pass": true,
+    "failure_fallback_pass": true,
+    "external_model_cannot_bypass_snapshot_gate": true
+  }
+}

@@ -6,7 +6,9 @@ import sys
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from .backup import backup_database, restore_database, write_backup_manifest
 from .database import QraDatabase
+from .demo_release import prepare_full_synthetic_demo
 from .engine_adapter import calculate_snapshot, preview_case
 from .paths import DEFAULT_DATABASE, DEFAULT_RUNTIME_ROOT
 from .server import serve
@@ -66,6 +68,30 @@ def build_parser() -> argparse.ArgumentParser:
     serve_parser = subparsers.add_parser("serve", help="启动从数据库读取报告资源的本地网页服务")
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=DEFAULT_SERVER_PORT)
+    serve_parser.add_argument("--tls-cert", type=Path)
+    serve_parser.add_argument("--tls-key", type=Path)
+    serve_parser.add_argument(
+        "--trust-proxy-tls",
+        action="store_true",
+        default=None,
+        help="仅在受信任反向代理终止TLS并覆盖客户端转发头时使用",
+    )
+
+    demo_parser = subparsers.add_parser(
+        "load-demo", help="幂等加载、计算并生成全合成端到端演示项目"
+    )
+    demo_parser.add_argument("--runtime-root", type=Path, default=DEFAULT_RUNTIME_ROOT)
+    demo_parser.add_argument("--no-report", action="store_true")
+    demo_parser.add_argument("--actor", default="demo-launcher")
+
+    backup_parser = subparsers.add_parser("backup", help="创建一致性SQLite演示状态备份")
+    backup_parser.add_argument("--output", type=Path, required=True)
+    backup_parser.add_argument("--replace", action="store_true")
+    backup_parser.add_argument("--manifest", type=Path)
+
+    restore_parser = subparsers.add_parser("restore", help="把QRA备份恢复到当前--database路径")
+    restore_parser.add_argument("--input", type=Path, required=True)
+    restore_parser.add_argument("--replace", action="store_true")
     return parser
 
 
@@ -177,7 +203,35 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 0
         if args.command == "serve":
-            serve(database, args.host, args.port)
+            serve(
+                database,
+                args.host,
+                args.port,
+                tls_cert=args.tls_cert,
+                tls_key=args.tls_key,
+                trust_proxy_tls=args.trust_proxy_tls,
+            )
+            return 0
+        if args.command == "load-demo":
+            result = prepare_full_synthetic_demo(
+                database,
+                runtime_root=args.runtime_root.resolve(),
+                actor=args.actor,
+                generate_report=not args.no_report,
+            )
+            _print_json(result)
+            return 0
+        if args.command == "backup":
+            result = backup_database(database, args.output, replace=args.replace)
+            if args.manifest:
+                write_backup_manifest(args.manifest, result)
+                result["manifest"] = str(args.manifest.resolve())
+            _print_json(result)
+            return 0
+        if args.command == "restore":
+            _print_json(
+                restore_database(args.input, database.path, replace=args.replace)
+            )
             return 0
     except (KeyError, ValueError, FileNotFoundError, json.JSONDecodeError) as exc:
         print(f"BLOCK: {exc}", file=sys.stderr)

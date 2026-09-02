@@ -1,0 +1,588 @@
+{
+  "evaluation_basis": "each segment midpoint; rupture is initial two-sided flow",
+  "gas_mixture_properties": {
+    "composition_mole_fraction": {
+      "carbon_dioxide": 0.012,
+      "ethane": 0.035,
+      "methane": 0.93,
+      "n_butane": 0.003,
+      "nitrogen": 0.008,
+      "propane": 0.012
+    },
+    "heat_capacity_ratio": 1.2922757692664293,
+    "lfl_volume_fraction": 0.04876915931258708,
+    "lower_heating_value_j_kg": 47544676.62323673,
+    "mixing_rules": {
+      "heat_capacity": "ideal-gas mole-fraction weighted Cp at approximately 288-298 K",
+      "lfl": "Le Chatelier rule over combustible components",
+      "lower_heating_value": "mole-fraction weighted molar LHV divided by mixture molar mass",
+      "molar_mass": "mole-fraction weighted"
+    },
+    "molar_mass_kg_mol": 0.017428197200000002,
+    "property_model_id": "natural_gas.ideal_mixture.lhv.v1"
+  },
+  "model_id": "human.aqt3046.source_term.dynamic.v1",
+  "rows": [
+    {
+      "evaluation_chainage_km": 0.25,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-001"
+    },
+    {
+      "evaluation_chainage_km": 0.25,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-001"
+    },
+    {
+      "evaluation_chainage_km": 0.25,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-001"
+    },
+    {
+      "evaluation_chainage_km": 0.25,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 16815.25640528577,
+      "segment_id": "SEG-001"
+    },
+    {
+      "evaluation_chainage_km": 0.75,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-002"
+    },
+    {
+      "evaluation_chainage_km": 0.75,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-002"
+    },
+    {
+      "evaluation_chainage_km": 0.75,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-002"
+    },
+    {
+      "evaluation_chainage_km": 0.75,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 16815.25640528577,
+      "segment_id": "SEG-002"
+    },
+    {
+      "evaluation_chainage_km": 1.25,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-003"
+    },
+    {
+      "evaluation_chainage_km": 1.25,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-003"
+    },
+    {
+      "evaluation_chainage_km": 1.25,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-003"
+    },
+    {
+      "evaluation_chainage_km": 1.25,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 16815.25640528577,
+      "segment_id": "SEG-003"
+    },
+    {
+      "evaluation_chainage_km": 1.75,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-004"
+    },
+    {
+      "evaluation_chainage_km": 1.75,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-004"
+    },
+    {
+      "evaluation_chainage_km": 1.75,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-004"
+    },
+    {
+      "evaluation_chainage_km": 1.75,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 16815.25640528577,
+      "segment_id": "SEG-004"
+    },
+    {
+      "evaluation_chainage_km": 2.175,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-005"
+    },
+    {
+      "evaluation_chainage_km": 2.175,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-005"
+    },
+    {
+      "evaluation_chainage_km": 2.175,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-005"
+    },
+    {
+      "evaluation_chainage_km": 2.175,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-005"
+    },
+    {
+      "evaluation_chainage_km": 2.5250000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-006"
+    },
+    {
+      "evaluation_chainage_km": 2.5250000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-006"
+    },
+    {
+      "evaluation_chainage_km": 2.5250000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-006"
+    },
+    {
+      "evaluation_chainage_km": 2.5250000000000004,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-006"
+    },
+    {
+      "evaluation_chainage_km": 2.9000000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-007"
+    },
+    {
+      "evaluation_chainage_km": 2.9000000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-007"
+    },
+    {
+      "evaluation_chainage_km": 2.9000000000000004,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-007"
+    },
+    {
+      "evaluation_chainage_km": 2.9000000000000004,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-007"
+    },
+    {
+      "evaluation_chainage_km": 3.3,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-008"
+    },
+    {
+      "evaluation_chainage_km": 3.3,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-008"
+    },
+    {
+      "evaluation_chainage_km": 3.3,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-008"
+    },
+    {
+      "evaluation_chainage_km": 3.3,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-008"
+    },
+    {
+      "evaluation_chainage_km": 3.65,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-009"
+    },
+    {
+      "evaluation_chainage_km": 3.65,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-009"
+    },
+    {
+      "evaluation_chainage_km": 3.65,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-009"
+    },
+    {
+      "evaluation_chainage_km": 3.65,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 19632.223523893474,
+      "segment_id": "SEG-009"
+    },
+    {
+      "evaluation_chainage_km": 3.9499999999999997,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-010"
+    },
+    {
+      "evaluation_chainage_km": 3.9499999999999997,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-010"
+    },
+    {
+      "evaluation_chainage_km": 3.9499999999999997,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-010"
+    },
+    {
+      "evaluation_chainage_km": 3.9499999999999997,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 19632.223523893474,
+      "segment_id": "SEG-010"
+    },
+    {
+      "evaluation_chainage_km": 4.275,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-011"
+    },
+    {
+      "evaluation_chainage_km": 4.275,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-011"
+    },
+    {
+      "evaluation_chainage_km": 4.275,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-011"
+    },
+    {
+      "evaluation_chainage_km": 4.275,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-011"
+    },
+    {
+      "evaluation_chainage_km": 4.625,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-012"
+    },
+    {
+      "evaluation_chainage_km": 4.625,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-012"
+    },
+    {
+      "evaluation_chainage_km": 4.625,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-012"
+    },
+    {
+      "evaluation_chainage_km": 4.625,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-012"
+    },
+    {
+      "evaluation_chainage_km": 5.0,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-013"
+    },
+    {
+      "evaluation_chainage_km": 5.0,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-013"
+    },
+    {
+      "evaluation_chainage_km": 5.0,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-013"
+    },
+    {
+      "evaluation_chainage_km": 5.0,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-013"
+    },
+    {
+      "evaluation_chainage_km": 5.4,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-014"
+    },
+    {
+      "evaluation_chainage_km": 5.4,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-014"
+    },
+    {
+      "evaluation_chainage_km": 5.4,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-014"
+    },
+    {
+      "evaluation_chainage_km": 5.4,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-014"
+    },
+    {
+      "evaluation_chainage_km": 5.824999999999999,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-015"
+    },
+    {
+      "evaluation_chainage_km": 5.824999999999999,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-015"
+    },
+    {
+      "evaluation_chainage_km": 5.824999999999999,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-015"
+    },
+    {
+      "evaluation_chainage_km": 5.824999999999999,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 17388.574748424147,
+      "segment_id": "SEG-015"
+    },
+    {
+      "evaluation_chainage_km": 6.275,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-016"
+    },
+    {
+      "evaluation_chainage_km": 6.275,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-016"
+    },
+    {
+      "evaluation_chainage_km": 6.275,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-016"
+    },
+    {
+      "evaluation_chainage_km": 6.275,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 17388.574748424147,
+      "segment_id": "SEG-016"
+    },
+    {
+      "evaluation_chainage_km": 6.675,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-017"
+    },
+    {
+      "evaluation_chainage_km": 6.675,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-017"
+    },
+    {
+      "evaluation_chainage_km": 6.675,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-017"
+    },
+    {
+      "evaluation_chainage_km": 6.675,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-017"
+    },
+    {
+      "evaluation_chainage_km": 7.025,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-018"
+    },
+    {
+      "evaluation_chainage_km": 7.025,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-018"
+    },
+    {
+      "evaluation_chainage_km": 7.025,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-018"
+    },
+    {
+      "evaluation_chainage_km": 7.025,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18774.15010259696,
+      "segment_id": "SEG-018"
+    },
+    {
+      "evaluation_chainage_km": 7.4,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-019"
+    },
+    {
+      "evaluation_chainage_km": 7.4,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-019"
+    },
+    {
+      "evaluation_chainage_km": 7.4,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-019"
+    },
+    {
+      "evaluation_chainage_km": 7.4,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-019"
+    },
+    {
+      "evaluation_chainage_km": 7.8,
+      "flow_regime": "sonic",
+      "loc_id": "small_5mm",
+      "mass_flow_rate_kg_s": 0.2856737676029434,
+      "segment_id": "SEG-020"
+    },
+    {
+      "evaluation_chainage_km": 7.8,
+      "flow_regime": "sonic",
+      "loc_id": "medium_25mm",
+      "mass_flow_rate_kg_s": 7.141844190073584,
+      "segment_id": "SEG-020"
+    },
+    {
+      "evaluation_chainage_km": 7.8,
+      "flow_regime": "sonic",
+      "loc_id": "large_100mm",
+      "mass_flow_rate_kg_s": 114.26950704117735,
+      "segment_id": "SEG-020"
+    },
+    {
+      "evaluation_chainage_km": 7.8,
+      "flow_regime": "two_sided_adiabatic_initial",
+      "loc_id": "rupture",
+      "mass_flow_rate_kg_s": 18035.256681298328,
+      "segment_id": "SEG-020"
+    }
+  ],
+  "source": "AQ/T 3046-2013 E.13-E.22"
+}

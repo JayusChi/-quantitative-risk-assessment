@@ -1,0 +1,17 @@
+{
+  "business_content_sha256": "76706b192476b5593332830ceb943b7bc8858c5425ed79f2be91dd09ace7783c",
+  "contract_id": "qra.synthetic-full-chain.stage3",
+  "contract_version": "1.0.0",
+  "files": {
+    "deterministic-replay.json": "9090a3510c1ca1cd178b5982ea681c5f9666113d6f7595f7d04eafc068d1a260",
+    "expected-binding.v1.json": "792053893de90d274f9de76b5810c9243e860d847b152c063899f9944fa096ca",
+    "extraction-contract.schema.json": "c6aad2f0776f7bd6488da56d5b8c279a86d38387accc5342688904fac6dcaaf0",
+    "provider-configs.v1.json": "09cc2dc88fac1832fd46c8524086b8304282b9f0925bacf0c47fd3466c3364ca",
+    "real-online-acceptance.json": "13b18d234ace637ef6e624e2343e63870b3b0ccf8ad52be93d90616ed56e629b",
+    "run-assumptions.v1.json": "1c8f5aa5e07828254ddc0577c14f47984b9be0118a736f7c00f1af9d094fcda1",
+    "structural-assembly.v1.json": "a23d78a900fded0e750d72bf71cbb121b3e9bdc03dc19b3294f49026ca28b751",
+    "synthetic-mapping.v1.json": "0369d08cc7fc9b64bde3d560d6cd05046828bf772ce6a5ad7e09d6d1c3ee357f"
+  },
+  "schema_version": "1.0.0",
+  "stage": 3
+}

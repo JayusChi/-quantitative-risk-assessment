@@ -1,0 +1,17 @@
+阶段4验证时间：2026-09-01
+
+1. Ruff
+   ruff check src/db_qra/synthetic_stage4.py tools/run_full_chain_stage4.py tools/run_full_chain_stage4_acceptance.py tests/unit/test_full_chain_stage4_snapshot_to_calculation.py
+   结果：All checks passed
+
+2. 阶段4专项
+   pytest tests/unit/test_full_chain_stage4_snapshot_to_calculation.py -q
+   结果：8 passed
+
+3. 阶段门
+   .\.venv\Scripts\python.exe tools/run_full_chain_stage4_acceptance.py
+   结果：S4_FULL_11_OF_11_SYNTHETIC_PASS，18/18 checks passed
+
+4. 全量回归
+   项目虚拟环境 + pytest 运行器执行 pytest -q
+   结果：286 passed, 1 skipped

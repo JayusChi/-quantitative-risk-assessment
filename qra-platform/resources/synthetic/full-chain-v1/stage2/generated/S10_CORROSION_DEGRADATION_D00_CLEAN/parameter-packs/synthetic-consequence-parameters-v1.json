@@ -1,0 +1,2380 @@
+{
+  "business_content_sha256": "1840bc461c1ac41d0c763131ff0b61d8d56afd1321e78c71b14d12e4fbb736de",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-consequence-parameters-v1",
+  "parameters": [
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "damage_model",
+      "target_path": "damage_model",
+      "unit": null,
+      "value": {
+        "description": "用于聚合层测试的分段死亡概率，不代表AQ/T 3046或Phast正式模型",
+        "flash_fire": [
+          {
+            "fatality_probability": 1.0,
+            "inside_lfl_cloud": true
+          },
+          {
+            "fatality_probability": 0.0,
+            "inside_lfl_cloud": false
+          }
+        ],
+        "jet_fire": [
+          {
+            "distance_max_m": 30.0,
+            "fatality_probability": 1.0
+          },
+          {
+            "distance_max_m": 60.0,
+            "fatality_probability": 0.5
+          },
+          {
+            "distance_max_m": null,
+            "fatality_probability": 0.0
+          }
+        ],
+        "model_id": "damage.synthetic_piecewise.v1",
+        "status": "SYNTHETIC_TEST_ONLY",
+        "vce": [
+          {
+            "fatality_probability": 0.8,
+            "overpressure_min_kpa": 20.0
+          },
+          {
+            "fatality_probability": 0.2,
+            "overpressure_min_kpa": 7.0
+          },
+          {
+            "fatality_probability": 0.0,
+            "overpressure_min_kpa": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.consequence_parameters.indoor_overpressure_fatality_factor",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.indoor_overpressure_fatality_factor",
+      "unit": null,
+      "value": 0.5
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.consequence_parameters.indoor_thermal_protection_factor",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.indoor_thermal_protection_factor",
+      "unit": null,
+      "value": 0.35
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.consequence_parameters.probit_model_version",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.probit_model_version",
+      "unit": null,
+      "value": "AQT3046-2013-I.1"
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.consequence_parameters.roughness_class",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.roughness_class",
+      "unit": null,
+      "value": "RURAL_OPEN"
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.consequence_parameters.tno_curve_version",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.tno_curve_version",
+      "unit": null,
+      "value": "AQT3046-FIG-E1-DIGITIZED-PROVISIONAL"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "standard_formula_test_parameters",
+      "target_path": "standard_formula_test_parameters",
+      "unit": null,
+      "value": {
+        "aqt3046_physical_chain": {
+          "ambient_pressure_pa_abs": 101325.0,
+          "ambient_temperature_k": 288.15,
+          "data_classification": "SYNTHETIC_TEST_ONLY",
+          "effective_release_height_m": 0.0,
+          "gamma": 1.3,
+          "gas_discharge_coefficient": 1.0,
+          "heat_of_combustion_j_kg": 50000000.0,
+          "ignition_model": {
+            "delayed_ignition_sources_by_activity": {
+              "high": [
+                {
+                  "cloud_exposure_time_s": 60.0,
+                  "ignition_efficiency_per_s": 0.003,
+                  "presence_probability": 0.9,
+                  "source_id": "SYN-HIGH-POINT"
+                }
+              ],
+              "low": [
+                {
+                  "cloud_exposure_time_s": 60.0,
+                  "ignition_efficiency_per_s": 0.001,
+                  "presence_probability": 0.25,
+                  "source_id": "SYN-LOW-POINT"
+                }
+              ],
+              "medium": [
+                {
+                  "cloud_exposure_time_s": 60.0,
+                  "ignition_efficiency_per_s": 0.002,
+                  "presence_probability": 0.6,
+                  "source_id": "SYN-MEDIUM-POINT"
+                }
+              ]
+            },
+            "material_reactivity_class": "low",
+            "model_status": "STANDARD_FORMULA_SYNTHETIC_PARAMETERS",
+            "vce_given_delayed_probability": {
+              "high": 0.25,
+              "low": 0.0,
+              "medium": 0.05
+            }
+          },
+          "jet_direction_mode": "radial_worst_case_envelope",
+          "lfl_volume_fraction": 0.05,
+          "minimum_effect_distance_m": 1.0,
+          "minimum_rupture_flow_length_m": 1.0,
+          "molar_mass_kg_mol": 0.018,
+          "operating_pressure_basis": "gauge",
+          "pipe_absolute_roughness_mm": 0.046,
+          "radiative_fraction": 0.2,
+          "segments": {
+            "SEG-001": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-002": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-003": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-004": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-005": {
+              "explosion_source_volume_m3": 800.0,
+              "terrain": "rural",
+              "tno_source_strength": 3
+            },
+            "SEG-006": {
+              "explosion_source_volume_m3": 800.0,
+              "terrain": "rural",
+              "tno_source_strength": 3
+            },
+            "SEG-007": {
+              "explosion_source_volume_m3": 800.0,
+              "terrain": "rural",
+              "tno_source_strength": 3
+            },
+            "SEG-008": {
+              "explosion_source_volume_m3": 800.0,
+              "terrain": "rural",
+              "tno_source_strength": 3
+            },
+            "SEG-009": {
+              "explosion_source_volume_m3": 2000.0,
+              "terrain": "urban",
+              "tno_source_strength": 3
+            },
+            "SEG-010": {
+              "explosion_source_volume_m3": 2000.0,
+              "terrain": "urban",
+              "tno_source_strength": 3
+            },
+            "SEG-011": {
+              "explosion_source_volume_m3": 2000.0,
+              "terrain": "urban",
+              "tno_source_strength": 3
+            },
+            "SEG-012": {
+              "explosion_source_volume_m3": 2000.0,
+              "terrain": "urban",
+              "tno_source_strength": 3
+            },
+            "SEG-013": {
+              "explosion_source_volume_m3": 5000.0,
+              "terrain": "urban",
+              "tno_source_strength": 7
+            },
+            "SEG-014": {
+              "explosion_source_volume_m3": 5000.0,
+              "terrain": "urban",
+              "tno_source_strength": 7
+            },
+            "SEG-015": {
+              "explosion_source_volume_m3": 5000.0,
+              "terrain": "urban",
+              "tno_source_strength": 7
+            },
+            "SEG-016": {
+              "explosion_source_volume_m3": 5000.0,
+              "terrain": "urban",
+              "tno_source_strength": 7
+            },
+            "SEG-017": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-018": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-019": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            },
+            "SEG-020": {
+              "explosion_source_volume_m3": 200.0,
+              "terrain": "rural",
+              "tno_source_strength": 1
+            }
+          },
+          "thermal_exposure_time_s": 20.0
+        },
+        "gbt34346_annex_c": {
+          "ambient_pressure_pa_abs": 101325.0,
+          "data_classification": "SYNTHETIC_TEST_ONLY",
+          "fatal_heat_flux_threshold_kw_m2": 37.5,
+          "gamma": 1.3,
+          "gas_discharge_coefficient_c13": 0.9,
+          "heat_of_combustion_j_kg": 50000000.0,
+          "molar_mass_kg_mol": 0.018,
+          "operating_pressure_basis": "gauge",
+          "radiative_fraction": 0.2,
+          "segments": {
+            "SEG-001": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                90,
+                80,
+                75,
+                80,
+                80,
+                75
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 1e-05
+            },
+            "SEG-002": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                90,
+                80,
+                75,
+                80,
+                80,
+                75
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 1e-05
+            },
+            "SEG-003": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                90,
+                80,
+                75,
+                80,
+                80,
+                75
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 1e-05
+            },
+            "SEG-004": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                90,
+                80,
+                75,
+                80,
+                80,
+                75
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 1e-05
+            },
+            "SEG-005": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                75,
+                60,
+                50,
+                60,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.03,
+              "population_density_per_m2": 0.0002
+            },
+            "SEG-006": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                75,
+                60,
+                50,
+                60,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.03,
+              "population_density_per_m2": 0.0002
+            },
+            "SEG-007": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                75,
+                60,
+                50,
+                60,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.03,
+              "population_density_per_m2": 0.0002
+            },
+            "SEG-008": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                75,
+                60,
+                50,
+                60,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.03,
+              "population_density_per_m2": 0.0002
+            },
+            "SEG-009": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                65,
+                60,
+                50,
+                50,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.05,
+              "population_density_per_m2": 0.001
+            },
+            "SEG-010": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                65,
+                60,
+                50,
+                50,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.05,
+              "population_density_per_m2": 0.001
+            },
+            "SEG-011": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                65,
+                60,
+                50,
+                50,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.05,
+              "population_density_per_m2": 0.001
+            },
+            "SEG-012": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.0,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                65,
+                60,
+                50,
+                50,
+                60,
+                50
+              ],
+              "point_ignition_probability": 0.05,
+              "population_density_per_m2": 0.001
+            },
+            "SEG-013": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                80,
+                75,
+                70,
+                70,
+                75,
+                70
+              ],
+              "point_ignition_probability": 0.08,
+              "population_density_per_m2": 0.0008
+            },
+            "SEG-014": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                80,
+                75,
+                70,
+                70,
+                75,
+                70
+              ],
+              "point_ignition_probability": 0.08,
+              "population_density_per_m2": 0.0008
+            },
+            "SEG-015": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                80,
+                75,
+                70,
+                70,
+                75,
+                70
+              ],
+              "point_ignition_probability": 0.08,
+              "population_density_per_m2": 0.0008
+            },
+            "SEG-016": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 0.8,
+                "fatigue": 0.1,
+                "manufacturing": 0.5,
+                "third_party": 2.0
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                80,
+                75,
+                70,
+                70,
+                75,
+                70
+              ],
+              "point_ignition_probability": 0.08,
+              "population_density_per_m2": 0.0008
+            },
+            "SEG-017": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.2,
+                "fatigue": 2.5,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                60,
+                50,
+                40,
+                50,
+                50,
+                40
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 5e-06
+            },
+            "SEG-018": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.2,
+                "fatigue": 2.5,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                60,
+                50,
+                40,
+                50,
+                50,
+                40
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 5e-06
+            },
+            "SEG-019": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.2,
+                "fatigue": 2.5,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                60,
+                50,
+                40,
+                50,
+                50,
+                40
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 5e-06
+            },
+            "SEG-020": {
+              "damage_component_factors": {
+                "body_defect": 0.5,
+                "corrosion": 1.2,
+                "fatigue": 2.5,
+                "manufacturing": 0.5,
+                "third_party": 0.5
+              },
+              "damage_component_weights": {
+                "body_defect": 0.2,
+                "corrosion": 0.2,
+                "fatigue": 0.2,
+                "manufacturing": 0.2,
+                "third_party": 0.2
+              },
+              "management_scores_c3_to_c8": [
+                60,
+                50,
+                40,
+                50,
+                50,
+                40
+              ],
+              "point_ignition_probability": 0.01,
+              "population_density_per_m2": 5e-06
+            }
+          }
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+      "unit": "Pa",
+      "value": 101325.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+      "unit": "K",
+      "value": 288.15
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+      "unit": null,
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+      "unit": "m",
+      "value": 0.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+      "unit": null,
+      "value": 1.3
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+      "unit": null,
+      "value": 1.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+      "unit": "J/kg",
+      "value": 50000000.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+      "unit": null,
+      "value": {
+        "delayed_ignition_sources_by_activity": {
+          "high": [
+            {
+              "cloud_exposure_time_s": 60.0,
+              "ignition_efficiency_per_s": 0.003,
+              "presence_probability": 0.9,
+              "source_id": "SYN-HIGH-POINT"
+            }
+          ],
+          "low": [
+            {
+              "cloud_exposure_time_s": 60.0,
+              "ignition_efficiency_per_s": 0.001,
+              "presence_probability": 0.25,
+              "source_id": "SYN-LOW-POINT"
+            }
+          ],
+          "medium": [
+            {
+              "cloud_exposure_time_s": 60.0,
+              "ignition_efficiency_per_s": 0.002,
+              "presence_probability": 0.6,
+              "source_id": "SYN-MEDIUM-POINT"
+            }
+          ]
+        },
+        "material_reactivity_class": "low",
+        "model_status": "STANDARD_FORMULA_SYNTHETIC_PARAMETERS",
+        "vce_given_delayed_probability": {
+          "high": 0.25,
+          "low": 0.0,
+          "medium": 0.05
+        }
+      }
+    },
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model.material_reactivity_class",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model.material_reactivity_class",
+      "unit": null,
+      "value": "low"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+      "unit": null,
+      "value": "radial_worst_case_envelope"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+      "unit": "fraction",
+      "value": 0.05
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+      "unit": "m",
+      "value": 1.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+      "unit": "m",
+      "value": 1.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+      "unit": "kg/mol",
+      "value": 0.018
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+      "unit": null,
+      "value": "gauge"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+      "unit": "mm",
+      "value": 0.046
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+      "unit": "fraction",
+      "value": 0.2
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+      "unit": null,
+      "value": {
+        "SEG-001": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-002": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-003": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-004": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-005": {
+          "explosion_source_volume_m3": 800.0,
+          "terrain": "rural",
+          "tno_source_strength": 3
+        },
+        "SEG-006": {
+          "explosion_source_volume_m3": 800.0,
+          "terrain": "rural",
+          "tno_source_strength": 3
+        },
+        "SEG-007": {
+          "explosion_source_volume_m3": 800.0,
+          "terrain": "rural",
+          "tno_source_strength": 3
+        },
+        "SEG-008": {
+          "explosion_source_volume_m3": 800.0,
+          "terrain": "rural",
+          "tno_source_strength": 3
+        },
+        "SEG-009": {
+          "explosion_source_volume_m3": 2000.0,
+          "terrain": "urban",
+          "tno_source_strength": 3
+        },
+        "SEG-010": {
+          "explosion_source_volume_m3": 2000.0,
+          "terrain": "urban",
+          "tno_source_strength": 3
+        },
+        "SEG-011": {
+          "explosion_source_volume_m3": 2000.0,
+          "terrain": "urban",
+          "tno_source_strength": 3
+        },
+        "SEG-012": {
+          "explosion_source_volume_m3": 2000.0,
+          "terrain": "urban",
+          "tno_source_strength": 3
+        },
+        "SEG-013": {
+          "explosion_source_volume_m3": 5000.0,
+          "terrain": "urban",
+          "tno_source_strength": 7
+        },
+        "SEG-014": {
+          "explosion_source_volume_m3": 5000.0,
+          "terrain": "urban",
+          "tno_source_strength": 7
+        },
+        "SEG-015": {
+          "explosion_source_volume_m3": 5000.0,
+          "terrain": "urban",
+          "tno_source_strength": 7
+        },
+        "SEG-016": {
+          "explosion_source_volume_m3": 5000.0,
+          "terrain": "urban",
+          "tno_source_strength": 7
+        },
+        "SEG-017": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-018": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-019": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        },
+        "SEG-020": {
+          "explosion_source_volume_m3": 200.0,
+          "terrain": "rural",
+          "tno_source_strength": 1
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.explosion_source_volume_m3",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.explosion_source_volume_m3",
+      "unit": "m3",
+      "value": {
+        "SEG-001": 200.0,
+        "SEG-002": 200.0,
+        "SEG-003": 200.0,
+        "SEG-004": 200.0,
+        "SEG-005": 800.0,
+        "SEG-006": 800.0,
+        "SEG-007": 800.0,
+        "SEG-008": 800.0,
+        "SEG-009": 2000.0,
+        "SEG-010": 2000.0,
+        "SEG-011": 2000.0,
+        "SEG-012": 2000.0,
+        "SEG-013": 5000.0,
+        "SEG-014": 5000.0,
+        "SEG-015": 5000.0,
+        "SEG-016": 5000.0,
+        "SEG-017": 200.0,
+        "SEG-018": 200.0,
+        "SEG-019": 200.0,
+        "SEG-020": 200.0
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.terrain",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.terrain",
+      "unit": null,
+      "value": {
+        "SEG-001": "rural",
+        "SEG-002": "rural",
+        "SEG-003": "rural",
+        "SEG-004": "rural",
+        "SEG-005": "rural",
+        "SEG-006": "rural",
+        "SEG-007": "rural",
+        "SEG-008": "rural",
+        "SEG-009": "urban",
+        "SEG-010": "urban",
+        "SEG-011": "urban",
+        "SEG-012": "urban",
+        "SEG-013": "urban",
+        "SEG-014": "urban",
+        "SEG-015": "urban",
+        "SEG-016": "urban",
+        "SEG-017": "rural",
+        "SEG-018": "rural",
+        "SEG-019": "rural",
+        "SEG-020": "rural"
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.tno_source_strength",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.tno_source_strength",
+      "unit": null,
+      "value": {
+        "SEG-001": 1,
+        "SEG-002": 1,
+        "SEG-003": 1,
+        "SEG-004": 1,
+        "SEG-005": 3,
+        "SEG-006": 3,
+        "SEG-007": 3,
+        "SEG-008": 3,
+        "SEG-009": 3,
+        "SEG-010": 3,
+        "SEG-011": 3,
+        "SEG-012": 3,
+        "SEG-013": 7,
+        "SEG-014": 7,
+        "SEG-015": 7,
+        "SEG-016": 7,
+        "SEG-017": 1,
+        "SEG-018": 1,
+        "SEG-019": 1,
+        "SEG-020": 1
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+      "unit": "s",
+      "value": 20.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+      "unit": "Pa_abs",
+      "value": 101325.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+      "unit": null,
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+      "unit": "kW/m2",
+      "value": 37.5
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+      "unit": null,
+      "value": 1.3
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+      "unit": null,
+      "value": 0.9
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+      "unit": "J/kg",
+      "value": 50000000.0
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+      "unit": "kg/mol",
+      "value": 0.018
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+      "unit": null,
+      "value": "gauge"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+      "unit": "fraction",
+      "value": 0.2
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+      "unit": null,
+      "value": {
+        "SEG-001": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            90,
+            80,
+            75,
+            80,
+            80,
+            75
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 1e-05
+        },
+        "SEG-002": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            90,
+            80,
+            75,
+            80,
+            80,
+            75
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 1e-05
+        },
+        "SEG-003": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            90,
+            80,
+            75,
+            80,
+            80,
+            75
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 1e-05
+        },
+        "SEG-004": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            90,
+            80,
+            75,
+            80,
+            80,
+            75
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 1e-05
+        },
+        "SEG-005": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            75,
+            60,
+            50,
+            60,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.03,
+          "population_density_per_m2": 0.0002
+        },
+        "SEG-006": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            75,
+            60,
+            50,
+            60,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.03,
+          "population_density_per_m2": 0.0002
+        },
+        "SEG-007": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            75,
+            60,
+            50,
+            60,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.03,
+          "population_density_per_m2": 0.0002
+        },
+        "SEG-008": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            75,
+            60,
+            50,
+            60,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.03,
+          "population_density_per_m2": 0.0002
+        },
+        "SEG-009": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            65,
+            60,
+            50,
+            50,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.05,
+          "population_density_per_m2": 0.001
+        },
+        "SEG-010": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            65,
+            60,
+            50,
+            50,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.05,
+          "population_density_per_m2": 0.001
+        },
+        "SEG-011": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            65,
+            60,
+            50,
+            50,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.05,
+          "population_density_per_m2": 0.001
+        },
+        "SEG-012": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.0,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            65,
+            60,
+            50,
+            50,
+            60,
+            50
+          ],
+          "point_ignition_probability": 0.05,
+          "population_density_per_m2": 0.001
+        },
+        "SEG-013": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            80,
+            75,
+            70,
+            70,
+            75,
+            70
+          ],
+          "point_ignition_probability": 0.08,
+          "population_density_per_m2": 0.0008
+        },
+        "SEG-014": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            80,
+            75,
+            70,
+            70,
+            75,
+            70
+          ],
+          "point_ignition_probability": 0.08,
+          "population_density_per_m2": 0.0008
+        },
+        "SEG-015": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            80,
+            75,
+            70,
+            70,
+            75,
+            70
+          ],
+          "point_ignition_probability": 0.08,
+          "population_density_per_m2": 0.0008
+        },
+        "SEG-016": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 0.8,
+            "fatigue": 0.1,
+            "manufacturing": 0.5,
+            "third_party": 2.0
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            80,
+            75,
+            70,
+            70,
+            75,
+            70
+          ],
+          "point_ignition_probability": 0.08,
+          "population_density_per_m2": 0.0008
+        },
+        "SEG-017": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.2,
+            "fatigue": 2.5,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            60,
+            50,
+            40,
+            50,
+            50,
+            40
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 5e-06
+        },
+        "SEG-018": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.2,
+            "fatigue": 2.5,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            60,
+            50,
+            40,
+            50,
+            50,
+            40
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 5e-06
+        },
+        "SEG-019": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.2,
+            "fatigue": 2.5,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            60,
+            50,
+            40,
+            50,
+            50,
+            40
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 5e-06
+        },
+        "SEG-020": {
+          "damage_component_factors": {
+            "body_defect": 0.5,
+            "corrosion": 1.2,
+            "fatigue": 2.5,
+            "manufacturing": 0.5,
+            "third_party": 0.5
+          },
+          "damage_component_weights": {
+            "body_defect": 0.2,
+            "corrosion": 0.2,
+            "fatigue": 0.2,
+            "manufacturing": 0.2,
+            "third_party": 0.2
+          },
+          "management_scores_c3_to_c8": [
+            60,
+            50,
+            40,
+            50,
+            50,
+            40
+          ],
+          "point_ignition_probability": 0.01,
+          "population_density_per_m2": 5e-06
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_factors",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_factors",
+      "unit": null,
+      "value": {
+        "SEG-001": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-002": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-003": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-004": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-005": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-006": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-007": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-008": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-009": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.5
+        },
+        "SEG-010": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.5
+        },
+        "SEG-011": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.5
+        },
+        "SEG-012": {
+          "body_defect": 0.5,
+          "corrosion": 1.0,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.5
+        },
+        "SEG-013": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-014": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-015": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-016": {
+          "body_defect": 0.5,
+          "corrosion": 0.8,
+          "fatigue": 0.1,
+          "manufacturing": 0.5,
+          "third_party": 2.0
+        },
+        "SEG-017": {
+          "body_defect": 0.5,
+          "corrosion": 1.2,
+          "fatigue": 2.5,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-018": {
+          "body_defect": 0.5,
+          "corrosion": 1.2,
+          "fatigue": 2.5,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-019": {
+          "body_defect": 0.5,
+          "corrosion": 1.2,
+          "fatigue": 2.5,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        },
+        "SEG-020": {
+          "body_defect": 0.5,
+          "corrosion": 1.2,
+          "fatigue": 2.5,
+          "manufacturing": 0.5,
+          "third_party": 0.5
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_weights",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_weights",
+      "unit": null,
+      "value": {
+        "SEG-001": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-002": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-003": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-004": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-005": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-006": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-007": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-008": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-009": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-010": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-011": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-012": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-013": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-014": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-015": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-016": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-017": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-018": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-019": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        },
+        "SEG-020": {
+          "body_defect": 0.2,
+          "corrosion": 0.2,
+          "fatigue": 0.2,
+          "manufacturing": 0.2,
+          "third_party": 0.2
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.management_scores_c3_to_c8",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.management_scores_c3_to_c8",
+      "unit": null,
+      "value": {
+        "SEG-001": [
+          90,
+          80,
+          75,
+          80,
+          80,
+          75
+        ],
+        "SEG-002": [
+          90,
+          80,
+          75,
+          80,
+          80,
+          75
+        ],
+        "SEG-003": [
+          90,
+          80,
+          75,
+          80,
+          80,
+          75
+        ],
+        "SEG-004": [
+          90,
+          80,
+          75,
+          80,
+          80,
+          75
+        ],
+        "SEG-005": [
+          75,
+          60,
+          50,
+          60,
+          60,
+          50
+        ],
+        "SEG-006": [
+          75,
+          60,
+          50,
+          60,
+          60,
+          50
+        ],
+        "SEG-007": [
+          75,
+          60,
+          50,
+          60,
+          60,
+          50
+        ],
+        "SEG-008": [
+          75,
+          60,
+          50,
+          60,
+          60,
+          50
+        ],
+        "SEG-009": [
+          65,
+          60,
+          50,
+          50,
+          60,
+          50
+        ],
+        "SEG-010": [
+          65,
+          60,
+          50,
+          50,
+          60,
+          50
+        ],
+        "SEG-011": [
+          65,
+          60,
+          50,
+          50,
+          60,
+          50
+        ],
+        "SEG-012": [
+          65,
+          60,
+          50,
+          50,
+          60,
+          50
+        ],
+        "SEG-013": [
+          80,
+          75,
+          70,
+          70,
+          75,
+          70
+        ],
+        "SEG-014": [
+          80,
+          75,
+          70,
+          70,
+          75,
+          70
+        ],
+        "SEG-015": [
+          80,
+          75,
+          70,
+          70,
+          75,
+          70
+        ],
+        "SEG-016": [
+          80,
+          75,
+          70,
+          70,
+          75,
+          70
+        ],
+        "SEG-017": [
+          60,
+          50,
+          40,
+          50,
+          50,
+          40
+        ],
+        "SEG-018": [
+          60,
+          50,
+          40,
+          50,
+          50,
+          40
+        ],
+        "SEG-019": [
+          60,
+          50,
+          40,
+          50,
+          50,
+          40
+        ],
+        "SEG-020": [
+          60,
+          50,
+          40,
+          50,
+          50,
+          40
+        ]
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.point_ignition_probability",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.point_ignition_probability",
+      "unit": "fraction",
+      "value": {
+        "SEG-001": 0.01,
+        "SEG-002": 0.01,
+        "SEG-003": 0.01,
+        "SEG-004": 0.01,
+        "SEG-005": 0.03,
+        "SEG-006": 0.03,
+        "SEG-007": 0.03,
+        "SEG-008": 0.03,
+        "SEG-009": 0.05,
+        "SEG-010": 0.05,
+        "SEG-011": 0.05,
+        "SEG-012": 0.05,
+        "SEG-013": 0.08,
+        "SEG-014": 0.08,
+        "SEG-015": 0.08,
+        "SEG-016": 0.08,
+        "SEG-017": 0.01,
+        "SEG-018": 0.01,
+        "SEG-019": 0.01,
+        "SEG-020": 0.01
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.population_density_per_m2",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.population_density_per_m2",
+      "unit": "person/m2",
+      "value": {
+        "SEG-001": 1e-05,
+        "SEG-002": 1e-05,
+        "SEG-003": 1e-05,
+        "SEG-004": 1e-05,
+        "SEG-005": 0.0002,
+        "SEG-006": 0.0002,
+        "SEG-007": 0.0002,
+        "SEG-008": 0.0002,
+        "SEG-009": 0.001,
+        "SEG-010": 0.001,
+        "SEG-011": 0.001,
+        "SEG-012": 0.001,
+        "SEG-013": 0.0008,
+        "SEG-014": 0.0008,
+        "SEG-015": 0.0008,
+        "SEG-016": 0.0008,
+        "SEG-017": 5e-06,
+        "SEG-018": 5e-06,
+        "SEG-019": 5e-06,
+        "SEG-020": 5e-06
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "system_parameters.adaptive_evidence_qra",
+      "target_path": "system_parameters.adaptive_evidence_qra",
+      "unit": null,
+      "value": {
+        "applicability": "输入不满足完整空间人员域QRA时，利用现有管段、完整性、运行和高后果目标数据形成可追溯的定量筛查估计。",
+        "defaults": {
+          "ambient_pressure_pa_abs": 101325.0,
+          "day_time_weight": 0.5,
+          "default_population_density_per_m2": 0.0002,
+          "gamma": 1.31,
+          "gas_discharge_coefficient": 0.82,
+          "heat_of_combustion_j_kg": 50000000.0,
+          "maximum_evidence_factor": 5.0,
+          "maximum_uncertainty_factor": 10.0,
+          "minimum_distance_m": 1.0,
+          "minimum_evidence_factor": 0.3,
+          "minimum_uncertainty_factor": 2.0,
+          "molar_mass_kg_mol": 0.018,
+          "operating_pressure_mpa": 4.0,
+          "operating_temperature_k": 288.15,
+          "outside_diameter_mm": 610.0,
+          "point_ignition_probability": 0.1,
+          "radiative_fraction": 0.2,
+          "thermal_exposure_time_s": 20.0,
+          "wall_thickness_mm": 10.0
+        },
+        "evidence_terms": [
+          {
+            "coefficient": 0.55,
+            "indicator_id": "external_corrosion.cp_off_potential_v",
+            "name_zh": "断电电位",
+            "normalized_max": 3.0,
+            "normalized_min": -2.0,
+            "reference": -0.85,
+            "scale": 0.15,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.7,
+            "indicator_id": "external_corrosion.cp_out_of_range_fraction",
+            "name_zh": "保护电位超限比例",
+            "normalized_max": 4.0,
+            "normalized_min": -1.0,
+            "reference": 0.1,
+            "scale": 0.2,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.55,
+            "indicator_id": "external_corrosion.dcvg_acvg_severity_max",
+            "name_zh": "DCVG/ACVG最大严重度",
+            "normalized_max": 3.0,
+            "normalized_min": -1.0,
+            "reference": 20.0,
+            "scale": 30.0,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.45,
+            "indicator_id": "external_corrosion.soil_resistivity_ohm_m",
+            "name_zh": "土壤电阻率",
+            "normalized_max": 2.0,
+            "normalized_min": -2.0,
+            "reference": 40.0,
+            "scale": 40.0,
+            "transform": "inverse"
+          },
+          {
+            "coefficient": 0.4,
+            "indicator_id": "external_corrosion.ac_interference_voltage_v",
+            "name_zh": "交流干扰电压",
+            "normalized_max": 3.0,
+            "normalized_min": -1.0,
+            "reference": 4.0,
+            "scale": 6.0,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.8,
+            "indicator_id": "inspection_integrity.maximum_corrosion_depth_ratio",
+            "name_zh": "最大腐蚀深度比",
+            "normalized_max": 4.0,
+            "normalized_min": -1.0,
+            "reference": 0.2,
+            "scale": 0.2,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.5,
+            "indicator_id": "inspection_integrity.unrepaired_critical_anomaly_count",
+            "name_zh": "未修复临界缺陷数量",
+            "normalized_max": 3.0,
+            "normalized_min": 0.0,
+            "reference": 0.0,
+            "scale": 1.0,
+            "transform": "linear"
+          },
+          {
+            "coefficient": 0.6,
+            "indicator_id": "management_emergency.maintenance_completion_fraction",
+            "name_zh": "维护计划完成率",
+            "normalized_max": 3.0,
+            "normalized_min": -0.34,
+            "reference": 0.9,
+            "scale": 0.3,
+            "transform": "inverse"
+          }
+        ],
+        "evidence_update_note": "标准没有为任意指标组合规定统一权重。下列对数证据响应是可替换、需项目校准的模型参数，不冒充标准条文。缺失证据不阻断计算，而是按中性贡献处理并扩大不确定性带。",
+        "formal_release_limitations": [
+          "证据更新系数在用于真实决策前必须以适用管道失效数据校准、验证并批准",
+          "使用默认物性、点火概率、人口密度或其他先验时只能作为筛查估计",
+          "该模型不替代完整空间QRA的IR等值线和F-N合规判断"
+        ],
+        "method_type": "QUANTITATIVE_EVIDENCE_CONDITIONED_SCREENING_QRA",
+        "model_id": "pipeline.adaptive.evidence_qra.v1",
+        "standard_formula_backbone": [
+          "GB/T 34346-2017 表C.1、表C.24、式(C.1)、式(C.40)-式(C.42)",
+          "AQ/T 3046-2013 式(E.13)-式(E.17)、式(E.58)-式(E.59)、式(6)-式(8)及表10",
+          "AQ/T 3046-2013 式(15)：风险为事故频率与期望死亡人数乘积之和"
+        ],
+        "status": "PROVISIONAL_CONFIGURABLE_EVIDENCE_MODEL",
+        "version": "1.0.0"
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S10_CORROSION_DEGRADATION",
+  "version": "1.0.0"
+}

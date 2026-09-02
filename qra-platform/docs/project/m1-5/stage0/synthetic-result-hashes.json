@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "edition_id": "QRA-SYNTHETIC-TEST-EDITION-V1",
+  "recorded_on": "2026-09-01",
+  "status": "PASSED_ALL_SYNTHETIC_SCENARIOS",
+  "zero_real_project_data": true,
+  "formal_report_allowed": false,
+  "scenario_count": 5,
+  "all_scenarios_passed": true,
+  "all_response_checks_passed": true,
+  "scenarios": [
+    {
+      "scenario_id": "S00_BASELINE",
+      "status": "PASS",
+      "completed_nodes": 11,
+      "skipped_nodes": 0,
+      "failed_nodes": 0,
+      "formal_report_allowed": false,
+      "numerical_result_sha256": "4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c"
+    },
+    {
+      "scenario_id": "S10_CORROSION_DEGRADATION",
+      "status": "PASS",
+      "completed_nodes": 11,
+      "skipped_nodes": 0,
+      "failed_nodes": 0,
+      "formal_report_allowed": false,
+      "numerical_result_sha256": "93b0a545a9ed993029557d43218c131b60c73fe576003fcd4f7aa4352be77cbf"
+    },
+    {
+      "scenario_id": "S20_THIRD_PARTY_SURGE",
+      "status": "PASS",
+      "completed_nodes": 11,
+      "skipped_nodes": 0,
+      "failed_nodes": 0,
+      "formal_report_allowed": false,
+      "numerical_result_sha256": "c17fd6595aa3ee80d08d2b8585b1e34eb7f7f4723785cf98f4c543e7f252151c"
+    },
+    {
+      "scenario_id": "S30_HIGH_PRESSURE_POPULATION_PEAK",
+      "status": "PASS",
+      "completed_nodes": 11,
+      "skipped_nodes": 0,
+      "failed_nodes": 0,
+      "formal_report_allowed": false,
+      "numerical_result_sha256": "ff13ef3e5dacb9fe91de81bb06ba25ed3760d5bed1797248103cc942dde3408d"
+    },
+    {
+      "scenario_id": "S40_MITIGATION_PACKAGE",
+      "status": "PASS",
+      "completed_nodes": 11,
+      "skipped_nodes": 0,
+      "failed_nodes": 0,
+      "formal_report_allowed": false,
+      "numerical_result_sha256": "72fdd681bb0a88098502c9fec0c90b978df2385474e1e3027171631bcf8e99bb"
+    }
+  ]
+}
+

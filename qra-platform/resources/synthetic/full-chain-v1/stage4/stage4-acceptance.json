@@ -1,0 +1,411 @@
+{
+  "artifacts": {
+    "D20_report": "D20-missing-data-report.json",
+    "conservation": "conservation-report.json",
+    "deterministic_rerun": "deterministic-rerun-record.json",
+    "direct_json_results": "direct-json-run/",
+    "job_binding": "calculation-job-binding.json",
+    "result_diff": "result-diff-report.json",
+    "reverse_provenance": "reverse-provenance-record.json",
+    "source_chain_results": "source-chain-db-run/",
+    "standard_formula_path": "standard-formula-path.json"
+  },
+  "calculation_run_id": "RUN-20260902T042009Z-55a9cc2b",
+  "check_count": 18,
+  "checked_at": "2026-09-01T00:00:00+08:00",
+  "checks": [
+    {
+      "check_id": "STAGE4_WORKFLOW_PASS",
+      "detail": {
+        "calculation_run_id": "RUN-20260902T042009Z-55a9cc2b",
+        "completed_node_count": 11,
+        "database_run_status": "COMPLETED",
+        "exported_database_artifact_count": 17,
+        "failed_node_count": 0,
+        "formal_report_allowed": false,
+        "gate": "S4_FULL_11_OF_11_SYNTHETIC_PASS",
+        "metrics": {
+          "annual_failure_frequency_per_year": 0.0029070000000000003,
+          "at_least_one_failure_probability_over_horizon": 0.002902778766865609,
+          "failure_probability_horizon_years": 1.0,
+          "fn_curve": [
+            {
+              "cumulative_frequency_per_year": 7.795277465027721e-05,
+              "fatalities_at_least": 1.0
+            },
+            {
+              "cumulative_frequency_per_year": 7.482788749848088e-05,
+              "fatalities_at_least": 5.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.887938216145468e-05,
+              "fatalities_at_least": 10.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.014620785672304e-05,
+              "fatalities_at_least": 30.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.848873104796475e-05,
+              "fatalities_at_least": 50.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.21680591803573e-05,
+              "fatalities_at_least": 100.0
+            }
+          ],
+          "maximum_individual_risk_per_year": 3.546678691721081e-05,
+          "maximum_individual_risk_receptor_id": "POP-002",
+          "pipeline_pll_per_year": 0.043980921258671694,
+          "segment_count": 20,
+          "top_risk_segment_id": "SEG-012",
+          "top_risk_segment_pll_per_year": 0.004607567276719709
+        },
+        "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "schema_version": "1.0.0",
+        "skipped_node_count": 0,
+        "snapshot_id": "SNAP-1c02a610-6d58-42f6-bb81-5ea35e02dece",
+        "snapshot_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+        "stage": 4,
+        "status": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "IMMUTABLE_SNAPSHOT_HASH_BOUND",
+      "detail": {
+        "snapshot_id": "SNAP-1c02a610-6d58-42f6-bb81-5ea35e02dece",
+        "snapshot_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "SYSTEM_PARAMETER_PACKS_BOUND",
+      "detail": [
+        {
+          "actual_business_content_sha256": "1840bc461c1ac41d0c763131ff0b61d8d56afd1321e78c71b14d12e4fbb736de",
+          "business_content_sha256": "1840bc461c1ac41d0c763131ff0b61d8d56afd1321e78c71b14d12e4fbb736de",
+          "file_sha256": "97346699d55865754c12742445adc673177467d03cd5ba200f193e808990dfd9",
+          "pack_id": "synthetic-consequence-parameters-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-consequence-parameters-v1.json",
+          "verified": true
+        },
+        {
+          "actual_business_content_sha256": "26713c274b6dcdbf6353ffb91c5e802105403d65629ed51430c903f68d719c1d",
+          "business_content_sha256": "26713c274b6dcdbf6353ffb91c5e802105403d65629ed51430c903f68d719c1d",
+          "file_sha256": "4307bf50c6a29ddba3d49e6ab69611f496b23bf345203fd8a3205421cfbc55fc",
+          "pack_id": "synthetic-frequency-correction-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-frequency-correction-v1.json",
+          "verified": true
+        },
+        {
+          "actual_business_content_sha256": "0b243a0c031a96ece0c831642b6de38958e388c6d68877b8855f00ca392b9247",
+          "business_content_sha256": "0b243a0c031a96ece0c831642b6de38958e388c6d68877b8855f00ca392b9247",
+          "file_sha256": "d1ef90d0ace0d6888f26b16ea2cd44b891a8eaf74638fb2db9c383ac732d0ba3",
+          "pack_id": "synthetic-frequency-library-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-frequency-library-v1.json",
+          "verified": true
+        },
+        {
+          "actual_business_content_sha256": "93539ea0ac7b7284b50774b1da506f7af88b4073736532c4a743ab63449d42cc",
+          "business_content_sha256": "93539ea0ac7b7284b50774b1da506f7af88b4073736532c4a743ab63449d42cc",
+          "file_sha256": "ec93c4745a090d29251341726435a96de1e283515aa85fe108e2e36d5a8b7405",
+          "pack_id": "synthetic-ignition-model-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-ignition-model-v1.json",
+          "verified": true
+        },
+        {
+          "actual_business_content_sha256": "9d5a2630826ace7d33cad96cfd2b9f60b3acd9b4a80afb9113a3fd50f8c0a229",
+          "business_content_sha256": "9d5a2630826ace7d33cad96cfd2b9f60b3acd9b4a80afb9113a3fd50f8c0a229",
+          "file_sha256": "8313c1bf9648f57526f9a27a980a1a868565bc3f4b64f04348ec221188a7d26c",
+          "pack_id": "synthetic-model-validation-fixture-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-model-validation-fixture-v1.json",
+          "verified": true
+        },
+        {
+          "actual_business_content_sha256": "bdaae3e4ea829f3434b19cdcb6fa59450f095069dfcaae46163c04fffaf14606",
+          "business_content_sha256": "bdaae3e4ea829f3434b19cdcb6fa59450f095069dfcaae46163c04fffaf14606",
+          "file_sha256": "639db633e429df93d9b84be388c3503ffd5523101ab4b1da05a676c11119298b",
+          "pack_id": "synthetic-risk-criteria-v1",
+          "source_path": "D:/风险定量评估/qra-platform/resources/synthetic/full-chain-v1/stage2/generated/S00_BASELINE_D00_CLEAN/parameter-packs/synthetic-risk-criteria-v1.json",
+          "verified": true
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "RUN_ASSUMPTION_BOUND",
+      "detail": {
+        "binding": "run-assumption:S00_BASELINE-v1",
+        "business_content_sha256": "35e43ba7712d06183f5a7c33f6d75dea3ea7c225058134701ae7a02d8e6cc3a9"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "CAPABILITY_11_RUNNABLE",
+      "detail": {
+        "runnable": [
+          "data_inventory",
+          "indicator_coverage",
+          "segment_geometry",
+          "failure_frequency",
+          "leak_point_discretization",
+          "aqt3046_source_term",
+          "jet_fire_thresholds",
+          "gbt34346_annex_c",
+          "adaptive_evidence_qra",
+          "human_qra",
+          "risk_matrix"
+        ],
+        "skipped": []
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "CALCULATION_JOB_AUTO_CREATED",
+      "detail": {
+        "run_id": "RUN-20260902T042009Z-55a9cc2b",
+        "status": "COMPLETED"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S00_11_OF_11_COMPLETED",
+      "detail": 11,
+      "status": "PASS"
+    },
+    {
+      "check_id": "S00_FAILURES_ZERO_SKIPS_ZERO",
+      "detail": {
+        "failed": 0,
+        "skipped": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "RAW_SOURCE_CHAIN_EQUALS_DIRECT_JSON",
+      "detail": {
+        "mismatch_count": 0,
+        "node_count": 11
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "ALL_NODES_EQUAL_GOLDEN",
+      "detail": {
+        "mismatch_count": 0,
+        "status": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S00_CONSISTENCY_METRICS_EQUAL_BASELINE",
+      "detail": {
+        "actual": {
+          "annual_failure_frequency_per_year": 0.0029070000000000003,
+          "at_least_one_failure_probability_over_horizon": 0.002902778766865609,
+          "failure_probability_horizon_years": 1.0,
+          "fn_curve": [
+            {
+              "cumulative_frequency_per_year": 7.795277465027721e-05,
+              "fatalities_at_least": 1.0
+            },
+            {
+              "cumulative_frequency_per_year": 7.482788749848088e-05,
+              "fatalities_at_least": 5.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.887938216145468e-05,
+              "fatalities_at_least": 10.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.014620785672304e-05,
+              "fatalities_at_least": 30.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.848873104796475e-05,
+              "fatalities_at_least": 50.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.21680591803573e-05,
+              "fatalities_at_least": 100.0
+            }
+          ],
+          "maximum_individual_risk_per_year": 3.546678691721081e-05,
+          "maximum_individual_risk_receptor_id": "POP-002",
+          "pipeline_pll_per_year": 0.043980921258671694,
+          "segment_count": 20,
+          "top_risk_segment_id": "SEG-012",
+          "top_risk_segment_pll_per_year": 0.004607567276719709
+        },
+        "expected": {
+          "annual_failure_frequency_per_year": 0.002907,
+          "at_least_one_failure_probability_over_horizon": 0.0029027787668656083,
+          "failure_probability_horizon_years": 1.0,
+          "fn_curve": [
+            {
+              "cumulative_frequency_per_year": 7.795277465027736e-05,
+              "fatalities_at_least": 1.0
+            },
+            {
+              "cumulative_frequency_per_year": 7.48278874984809e-05,
+              "fatalities_at_least": 5.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.887938216145468e-05,
+              "fatalities_at_least": 10.0
+            },
+            {
+              "cumulative_frequency_per_year": 6.014620785672304e-05,
+              "fatalities_at_least": 30.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.848873104796475e-05,
+              "fatalities_at_least": 50.0
+            },
+            {
+              "cumulative_frequency_per_year": 5.21680591803573e-05,
+              "fatalities_at_least": 100.0
+            }
+          ],
+          "maximum_individual_risk_per_year": 3.546678691721081e-05,
+          "maximum_individual_risk_receptor_id": "POP-002",
+          "pipeline_pll_per_year": 0.0439809212586717,
+          "segment_count": 20,
+          "top_risk_segment_id": "SEG-012",
+          "top_risk_segment_pll_per_year": 0.004607567276719709
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "FREQUENCY_PROBABILITY_BRANCH_CONSERVATION",
+      "detail": {
+        "errors": {
+          "engine_scenario_branch_frequency_error": -6.5052130349130266e-18,
+          "frequency_by_loc_error": -4.336808689942018e-19,
+          "frequency_by_mechanism_error": 0.0,
+          "frequency_by_segment_error": -4.336808689942018e-19,
+          "gas_composition_sum_error": 0.0,
+          "loc_poisson_probability_max_error": 4.358492733391728e-17,
+          "mechanism_poisson_probability_max_error": 5.2597357892703034e-17,
+          "pll_segment_sum_error": 0.0,
+          "scenario_branch_frequency_error": -6.938893903907228e-18,
+          "segment_poisson_probability_max_error": 5.4074583352714534e-17,
+          "total_poisson_probability_error": -1.214306433183765e-17,
+          "weather_probability_sum_error": 0.0
+        },
+        "fn_curve_cumulative_frequency_non_increasing": true,
+        "probability_rule": "P(N>=1)=1-exp(-lambda*t); probabilities are never summed",
+        "schema_version": "1.0.0",
+        "status": "PASS",
+        "tolerance": 1e-12,
+        "total_expanded_branch_frequency_per_year": 0.0029069999999999934,
+        "total_initiating_frequency_per_year": 0.0029070000000000003
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "DETERMINISTIC_NUMERICAL_HASH",
+      "detail": {
+        "direct_json_rerun_numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "expected_numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "hash_scope": "canonical JSON of completed node result documents keyed by node_id; excludes job_id, timestamps, paths, embedded hashes and rendered artifacts; floats use 12 significant digits and result-record arrays use canonical ordering",
+        "schema_version": "1.0.0",
+        "snapshot_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+        "source_chain_numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "status": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "BASELINE_HASH_OR_VERSION_CHANGE_LOG",
+      "detail": {
+        "actual": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "expected": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "version_change_log_required": true,
+        "version_change_record": "../stage2/full-contract-result-hashes.json"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "ALL_NODES_REVERSE_TRACEABLE",
+      "detail": {
+        "node_count": 11,
+        "status": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D20_BLOCKED_NODES_NOT_COMPLETED",
+      "detail": {
+        "blocked_node_ids": [
+          "human_qra"
+        ],
+        "blocked_nodes_not_completed": true,
+        "calculation_status": "PARTIAL",
+        "completed_node_ids": [
+          "data_inventory",
+          "indicator_coverage",
+          "segment_geometry",
+          "failure_frequency",
+          "leak_point_discretization",
+          "aqt3046_source_term",
+          "jet_fire_thresholds",
+          "gbt34346_annex_c",
+          "adaptive_evidence_qra",
+          "risk_matrix"
+        ],
+        "condition_id": "D20_MISSING",
+        "fill_data_list": [
+          {
+            "label_zh": "缺少必填数据段：population_cells",
+            "path": "population_cells",
+            "state": "MISSING_NOT_ZERO",
+            "value": null
+          }
+        ],
+        "formal_report_allowed": false,
+        "missing_values_coerced_to_zero": false,
+        "persisted_as_snapshot": false,
+        "schema_version": "1.0.0",
+        "status": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "D20_MISSING_NOT_ZERO_WITH_FILL_LIST",
+      "detail": [
+        {
+          "label_zh": "缺少必填数据段：population_cells",
+          "path": "population_cells",
+          "state": "MISSING_NOT_ZERO",
+          "value": null
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "FORMAL_REPORT_GATE_CLOSED",
+      "detail": {
+        "D20": false,
+        "database": false,
+        "summary": false
+      },
+      "status": "PASS"
+    }
+  ],
+  "completed_node_count": 11,
+  "failed_node_count": 0,
+  "formal_report_allowed": false,
+  "gate": "S4_FULL_11_OF_11_SYNTHETIC_PASS",
+  "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+  "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage4-full-calculation-20260901",
+  "passed_count": 18,
+  "qra_input_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+  "schema_version": "1.0.0",
+  "skipped_node_count": 0,
+  "snapshot_id": "SNAP-1c02a610-6d58-42f6-bb81-5ea35e02dece",
+  "stage": 4,
+  "status": "PASS"
+}

@@ -1,0 +1,151 @@
+{
+  "business_content_sha256": "df5fa28ecb2185c11d1d9de9ae993a742a5dac180da0025888e0083fc0df3dc6",
+  "contract_id": "qra.synthetic-full-chain.stage3.structural-assembly",
+  "contract_version": "1.0.0",
+  "fields": [
+    {
+      "assembly_method": "DERIVE_OBJECT_FROM_CONSUMED_CHILDREN",
+      "child_path_prefixes": [
+        "engineering_indicators."
+      ],
+      "field_id": "engineering_indicators",
+      "target_path": "engineering_indicators"
+    },
+    {
+      "assembly_method": "DERIVE_ARCHETYPE_OBJECT_FROM_AGGREGATE_EVIDENCE",
+      "child_path_prefixes": [
+        "engineering_indicators.observations_by_segment.*."
+      ],
+      "field_id": "engineering_indicators.observations_by_archetype",
+      "target_path": "engineering_indicators.observations_by_archetype"
+    },
+    {
+      "assembly_method": "DERIVE_SEGMENT_OVERRIDE_OBJECT_FROM_AGGREGATE_EVIDENCE",
+      "child_path_prefixes": [
+        "engineering_indicators.observations_by_segment.*."
+      ],
+      "field_id": "engineering_indicators.observations_by_segment",
+      "target_path": "engineering_indicators.observations_by_segment"
+    },
+    {
+      "assembly_method": "DERIVE_FROM_ACCEPTED_SOURCE_DOCUMENT_INVENTORY",
+      "field_id": "raw_data_categories",
+      "materialized_value": {
+        "asset_register": {
+          "name_zh": "管线与管段台账",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "01_管线与管段台账.xlsx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "defects_repairs": {
+          "name_zh": "缺陷与维修记录",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "05_缺陷与维修记录.docx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "gas_composition": {
+          "name_zh": "天然气组分",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "03_天然气组分.xlsx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "integrity_inspection": {
+          "name_zh": "CIPS与腐蚀检测",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "04_CIPS与腐蚀检测.xlsx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "operating_conditions": {
+          "name_zh": "运行工况",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "02_运行工况.csv",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "population_receptors": {
+          "name_zh": "人口和敏感受体",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "07_人口和敏感受体.xlsx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "site_inspection": {
+          "name_zh": "现场检查扫描件",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "09_现场检查扫描件.pdf",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "site_photo_context": {
+          "name_zh": "现场照片说明",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "10_现场照片说明.png",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "third_party_patrol": {
+          "name_zh": "第三方与巡线记录",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "06_第三方与巡线记录.xlsx",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        },
+        "weather_joint_probability": {
+          "name_zh": "气象联合概率",
+          "records": [
+            {
+              "data_classification": "SYNTHETIC_TEST_ONLY",
+              "source_document": "08_气象联合概率.csv",
+              "synthetic_profile": "full-chain-v1-offline-defaults"
+            }
+          ]
+        }
+      },
+      "source_documents": [
+        "01_管线与管段台账.xlsx",
+        "02_运行工况.csv",
+        "03_天然气组分.xlsx",
+        "04_CIPS与腐蚀检测.xlsx",
+        "05_缺陷与维修记录.docx",
+        "06_第三方与巡线记录.xlsx",
+        "07_人口和敏感受体.xlsx",
+        "08_气象联合概率.csv",
+        "09_现场检查扫描件.pdf",
+        "10_现场照片说明.png"
+      ],
+      "target_path": "raw_data_categories"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

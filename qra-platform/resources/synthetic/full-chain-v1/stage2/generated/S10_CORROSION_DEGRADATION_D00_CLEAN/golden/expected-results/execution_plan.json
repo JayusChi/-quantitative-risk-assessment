@@ -1,0 +1,201 @@
+{
+  "plan": [
+    {
+      "blocked_dependencies": [],
+      "dependencies": [],
+      "label_zh": "数据能力盘点",
+      "missing_inputs": [],
+      "node_id": "data_inventory",
+      "planned_outputs": [
+        "data_inventory_json"
+      ],
+      "sequence": 1,
+      "standard": "平台数据合同",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "data_inventory"
+      ],
+      "label_zh": "工程指标覆盖率",
+      "missing_inputs": [],
+      "node_id": "indicator_coverage",
+      "planned_outputs": [
+        "indicator_coverage_json",
+        "indicator_coverage_chart"
+      ],
+      "sequence": 2,
+      "standard": "QRA工程指标目录v1",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "data_inventory"
+      ],
+      "label_zh": "管段几何与里程",
+      "missing_inputs": [],
+      "node_id": "segment_geometry",
+      "planned_outputs": [
+        "segment_geometry_json",
+        "segment_length_chart"
+      ],
+      "sequence": 3,
+      "standard": "SY/T 6891.2-2020",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "label_zh": "管段失效频率",
+      "missing_inputs": [],
+      "node_id": "failure_frequency",
+      "planned_outputs": [
+        "failure_frequency_json",
+        "failure_frequency_chart"
+      ],
+      "sequence": 4,
+      "standard": "SY/T 6891.2-2020 Annex A",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "label_zh": "泄漏点离散",
+      "missing_inputs": [],
+      "node_id": "leak_point_discretization",
+      "planned_outputs": [
+        "leak_points_json",
+        "leak_point_count_chart"
+      ],
+      "sequence": 5,
+      "standard": "SY/T 6891.2-2020",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "label_zh": "AQ/T 3046泄漏源项",
+      "missing_inputs": [],
+      "node_id": "aqt3046_source_term",
+      "planned_outputs": [
+        "source_term_json",
+        "release_rate_chart"
+      ],
+      "sequence": 6,
+      "standard": "AQ/T 3046-2013 E.13-E.22",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "aqt3046_source_term"
+      ],
+      "label_zh": "喷射火影响距离",
+      "missing_inputs": [],
+      "node_id": "jet_fire_thresholds",
+      "planned_outputs": [
+        "jet_fire_threshold_json",
+        "jet_fire_distance_chart"
+      ],
+      "sequence": 7,
+      "standard": "AQ/T 3046-2013 E.57-E.59",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "label_zh": "GB/T 34346附录C定量校核",
+      "missing_inputs": [],
+      "node_id": "gbt34346_annex_c",
+      "planned_outputs": [
+        "gbt34346_result_json",
+        "gbt34346_ranking_chart"
+      ],
+      "sequence": 8,
+      "standard": "GB/T 34346-2017 Annex C",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "label_zh": "自适应证据定量风险",
+      "missing_inputs": [],
+      "node_id": "adaptive_evidence_qra",
+      "planned_outputs": [
+        "adaptive_evidence_qra_json",
+        "adaptive_risk_ranking_chart",
+        "adaptive_uncertainty_chart",
+        "adaptive_evidence_factor_chart"
+      ],
+      "sequence": 9,
+      "standard": "GB/T 34346-2017 Annex C + AQ/T 3046-2013",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "failure_frequency",
+        "leak_point_discretization",
+        "aqt3046_source_term"
+      ],
+      "label_zh": "完整人员域QRA",
+      "missing_inputs": [],
+      "node_id": "human_qra",
+      "planned_outputs": [
+        "human_qra_json",
+        "ir_chart",
+        "fn_chart",
+        "pll_chart"
+      ],
+      "sequence": 10,
+      "standard": "SY/T 6891.2-2020 + AQ/T 3046-2013",
+      "status": "RUNNABLE"
+    },
+    {
+      "blocked_dependencies": [],
+      "dependencies": [
+        "adaptive_evidence_qra"
+      ],
+      "label_zh": "自适应风险结果展示矩阵",
+      "missing_inputs": [],
+      "node_id": "risk_matrix",
+      "planned_outputs": [
+        "risk_matrix_json",
+        "risk_matrix_csv",
+        "risk_matrix_chart"
+      ],
+      "sequence": 11,
+      "standard": "定量结果展示准则（不替代接受性判定）",
+      "status": "RUNNABLE"
+    }
+  ],
+  "requested_targets": [],
+  "runnable_node_ids": [
+    "data_inventory",
+    "indicator_coverage",
+    "segment_geometry",
+    "failure_frequency",
+    "leak_point_discretization",
+    "aqt3046_source_term",
+    "jet_fire_thresholds",
+    "gbt34346_annex_c",
+    "adaptive_evidence_qra",
+    "human_qra",
+    "risk_matrix"
+  ],
+  "schema_version": "1.3.0",
+  "selection_mode": "AUTO_BY_AVAILABLE_DATA",
+  "skipped_node_ids": []
+}

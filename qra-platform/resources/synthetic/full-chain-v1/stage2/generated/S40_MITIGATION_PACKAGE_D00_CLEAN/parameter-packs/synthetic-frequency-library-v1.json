@@ -1,0 +1,168 @@
+{
+  "business_content_sha256": "0b243a0c031a96ece0c831642b6de38958e388c6d68877b8855f00ca392b9247",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-frequency-library-v1",
+  "parameters": [
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_library",
+      "target_path": "frequency_library",
+      "unit": null,
+      "value": {
+        "base_frequency_by_mechanism": {
+          "external_corrosion": 0.00012,
+          "internal_corrosion": 4e-05,
+          "manufacturing_construction": 2e-05,
+          "misoperation": 1e-05,
+          "natural_geohazard": 2e-05,
+          "stress_corrosion_cracking": 3e-05,
+          "third_party_damage": 0.00015
+        },
+        "data_classification": "SYNTHETIC_TEST_ONLY",
+        "library_id": "SYN-FREQ-LIB-001",
+        "loc_fraction_by_mechanism": {
+          "external_corrosion": {
+            "large_100mm": 0.1,
+            "medium_25mm": 0.25,
+            "rupture": 0.05,
+            "small_5mm": 0.6
+          },
+          "internal_corrosion": {
+            "large_100mm": 0.1,
+            "medium_25mm": 0.2,
+            "rupture": 0.05,
+            "small_5mm": 0.65
+          },
+          "manufacturing_construction": {
+            "large_100mm": 0.2,
+            "medium_25mm": 0.25,
+            "rupture": 0.25,
+            "small_5mm": 0.3
+          },
+          "misoperation": {
+            "large_100mm": 0.15,
+            "medium_25mm": 0.25,
+            "rupture": 0.1,
+            "small_5mm": 0.5
+          },
+          "natural_geohazard": {
+            "large_100mm": 0.25,
+            "medium_25mm": 0.2,
+            "rupture": 0.4,
+            "small_5mm": 0.15
+          },
+          "stress_corrosion_cracking": {
+            "large_100mm": 0.25,
+            "medium_25mm": 0.15,
+            "rupture": 0.5,
+            "small_5mm": 0.1
+          },
+          "third_party_damage": {
+            "large_100mm": 0.15,
+            "medium_25mm": 0.25,
+            "rupture": 0.25,
+            "small_5mm": 0.35
+          }
+        },
+        "unit": "per_km_year",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_library.base_frequency_by_mechanism",
+      "target_path": "frequency_library.base_frequency_by_mechanism",
+      "unit": "per_km_year",
+      "value": {
+        "external_corrosion": 0.00012,
+        "internal_corrosion": 4e-05,
+        "manufacturing_construction": 2e-05,
+        "misoperation": 1e-05,
+        "natural_geohazard": 2e-05,
+        "stress_corrosion_cracking": 3e-05,
+        "third_party_damage": 0.00015
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_library.data_classification",
+      "target_path": "frequency_library.data_classification",
+      "unit": null,
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_library.library_id",
+      "target_path": "frequency_library.library_id",
+      "unit": null,
+      "value": "SYN-FREQ-LIB-001"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_library.loc_fraction_by_mechanism",
+      "target_path": "frequency_library.loc_fraction_by_mechanism",
+      "unit": null,
+      "value": {
+        "external_corrosion": {
+          "large_100mm": 0.1,
+          "medium_25mm": 0.25,
+          "rupture": 0.05,
+          "small_5mm": 0.6
+        },
+        "internal_corrosion": {
+          "large_100mm": 0.1,
+          "medium_25mm": 0.2,
+          "rupture": 0.05,
+          "small_5mm": 0.65
+        },
+        "manufacturing_construction": {
+          "large_100mm": 0.2,
+          "medium_25mm": 0.25,
+          "rupture": 0.25,
+          "small_5mm": 0.3
+        },
+        "misoperation": {
+          "large_100mm": 0.15,
+          "medium_25mm": 0.25,
+          "rupture": 0.1,
+          "small_5mm": 0.5
+        },
+        "natural_geohazard": {
+          "large_100mm": 0.25,
+          "medium_25mm": 0.2,
+          "rupture": 0.4,
+          "small_5mm": 0.15
+        },
+        "stress_corrosion_cracking": {
+          "large_100mm": 0.25,
+          "medium_25mm": 0.15,
+          "rupture": 0.5,
+          "small_5mm": 0.1
+        },
+        "third_party_damage": {
+          "large_100mm": 0.15,
+          "medium_25mm": 0.25,
+          "rupture": 0.25,
+          "small_5mm": 0.35
+        }
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_library.unit",
+      "target_path": "frequency_library.unit",
+      "unit": null,
+      "value": "per_km_year"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_library.version",
+      "target_path": "frequency_library.version",
+      "unit": null,
+      "value": "1.0.0"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S40_MITIGATION_PACKAGE",
+  "version": "1.0.0"
+}

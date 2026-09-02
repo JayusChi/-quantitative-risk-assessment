@@ -1,0 +1,20 @@
+{
+  "base_condition_id": "D00_CLEAN",
+  "business_content_sha256": "d9f3b74b7c28441da13b489bea76baa89d8f1ce9ab342c3a40d1a1e48adcd842",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "expected_behavior": "文件安全接收，触发扫描预处理、低置信度与人工复核",
+  "injected_conditions": [
+    {
+      "blur_radius": 1.25,
+      "document": "09_现场检查扫描件.pdf",
+      "rotation_deg": 2.5
+    }
+  ],
+  "overlay_files": [
+    "overlay/09_现场检查扫描件.pdf"
+  ],
+  "remove_files": [],
+  "scenario_id": "S00_BASELINE",
+  "schema_version": "1.0.0",
+  "variant_id": "D30_LOW_QUALITY_SCAN"
+}

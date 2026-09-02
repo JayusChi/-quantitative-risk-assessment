@@ -1,0 +1,21 @@
+{
+  "base_condition_id": "D00_CLEAN",
+  "business_content_sha256": "197cad277c74b2a7994cfaa09544a9314dfdd31081a75a187d0ff94a91e87fe2",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "expected_behavior": "同一运行压力形成显式冲突，必须人工选择",
+  "injected_conditions": [
+    {
+      "base_value": 8.0,
+      "conflicting_value": 8.35,
+      "target_path": "pipeline.operating_pressure_mpa",
+      "unit": "MPa"
+    }
+  ],
+  "overlay_files": [
+    "overlay/02_运行工况_冲突覆盖.csv"
+  ],
+  "remove_files": [],
+  "scenario_id": "S00_BASELINE",
+  "schema_version": "1.0.0",
+  "variant_id": "D10_CONFLICT"
+}

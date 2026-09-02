@@ -1,0 +1,2 @@
+﻿conflicts_with,data_classification,field_id,source_version,target_path,unit,value
+02_运行工况.csv:8.0 MPa,SYNTHETIC_TEST_ONLY,pipeline.operating_pressure_mpa,D10-conflict-v2,pipeline.operating_pressure_mpa,MPa,8.35

@@ -1,0 +1,20 @@
+{
+  "base_condition_id": "D00_CLEAN",
+  "business_content_sha256": "3a2f0089330ba576161608b85dbb2084b342bb545b20bd90e57a6a91e8e394dd",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "expected_behavior": "文件安全接收，自动压缩或切片并保留坐标回映",
+  "injected_conditions": [
+    {
+      "document": "10_现场照片说明.png",
+      "height": 12000,
+      "width": 1800
+    }
+  ],
+  "overlay_files": [
+    "overlay/10_现场照片说明.png"
+  ],
+  "remove_files": [],
+  "scenario_id": "S00_BASELINE",
+  "schema_version": "1.0.0",
+  "variant_id": "D40_OVERSIZED_IMAGE"
+}

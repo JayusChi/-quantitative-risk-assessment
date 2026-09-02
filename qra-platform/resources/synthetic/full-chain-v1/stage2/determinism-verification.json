@@ -1,0 +1,11 @@
+{
+  "business_content_sha256": "47892dc33573356e85bd195d74bbc841bff2d2ebd4fc568edab3eb4f5f6c85d6",
+  "business_hash_equal": true,
+  "comparison_scope": "canonical_business_content_and_numerical_results",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "independent_run_count": 2,
+  "numerical_hash_equal": true,
+  "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+  "schema_version": "1.0.0",
+  "verified_on": "2026-09-02"
+}

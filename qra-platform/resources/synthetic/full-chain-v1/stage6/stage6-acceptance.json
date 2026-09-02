@@ -1,0 +1,183 @@
+{
+  "calculation_run_id": "RUN-20260902T042112Z-c3ee7d2c",
+  "check_count": 14,
+  "checked_at": "2026-09-01T00:00:00+08:00",
+  "checks": [
+    {
+      "check_id": "S6-01_REPORT_CONTEXT_V1",
+      "detail": {
+        "context_id": "CTX-ca881ec470892caef90502ac",
+        "metric_count": 40,
+        "node_count": 11
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-02_REPORT_DRAFT_V1",
+      "detail": {
+        "prompt_version": "qra-controlled-report-prompt-v1",
+        "section_count": 15
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-03_DETERMINISTIC_CONTEXT_TRANSFORM",
+      "detail": {
+        "context_sha256": "e6a3bfd19c545515c53375b6029ce589d9b8c286fc9918b30fa1c49f1007e92e",
+        "metric_count": 40
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-04_STRUCTURED_MODEL_OUTPUT",
+      "detail": {
+        "draft_sha256": "75754ab3e11694f59bac35425f2ff302edfac77323dc76b82ebe74e603f5717c",
+        "provider_id": "stage6-structured-fixture-provider"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-05_NUMERIC_REFERENCE_CHECK",
+      "detail": {
+        "metric_reference_count": 34,
+        "render_check": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-06_EVIDENCE_REFERENCE_CHECK",
+      "detail": {
+        "evidence_count": 11,
+        "result_count": 11
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-07_NODE_STATUS_CONSISTENCY",
+      "detail": {
+        "negative": "FAIL",
+        "positive": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-08_PROHIBITED_AND_UNSOURCED_CLAIM_CHECK",
+      "detail": {
+        "prohibited_negative": "FAIL",
+        "unbound_negative": "FAIL"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-09_SYNTHETIC_WATERMARK",
+      "detail": {
+        "docx_ooxml": true,
+        "html": true,
+        "pdf_byte_count": 340262
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-10_MODEL_UNAVAILABLE_FALLBACK",
+      "detail": {
+        "reason": "RuntimeError: synthetic provider unavailable",
+        "requested_provider_id": "stage6-unavailable-provider"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-11_HUMAN_CONFIRMATION",
+      "detail": {
+        "confirmed_by": "stage6-reviewer",
+        "formal_report_allowed": false,
+        "status": "CONFIRMED_TEST_ONLY"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-12_VERSION_HASH_AND_IMMUTABILITY",
+      "detail": {
+        "payload_immutable": true,
+        "version_count": 2,
+        "versions": [
+          2,
+          1
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-13_HTML_AND_BUNDLE_OUTPUT",
+      "detail": {
+        "bundle_file_count": 10,
+        "bundle_sha256": "5ae76ad4565e722d4d7259d45acefe373930f02ad3c1ba5bb716545c245ce5da",
+        "html_sha256": "3d18b517f88ad92ea0dc19072883a76d2b9097d36b7f8c97d35f6bea0cf824b2"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S6-14_PDF_AND_DOCX_OUTPUT",
+      "detail": {
+        "docx_byte_count": 184189,
+        "docx_sha256": "b7d828f2860de150d061331189be8f7ca5f49631bce5e2c34c736e0ee4211368",
+        "pdf_byte_count": 340262,
+        "pdf_sha256": "9ca464ab0d43c21a50fbedb67e279bc743cc2f2c36c5c6204d430438c86f4184"
+      },
+      "status": "PASS"
+    }
+  ],
+  "completed_node_count": 11,
+  "context_sha256": "e6a3bfd19c545515c53375b6029ce589d9b8c286fc9918b30fa1c49f1007e92e",
+  "controlled_report_id": "REPORT-857017e5-b9f1-4229-a43f-2b59478dfb0a",
+  "controlled_report_status": "CONFIRMED_TEST_ONLY",
+  "database": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\stage6-controlled-report.sqlite3",
+  "deliverables": {
+    "context": {
+      "byte_count": 127091,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\report-context-v1.json",
+      "sha256": "cc1101e9cc13820d7c057c2585860eb298d813c54c8a60149c37793cb30ed435"
+    },
+    "docx": {
+      "byte_count": 184189,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\QRA全合成受控测试报告_v1.docx",
+      "sha256": "b7d828f2860de150d061331189be8f7ca5f49631bce5e2c34c736e0ee4211368"
+    },
+    "draft": {
+      "byte_count": 13219,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\report-draft-v1.json",
+      "sha256": "c035576a759d8de44bf50e6348e9946c1a907ef175412570ba16b7ac5cc99fb0"
+    },
+    "html": {
+      "byte_count": 226636,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\QRA全合成受控测试报告_v1.html",
+      "sha256": "3d18b517f88ad92ea0dc19072883a76d2b9097d36b7f8c97d35f6bea0cf824b2"
+    },
+    "pdf": {
+      "byte_count": 340262,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\QRA全合成受控测试报告_v1.pdf",
+      "sha256": "9ca464ab0d43c21a50fbedb67e279bc743cc2f2c36c5c6204d430438c86f4184"
+    },
+    "validation": {
+      "byte_count": 3240,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\report-validation-v1.json",
+      "sha256": "c0f1dd9fa14709986c5e50036efc20fb8e9b4ad417b84b031070b4e7c2275ee6"
+    },
+    "zip": {
+      "byte_count": 787467,
+      "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901\\QRA全合成受控测试报告_v1.zip",
+      "sha256": "5ae76ad4565e722d4d7259d45acefe373930f02ad3c1ba5bb716545c245ce5da"
+    }
+  },
+  "draft_sha256": "7ab770d0486caddd76507d57c8bd159111ed7aadcd484fdd16d5d8dce0b2174e",
+  "formal_report_allowed": false,
+  "gate": "S6_CONTROLLED_REPORT_AGENT_ACCEPTED",
+  "implementation_hash": "6fcc93fbfd0c64ec308ddb880c4c758b6d540acfbb6f4a51da0e73e2d1e5c87e",
+  "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage6-controlled-report-20260901",
+  "passed_count": 14,
+  "project_id": "PROJECT-4098df2a-31aa-49ef-921b-af10a7ae2113",
+  "reference_targets_sha256": "18b345157a8f8d2efd0cd3e1e56aadad87012cf1f4c32df7ef768620a2b7f8dd",
+  "schema_version": "1.0.0",
+  "snapshot_id": "SNAP-98662f89-b0f1-41ba-9e81-f1dc404fcc0f",
+  "stage": 6,
+  "status": "PASS"
+}

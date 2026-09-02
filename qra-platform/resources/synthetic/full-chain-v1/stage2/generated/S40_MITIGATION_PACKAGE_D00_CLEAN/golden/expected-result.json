@@ -1,0 +1,26 @@
+{
+  "business_content_sha256": "d8833461a63a6c6c7f070c4340a0eadca920328d482cf1dd95bb5539cabc8529",
+  "completed_node_count": 11,
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "data_condition_id": "D00_CLEAN",
+  "failed_node_count": 0,
+  "formal_report_allowed": false,
+  "node_result_sha256": {
+    "adaptive_evidence_qra": "205e6a167785b46db1540d49423ec0ab93a5ddb58b5bb59206795fec359c510f",
+    "aqt3046_source_term": "bc079f18b231937d241a0631133259ff348397dea6800d7b57f35d450b6f2083",
+    "data_inventory": "508a2e173fc2ec18026967e8e4cb4c50253a5d49fb0a73f7a61a6d98a9fdc5cd",
+    "failure_frequency": "737d99094e6d2b6efa2e0a86a1dd69f8e6b4f0a6163c7e3911a180740676f9dc",
+    "gbt34346_annex_c": "08e5c11141322b80aa95a47958c379184de8c0dd534ad7d7daa60d1fb23a15b3",
+    "human_qra": "d529fc7480a684ae4bd5dd3aae0b7bcc5a33cb31ec98586fe8cd9fa26ebc9bb8",
+    "indicator_coverage": "e374e4f07c1af8e4fb61609a25141f2eda38cea035773ae852fbf060c39ae5be",
+    "jet_fire_thresholds": "106ad8a76d2c2e408e3c088da095d15793e2f7c5b33590cea12b7c8b85711442",
+    "leak_point_discretization": "07bc12ea02f12c88ad2b313f6eded45c76dcb53d5a82738faa03ecac79ff64b8",
+    "risk_matrix": "0e145342d0b2039d16aa2713aa1e93461c7ee2904660a02cca5e52f5cbc5f86a",
+    "segment_geometry": "ab2a7b381fa0d1cd1fcad9c08ce74eb18281e2ac932b8dcd67beac4e29438859"
+  },
+  "numerical_result_sha256": "24fe1b913fa592457823f6806a24459cb3dff17772a89a926307904163649928",
+  "scenario_id": "S40_MITIGATION_PACKAGE",
+  "schema_version": "1.0.0",
+  "skipped_node_count": 0,
+  "status": "PASS"
+}

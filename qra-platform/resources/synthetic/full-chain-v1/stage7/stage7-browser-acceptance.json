@@ -1,0 +1,81 @@
+{
+  "schema_version": "qra-stage7-browser-acceptance/1.0.0",
+  "status": "PASS",
+  "checked_at": "2026-09-01T18:08:02+08:00",
+  "tool": {
+    "name": "Playwright CLI",
+    "version": "0.1.18",
+    "browser": "Chromium",
+    "headed": true
+  },
+  "application_url": "http://127.0.0.1:8777/projects/",
+  "fresh_runtime": "output/playwright/stage7-runtime",
+  "project_id": "PROJECT-af0de1b4-992e-4e75-ae2d-c0f69827f352",
+  "snapshot_id": "SNAP-2b270203-df60-4bbb-8085-4c14144c5a22",
+  "run_id": "RUN-20260901T100434Z-7d1c25b2",
+  "report_id": "REPORT-895622ca-cc9f-4a2f-ba90-99d35d4b6cff",
+  "source_count": 10,
+  "completed_node_count": 11,
+  "total_node_count": 11,
+  "report_status": "CONFIRMED_TEST_ONLY",
+  "formal_report_allowed": false,
+  "console_error_count": 0,
+  "console_warning_count": 0,
+  "desktop_viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "mobile_viewport": {
+    "width": 390,
+    "height": 844,
+    "document_scroll_width": 375,
+    "horizontal_overflow": false
+  },
+  "checks": [
+    {
+      "check_id": "EMPTY_DATABASE_START",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ONE_CLICK_SYNTHETIC_DEMO_LOAD",
+      "status": "PASS"
+    },
+    {
+      "check_id": "TEN_SOURCE_FILES_VISIBLE",
+      "status": "PASS"
+    },
+    {
+      "check_id": "ELEVEN_OF_ELEVEN_CALCULATIONS_COMPLETE",
+      "status": "PASS"
+    },
+    {
+      "check_id": "CONTROLLED_REPORT_GENERATION_AND_INLINE_VIEW",
+      "status": "PASS"
+    },
+    {
+      "check_id": "HTML_PDF_DOCX_ZIP_EXPORT_LINKS_VISIBLE",
+      "status": "PASS"
+    },
+    {
+      "check_id": "HUMAN_CONFIRMATION_PRESERVES_FORMAL_BLOCK",
+      "status": "PASS"
+    },
+    {
+      "check_id": "DESKTOP_AND_MOBILE_LAYOUT",
+      "status": "PASS"
+    },
+    {
+      "check_id": "BROWSER_CONSOLE_ERRORS",
+      "status": "PASS",
+      "actual": 0
+    }
+  ],
+  "screenshots": [
+    "output/playwright/stage7-demo-report-desktop.png",
+    "output/playwright/stage7-demo-confirmed-mobile.png"
+  ],
+  "notes": [
+    "人工确认只确认受控测试报告内容，页面与接口均继续显示正式报告许可未开放。",
+    "移动端DOM检查确认页面无水平溢出；项目进度、合成数据警示、11/11计算状态与报告入口均可见。"
+  ]
+}

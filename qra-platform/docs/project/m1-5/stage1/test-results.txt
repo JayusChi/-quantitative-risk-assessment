@@ -1,0 +1,11 @@
+M1.5 Stage 1 verification summary
+Date: 2026-09-01
+Status: S1_FULL_CONTRACT_MAPPED
+
+Stage 1 artifact freshness: PASS
+Stage 1 contract tests: Ran 5 tests, OK
+Ruff: All checks passed
+Architecture: ARCHITECTURE CHECK PASSED
+Full regression: Ran 259 tests in 119.514s, OK (skipped=1)
+Workbook formula scan: PASS (9 formulas, 0 known error tokens)
+Workbook render review: PASS (Summary and Field Matrix)

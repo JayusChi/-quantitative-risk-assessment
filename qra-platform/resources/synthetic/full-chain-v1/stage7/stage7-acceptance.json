@@ -1,0 +1,355 @@
+{
+  "calculation_run_id": "RUN-20260902T042832Z-cff4f2b4",
+  "check_count": 19,
+  "checked_at": "2026-09-01T00:00:00+08:00",
+  "checks": [
+    {
+      "check_id": "S7-A-RAW_TO_GATE",
+      "detail": {
+        "candidate_count": 256,
+        "evidence_count": 256,
+        "gate": "PASS",
+        "source_count": 10
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-A-SNAPSHOT_EQUALS_GOLDEN",
+      "detail": {
+        "difference_count": 0,
+        "differences": [],
+        "equal": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-A-11_OF_11_EQUALS_NUMERIC_BASELINE",
+      "detail": {
+        "completed": 11,
+        "result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-A-CONTROLLED_REPORT_FORMAL_GATE_CLOSED",
+      "detail": {
+        "report_id": "REPORT-62ab9600-53f7-492e-99f6-794c6fcd41b1",
+        "status": "CONFIRMED_TEST_ONLY"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-B-CONFLICT_REQUIRES_HUMAN_DECISION",
+      "detail": {
+        "blocking_issue_count": 0,
+        "business_replay_hash": "768a6fa30778b3cf44a714ed0bea54b98506bb0d1311a839d22aabb8302d9b48",
+        "name": "S3_RAW_TO_SNAPSHOT_PASS",
+        "status": "BLOCKED",
+        "unresolved_review_count": 1
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-B-DECISION_HASH_AND_11_OF_11",
+      "detail": {
+        "completed": 11,
+        "decision_set_sha256": "0f7569e028fcc74cbba248d7c97d46c32fcaa73eba43501a9ffec70c474c22d1"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-B-REPORT_RECORDS_REVIEW_DECISION",
+      "detail": {
+        "evidence_id": "EVIDENCE.REVIEW_DECISION_SET",
+        "label": "人工复核决定集",
+        "sha256": "0f7569e028fcc74cbba248d7c97d46c32fcaa73eba43501a9ffec70c474c22d1",
+        "source": "audit-event:12"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-C-MISSING_NOT_ZERO_AND_INCOMPLETE_SCREENING",
+      "detail": {
+        "blocked_nodes": [
+          "adaptive_evidence_qra",
+          "data_inventory",
+          "human_qra",
+          "indicator_coverage"
+        ],
+        "fill_data_count": 1
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-D-LOW_QUALITY_SCAN_REVIEW_AND_ISOLATION",
+      "detail": {
+        "low_confidence_fields": 42,
+        "unaffected_parsed_documents": 9
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-E-OVERSIZED_IMAGE_BOUNDED_AND_REVERSIBLE",
+      "detail": {
+        "last_original_bbox": [
+          0,
+          11200,
+          1800,
+          12000
+        ],
+        "tile_count": 8
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-F-PROMPT_INJECTION_CONTAINED_AND_AUDITED",
+      "detail": {
+        "candidate_count_from_injection": 0,
+        "contract_changed": false,
+        "detected_evidence_ids": [
+          "EVID-6abf6125732af58109320227"
+        ],
+        "document_commands_trusted": false,
+        "gate_changed": false,
+        "workflow_changed": false
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-G-MODEL_UNAVAILABLE_PRESERVES_DETERMINISTIC_WORK",
+      "detail": {
+        "audit_records": [],
+        "external_call_made": false,
+        "external_sharing_allowed": false,
+        "human_review_route_available": true,
+        "mode": "online",
+        "parsed_artifacts_preserved": true,
+        "provider_id": "aliyun-bailian-openai",
+        "status": "MODEL_UNAVAILABLE_PRESERVED_AND_ROUTED_TO_HUMAN"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-H-SERVICE_RESTART_RECOVERS_WITHOUT_MUTATION",
+      "detail": {
+        "recovered": true,
+        "report_resources_unchanged": true,
+        "result_unchanged": true,
+        "snapshot_unchanged": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-BACKUP-RESTORE_VERIFIED",
+      "detail": {
+        "backup": {
+          "byte_count": 7237632,
+          "counts": {
+            "audit_event": 24,
+            "business_project": 2,
+            "calculation_run": 3,
+            "controlled_report": 2,
+            "input_snapshot": 2
+          },
+          "operation": "BACKUP_CREATED",
+          "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage7-end-to-end-20260901\\backup\\stage7-demo.sqlite3",
+          "quick_check": "ok",
+          "schema_versions": [
+            "2.3.0"
+          ],
+          "sha256": "eac5d39b36bc4a479cd02873b6d42a3cf46ff70367a25e96a2c564ffc17e3ac4"
+        },
+        "restore": {
+          "byte_count": 7237632,
+          "counts": {
+            "audit_event": 24,
+            "business_project": 2,
+            "calculation_run": 3,
+            "controlled_report": 2,
+            "input_snapshot": 2
+          },
+          "operation": "BACKUP_RESTORED",
+          "path": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage7-end-to-end-20260901\\restored\\stage7-demo.sqlite3",
+          "quick_check": "ok",
+          "schema_versions": [
+            "2.3.0"
+          ],
+          "sha256": "eac5d39b36bc4a479cd02873b6d42a3cf46ff70367a25e96a2c564ffc17e3ac4"
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-I-REPORT_TAMPER_REJECTED_AND_AUDITED",
+      "detail": {
+        "audit_event_id": 26,
+        "stored_status": "DRAFT",
+        "validation_status": "FAIL"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-BIDIRECTIONAL-TRACEABILITY",
+      "detail": {
+        "ledger_sha256": "65f6a52616a11d4c6fa099aecbea0b8900221e0ae52ba9f61c535f4c0bc7272f"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-FRESH-RELEASE-DIRECTORY-STARTS-WITHOUT-JSON-OR-DB-EDIT",
+      "detail": {
+        "release": {
+          "file_count": 395,
+          "formal_report_allowed": false,
+          "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\releases\\QRA全合成端到端演示版_v1_acceptance",
+          "release_name": "QRA全合成端到端演示版_v1",
+          "release_version": "1.0.0",
+          "status": "PASS",
+          "zip_path": "D:\\风险定量评估\\qra-platform\\workspace\\releases\\QRA全合成端到端演示版_v1_acceptance.zip",
+          "zip_sha256": "df04ddc282db3b63d77cf0174c9847c314930a6d1769c38629e479a3d9a93bb3"
+        },
+        "smoke": {
+          "database": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage7-end-to-end-20260901\\fresh-release-runtime\\state\\qra.sqlite3",
+          "prepared": {
+            "completed_node_count": 11,
+            "formal_report_allowed": false,
+            "project_id": "PROJECT-d818e80c-afe0-4ce2-a83e-d4a5426eb60d",
+            "project_status": "REPORT_READY",
+            "project_url": "/projects/PROJECT-d818e80c-afe0-4ce2-a83e-d4a5426eb60d/",
+            "release_name": "QRA全合成端到端演示版_v1",
+            "release_version": "1.0.0",
+            "report_id": "REPORT-bb26b06a-aebd-4981-b213-87784b905b32",
+            "report_status": "DRAFT",
+            "report_url": "/reports/REPORT-bb26b06a-aebd-4981-b213-87784b905b32/",
+            "result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+            "run_id": "RUN-20260902T043046Z-1569b7e5",
+            "snapshot_id": "SNAP-fbba3db0-9a9f-4cd9-91ba-8200247a6e2d",
+            "snapshot_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+            "status": "PASS"
+          },
+          "project_page_ok": true,
+          "report_page_ok": true
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-REAL-BROWSER-ORDINARY-USER-FLOW",
+      "detail": {
+        "application_url": "http://127.0.0.1:8777/projects/",
+        "checked_at": "2026-09-01T18:08:02+08:00",
+        "checks": [
+          {
+            "check_id": "EMPTY_DATABASE_START",
+            "status": "PASS"
+          },
+          {
+            "check_id": "ONE_CLICK_SYNTHETIC_DEMO_LOAD",
+            "status": "PASS"
+          },
+          {
+            "check_id": "TEN_SOURCE_FILES_VISIBLE",
+            "status": "PASS"
+          },
+          {
+            "check_id": "ELEVEN_OF_ELEVEN_CALCULATIONS_COMPLETE",
+            "status": "PASS"
+          },
+          {
+            "check_id": "CONTROLLED_REPORT_GENERATION_AND_INLINE_VIEW",
+            "status": "PASS"
+          },
+          {
+            "check_id": "HTML_PDF_DOCX_ZIP_EXPORT_LINKS_VISIBLE",
+            "status": "PASS"
+          },
+          {
+            "check_id": "HUMAN_CONFIRMATION_PRESERVES_FORMAL_BLOCK",
+            "status": "PASS"
+          },
+          {
+            "check_id": "DESKTOP_AND_MOBILE_LAYOUT",
+            "status": "PASS"
+          },
+          {
+            "actual": 0,
+            "check_id": "BROWSER_CONSOLE_ERRORS",
+            "status": "PASS"
+          }
+        ],
+        "completed_node_count": 11,
+        "console_error_count": 0,
+        "console_warning_count": 0,
+        "desktop_viewport": {
+          "height": 900,
+          "width": 1440
+        },
+        "formal_report_allowed": false,
+        "fresh_runtime": "output/playwright/stage7-runtime",
+        "mobile_viewport": {
+          "document_scroll_width": 375,
+          "height": 844,
+          "horizontal_overflow": false,
+          "width": 390
+        },
+        "notes": [
+          "人工确认只确认受控测试报告内容，页面与接口均继续显示正式报告许可未开放。",
+          "移动端DOM检查确认页面无水平溢出；项目进度、合成数据警示、11/11计算状态与报告入口均可见。"
+        ],
+        "project_id": "PROJECT-af0de1b4-992e-4e75-ae2d-c0f69827f352",
+        "report_id": "REPORT-895622ca-cc9f-4a2f-ba90-99d35d4b6cff",
+        "report_status": "CONFIRMED_TEST_ONLY",
+        "run_id": "RUN-20260901T100434Z-7d1c25b2",
+        "schema_version": "qra-stage7-browser-acceptance/1.0.0",
+        "screenshots": [
+          "output/playwright/stage7-demo-report-desktop.png",
+          "output/playwright/stage7-demo-confirmed-mobile.png"
+        ],
+        "snapshot_id": "SNAP-2b270203-df60-4bbb-8085-4c14144c5a22",
+        "source_count": 10,
+        "status": "PASS",
+        "tool": {
+          "browser": "Chromium",
+          "headed": true,
+          "name": "Playwright CLI",
+          "version": "0.1.18"
+        },
+        "total_node_count": 11
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S7-SYNTHETIC-AND-FORMAL-BOUNDARY",
+      "detail": {
+        "formal_report_allowed": false
+      },
+      "status": "PASS"
+    }
+  ],
+  "completed_node_count": 11,
+  "controlled_report_id": "REPORT-62ab9600-53f7-492e-99f6-794c6fcd41b1",
+  "expected_numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+  "formal_report_allowed": false,
+  "gate": "M1_5_FULL_SYNTHETIC_END_TO_END_ACCEPTED",
+  "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+  "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage7-end-to-end-20260901",
+  "passed_count": 19,
+  "project_id": "PROJECT-14cbb710-fbc9-4cf0-b35c-ccea9ab6333a",
+  "release_acceptance_root": "D:\\风险定量评估\\qra-platform\\workspace\\releases\\QRA全合成端到端演示版_v1_acceptance",
+  "scenario_ids": [
+    "A_D00_CLEAN",
+    "B_D10_CONFLICT",
+    "C_D20_MISSING",
+    "D_D30_LOW_QUALITY_SCAN",
+    "E_D40_OVERSIZED_IMAGE",
+    "F_D50_PROMPT_INJECTION",
+    "G_MODEL_UNAVAILABLE",
+    "H_SERVICE_RESTART",
+    "I_REPORT_TAMPER"
+  ],
+  "schema_version": "qra-stage7-acceptance/1.0.0",
+  "snapshot_id": "SNAP-2db2247c-4204-4c49-89e4-49d2077bcb79",
+  "stage": 7,
+  "status": "PASS",
+  "traceability_ledger_sha256": "65f6a52616a11d4c6fa099aecbea0b8900221e0ae52ba9f61c535f4c0bc7272f"
+}

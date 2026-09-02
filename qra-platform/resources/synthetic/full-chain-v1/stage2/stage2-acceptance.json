@@ -1,0 +1,38 @@
+{
+  "business_content_sha256": "47892dc33573356e85bd195d74bbc841bff2d2ebd4fc568edab3eb4f5f6c85d6",
+  "checks": {
+    "all_critical_project_facts_have_evidence": true,
+    "all_evidence_values_match_ground_truth": true,
+    "all_model_parameters_in_versioned_packs": true,
+    "all_source_files_marked_synthetic": true,
+    "business_model_has_stable_hash": true,
+    "d10_contains_verifiable_conflict": true,
+    "d20_removes_critical_population_document": true,
+    "d30_safe_intake": true,
+    "d40_safe_intake": true,
+    "d50_has_zero_ground_truth_bindings": true,
+    "d60_duplicate_relation_explicit": true,
+    "d70_unit_anomalies_explicit": true,
+    "expected_result_has_all_nodes": true,
+    "expected_result_hash_matches_full_contract_baseline": true,
+    "expected_snapshot_generated": true,
+    "s00_d00_all_planned_files_generated": true
+  },
+  "counts": {
+    "critical_project_fact_count": 25,
+    "evidence_entry_count": 256,
+    "expected_node_count": 11,
+    "model_parameter_count": 68,
+    "parameter_pack_count": 6,
+    "project_fact_contract_count": 260,
+    "source_document_count": 10,
+    "variant_count": 7,
+    "workbook_count": 5
+  },
+  "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+  "passed": true,
+  "schema_version": "1.0.0",
+  "source_pack_archive": "generated/S00_BASELINE_D00_CLEAN.zip",
+  "stage_id": "S2",
+  "status": "S2_SYNTHETIC_SOURCE_PACK_ACCEPTED"
+}

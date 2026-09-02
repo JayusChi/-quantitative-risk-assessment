@@ -15,7 +15,6 @@ from typing import Any
 
 from qra_engine.dynamic import dynamic_node_catalog
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = PROJECT_ROOT / "resources" / "contracts" / "part1" / "v1"
 INDICATOR_CATALOG = (
@@ -44,8 +43,7 @@ QUALITY_STATUSES = [
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False)
-        + "\n",
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + "\n",
         encoding="utf-8",
     )
 
@@ -219,13 +217,43 @@ CURATED_FIELDS: tuple[tuple[str, str, str, str | None], ...] = (
     ("population_cells.*.outdoor_fraction_day", "昼间室外比例", "number", None),
     ("population_cells.*.outdoor_fraction_night", "夜间室外比例", "number", None),
     ("ignition_model", "点火模型", "object", None),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs", "环境绝压", "number", "Pa_abs"),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol", "摩尔质量", "number", "kg/mol"),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+        "环境绝压",
+        "number",
+        "Pa_abs",
+    ),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+        "摩尔质量",
+        "number",
+        "kg/mol",
+    ),
     ("standard_formula_test_parameters.aqt3046_physical_chain.gamma", "绝热指数", "number", None),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient", "气体泄放系数", "number", None),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm", "管壁绝对粗糙度", "number", "mm"),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg", "燃烧热", "number", "J/kg"),
-    ("standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction", "辐射分数", "number", None),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+        "气体泄放系数",
+        "number",
+        None,
+    ),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+        "管壁绝对粗糙度",
+        "number",
+        "mm",
+    ),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+        "燃烧热",
+        "number",
+        "J/kg",
+    ),
+    (
+        "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+        "辐射分数",
+        "number",
+        None,
+    ),
     ("standard_formula_test_parameters.gbt34346_annex_c.segments", "附录C逐段参数", "object", None),
     ("raw_data_categories", "原始资料类别", "object", None),
     ("data_category_manifest", "资料类别清单", "object", None),
@@ -288,9 +316,7 @@ def build_field_dictionary() -> tuple[dict[str, Any], dict[str, Any]]:
         existing = fields_by_path.get(path)
         nodes = required_by_path.get(path, [])
         if existing is not None:
-            existing["required_by_nodes"] = sorted(
-                set(existing["required_by_nodes"]) | set(nodes)
-            )
+            existing["required_by_nodes"] = sorted(set(existing["required_by_nodes"]) | set(nodes))
             if nodes:
                 existing["required_level"] = "NODE_REQUIRED"
             continue
@@ -312,7 +338,9 @@ def build_field_dictionary() -> tuple[dict[str, Any], dict[str, Any]]:
             fields_by_path[path] = make_field(
                 path=path,
                 name_zh=path,
-                value_type="object" if not path.rsplit(".", 1)[-1].endswith(("_km", "_m", "_k")) else "number",
+                value_type="object"
+                if not path.rsplit(".", 1)[-1].endswith(("_km", "_m", "_k"))
+                else "number",
                 required_by_nodes=nodes,
             )
 
@@ -348,9 +376,7 @@ def build_field_dictionary() -> tuple[dict[str, Any], dict[str, Any]]:
             "segment_correction_factor",
             "engineering_indicators.catalog_id",
         ],
-        "gbt34346_annex_c": [
-            "standard_formula_test_parameters.gbt34346_annex_c.segments"
-        ],
+        "gbt34346_annex_c": ["standard_formula_test_parameters.gbt34346_annex_c.segments"],
         "human_qra": [
             "weather_joint_probability.*.probability",
             "population_cells.*.population_day",
@@ -464,8 +490,18 @@ def qra_input_schema() -> dict[str, Any]:
             "start_km": {"type": "number", "minimum": 0},
             "end_km": {"type": "number", "exclusiveMinimum": 0},
             "length_km": {"type": "number", "exclusiveMinimum": 0},
-            "start_xy_m": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "items": False, "minItems": 2},
-            "end_xy_m": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "items": False, "minItems": 2},
+            "start_xy_m": {
+                "type": "array",
+                "prefixItems": [{"type": "number"}, {"type": "number"}],
+                "items": False,
+                "minItems": 2,
+            },
+            "end_xy_m": {
+                "type": "array",
+                "prefixItems": [{"type": "number"}, {"type": "number"}],
+                "items": False,
+                "minItems": 2,
+            },
         }
     )
     optional_sections = (
@@ -479,6 +515,8 @@ def qra_input_schema() -> dict[str, Any]:
         "ignition_model",
         "standard_formula_test_parameters",
         "raw_data_categories",
+        "risk_matrix_criteria",
+        "system_parameters",
         "data_category_manifest",
         "damage_model",
         "mock_adapter_output",
@@ -532,9 +570,18 @@ def candidate_schema() -> dict[str, Any]:
         "$id": "https://qra.local/contracts/part1/v1/candidate-field.schema.json",
         "type": "object",
         "required": [
-            "candidate_id", "field_id", "entity", "raw_value", "parsed_value",
-            "normalized_value", "confidence", "extraction_method", "evidence_ids",
-            "quality_status", "review_status", "model_or_rule_versions",
+            "candidate_id",
+            "field_id",
+            "entity",
+            "raw_value",
+            "parsed_value",
+            "normalized_value",
+            "confidence",
+            "extraction_method",
+            "evidence_ids",
+            "quality_status",
+            "review_status",
+            "model_or_rule_versions",
         ],
         "properties": {
             "candidate_id": {"type": "string", "pattern": "^CAND-[A-Za-z0-9._-]+$"},
@@ -545,19 +592,41 @@ def candidate_schema() -> dict[str, Any]:
                 "properties": {"entity_type": {"type": "string"}, "entity_key": {"type": "string"}},
                 "additionalProperties": False,
             },
-            "raw_value": {}, "parsed_value": {}, "normalized_value": {},
+            "raw_value": {},
+            "parsed_value": {},
+            "normalized_value": {},
             "source_unit": {"type": ["string", "null"]},
             "canonical_unit": {"type": ["string", "null"]},
             "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-            "extraction_method": {"enum": ["STRUCTURED_TABLE", "TEXT_RULE", "OCR", "MODEL_EXTRACTION", "MANUAL", "SYSTEM_DERIVED"]},
-            "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^EVD-"}, "uniqueItems": True},
-            "non_document_source": {"enum": ["APPROVAL_REQUIRED", "SYSTEM_DERIVED", "MANUAL_ALLOWED"]},
+            "extraction_method": {
+                "enum": [
+                    "STRUCTURED_TABLE",
+                    "TEXT_RULE",
+                    "OCR",
+                    "MODEL_EXTRACTION",
+                    "MANUAL",
+                    "SYSTEM_DERIVED",
+                ]
+            },
+            "evidence_ids": {
+                "type": "array",
+                "items": {"type": "string", "pattern": "^EVD-"},
+                "uniqueItems": True,
+            },
+            "non_document_source": {
+                "enum": ["APPROVAL_REQUIRED", "SYSTEM_DERIVED", "MANUAL_ALLOWED"]
+            },
             "derivation": {
                 "type": "object",
                 "required": ["rule_id", "rule_version", "input_candidate_ids"],
                 "properties": {
-                    "rule_id": {"type": "string"}, "rule_version": {"type": "string"},
-                    "input_candidate_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^CAND-"}},
+                    "rule_id": {"type": "string"},
+                    "rule_version": {"type": "string"},
+                    "input_candidate_ids": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "string", "pattern": "^CAND-"},
+                    },
                 },
                 "additionalProperties": False,
             },
@@ -566,8 +635,22 @@ def candidate_schema() -> dict[str, Any]:
             "model_or_rule_versions": {"type": "object", "minProperties": 1},
         },
         "allOf": [
-            {"anyOf": [{"properties": {"evidence_ids": {"minItems": 1}}}, {"required": ["non_document_source"]}]},
-            {"if": {"properties": {"extraction_method": {"const": "SYSTEM_DERIVED"}}, "required": ["extraction_method"]}, "then": {"required": ["derivation", "non_document_source"], "properties": {"non_document_source": {"const": "SYSTEM_DERIVED"}}}},
+            {
+                "anyOf": [
+                    {"properties": {"evidence_ids": {"minItems": 1}}},
+                    {"required": ["non_document_source"]},
+                ]
+            },
+            {
+                "if": {
+                    "properties": {"extraction_method": {"const": "SYSTEM_DERIVED"}},
+                    "required": ["extraction_method"],
+                },
+                "then": {
+                    "required": ["derivation", "non_document_source"],
+                    "properties": {"non_document_source": {"const": "SYSTEM_DERIVED"}},
+                },
+            },
         ],
         "additionalProperties": False,
     }
@@ -576,12 +659,34 @@ def candidate_schema() -> dict[str, Any]:
 def evidence_schema() -> dict[str, Any]:
     location_variants = []
     specs = {
-        "TABLE": ({"file_id", "sheet_name", "row", "column", "cell_text", "coordinate_system"}, {"row": {"type": "integer", "minimum": 1}, "column": {"type": "integer", "minimum": 1}}),
-        "PDF": ({"file_id", "page", "bbox", "page_size", "coordinate_system"}, {"page": {"type": "integer", "minimum": 1}, "bbox": {"$ref": "#/$defs/box"}, "page_size": {"$ref": "#/$defs/size"}}),
-        "DOCX": ({"file_id", "paragraph_index", "ooxml_part", "coordinate_system"}, {"paragraph_index": {"type": "integer", "minimum": 0}}),
-        "IMAGE": ({"file_id", "bbox", "image_size", "coordinate_system"}, {"bbox": {"$ref": "#/$defs/box"}, "image_size": {"$ref": "#/$defs/size"}}),
-        "MANUAL": ({"operator", "entered_at", "reason", "coordinate_system"}, {"entered_at": {"type": "string", "format": "date-time"}}),
-        "PARAMETER_LIBRARY": ({"library_id", "version", "approval_ref", "applicability", "coordinate_system"}, {}),
+        "TABLE": (
+            {"file_id", "sheet_name", "row", "column", "cell_text", "coordinate_system"},
+            {"row": {"type": "integer", "minimum": 1}, "column": {"type": "integer", "minimum": 1}},
+        ),
+        "PDF": (
+            {"file_id", "page", "bbox", "page_size", "coordinate_system"},
+            {
+                "page": {"type": "integer", "minimum": 1},
+                "bbox": {"$ref": "#/$defs/box"},
+                "page_size": {"$ref": "#/$defs/size"},
+            },
+        ),
+        "DOCX": (
+            {"file_id", "paragraph_index", "ooxml_part", "coordinate_system"},
+            {"paragraph_index": {"type": "integer", "minimum": 0}},
+        ),
+        "IMAGE": (
+            {"file_id", "bbox", "image_size", "coordinate_system"},
+            {"bbox": {"$ref": "#/$defs/box"}, "image_size": {"$ref": "#/$defs/size"}},
+        ),
+        "MANUAL": (
+            {"operator", "entered_at", "reason", "coordinate_system"},
+            {"entered_at": {"type": "string", "format": "date-time"}},
+        ),
+        "PARAMETER_LIBRARY": (
+            {"library_id", "version", "approval_ref", "applicability", "coordinate_system"},
+            {},
+        ),
     }
     for kind, (required, overrides) in specs.items():
         props = {key: {"type": "string"} for key in required}
@@ -595,13 +700,38 @@ def evidence_schema() -> dict[str, Any]:
                     "column": {"type": "integer", "minimum": 1},
                 }
             )
-        location_variants.append({"type": "object", "required": ["kind", *sorted(required)], "properties": props, "additionalProperties": False})
+        location_variants.append(
+            {
+                "type": "object",
+                "required": ["kind", *sorted(required)],
+                "properties": props,
+                "additionalProperties": False,
+            }
+        )
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://qra.local/contracts/part1/v1/evidence.schema.json",
         "$defs": {
-            "box": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}, {"type": "number"}], "items": False, "minItems": 4},
-            "size": {"type": "array", "prefixItems": [{"type": "number", "exclusiveMinimum": 0}, {"type": "number", "exclusiveMinimum": 0}], "items": False, "minItems": 2},
+            "box": {
+                "type": "array",
+                "prefixItems": [
+                    {"type": "number"},
+                    {"type": "number"},
+                    {"type": "number"},
+                    {"type": "number"},
+                ],
+                "items": False,
+                "minItems": 4,
+            },
+            "size": {
+                "type": "array",
+                "prefixItems": [
+                    {"type": "number", "exclusiveMinimum": 0},
+                    {"type": "number", "exclusiveMinimum": 0},
+                ],
+                "items": False,
+                "minItems": 2,
+            },
         },
         "type": "object",
         "required": ["evidence_id", "source_type", "location"],
@@ -624,9 +754,13 @@ def quality_issue_schema() -> dict[str, Any]:
         "required": ["issue_id", "code", "quality_status", "blocking", "target", "message"],
         "properties": {
             "issue_id": {"type": "string", "pattern": "^ISS-"},
-            "code": {"type": "string", "pattern": "^(INTAKE|PARSE|EXTRACT|NORMALIZE|FUSION|CONTRACT|GATE|DELIVERY)\\."},
+            "code": {
+                "type": "string",
+                "pattern": "^(INTAKE|PARSE|EXTRACT|NORMALIZE|FUSION|CONTRACT|GATE|DELIVERY)\\.",
+            },
             "quality_status": {"enum": QUALITY_STATUSES},
-            "blocking": {"type": "boolean"}, "target": {"type": "string"},
+            "blocking": {"type": "boolean"},
+            "target": {"type": "string"},
             "message": {"type": "string", "minLength": 1},
             "candidate_ids": {"type": "array", "items": {"type": "string"}},
             "evidence_ids": {"type": "array", "items": {"type": "string"}},
@@ -640,15 +774,44 @@ def review_schema() -> dict[str, Any]:
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://qra.local/contracts/part1/v1/review-decision.schema.json",
         "type": "object",
-        "required": ["review_id", "action", "target", "before_value", "after_value", "reviewer", "reviewed_at", "reason", "candidate_ids", "evidence_ids"],
+        "required": [
+            "review_id",
+            "action",
+            "target",
+            "before_value",
+            "after_value",
+            "reviewer",
+            "reviewed_at",
+            "reason",
+            "candidate_ids",
+            "evidence_ids",
+        ],
         "properties": {
             "review_id": {"type": "string", "pattern": "^REV-"},
-            "action": {"enum": ["ACCEPT_CANDIDATE", "REPLACE_VALUE", "REJECT_FIELD", "MARK_NOT_APPLICABLE", "REQUEST_REEXTRACTION"]},
-            "target": {"type": "string", "minLength": 1}, "before_value": {}, "after_value": {},
+            "action": {
+                "enum": [
+                    "ACCEPT_CANDIDATE",
+                    "REPLACE_VALUE",
+                    "REJECT_FIELD",
+                    "MARK_NOT_APPLICABLE",
+                    "REQUEST_REEXTRACTION",
+                ]
+            },
+            "target": {"type": "string", "minLength": 1},
+            "before_value": {},
+            "after_value": {},
             "reviewer": {"type": "string", "minLength": 1},
-            "reviewed_at": {"type": "string", "format": "date-time", "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$"},
+            "reviewed_at": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "(Z|[+-][0-9]{2}:[0-9]{2})$",
+            },
             "reason": {"type": "string", "minLength": 1},
-            "candidate_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^CAND-"}},
+            "candidate_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {"type": "string", "pattern": "^CAND-"},
+            },
             "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^EVD-"}},
         },
         "additionalProperties": False,
@@ -660,10 +823,21 @@ def snapshot_schema() -> dict[str, Any]:
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://qra.local/contracts/part1/v1/snapshot-manifest.schema.json",
         "type": "object",
-        "required": ["snapshot_id", "contract_id", "contract_version", "contract_sha256", "payload_sha256", "created_at", "candidate_ids", "review_ids", "unresolved_issue_ids"],
+        "required": [
+            "snapshot_id",
+            "contract_id",
+            "contract_version",
+            "contract_sha256",
+            "payload_sha256",
+            "created_at",
+            "candidate_ids",
+            "review_ids",
+            "unresolved_issue_ids",
+        ],
         "properties": {
             "snapshot_id": {"type": "string", "pattern": "^SNAP-"},
-            "contract_id": {"const": CONTRACT_ID}, "contract_version": {"const": VERSION},
+            "contract_id": {"const": CONTRACT_ID},
+            "contract_version": {"const": VERSION},
             "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
             "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
             "created_at": {"type": "string", "format": "date-time"},
@@ -677,51 +851,119 @@ def snapshot_schema() -> dict[str, Any]:
 
 def registries() -> dict[str, Any]:
     units = [
-        ("Pa", "pressure_absolute_or_gauge_declared_by_field", "Pa", 1), ("Pa_abs", "pressure_absolute", "Pa_abs", 1),
-        ("kPa", "pressure_absolute_or_gauge_declared_by_field", "Pa", 1000), ("MPa", "pressure_absolute_or_gauge_declared_by_field", "MPa", 1),
-        ("bar", "pressure_absolute_or_gauge_declared_by_field", "Pa", 100000), ("mm", "length", "mm", 1),
-        ("cm", "length", "m", 0.01), ("m", "length", "m", 1), ("km", "length", "km", 1),
-        ("°C", "temperature", "K", 1), ("K", "temperature", "K", 1), ("m/s", "speed", "m/s", 1),
-        ("km/h", "speed", "m/s", 1 / 3.6), ("V", "electric_potential", "V", 1), ("mV", "electric_potential", "V", 0.001),
-        ("Ω·m", "resistivity", "Ω·m", 1), ("ohm*m", "resistivity", "Ω·m", 1), ("per_km_year", "frequency", "per_km_year", 1),
-        ("1/(km*year)", "frequency", "per_km_year", 1), ("fraction", "ratio", "fraction", 1), ("%", "ratio", "fraction", 0.01),
+        ("Pa", "pressure_absolute_or_gauge_declared_by_field", "Pa", 1),
+        ("Pa_abs", "pressure_absolute", "Pa_abs", 1),
+        ("kPa", "pressure_absolute_or_gauge_declared_by_field", "Pa", 1000),
+        ("MPa", "pressure_absolute_or_gauge_declared_by_field", "MPa", 1),
+        ("bar", "pressure_absolute_or_gauge_declared_by_field", "Pa", 100000),
+        ("mm", "length", "mm", 1),
+        ("cm", "length", "m", 0.01),
+        ("m", "length", "m", 1),
+        ("km", "length", "km", 1),
+        ("°C", "temperature", "K", 1),
+        ("K", "temperature", "K", 1),
+        ("m/s", "speed", "m/s", 1),
+        ("km/h", "speed", "m/s", 1 / 3.6),
+        ("V", "electric_potential", "V", 1),
+        ("mV", "electric_potential", "V", 0.001),
+        ("Ω·m", "resistivity", "Ω·m", 1),
+        ("ohm*m", "resistivity", "Ω·m", 1),
+        ("per_km_year", "frequency", "per_km_year", 1),
+        ("1/(km*year)", "frequency", "per_km_year", 1),
+        ("fraction", "ratio", "fraction", 1),
+        ("%", "ratio", "fraction", 0.01),
     ]
-    for symbol in ("1/km", "1/s", "1/year", "count", "day", "deg", "g", "J/kg", "kg/mol", "m/year", "m2", "m3", "m3/d", "mg/kg", "mg/L", "mg/m3", "mm/year", "MPa√m", "person", "s", "year"):
+    for symbol in (
+        "1/km",
+        "1/s",
+        "1/year",
+        "count",
+        "day",
+        "deg",
+        "g",
+        "J/kg",
+        "kg/mol",
+        "m/year",
+        "m2",
+        "m3",
+        "m3/d",
+        "mg/kg",
+        "mg/L",
+        "mg/m3",
+        "mm/year",
+        "MPa√m",
+        "person",
+        "s",
+        "year",
+    ):
         units.append((symbol, "registered_engineering_quantity", symbol, 1))
     return {
         "unit_registry.json": {
-            "registry_id": "qra.part1-units", "version": VERSION,
+            "registry_id": "qra.part1-units",
+            "version": VERSION,
             "rules": {"pressure_basis_required": True, "ratio_inference_by_value_forbidden": True},
             "units": [
-                {"symbol": symbol, "dimension": dimension, "canonical_unit": canonical, "factor": factor, "offset": 273.15 if symbol == "°C" else 0, "allowed_fields": ["*"], "case_sensitive": True}
+                {
+                    "symbol": symbol,
+                    "dimension": dimension,
+                    "canonical_unit": canonical,
+                    "factor": factor,
+                    "offset": 273.15 if symbol == "°C" else 0,
+                    "allowed_fields": ["*"],
+                    "case_sensitive": True,
+                }
                 for symbol, dimension, canonical, factor in units
             ],
         },
         "term_aliases.json": {
-            "alias_set_id": "qra.part1-terms", "version": VERSION,
+            "alias_set_id": "qra.part1-terms",
+            "version": VERSION,
             "aliases": [
-                {"term": "工作压力", "candidate_field_ids": ["pipeline.operating_pressure_mpa"], "auto_confirm": False},
-                {"term": "运行压力", "candidate_field_ids": ["pipeline.operating_pressure_mpa"], "auto_confirm": False},
-                {"term": "管径", "candidate_field_ids": ["segment.outside_diameter_mm"], "auto_confirm": False},
+                {
+                    "term": "工作压力",
+                    "candidate_field_ids": ["pipeline.operating_pressure_mpa"],
+                    "auto_confirm": False,
+                },
+                {
+                    "term": "运行压力",
+                    "candidate_field_ids": ["pipeline.operating_pressure_mpa"],
+                    "auto_confirm": False,
+                },
+                {
+                    "term": "管径",
+                    "candidate_field_ids": ["segment.outside_diameter_mm"],
+                    "auto_confirm": False,
+                },
                 {"term": "桩号", "normalization_rule": "CHAINAGE_KM_V1", "auto_confirm": False},
             ],
-            "chainage_rule": {"output": "chainage_km", "accepted_examples": {"K12+300": 12.3, "12km+300m": 12.3, "12300m": 12.3}, "ambiguous_is_blocking": True},
+            "chainage_rule": {
+                "output": "chainage_km",
+                "accepted_examples": {"K12+300": 12.3, "12km+300m": 12.3, "12300m": 12.3},
+                "ambiguous_is_blocking": True,
+            },
         },
         "source_rank.json": {
-            "rank_set_id": "qra.part1-source-rank", "version": VERSION,
+            "rank_set_id": "qra.part1-source-rank",
+            "version": VERSION,
             "ranks": [
                 {"source_type": "MANUAL_APPROVAL", "rank": 100, "requires_approval_ref": True},
                 {"source_type": "AS_BUILT_DRAWING", "rank": 90},
                 {"source_type": "DESIGN_DOCUMENT", "rank": 80},
                 {"source_type": "INSPECTION_RECORD", "rank": 75},
                 {"source_type": "OPERATING_RECORD", "rank": 70},
-                {"source_type": "APPROVED_PARAMETER_LIBRARY", "rank": 65, "requires_approval_ref": True},
+                {
+                    "source_type": "APPROVED_PARAMETER_LIBRARY",
+                    "rank": 65,
+                    "requires_approval_ref": True,
+                },
             ],
             "rule": "来源排序只生成建议，不自动解决冲突。",
         },
         "issue_catalog.json": {
-            "catalog_id": "qra.part1-issues", "version": VERSION,
-            "immutable_meanings": True, "quality_statuses": QUALITY_STATUSES,
+            "catalog_id": "qra.part1-issues",
+            "version": VERSION,
+            "immutable_meanings": True,
+            "quality_statuses": QUALITY_STATUSES,
             "codes": [
                 {"code": "INTAKE.FILE_INVALID", "default_status": "INVALID"},
                 {"code": "PARSE.CONTENT_UNREADABLE", "default_status": "INVALID"},
@@ -741,49 +983,171 @@ def registries() -> dict[str, Any]:
 
 def examples(output: Path) -> None:
     minimum = {
-        "metadata": {"case_id": "MIN-SEG-001", "project_name": "最小管段案例", "data_classification": "SYNTHETIC_TEST_ONLY"},
+        "metadata": {
+            "case_id": "MIN-SEG-001",
+            "project_name": "最小管段案例",
+            "data_classification": "SYNTHETIC_TEST_ONLY",
+        },
         "pipeline": {"pipeline_id": "PL-001", "total_length_km": 1.0},
         "segments": [{"segment_id": "SEG-001", "start_km": 0.0, "end_km": 1.0, "length_km": 1.0}],
     }
     write_json(output / "examples" / "minimum-segments.json", minimum)
     shutil.copyfile(FULL_SYNTHETIC, output / "examples" / "full-synthetic.json")
     candidate = {
-        "candidate_id": "CAND-0001", "field_id": "pipeline.operating_pressure_mpa",
+        "candidate_id": "CAND-0001",
+        "field_id": "pipeline.operating_pressure_mpa",
         "entity": {"entity_type": "PIPELINE", "entity_key": "PL-001"},
-        "raw_value": "运行压力 7.8MPa", "parsed_value": 7.8, "normalized_value": 7.8,
-        "source_unit": "MPa", "canonical_unit": "MPa", "confidence": 0.98,
-        "extraction_method": "STRUCTURED_TABLE", "evidence_ids": ["EVD-0001"],
-        "quality_status": "PASS", "review_status": "PENDING", "model_or_rule_versions": {"mapping": "1.0.0"},
+        "raw_value": "运行压力 7.8MPa",
+        "parsed_value": 7.8,
+        "normalized_value": 7.8,
+        "source_unit": "MPa",
+        "canonical_unit": "MPa",
+        "confidence": 0.98,
+        "extraction_method": "STRUCTURED_TABLE",
+        "evidence_ids": ["EVD-0001"],
+        "quality_status": "PASS",
+        "review_status": "PENDING",
+        "model_or_rule_versions": {"mapping": "1.0.0"},
     }
     write_json(output / "examples" / "candidate-fields.json", [candidate])
-    evidence = {"evidence_id": "EVD-0001", "source_type": "TABLE", "location": {"kind": "TABLE", "file_id": "FILE-001", "sheet_name": "运行工况", "row": 3, "column": 5, "cell_text": "7.8MPa", "coordinate_system": "ROW_COLUMN_1_BASED"}, "excerpt": "运行压力 7.8MPa", "checksum_sha256": "0" * 64}
+    evidence = {
+        "evidence_id": "EVD-0001",
+        "source_type": "TABLE",
+        "location": {
+            "kind": "TABLE",
+            "file_id": "FILE-001",
+            "sheet_name": "运行工况",
+            "row": 3,
+            "column": 5,
+            "cell_text": "7.8MPa",
+            "coordinate_system": "ROW_COLUMN_1_BASED",
+        },
+        "excerpt": "运行压力 7.8MPa",
+        "checksum_sha256": "0" * 64,
+    }
     write_json(output / "examples" / "evidence.json", [evidence])
-    review = {"review_id": "REV-0001", "action": "ACCEPT_CANDIDATE", "target": "pipeline.operating_pressure_mpa", "before_value": None, "after_value": 7.8, "reviewer": "reviewer@example", "reviewed_at": "2026-08-26T10:00:00+08:00", "reason": "与批准运行记录一致", "candidate_ids": ["CAND-0001"], "evidence_ids": ["EVD-0001"]}
+    review = {
+        "review_id": "REV-0001",
+        "action": "ACCEPT_CANDIDATE",
+        "target": "pipeline.operating_pressure_mpa",
+        "before_value": None,
+        "after_value": 7.8,
+        "reviewer": "reviewer@example",
+        "reviewed_at": "2026-08-26T10:00:00+08:00",
+        "reason": "与批准运行记录一致",
+        "candidate_ids": ["CAND-0001"],
+        "evidence_ids": ["EVD-0001"],
+    }
     write_json(output / "examples" / "review-decisions.json", [review])
-    issue = {"issue_id": "ISS-0001", "code": "EXTRACT.LOW_CONFIDENCE", "quality_status": "LOW_CONFIDENCE", "blocking": True, "target": "pipeline.operating_pressure_mpa", "message": "置信度低于阈值", "candidate_ids": ["CAND-0001"], "evidence_ids": ["EVD-0001"]}
+    issue = {
+        "issue_id": "ISS-0001",
+        "code": "EXTRACT.LOW_CONFIDENCE",
+        "quality_status": "LOW_CONFIDENCE",
+        "blocking": True,
+        "target": "pipeline.operating_pressure_mpa",
+        "message": "置信度低于阈值",
+        "candidate_ids": ["CAND-0001"],
+        "evidence_ids": ["EVD-0001"],
+    }
     write_json(output / "examples" / "quality-issues.json", [issue])
-    snapshot = {"snapshot_id": "SNAP-0001", "contract_id": CONTRACT_ID, "contract_version": VERSION, "contract_sha256": "0" * 64, "payload_sha256": "1" * 64, "created_at": "2026-08-26T10:00:00+08:00", "candidate_ids": ["CAND-0001"], "review_ids": ["REV-0001"], "unresolved_issue_ids": []}
+    snapshot = {
+        "snapshot_id": "SNAP-0001",
+        "contract_id": CONTRACT_ID,
+        "contract_version": VERSION,
+        "contract_sha256": "0" * 64,
+        "payload_sha256": "1" * 64,
+        "created_at": "2026-08-26T10:00:00+08:00",
+        "candidate_ids": ["CAND-0001"],
+        "review_ids": ["REV-0001"],
+        "unresolved_issue_ids": [],
+    }
     write_json(output / "examples" / "snapshot-manifest.json", snapshot)
 
 
 def invalid_fixtures(output: Path) -> None:
     invalid = PROJECT_ROOT / "tests" / "fixtures" / "contracts_v1" / "invalid"
-    minimum = json.loads((output / "examples" / "minimum-segments.json").read_text(encoding="utf-8"))
-    write_json(invalid / "qra-missing-segments.json", {"metadata": minimum["metadata"], "pipeline": minimum["pipeline"]})
-    duplicate = json.loads(json.dumps(minimum)); duplicate["segments"].append(dict(duplicate["segments"][0])); write_json(invalid / "qra-duplicate-segment.json", duplicate)
-    reverse = json.loads(json.dumps(minimum)); reverse["segments"][0].update({"start_km": 2.0, "end_km": 1.0}); write_json(invalid / "qra-reverse-chainage.json", reverse)
-    wrong_unit = json.loads(json.dumps(minimum)); wrong_unit["frequency_library"] = {"unit": "per_mile_year"}; write_json(invalid / "qra-wrong-unit.json", wrong_unit)
-    probability = json.loads(json.dumps(minimum)); probability["weather_joint_probability"] = [{"weather_id": "W1", "probability": 0.8}, {"weather_id": "W2", "probability": 0.8}]; write_json(invalid / "qra-probability-not-normalized.json", probability)
-    unknown = json.loads(json.dumps(minimum)); unknown["temporary_candidates"] = []; write_json(invalid / "qra-unknown-field.json", unknown)
-    (invalid / "qra-non-finite.json").write_text('{"metadata":{"case_id":"BAD"},"pipeline":{},"segments":[{"segment_id":"S1","start_km":0,"end_km":1,"length_km":1e999}]}\n', encoding="utf-8")
-    candidate = json.loads((output / "examples" / "candidate-fields.json").read_text(encoding="utf-8"))[0]
-    candidate["evidence_ids"] = []; write_json(invalid / "candidate-missing-evidence.json", candidate)
-    candidate2 = json.loads(json.dumps(candidate)); candidate2["confidence"] = 1.01; write_json(invalid / "candidate-confidence.json", candidate2)
-    review = json.loads((output / "examples" / "review-decisions.json").read_text(encoding="utf-8"))[0]
-    review["action"] = "EDIT_IN_PLACE"; write_json(invalid / "review-action.json", review)
-    write_json(invalid / "evidence-location.json", {"evidence_id": "EVD-BAD", "source_type": "PDF", "location": {"kind": "PDF", "file_id": "F", "page": 0, "bbox": [0, 0, 1, 1], "page_size": [100, 100], "coordinate_system": "PDF_POINTS"}})
-    write_json(invalid / "quality-status.json", {"issue_id": "ISS-BAD", "code": "EXTRACT.FIELD_MISSING", "quality_status": "UNKNOWN_STATUS", "blocking": True, "target": "$", "message": "bad"})
-    write_json(invalid / "snapshot-unresolved.json", {"snapshot_id": "SNAP-BAD", "contract_id": CONTRACT_ID, "contract_version": VERSION, "contract_sha256": "0" * 64, "payload_sha256": "1" * 64, "created_at": "2026-08-26T10:00:00+08:00", "candidate_ids": [], "review_ids": [], "unresolved_issue_ids": ["ISS-1"]})
+    minimum = json.loads(
+        (output / "examples" / "minimum-segments.json").read_text(encoding="utf-8")
+    )
+    write_json(
+        invalid / "qra-missing-segments.json",
+        {"metadata": minimum["metadata"], "pipeline": minimum["pipeline"]},
+    )
+    duplicate = json.loads(json.dumps(minimum))
+    duplicate["segments"].append(dict(duplicate["segments"][0]))
+    write_json(invalid / "qra-duplicate-segment.json", duplicate)
+    reverse = json.loads(json.dumps(minimum))
+    reverse["segments"][0].update({"start_km": 2.0, "end_km": 1.0})
+    write_json(invalid / "qra-reverse-chainage.json", reverse)
+    wrong_unit = json.loads(json.dumps(minimum))
+    wrong_unit["frequency_library"] = {"unit": "per_mile_year"}
+    write_json(invalid / "qra-wrong-unit.json", wrong_unit)
+    probability = json.loads(json.dumps(minimum))
+    probability["weather_joint_probability"] = [
+        {"weather_id": "W1", "probability": 0.8},
+        {"weather_id": "W2", "probability": 0.8},
+    ]
+    write_json(invalid / "qra-probability-not-normalized.json", probability)
+    unknown = json.loads(json.dumps(minimum))
+    unknown["temporary_candidates"] = []
+    write_json(invalid / "qra-unknown-field.json", unknown)
+    (invalid / "qra-non-finite.json").write_text(
+        '{"metadata":{"case_id":"BAD"},"pipeline":{},"segments":[{"segment_id":"S1","start_km":0,"end_km":1,"length_km":1e999}]}\n',
+        encoding="utf-8",
+    )
+    candidate = json.loads(
+        (output / "examples" / "candidate-fields.json").read_text(encoding="utf-8")
+    )[0]
+    candidate["evidence_ids"] = []
+    write_json(invalid / "candidate-missing-evidence.json", candidate)
+    candidate2 = json.loads(json.dumps(candidate))
+    candidate2["confidence"] = 1.01
+    write_json(invalid / "candidate-confidence.json", candidate2)
+    review = json.loads(
+        (output / "examples" / "review-decisions.json").read_text(encoding="utf-8")
+    )[0]
+    review["action"] = "EDIT_IN_PLACE"
+    write_json(invalid / "review-action.json", review)
+    write_json(
+        invalid / "evidence-location.json",
+        {
+            "evidence_id": "EVD-BAD",
+            "source_type": "PDF",
+            "location": {
+                "kind": "PDF",
+                "file_id": "F",
+                "page": 0,
+                "bbox": [0, 0, 1, 1],
+                "page_size": [100, 100],
+                "coordinate_system": "PDF_POINTS",
+            },
+        },
+    )
+    write_json(
+        invalid / "quality-status.json",
+        {
+            "issue_id": "ISS-BAD",
+            "code": "EXTRACT.FIELD_MISSING",
+            "quality_status": "UNKNOWN_STATUS",
+            "blocking": True,
+            "target": "$",
+            "message": "bad",
+        },
+    )
+    write_json(
+        invalid / "snapshot-unresolved.json",
+        {
+            "snapshot_id": "SNAP-BAD",
+            "contract_id": CONTRACT_ID,
+            "contract_version": VERSION,
+            "contract_sha256": "0" * 64,
+            "payload_sha256": "1" * 64,
+            "created_at": "2026-08-26T10:00:00+08:00",
+            "candidate_ids": [],
+            "review_ids": [],
+            "unresolved_issue_ids": ["ISS-1"],
+        },
+    )
 
 
 def build(output: Path) -> None:

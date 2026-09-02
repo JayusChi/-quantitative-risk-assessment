@@ -1,0 +1,11 @@
+{
+  "candidate_ids": [],
+  "contract_id": "qra.part1-input",
+  "contract_sha256": "9eaa0b8a3a2aa7e7d5c2b405f381234fb689f5e6327ab1e861389420f15fb197",
+  "contract_version": "1.0.0",
+  "created_at": "2026-08-26T10:00:00+08:00",
+  "payload_sha256": "8b95bd4fe88aaa76c29b3c9d1e147409bb6914d036c3459a81f8a402704ec89c",
+  "review_ids": [],
+  "snapshot_id": "SNAP-SYNTHETIC-S10-D00-v1",
+  "unresolved_issue_ids": []
+}

@@ -1,0 +1,136 @@
+{
+  "business_content_sha256": "93539ea0ac7b7284b50774b1da506f7af88b4073736532c4a743ab63449d42cc",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-ignition-model-v1",
+  "parameters": [
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "ignition_model",
+      "target_path": "ignition_model",
+      "unit": null,
+      "value": {
+        "delayed_ignition_test_probability": {
+          "high": 0.35,
+          "low": 0.1,
+          "medium": 0.25
+        },
+        "immediate_ignition_probability": {
+          "low": [
+            {
+              "probability": 0.02,
+              "release_rate_max_kg_s": 10.0,
+              "release_rate_min_kg_s": 0.0
+            },
+            {
+              "probability": 0.04,
+              "release_rate_max_kg_s": 100.0,
+              "release_rate_min_kg_s": 10.0
+            },
+            {
+              "probability": 0.09,
+              "release_rate_max_kg_s": null,
+              "release_rate_min_kg_s": 100.0
+            }
+          ],
+          "medium_high": [
+            {
+              "probability": 0.2,
+              "release_rate_max_kg_s": 10.0,
+              "release_rate_min_kg_s": 0.0
+            },
+            {
+              "probability": 0.5,
+              "release_rate_max_kg_s": 100.0,
+              "release_rate_min_kg_s": 10.0
+            },
+            {
+              "probability": 0.7,
+              "release_rate_max_kg_s": null,
+              "release_rate_min_kg_s": 100.0
+            }
+          ]
+        },
+        "model_status": "TEST_PARAMETER_SET",
+        "vce_given_delayed_test_probability": {
+          "high": 0.25,
+          "low": 0.0,
+          "medium": 0.05
+        }
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "ignition_model.delayed_ignition_test_probability",
+      "target_path": "ignition_model.delayed_ignition_test_probability",
+      "unit": null,
+      "value": {
+        "high": 0.35,
+        "low": 0.1,
+        "medium": 0.25
+      }
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "ignition_model.immediate_ignition_probability",
+      "target_path": "ignition_model.immediate_ignition_probability",
+      "unit": null,
+      "value": {
+        "low": [
+          {
+            "probability": 0.02,
+            "release_rate_max_kg_s": 10.0,
+            "release_rate_min_kg_s": 0.0
+          },
+          {
+            "probability": 0.04,
+            "release_rate_max_kg_s": 100.0,
+            "release_rate_min_kg_s": 10.0
+          },
+          {
+            "probability": 0.09,
+            "release_rate_max_kg_s": null,
+            "release_rate_min_kg_s": 100.0
+          }
+        ],
+        "medium_high": [
+          {
+            "probability": 0.2,
+            "release_rate_max_kg_s": 10.0,
+            "release_rate_min_kg_s": 0.0
+          },
+          {
+            "probability": 0.5,
+            "release_rate_max_kg_s": 100.0,
+            "release_rate_min_kg_s": 10.0
+          },
+          {
+            "probability": 0.7,
+            "release_rate_max_kg_s": null,
+            "release_rate_min_kg_s": 100.0
+          }
+        ]
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "ignition_model.model_status",
+      "target_path": "ignition_model.model_status",
+      "unit": null,
+      "value": "TEST_PARAMETER_SET"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "ignition_model.vce_given_delayed_test_probability",
+      "target_path": "ignition_model.vce_given_delayed_test_probability",
+      "unit": null,
+      "value": {
+        "high": 0.25,
+        "low": 0.0,
+        "medium": 0.05
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S00_BASELINE",
+  "version": "1.0.0"
+}

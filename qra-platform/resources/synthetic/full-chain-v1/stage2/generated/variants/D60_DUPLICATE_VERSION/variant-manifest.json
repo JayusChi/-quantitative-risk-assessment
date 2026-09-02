@@ -1,0 +1,20 @@
+{
+  "base_condition_id": "D00_CLEAN",
+  "business_content_sha256": "233e57bff55fd840ec4ef5945dae730421af3d3bca315c5ac7b0eb2998761692",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "expected_behavior": "显示同内容重复版本关系，不静默覆盖原文件",
+  "injected_conditions": [
+    {
+      "base_document": "02_运行工况.csv",
+      "duplicate_document": "02_运行工况_v2.csv",
+      "relationship": "EXACT_CONTENT_DUPLICATE_NEW_VERSION"
+    }
+  ],
+  "overlay_files": [
+    "overlay/02_运行工况_v2.csv"
+  ],
+  "remove_files": [],
+  "scenario_id": "S00_BASELINE",
+  "schema_version": "1.0.0",
+  "variant_id": "D60_DUPLICATE_VERSION"
+}

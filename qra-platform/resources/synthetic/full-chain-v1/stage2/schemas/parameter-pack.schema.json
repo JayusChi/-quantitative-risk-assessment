@@ -1,0 +1,80 @@
+{
+  "$id": "https://qra.local/synthetic/full-chain-v1/stage2/parameter-pack.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "business_content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "data_classification": {
+      "const": "SYNTHETIC_TEST_ONLY"
+    },
+    "pack_id": {
+      "pattern": "^synthetic-.+-v[0-9]+$",
+      "type": "string"
+    },
+    "parameters": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "criticality": {
+            "enum": [
+              "BLOCKING",
+              "IMPORTANT",
+              "OPTIONAL"
+            ]
+          },
+          "field_id": {
+            "type": "string"
+          },
+          "target_path": {
+            "type": "string"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {}
+        },
+        "required": [
+          "field_id",
+          "target_path",
+          "value",
+          "unit",
+          "criticality"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_case": {
+      "enum": [
+        "S00_BASELINE",
+        "S10_CORROSION_DEGRADATION",
+        "S20_THIRD_PARTY_SURGE",
+        "S30_HIGH_PRESSURE_POPULATION_PEAK",
+        "S40_MITIGATION_PACKAGE"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "pack_id",
+    "version",
+    "data_classification",
+    "source_case",
+    "parameters",
+    "business_content_sha256"
+  ],
+  "type": "object"
+}

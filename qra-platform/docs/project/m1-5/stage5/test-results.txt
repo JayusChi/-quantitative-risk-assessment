@@ -1,0 +1,33 @@
+阶段5验证时间：2026-09-01
+
+1. 阶段门
+   .\.venv\Scripts\python.exe tools\run_full_chain_stage5_acceptance.py
+   结果：S5_USER_JOURNEY_ACCEPTED，11/11 checks passed
+
+2. 阶段5专项
+   .\.venv\Scripts\python.exe -m pytest tests\integration\test_full_chain_stage5_user_journey.py tests\unit\test_full_chain_stage5_user_journey.py -q
+   结果：6 passed
+
+3. 阶段5兼容性回归
+   .\.venv\Scripts\python.exe -m pytest tests\integration\test_full_chain_stage5_user_journey.py tests\unit\test_full_chain_stage5_user_journey.py tests\integration\test_database_end_to_end.py tests\integration\test_file_intake_phase2.py -q
+   结果：14 passed
+
+4. 全量回归
+   .\.venv\Scripts\python.exe -m pytest -q
+   结果：292 passed, 1 skipped in 174.48s
+
+5. 阶段3依赖分层回归
+   .\.venv\Scripts\python.exe -m pytest tests\unit\test_full_chain_stage3_raw_to_snapshot.py -q
+   结果：11 passed
+
+6. 静态和结构检查
+   .\.venv\Scripts\python.exe -m compileall -q src tests tools
+   ruff check（阶段5文件及依赖分层改动文件）
+   .\.venv\Scripts\python.exe tools\check_architecture.py
+   git diff --check
+   结果：全部通过
+
+7. 真实浏览器验收
+   桌面视口：1440x900
+   窄屏视口：390x844
+   结果：项目主链可操作；有效项目控制台 0 error / 0 warning；窄屏无横向溢出；键盘焦点、跳转链接、对话框关闭和错误提示通过

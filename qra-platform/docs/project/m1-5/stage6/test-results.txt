@@ -1,0 +1,34 @@
+阶段6验证时间：2026-09-01
+
+1. 阶段门
+   .\.venv\Scripts\python.exe tools\run_full_chain_stage6_acceptance.py
+   结果：S6_CONTROLLED_REPORT_AGENT_ACCEPTED，14/14 checks passed
+
+2. 阶段6专项
+   .\.venv\Scripts\python.exe -m pytest tests\unit\test_full_chain_stage6_controlled_report.py tests\integration\test_full_chain_stage6_controlled_report.py -q
+   结果：4 passed
+
+3. 阶段2兼容性与阶段6组合回归
+   .\.venv\Scripts\python.exe -m pytest tests\integration\test_file_intake_phase2.py tests\unit\test_full_chain_stage6_controlled_report.py tests\integration\test_full_chain_stage6_controlled_report.py -q
+   结果：10 passed
+
+4. 全量回归
+   .\.venv\Scripts\python.exe -m pytest -q
+   结果：296 passed, 1 skipped in 182.90s
+
+5. 静态和结构检查
+   .\.venv\Scripts\ruff.exe check src\db_qra\controlled_reporting.py src\db_qra\project_service.py src\db_qra\project_ui.py src\db_qra\server.py src\db_qra\database.py tools\run_full_chain_stage6_acceptance.py tests\unit\test_full_chain_stage6_controlled_report.py tests\integration\test_full_chain_stage6_controlled_report.py tests\integration\test_file_intake_phase2.py
+   .\.venv\Scripts\python.exe -m compileall -q src tests tools
+   .\.venv\Scripts\python.exe tools\check_architecture.py
+   git diff --check
+   结果：全部通过
+
+6. PDF视觉检查
+   使用 bundled Poppler 将最终 PDF 渲染为 7 页 PNG，并逐页检查。
+   结果：封面、正文、3 张图表、水印、6 张表、页眉页脚和分页通过。
+
+7. DOCX结构检查
+   a11y_audit.py、images_audit.py、section_audit.py、heading_audit.py、watermark_audit_remove.py --mode report、table_geometry.py
+   结果：无障碍 0 finding；3 张图片替代文本齐全；1 个 Letter 纵向节、1 英寸页边距；22 个 Heading 1；水印命中；6 张表精确几何通过。
+   限制：验收主机无 LibreOffice，未执行 DOCX→PNG 直接视觉渲染。
+

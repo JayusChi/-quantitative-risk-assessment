@@ -14,7 +14,7 @@
     "issue_catalog.json": "13e8b31250fa6f2c07385dbd67a0fa45b8fbef19b339afc7ea69ef11d7f764d8",
     "schemas/candidate-field.schema.json": "7b18e6b2ca8874aaa5a0a6f63e57ed353a44beeb0ab3484c0b0b5831df1eb715",
     "schemas/evidence.schema.json": "8ca08c78275c1d12e65fa9af39e98522a28ba4744b9cc610647a9f42da0c71a5",
-    "schemas/qra-input.schema.json": "7f651ea45ac32308c9e802b9ea461968191e0a458d8865f55500ba59b3d86641",
+    "schemas/qra-input.schema.json": "55ae761bd95ffeda59a7fa9afdddfe09537726909763a4576bec3822f7a404c8",
     "schemas/quality-issue.schema.json": "43e482ceb4af48d21ef9a31fdb790ca5c5ab5ef87819cf52dfac6d78bb6406d2",
     "schemas/review-decision.schema.json": "cb3e9caa361b270429d33dc402ae005932c9329e78a6cb7fa37bc319ba9166c5",
     "schemas/snapshot-manifest.schema.json": "7b52782614de172936b00d9b2dd31ebff528bb3289a6a9f4a831c9d0c2f651d7",

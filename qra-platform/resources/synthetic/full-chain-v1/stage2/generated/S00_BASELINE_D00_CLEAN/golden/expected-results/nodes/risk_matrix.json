@@ -1,0 +1,575 @@
+{
+  "authoritative_risk_metrics": {
+    "individual_risk": "IR = sum(f_s * P_fatality,s)",
+    "judgement_status": "IR_JUDGED_WITH_GBT34346_REFERENCE_FN_NOT_JUDGED",
+    "matrix_consequence": "N_q = segment_PLL / segment_initiating_failure_frequency",
+    "segment_risk_value": "PLL = sum(f_s * N_s)",
+    "societal_risk": "F-N curve"
+  },
+  "cells": [
+    {
+      "consequence_grade": "A",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 1,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "B",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 1,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 1,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 1,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "E",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 1,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "A",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 2,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "B",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 2,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 2,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 2,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "E",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 2,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "A",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 3,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "B",
+      "display_risk_band": "LOW",
+      "display_risk_band_zh": "低",
+      "likelihood_grade": 3,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 3,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 3,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "E",
+      "display_risk_band": "HIGH",
+      "display_risk_band_zh": "高",
+      "likelihood_grade": 3,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "A",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 4,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "likelihood_grade": 4,
+      "segment_ids": [
+        "SEG-004",
+        "SEG-019",
+        "SEG-003",
+        "SEG-020",
+        "SEG-002",
+        "SEG-001"
+      ]
+    },
+    {
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 4,
+      "segment_ids": [
+        "SEG-007",
+        "SEG-016",
+        "SEG-006",
+        "SEG-018",
+        "SEG-017",
+        "SEG-005"
+      ]
+    },
+    {
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 4,
+      "segment_ids": [
+        "SEG-012",
+        "SEG-011",
+        "SEG-013",
+        "SEG-014",
+        "SEG-015",
+        "SEG-008",
+        "SEG-010",
+        "SEG-009"
+      ]
+    },
+    {
+      "consequence_grade": "E",
+      "display_risk_band": "HIGH",
+      "display_risk_band_zh": "高",
+      "likelihood_grade": 4,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "A",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 5,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 5,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "likelihood_grade": 5,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "D",
+      "display_risk_band": "HIGH",
+      "display_risk_band_zh": "高",
+      "likelihood_grade": 5,
+      "segment_ids": []
+    },
+    {
+      "consequence_grade": "E",
+      "display_risk_band": "HIGH",
+      "display_risk_band_zh": "高",
+      "likelihood_grade": 5,
+      "segment_ids": []
+    }
+  ],
+  "criteria": {
+    "consequence_labels": {
+      "A": "<1人",
+      "B": "1-5人",
+      "C": "5-20人",
+      "D": "20-100人",
+      "E": ">=100人"
+    },
+    "consequence_metric": "equivalent_fatalities_per_initiating_failure",
+    "consequence_upper_bounds_fatalities": [
+      1.0,
+      5.0,
+      20.0,
+      100.0
+    ],
+    "criteria_id": "QRA_DISPLAY_MATRIX_V1",
+    "likelihood_labels": {
+      "1": "极低",
+      "2": "较低",
+      "3": "中等",
+      "4": "较高",
+      "5": "高"
+    },
+    "likelihood_metric": "segment_initiating_failure_frequency_per_year",
+    "likelihood_upper_bounds_per_year": [
+      1e-05,
+      3e-05,
+      8e-05,
+      0.0002
+    ],
+    "note": "该5x5矩阵只用于结果展示、筛选和报告排版，不替代PLL、个人风险IR、F-N曲线，也不构成项目风险接受准则。正式项目必须用经批准的阈值覆盖本配置。",
+    "status": "DISPLAY_ONLY_NOT_ACCEPTANCE_CRITERION"
+  },
+  "matrix_type": "QRA_RESULT_DISPLAY_MATRIX",
+  "result_tier": "FULL_SPATIAL_HUMAN_QRA",
+  "schema_version": "1.0.0",
+  "segments": [
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 0.5,
+      "equivalent_fatalities_per_initiating_failure": 1.0834803982653445,
+      "initiating_failure_frequency_per_year": 0.00011850000000000001,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2455.0,
+      "maximum_individual_risk_per_year": 1.8787499999999998e-06,
+      "pll_per_year": 0.00012839242719444333,
+      "segment_id": "SEG-001",
+      "start_km": 0.0
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 1.0,
+      "equivalent_fatalities_per_initiating_failure": 1.087245102579607,
+      "initiating_failure_frequency_per_year": 0.00011850000000000001,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2455.0,
+      "maximum_individual_risk_per_year": 1.8891368777899134e-06,
+      "pll_per_year": 0.00012883854465568344,
+      "segment_id": "SEG-002",
+      "start_km": 0.5
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 1.5,
+      "equivalent_fatalities_per_initiating_failure": 2.0830999509365116,
+      "initiating_failure_frequency_per_year": 0.00011850000000000001,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2455.0,
+      "maximum_individual_risk_per_year": 1.8891368777899132e-06,
+      "pll_per_year": 0.0002468473441859766,
+      "segment_id": "SEG-003",
+      "start_km": 1.0
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 2.0,
+      "equivalent_fatalities_per_initiating_failure": 4.294274973504153,
+      "initiating_failure_frequency_per_year": 0.00011850000000000001,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2455.0,
+      "maximum_individual_risk_per_year": 1.9418065622973116e-06,
+      "pll_per_year": 0.0005088715843602422,
+      "segment_id": "SEG-004",
+      "start_km": 1.5
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 2.35,
+      "equivalent_fatalities_per_initiating_failure": 8.274619822602974,
+      "initiating_failure_frequency_per_year": 0.0001631,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2455.0,
+      "maximum_individual_risk_per_year": 3.1252108556553e-06,
+      "pll_per_year": 0.0013495904930665452,
+      "segment_id": "SEG-005",
+      "start_km": 2.0
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 2.7,
+      "equivalent_fatalities_per_initiating_failure": 10.460652779212749,
+      "initiating_failure_frequency_per_year": 0.0001631,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2335.0,
+      "maximum_individual_risk_per_year": 3.0207495920295797e-06,
+      "pll_per_year": 0.0017061324682895996,
+      "segment_id": "SEG-006",
+      "start_km": 2.35
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 3.1,
+      "equivalent_fatalities_per_initiating_failure": 17.08706043453597,
+      "initiating_failure_frequency_per_year": 0.00018640000000000003,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2035.0,
+      "maximum_individual_risk_per_year": 4.697833065839281e-06,
+      "pll_per_year": 0.0031850280649975055,
+      "segment_id": "SEG-007",
+      "start_km": 2.7
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 3.5,
+      "equivalent_fatalities_per_initiating_failure": 20.01250227243613,
+      "initiating_failure_frequency_per_year": 0.00018640000000000003,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2035.0,
+      "maximum_individual_risk_per_year": 3.991085159526052e-06,
+      "pll_per_year": 0.003730330423582095,
+      "segment_id": "SEG-008",
+      "start_km": 3.1
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 3.8,
+      "equivalent_fatalities_per_initiating_failure": 22.2670351846128,
+      "initiating_failure_frequency_per_year": 0.0001335,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2030.0,
+      "maximum_individual_risk_per_year": 3.0653018437153622e-06,
+      "pll_per_year": 0.0029726491971458087,
+      "segment_id": "SEG-009",
+      "start_km": 3.5
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 4.1,
+      "equivalent_fatalities_per_initiating_failure": 23.83835723969315,
+      "initiating_failure_frequency_per_year": 0.0001335,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2030.0,
+      "maximum_individual_risk_per_year": 3.1585067985749247e-06,
+      "pll_per_year": 0.003182420691499035,
+      "segment_id": "SEG-010",
+      "start_km": 3.8
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 4.45,
+      "equivalent_fatalities_per_initiating_failure": 28.455141798602696,
+      "initiating_failure_frequency_per_year": 0.00015575,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2335.7657364545125,
+      "maximum_individual_risk_per_year": 4.523549274545345e-06,
+      "pll_per_year": 0.00443188833513237,
+      "segment_id": "SEG-011",
+      "start_km": 4.1
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 4.8,
+      "equivalent_fatalities_per_initiating_failure": 29.58309647974131,
+      "initiating_failure_frequency_per_year": 0.00015575,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2335.4457821329506,
+      "maximum_individual_risk_per_year": 3.918908975142519e-06,
+      "pll_per_year": 0.004607567276719709,
+      "segment_id": "SEG-012",
+      "start_km": 4.45
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 5.2,
+      "equivalent_fatalities_per_initiating_failure": 27.733323881402146,
+      "initiating_failure_frequency_per_year": 0.000148,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2330.1535982484365,
+      "maximum_individual_risk_per_year": 3.326413687355696e-06,
+      "pll_per_year": 0.004104531934447517,
+      "segment_id": "SEG-013",
+      "start_km": 4.8
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 5.6,
+      "equivalent_fatalities_per_initiating_failure": 27.152870951793226,
+      "initiating_failure_frequency_per_year": 0.000148,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2330.017211635351,
+      "maximum_individual_risk_per_year": 3.491998269224614e-06,
+      "pll_per_year": 0.004018624900865397,
+      "segment_id": "SEG-014",
+      "start_km": 5.2
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "D",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 6.05,
+      "equivalent_fatalities_per_initiating_failure": 23.420809755703136,
+      "initiating_failure_frequency_per_year": 0.00016649999999999998,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2041.7301292813308,
+      "maximum_individual_risk_per_year": 4.213811622836923e-06,
+      "pll_per_year": 0.0038995648243245716,
+      "segment_id": "SEG-015",
+      "start_km": 5.6
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 6.5,
+      "equivalent_fatalities_per_initiating_failure": 15.22891268820843,
+      "initiating_failure_frequency_per_year": 0.00016649999999999998,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 1580.0,
+      "maximum_individual_risk_per_year": 3.6771026753309137e-06,
+      "pll_per_year": 0.0025356139625867034,
+      "segment_id": "SEG-016",
+      "start_km": 6.05
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 6.85,
+      "equivalent_fatalities_per_initiating_failure": 11.097375136408008,
+      "initiating_failure_frequency_per_year": 0.00012284999999999998,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2460.0,
+      "maximum_individual_risk_per_year": 2.300838667294112e-06,
+      "pll_per_year": 0.0013633125355077234,
+      "segment_id": "SEG-017",
+      "start_km": 6.5
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "C",
+      "display_risk_band": "MEDIUM_HIGH",
+      "display_risk_band_zh": "中高",
+      "end_km": 7.2,
+      "equivalent_fatalities_per_initiating_failure": 11.106652184841371,
+      "initiating_failure_frequency_per_year": 0.00012284999999999998,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2460.0,
+      "maximum_individual_risk_per_year": 2.300838667294112e-06,
+      "pll_per_year": 0.0013644522209077623,
+      "segment_id": "SEG-018",
+      "start_km": 6.85
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 7.6,
+      "equivalent_fatalities_per_initiating_failure": 2.5735308890462547,
+      "initiating_failure_frequency_per_year": 0.00014040000000000002,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2460.0,
+      "maximum_individual_risk_per_year": 2.5534592742441035e-06,
+      "pll_per_year": 0.0003613237368220942,
+      "segment_id": "SEG-019",
+      "start_km": 7.2
+    },
+    {
+      "authoritative_ir_label_zh": "低风险（可接受）",
+      "authoritative_ir_level": "LOW_ACCEPTABLE",
+      "consequence_grade": "B",
+      "display_risk_band": "MEDIUM",
+      "display_risk_band_zh": "中",
+      "end_km": 8.0,
+      "equivalent_fatalities_per_initiating_failure": 1.1035633360464014,
+      "initiating_failure_frequency_per_year": 0.00014040000000000002,
+      "likelihood_grade": 4,
+      "maximum_conditional_expected_fatalities": 2450.0,
+      "maximum_individual_risk_per_year": 2.5397999999999994e-06,
+      "pll_per_year": 0.00015494029238091478,
+      "segment_id": "SEG-020",
+      "start_km": 7.6
+    }
+  ],
+  "source_node_id": "human_qra",
+  "summary": {
+    "band_counts": {
+      "MEDIUM": 6,
+      "MEDIUM_HIGH": 14
+    },
+    "segment_count": 20
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "baseline_pack": "generated/S00_BASELINE_D00_CLEAN/source-pack-manifest.json",
+  "business_content_sha256": "47892dc33573356e85bd195d74bbc841bff2d2ebd4fc568edab3eb4f5f6c85d6",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "generator_version": "qra.synthetic-source-pack/1.1.0",
+  "schema_version": "1.0.0",
+  "source_matrix": "resources/synthetic/full-chain-v1/field-source-node-matrix.csv",
+  "source_template": "tests/fixtures/qra_synthetic_case_v1.json",
+  "status": "S2_SYNTHETIC_SOURCE_PACK_ACCEPTED",
+  "variants": {
+    "D10_CONFLICT": "generated/variants/D10_CONFLICT/variant-manifest.json",
+    "D20_MISSING": "generated/variants/D20_MISSING/variant-manifest.json",
+    "D30_LOW_QUALITY_SCAN": "generated/variants/D30_LOW_QUALITY_SCAN/variant-manifest.json",
+    "D40_OVERSIZED_IMAGE": "generated/variants/D40_OVERSIZED_IMAGE/variant-manifest.json",
+    "D50_PROMPT_INJECTION": "generated/variants/D50_PROMPT_INJECTION/variant-manifest.json",
+    "D60_DUPLICATE_VERSION": "generated/variants/D60_DUPLICATE_VERSION/variant-manifest.json",
+    "D70_UNIT_ANOMALY": "generated/variants/D70_UNIT_ANOMALY/variant-manifest.json"
+  }
+}

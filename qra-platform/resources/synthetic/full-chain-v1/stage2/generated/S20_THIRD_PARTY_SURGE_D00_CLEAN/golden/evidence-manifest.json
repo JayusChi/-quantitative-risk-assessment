@@ -1,0 +1,4463 @@
+{
+  "business_content_sha256": "a78ce35041b9ca84b005f0eeac2cfde57c36925acfd5b394cc2362f0931fd488",
+  "coordinate_convention": "top-left origin; normalized bboxes are [x1,y1,x2,y2]",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "data_condition_id": "D00_CLEAN",
+  "entries": [
+    {
+      "business_name": "坐标系",
+      "criticality": "OPTIONAL",
+      "field_id": "assessment.coordinate_system",
+      "location": {
+        "cell": "F5",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "assessment.coordinate_system",
+      "target_unit": null,
+      "value_sha256": "79150b377722802200d763d82ee82fd194c6285320150d3a2f7fde81980d218e"
+    },
+    {
+      "business_name": "设计系数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.design_factor",
+      "location": {
+        "cell": "F6",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.design_factor",
+      "target_unit": null,
+      "value_sha256": "cfa271ee5dd9e58190f82183261c0f19a2c3124fe4ab5fa64186aef686352a64"
+    },
+    {
+      "business_name": "高程剖面",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.elevation_profile",
+      "location": {
+        "cell": "F7",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "m",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.elevation_profile",
+      "target_unit": "m",
+      "value_sha256": "1bfa3eddd66b178067ce4359015b41f0c2bedaf676361432c92bd10df60015ec"
+    },
+    {
+      "business_name": "断裂韧度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.fracture_toughness",
+      "location": {
+        "cell": "F8",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "MPa√m",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.fracture_toughness",
+      "target_unit": "MPa√m",
+      "value_sha256": "e244d33f0ad22a574cd49543738cace0169ecf07f9f459909235d249105f3856"
+    },
+    {
+      "business_name": "实测最小壁厚",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.measured_wall_thickness_mm",
+      "location": {
+        "cell": "F9",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.measured_wall_thickness_mm",
+      "target_unit": "mm",
+      "value_sha256": "cd35f2c4be6d1a4b93639bc3e2ba6f4d9a6dc422a7732620fa470ead50992f98"
+    },
+    {
+      "business_name": "泊松比",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.poisson_ratio",
+      "location": {
+        "cell": "F10",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.poisson_ratio",
+      "target_unit": null,
+      "value_sha256": "311a00a91908ffb55b9b4d46f4beccf0a95b46435cbd01ba3097c74bdd70df50"
+    },
+    {
+      "business_name": "制管焊缝类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.seam_type",
+      "location": {
+        "cell": "F11",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.seam_type",
+      "target_unit": null,
+      "value_sha256": "f7f84b9da0fe53237dde878dc11846399e3fc0441b48b49424661e6b470d3644"
+    },
+    {
+      "business_name": "规定最小抗拉强度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.smts_mpa",
+      "location": {
+        "cell": "F12",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.smts_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "c1ef74218bf10dac4b53797c22f37b217ac36e27c77a2edb2cbc039f760b8914"
+    },
+    {
+      "business_name": "规定最小屈服强度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.smys_mpa",
+      "location": {
+        "cell": "F13",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.smys_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "63d29d6de341bca54c3d9f9905b4af13793c812296e3c1ed9eadafee877ba7ce"
+    },
+    {
+      "business_name": "弹性模量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geometry_material.youngs_modulus_mpa",
+      "location": {
+        "cell": "F14",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.youngs_modulus_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "a9605d566f4b887c584b8ef54eecb9fd147d529afa518c1ce78c56c6dc9b5dfc"
+    },
+    {
+      "business_name": "设计压力",
+      "criticality": "BLOCKING",
+      "field_id": "pipeline.design_pressure_mpa",
+      "location": {
+        "cell": "F15",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "MPa",
+      "target_path": "pipeline.design_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "f1e42019aecc858ffbcca7fddec511b761b474916fde37b1a6ff321a9b459330"
+    },
+    {
+      "business_name": "installation",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.installation",
+      "location": {
+        "cell": "F16",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.installation",
+      "target_unit": null,
+      "value_sha256": "39330f2e6feeed2813be16f571cad1dd32365f9a58edc0f1f452bad0b1e2ce05"
+    },
+    {
+      "business_name": "material",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.material",
+      "location": {
+        "cell": "F17",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.material",
+      "target_unit": null,
+      "value_sha256": "48023cad6d43dc1bf0535cf67e8eecab1971b4d74338da4965942039e2d3e2e2"
+    },
+    {
+      "business_name": "管线共性外径",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.outside_diameter_mm",
+      "location": {
+        "cell": "F18",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "mm",
+      "target_path": "pipeline.outside_diameter_mm",
+      "target_unit": "mm",
+      "value_sha256": "cb26dc12237917929aa54ad56aceb3c55a3cdcdcd566af1de99f20afe5ae4372"
+    },
+    {
+      "business_name": "管线编号",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.pipeline_id",
+      "location": {
+        "cell": "F19",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.pipeline_id",
+      "target_unit": null,
+      "value_sha256": "4a9bef2a1313b2d6d20d220ba1905f709e1290afa6a98349fb71d8598c57af27"
+    },
+    {
+      "business_name": "population_spatial_data_status",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.population_spatial_data_status",
+      "location": {
+        "cell": "F20",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.population_spatial_data_status",
+      "target_unit": null,
+      "value_sha256": "fbbd69964c85ec51bbf9ac5e8caf4fbcb247d92876ac788c121e89d4829e2e47"
+    },
+    {
+      "business_name": "source_refs",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.source_refs",
+      "location": {
+        "cell": "F21",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.source_refs",
+      "target_unit": null,
+      "value_sha256": "414ae351fab1f8cf91c1da5aee761d235c343c427a40a91b26b74e9f3e61167b"
+    },
+    {
+      "business_name": "管线总长度",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.total_length_km",
+      "location": {
+        "cell": "F22",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "km",
+      "target_path": "pipeline.total_length_km",
+      "target_unit": "km",
+      "value_sha256": "7b1bd53949b752d143d871408483b5382371b5bc48d195d0c040ec93cfa2748b"
+    },
+    {
+      "business_name": "wall_thickness_data_status",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.wall_thickness_data_status",
+      "location": {
+        "cell": "F23",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "pipeline.wall_thickness_data_status",
+      "target_unit": null,
+      "value_sha256": "fbbd69964c85ec51bbf9ac5e8caf4fbcb247d92876ac788c121e89d4829e2e47"
+    },
+    {
+      "business_name": "管线共性壁厚",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.wall_thickness_mm",
+      "location": {
+        "cell": "F24",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "mm",
+      "target_path": "pipeline.wall_thickness_mm",
+      "target_unit": "mm",
+      "value_sha256": "9dab82380f617a2f79d677356ead11ffa1b3e81d6c33a5e449d6e64059bcae1c"
+    },
+    {
+      "business_name": "投产年份",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.commissioning_year",
+      "location": {
+        "cell": "F25",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "year",
+      "target_path": "segments.*.commissioning_year",
+      "target_unit": "year",
+      "value_sha256": "5038a80a731f86aa535d53ba2c49eff45affa21f5557fff59ea4d01806c6ba37"
+    },
+    {
+      "business_name": "终点里程",
+      "criticality": "BLOCKING",
+      "field_id": "segment.end_km",
+      "location": {
+        "cell": "F26",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "km",
+      "target_path": "segments.*.end_km",
+      "target_unit": "km",
+      "value_sha256": "f558cf4076422676902788205b540c6f3084bd9af11c52b485f5b7a5a1ab47f1"
+    },
+    {
+      "business_name": "管段终点坐标",
+      "criticality": "BLOCKING",
+      "field_id": "segment.end_xy_m",
+      "location": {
+        "cell": "F27",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "m",
+      "target_path": "segments.*.end_xy_m",
+      "target_unit": "m",
+      "value_sha256": "82901d7d9ba667bb8873b3001d5041e5708d17c6c8a3b357e64e02a491548d33"
+    },
+    {
+      "business_name": "管段长度",
+      "criticality": "BLOCKING",
+      "field_id": "segment.length_km",
+      "location": {
+        "cell": "F28",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "km",
+      "target_path": "segments.*.length_km",
+      "target_unit": "km",
+      "value_sha256": "1c5807035edc166fa0e861e74f34198179449e93fe6c3715960fddbb97296a2f"
+    },
+    {
+      "business_name": "material_grade",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.material_grade",
+      "location": {
+        "cell": "F29",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.material_grade",
+      "target_unit": null,
+      "value_sha256": "08a71892608570f8bd4ad1a23d2ac9bf9a7b5be724e525ae7e8981f69e311c77"
+    },
+    {
+      "business_name": "外径",
+      "criticality": "BLOCKING",
+      "field_id": "segment.outside_diameter_mm",
+      "location": {
+        "cell": "F30",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "mm",
+      "target_path": "segments.*.outside_diameter_mm",
+      "target_unit": "mm",
+      "value_sha256": "594841a05af42ab27d5f17a04068ca708e842fd7db702a7bd79288041cd7394c"
+    },
+    {
+      "business_name": "population_context",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.population_context",
+      "location": {
+        "cell": "F31",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.population_context",
+      "target_unit": null,
+      "value_sha256": "6f91eccf67aa0e2f4edb01552597c9bb464c76ae22ceec96f62e433575e0d677"
+    },
+    {
+      "business_name": "quality",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.quality",
+      "location": {
+        "cell": "F32",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.quality",
+      "target_unit": null,
+      "value_sha256": "1f9b60f7987e07af26bd005525743392d69a5c8e372522fefb188e68f02cd995"
+    },
+    {
+      "business_name": "review_status",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.review_status",
+      "location": {
+        "cell": "F33",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.review_status",
+      "target_unit": null,
+      "value_sha256": "d40544e6ab934ec349dcff98e308c734eb101cd77d7477b4dcdb8295f2e6ce17"
+    },
+    {
+      "business_name": "管段编号",
+      "criticality": "BLOCKING",
+      "field_id": "segment.segment_id",
+      "location": {
+        "cell": "F34",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.segment_id",
+      "target_unit": null,
+      "value_sha256": "5efee94a28e3c28798afacc5e318b855ea288d19bddd6ffc3b1f2c386381a136"
+    },
+    {
+      "business_name": "source_ref",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.source_ref",
+      "location": {
+        "cell": "F35",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.source_ref",
+      "target_unit": null,
+      "value_sha256": "2cba2bec3e7206715b4ea63bc151ba8c4ee886e39729d77614096949b787053e"
+    },
+    {
+      "business_name": "source_refs",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.source_refs",
+      "location": {
+        "cell": "F36",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.source_refs",
+      "target_unit": null,
+      "value_sha256": "e7d97ad1acd649aa1ed34fd6d7d395ce5c91385b1e463b413899f6aef95cfc9e"
+    },
+    {
+      "business_name": "split_reason",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.split_reason",
+      "location": {
+        "cell": "F37",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.split_reason",
+      "target_unit": null,
+      "value_sha256": "bab3862a193791707aaa1ced3b39941167ee0365155e5fa58d39f1ee2aedcf21"
+    },
+    {
+      "business_name": "起点里程",
+      "criticality": "BLOCKING",
+      "field_id": "segment.start_km",
+      "location": {
+        "cell": "F38",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "km",
+      "target_path": "segments.*.start_km",
+      "target_unit": "km",
+      "value_sha256": "2a6278e46155c6d6e495a6c9c717540f857ba5907da12f7cf390a718b3725c92"
+    },
+    {
+      "business_name": "中心线平面坐标",
+      "criticality": "BLOCKING",
+      "field_id": "segment.start_xy_m",
+      "location": {
+        "cell": "F39",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "m",
+      "target_path": "segments.*.start_xy_m",
+      "target_unit": "m",
+      "value_sha256": "c6418931bdbf2fd42339ede7be337a18f961e00d58e506a867bf97e1409f6065"
+    },
+    {
+      "business_name": "钢级",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.steel_grade",
+      "location": {
+        "cell": "F40",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.steel_grade",
+      "target_unit": null,
+      "value_sha256": "08a71892608570f8bd4ad1a23d2ac9bf9a7b5be724e525ae7e8981f69e311c77"
+    },
+    {
+      "business_name": "名义壁厚",
+      "criticality": "BLOCKING",
+      "field_id": "segment.wall_thickness_mm",
+      "location": {
+        "cell": "F41",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "01_管线与管段台账.xlsx",
+      "source_unit": "mm",
+      "target_path": "segments.*.wall_thickness_mm",
+      "target_unit": "mm",
+      "value_sha256": "0d9168da846376751469e89b47049cf3de8eb214c9417bafc4cd94d2e1d8a537"
+    },
+    {
+      "business_name": "流速",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.flow_velocity_m_s",
+      "location": {
+        "column": "value_json",
+        "line": 2,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "m/s",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.flow_velocity_m_s",
+      "target_unit": "m/s",
+      "value_sha256": "e5c78dc1d76ee0eafc7be19dac5ec02926c46cabaff6cb7066bb8d6737cd8d3d"
+    },
+    {
+      "business_name": "硫化氢摩尔分数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.gas_h2s_fraction",
+      "location": {
+        "column": "value_json",
+        "line": 3,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.gas_h2s_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "天然气含水量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.gas_water_content_mg_m3",
+      "location": {
+        "column": "value_json",
+        "line": 4,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "mg/m3",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.gas_water_content_mg_m3",
+      "target_unit": "mg/m3",
+      "value_sha256": "945ce5f5043534d42cc7ce4ae96665c14b106b8ffeae9a42dccd0543fcab28d0"
+    },
+    {
+      "business_name": "烃露点",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.hydrocarbon_dew_point_k",
+      "location": {
+        "column": "value_json",
+        "line": 5,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "°C",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.hydrocarbon_dew_point_k",
+      "target_unit": "K",
+      "value_sha256": "2d6769278a931e5b036a9d7876b6b6dc6d5ae9dff6ffe5d731e91a4316ec9046"
+    },
+    {
+      "business_name": "液体夹带事件次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.liquid_carryover_events_per_year",
+      "location": {
+        "column": "value_json",
+        "line": 6,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.liquid_carryover_events_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "历史最高运行压力",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.maximum_operating_pressure_mpa",
+      "location": {
+        "column": "value_json",
+        "line": 7,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.maximum_operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "14000a3ce3845181a18a1dff39342d6a5369eb261840c20e704e55d1913d0a94"
+    },
+    {
+      "business_name": "历史最低运行压力",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.minimum_operating_pressure_mpa",
+      "location": {
+        "column": "value_json",
+        "line": 8,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.minimum_operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "71bafd73fd5ccf06163d6457b5dc20ca6ea8f672fb9e2631e7c2a1b6951a44a8"
+    },
+    {
+      "business_name": "年超压次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.overpressure_events_per_year",
+      "location": {
+        "column": "value_json",
+        "line": 9,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.overpressure_events_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "年压力循环次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.pressure_cycle_count_per_year",
+      "location": {
+        "column": "value_json",
+        "line": 10,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.pressure_cycle_count_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "6303146a205c297f906d80c4a995f491d0ccad4964036c8487eb4a115e0b7d9c"
+    },
+    {
+      "business_name": "压力循环幅值",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.pressure_cycle_range_mpa",
+      "location": {
+        "column": "value_json",
+        "line": 11,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.pressure_cycle_range_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "54f315acf1b18f3114c0001658c1d1fc37b13b3e2b065760e53929ff97376cfb"
+    },
+    {
+      "business_name": "年停输次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.shutdown_events_per_year",
+      "location": {
+        "column": "value_json",
+        "line": 12,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.shutdown_events_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "business_name": "日输量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.throughput_m3_d",
+      "location": {
+        "column": "value_json",
+        "line": 13,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "m3/d",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.throughput_m3_d",
+      "target_unit": "m3/d",
+      "value_sha256": "ea67b8fd27aa442b0e78b18746f65324b072c7a37174e6c414435685c3b5637a"
+    },
+    {
+      "business_name": "水露点",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.operation_medium.water_dew_point_k",
+      "location": {
+        "column": "value_json",
+        "line": 14,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "°C",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.water_dew_point_k",
+      "target_unit": "K",
+      "value_sha256": "92d63426b48ddf1aedf812328b4cb9a0547f20a6b21eaecc3c5d4f7b1fd2503f"
+    },
+    {
+      "business_name": "自动切断可用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.automatic_shutdown_available",
+      "location": {
+        "column": "value_json",
+        "line": 15,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.automatic_shutdown_available",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "控制室可靠性",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.control_room_reliability",
+      "location": {
+        "column": "value_json",
+        "line": 16,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.control_room_reliability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "泄漏检测系统可用率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.leak_detection_availability_fraction",
+      "location": {
+        "column": "value_json",
+        "line": 17,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.leak_detection_availability_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "压力报警可用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.pressure_alarm_available",
+      "location": {
+        "column": "value_json",
+        "line": 18,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.pressure_alarm_available",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "远程控制可用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.remote_control_available",
+      "location": {
+        "column": "value_json",
+        "line": 19,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.remote_control_available",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "SCADA可用率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.scada_availability_fraction",
+      "location": {
+        "column": "value_json",
+        "line": 20,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.scada_availability_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "阀门拒关概率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.valve_fail_to_close_probability",
+      "location": {
+        "column": "value_json",
+        "line": 21,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_fail_to_close_probability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "阀门内漏概率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.valve_internal_leak_probability",
+      "location": {
+        "column": "value_json",
+        "line": 22,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_internal_leak_probability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "阀门测试周期",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.valve_test_interval_days",
+      "location": {
+        "column": "value_json",
+        "line": 23,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "day",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_test_interval_days",
+      "target_unit": "day",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "隔离阀类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.valve_control.valve_type",
+      "location": {
+        "column": "value_json",
+        "line": 24,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_type",
+      "target_unit": null,
+      "value_sha256": "dcf892783980f505ac91b51f9ca483cbe40add13632577036558e19864c1361a"
+    },
+    {
+      "business_name": "二氧化碳摩尔分数",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.gas_composition_mole_fraction.carbon_dioxide",
+      "location": {
+        "column": "value_json",
+        "line": 25,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "pipeline.gas_composition_mole_fraction.carbon_dioxide",
+      "target_unit": null,
+      "value_sha256": "33489efa25ff2aa92293e9f6695187a8defe09e90fdf34dddea9d45be1c124a8"
+    },
+    {
+      "business_name": "甲烷摩尔分数",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.gas_composition_mole_fraction.methane",
+      "location": {
+        "column": "value_json",
+        "line": 26,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "pipeline.gas_composition_mole_fraction.methane",
+      "target_unit": null,
+      "value_sha256": "faf3c0009927f75ba8b5502aef06674c99ef23e098b860bb02a683932562957f"
+    },
+    {
+      "business_name": "operating_pressure_data_status",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.operating_pressure_data_status",
+      "location": {
+        "column": "value_json",
+        "line": 27,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "pipeline.operating_pressure_data_status",
+      "target_unit": null,
+      "value_sha256": "fbbd69964c85ec51bbf9ac5e8caf4fbcb247d92876ac788c121e89d4829e2e47"
+    },
+    {
+      "business_name": "运行压力",
+      "criticality": "BLOCKING",
+      "field_id": "pipeline.operating_pressure_mpa",
+      "location": {
+        "column": "value_json",
+        "line": 28,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "MPa",
+      "target_path": "pipeline.operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "7b1bd53949b752d143d871408483b5382371b5bc48d195d0c040ec93cfa2748b"
+    },
+    {
+      "business_name": "operating_temperature_data_status",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.operating_temperature_data_status",
+      "location": {
+        "column": "value_json",
+        "line": 29,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "pipeline.operating_temperature_data_status",
+      "target_unit": null,
+      "value_sha256": "fbbd69964c85ec51bbf9ac5e8caf4fbcb247d92876ac788c121e89d4829e2e47"
+    },
+    {
+      "business_name": "运行温度",
+      "criticality": "BLOCKING",
+      "field_id": "pipeline.operating_temperature_k",
+      "location": {
+        "column": "value_json",
+        "line": 30,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "°C",
+      "target_path": "pipeline.operating_temperature_k",
+      "target_unit": "K",
+      "value_sha256": "a07dd7b4ba7502056cc7121f4a6c0a5dd9080c1bfabe331e740a3af61912a59e"
+    },
+    {
+      "business_name": "输送介质类型",
+      "criticality": "IMPORTANT",
+      "field_id": "pipeline.service",
+      "location": {
+        "column": "value_json",
+        "line": 31,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": null,
+      "target_path": "pipeline.service",
+      "target_unit": null,
+      "value_sha256": "19bc3ad5c772877d9ea44aba02bd638fa9b74fccf0704fe956b1d68804f5b596"
+    },
+    {
+      "business_name": "下游隔离阀里程",
+      "criticality": "BLOCKING",
+      "field_id": "segment.downstream_valve_km",
+      "location": {
+        "column": "value_json",
+        "line": 32,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "km",
+      "target_path": "segments.*.downstream_valve_km",
+      "target_unit": "km",
+      "value_sha256": "f558cf4076422676902788205b540c6f3084bd9af11c52b485f5b7a5a1ab47f1"
+    },
+    {
+      "business_name": "泄漏检测时间",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.leak_detection_time_s",
+      "location": {
+        "column": "value_json",
+        "line": 33,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "s",
+      "target_path": "segments.*.leak_detection_time_s",
+      "target_unit": "s",
+      "value_sha256": "b0ea4a8d326a648333bedc62a3b87add6caa62e6dc2543e53c0fdbc5152a7704"
+    },
+    {
+      "business_name": "上游隔离阀里程",
+      "criticality": "BLOCKING",
+      "field_id": "segment.upstream_valve_km",
+      "location": {
+        "column": "value_json",
+        "line": 34,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "km",
+      "target_path": "segments.*.upstream_valve_km",
+      "target_unit": "km",
+      "value_sha256": "2a6278e46155c6d6e495a6c9c717540f857ba5907da12f7cf390a718b3725c92"
+    },
+    {
+      "business_name": "关阀时间",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.valve_closure_time_s",
+      "location": {
+        "column": "value_json",
+        "line": 35,
+        "location_type": "csv_cell"
+      },
+      "source_document": "02_运行工况.csv",
+      "source_unit": "s",
+      "target_path": "segments.*.valve_closure_time_s",
+      "target_unit": "s",
+      "value_sha256": "26909842f9e2e3e856ae85e1b5bfe96a5f8d1665df282826f4eeea17a9cb78d6"
+    },
+    {
+      "business_name": "气体摩尔组分",
+      "criticality": "BLOCKING",
+      "field_id": "pipeline.gas_composition_mole_fraction",
+      "location": {
+        "cell": "F5",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "03_天然气组分.xlsx",
+      "source_unit": "%",
+      "target_path": "pipeline.gas_composition_mole_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "2ec09d47943da09d4f4a55efef3adeecbe95ebc9738c5a8e0de1d9b2d8db9d94"
+    },
+    {
+      "business_name": "交流干扰电压",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.ac_interference_voltage_v",
+      "location": {
+        "cell": "F5",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "V",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.ac_interference_voltage_v",
+      "target_unit": "V",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "防腐层状态指数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.coating_condition_index",
+      "location": {
+        "cell": "F6",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_condition_index",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "防腐层缺陷密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.coating_defect_density_per_km",
+      "location": {
+        "cell": "F7",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_defect_density_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "5143d7fbe5554b164ced23c82286b8ca42f15a5318617bb6ee8b7e503020c91b"
+    },
+    {
+      "business_name": "防腐层安装年份",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.coating_installation_year",
+      "location": {
+        "cell": "F8",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "year",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_installation_year",
+      "target_unit": "year",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "外防腐层类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.coating_type",
+      "location": {
+        "cell": "F9",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_type",
+      "target_unit": null,
+      "value_sha256": "90497fd7215eab7edbe9635eb44e1a26d650705643a5ff1c426681c1841ecac6"
+    },
+    {
+      "business_name": "断电电位",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.cp_off_potential_v",
+      "location": {
+        "cell": "F10",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "V",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_off_potential_v",
+      "target_unit": "V",
+      "value_sha256": "2a9a7fd42b41b69a985ad494404e2ef823855fb895b4a543a021224a5cb14e1a"
+    },
+    {
+      "business_name": "通电电位",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.cp_on_potential_v",
+      "location": {
+        "cell": "F11",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "V",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_on_potential_v",
+      "target_unit": "V",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "保护电位超限比例",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.cp_out_of_range_fraction",
+      "location": {
+        "cell": "F12",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_out_of_range_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "阴极保护覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.cp_protection_coverage_fraction",
+      "location": {
+        "cell": "F13",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_protection_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "阴保测试周期",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.cp_test_interval_days",
+      "location": {
+        "cell": "F14",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "day",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_test_interval_days",
+      "target_unit": "day",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "DCVG/ACVG最大严重度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.dcvg_acvg_severity_max",
+      "location": {
+        "cell": "F15",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.dcvg_acvg_severity_max",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "土壤氯离子",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.soil_chloride_mg_kg",
+      "location": {
+        "cell": "F16",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "mg/kg",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_chloride_mg_kg",
+      "target_unit": "mg/kg",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "土壤含水率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.soil_moisture_fraction",
+      "location": {
+        "cell": "F17",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_moisture_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "土壤pH",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.soil_ph",
+      "location": {
+        "cell": "F18",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_ph",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "土壤电阻率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.soil_resistivity_ohm_m",
+      "location": {
+        "cell": "F19",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "ohm*m",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_resistivity_ohm_m",
+      "target_unit": "ohm*m",
+      "value_sha256": "d065750e6929b462bc6431f8abe42f31d25bfbf7ad35ed3f0409c6a98569b097"
+    },
+    {
+      "business_name": "杂散电流存在",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.external_corrosion.stray_current_detected",
+      "location": {
+        "cell": "F20",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.stray_current_detected",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "液相氯离子浓度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.chloride_concentration_mg_l",
+      "location": {
+        "cell": "F21",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "mg/L",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.chloride_concentration_mg_l",
+      "target_unit": "mg/L",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "二氧化碳分压",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.co2_partial_pressure_mpa",
+      "location": {
+        "cell": "F22",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.co2_partial_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "缓蚀剂使用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.corrosion_inhibitor_used",
+      "location": {
+        "cell": "F23",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.corrosion_inhibitor_used",
+      "target_unit": null,
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "business_name": "挂片腐蚀速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.coupon_corrosion_rate_mm_year",
+      "location": {
+        "cell": "F24",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.coupon_corrosion_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "游离水出现概率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.free_water_probability",
+      "location": {
+        "cell": "F25",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.free_water_probability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "硫化氢分压",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.h2s_partial_pressure_mpa",
+      "location": {
+        "cell": "F26",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "MPa",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.h2s_partial_pressure_mpa",
+      "target_unit": "MPa",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "缓蚀剂有效投加率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.inhibitor_availability_fraction",
+      "location": {
+        "cell": "F27",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.inhibitor_availability_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "business_name": "内腐蚀泄漏历史次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.internal_corrosion_leak_history_count",
+      "location": {
+        "cell": "F28",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.internal_corrosion_leak_history_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "液相pH",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.liquid_ph",
+      "location": {
+        "cell": "F29",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.liquid_ph",
+      "target_unit": null,
+      "value_sha256": "305a79a2388d2d7e34208b0e2e4b4b21c490fb47314bc6657775dc5a5f57d8d7"
+    },
+    {
+      "business_name": "低点积液",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.low_point_liquid_holdup",
+      "location": {
+        "cell": "F30",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.low_point_liquid_holdup",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "微生物腐蚀迹象",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.microbial_activity_detected",
+      "location": {
+        "cell": "F31",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.microbial_activity_detected",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "清管周期",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.pigging_interval_days",
+      "location": {
+        "cell": "F32",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "day",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.pigging_interval_days",
+      "target_unit": "day",
+      "value_sha256": "4749ade34775edf3ec31f5f5900be4c0333f5543e340ddabcb35bf91749fb296"
+    },
+    {
+      "business_name": "探针腐蚀速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.probe_corrosion_rate_mm_year",
+      "location": {
+        "cell": "F33",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.probe_corrosion_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "固体沉积物存在",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.internal_corrosion.solid_deposit_detected",
+      "location": {
+        "cell": "F34",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "04_CIPS与腐蚀检测.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.solid_deposit_detected",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "腐蚀增长率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.corrosion_growth_rate_mm_year",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 2,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.corrosion_growth_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "裂纹数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.crack_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 3,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.crack_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "凹陷数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.dent_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 4,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.dent_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "外腐蚀异常数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.external_corrosion_anomaly_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 5,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.external_corrosion_anomaly_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "开挖验证数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.field_verification_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 6,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.field_verification_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "开挖验证符合率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.field_verification_match_fraction",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 7,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.field_verification_match_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "内检测覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.ili_coverage_fraction",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 8,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "缺陷深度测量误差",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.ili_depth_tolerance_mm",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 9,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_depth_tolerance_mm",
+      "target_unit": "mm",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "内检测检出阈值",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.ili_detection_threshold_mm",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 10,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_detection_threshold_mm",
+      "target_unit": "mm",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "内检测技术类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.ili_technology",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 11,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_technology",
+      "target_unit": null,
+      "value_sha256": "dcf892783980f505ac91b51f9ca483cbe40add13632577036558e19864c1361a"
+    },
+    {
+      "business_name": "内腐蚀异常数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.internal_corrosion_anomaly_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 12,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.internal_corrosion_anomaly_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "最近内检测日期",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.latest_ili_date",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 13,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.latest_ili_date",
+      "target_unit": null,
+      "value_sha256": "dcf892783980f505ac91b51f9ca483cbe40add13632577036558e19864c1361a"
+    },
+    {
+      "business_name": "最大腐蚀深度比",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.maximum_corrosion_depth_ratio",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 14,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.maximum_corrosion_depth_ratio",
+      "target_unit": null,
+      "value_sha256": "55516b4f9a100e560d9eff8729fab170d2654cc6cc5da718b311086008beb156"
+    },
+    {
+      "business_name": "最大腐蚀轴向长度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.maximum_corrosion_length_mm",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 15,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.maximum_corrosion_length_mm",
+      "target_unit": "mm",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "历史修复数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.repair_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 16,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.repair_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "未修复临界缺陷数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.inspection_integrity.unrepaired_critical_anomaly_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 17,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.unrepaired_critical_anomaly_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "凹陷最大应变",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.dent_strain_max_fraction",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 18,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.dent_strain_max_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "环焊缝异常密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.girth_weld_anomaly_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 19,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.girth_weld_anomaly_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "水压试验压力比",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.hydrotest_pressure_ratio_smys",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 20,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.hydrotest_pressure_ratio_smys",
+      "target_unit": null,
+      "value_sha256": "ac249fe380375343d0d8a9e60930b94b2f9ac42ec0523610184a112adcbd15a9"
+    },
+    {
+      "business_name": "未熔合缺陷密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.lack_of_fusion_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 21,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.lack_of_fusion_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "分层缺陷密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.lamination_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 22,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.lamination_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "制造缺陷历史失效次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.manufacturing_failure_history_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 23,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.manufacturing_failure_history_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "钢管制造标准",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.manufacturing_standard",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 24,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.manufacturing_standard",
+      "target_unit": null,
+      "value_sha256": "1dc878c719882fb890ce152bdfae956768ea3e0f3fd2b047d34b0820d9f7cf0a"
+    },
+    {
+      "business_name": "钢管制造商",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.pipe_manufacturer",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 25,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.pipe_manufacturer",
+      "target_unit": null,
+      "value_sha256": "b3b9951594497dfb21f206d839e3a21ced9563c026a3628f354b8a78eab8f6f2"
+    },
+    {
+      "business_name": "制管焊缝缺陷密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.seam_defect_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 26,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.seam_defect_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "夹渣缺陷密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.slag_inclusion_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 27,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.slag_inclusion_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "焊接裂纹密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.weld_crack_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 28,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.weld_crack_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "褶皱弯管存在",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.manufacturing_defects.wrinkle_bend_present",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 29,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.wrinkle_bend_present",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "裂纹内检测覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.crack_ili_coverage_fraction",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 30,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.crack_ili_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "business_name": "裂纹指示密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.crack_indication_count_per_km",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 31,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.crack_indication_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "疲劳累积使用系数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.fatigue_usage_factor",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 32,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.fatigue_usage_factor",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "高pH SCC环境",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.high_ph_scc_environment",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 33,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.high_ph_scc_environment",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "最大裂纹深度比",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.maximum_crack_depth_ratio",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 34,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.maximum_crack_depth_ratio",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "最大裂纹长度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.maximum_crack_length_mm",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 35,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.maximum_crack_length_mm",
+      "target_unit": "mm",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "近中性pH SCC环境",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.near_neutral_ph_scc_environment",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 36,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.near_neutral_ph_scc_environment",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "压力波动指数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.pressure_fluctuation_index",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 37,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.pressure_fluctuation_index",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "SCC历史失效次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.scc_failure_history_count",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 38,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_failure_history_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "SCC敏感防腐层",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.scc_susceptible_coating",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 39,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_susceptible_coating",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "SCC敏感温度条件",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.scc_susceptible_temperature",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 40,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_susceptible_temperature",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "运行应力占SMYS比例",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.scc_fatigue.stress_level_fraction_smys",
+      "location": {
+        "column": 3,
+        "location_type": "docx_table_cell",
+        "row": 41,
+        "table": "字段证据记录"
+      },
+      "source_document": "05_缺陷与维修记录.docx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.stress_level_fraction_smys",
+      "target_unit": null,
+      "value_sha256": "2a2d3fc252ac1ed1bb7ae650264a97cd49ffae7469fa711abc6608481545305e"
+    },
+    {
+      "business_name": "泥石流易发性指数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.debris_flow_susceptibility_index",
+      "location": {
+        "cell": "F5",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.debris_flow_susceptibility_index",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "活动断层穿越",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.fault_crossing_present",
+      "location": {
+        "cell": "F6",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.fault_crossing_present",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "洪水年发生频率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.flood_frequency_per_year",
+      "location": {
+        "cell": "F7",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.flood_frequency_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "地质灾害历史失效次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.geohazard_failure_history_count",
+      "location": {
+        "cell": "F8",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_failure_history_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "灾害治理工程状态",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.geohazard_mitigation_condition",
+      "location": {
+        "cell": "F9",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_mitigation_condition",
+      "target_unit": null,
+      "value_sha256": "ecdff7e410c1c9fca9a78972eacdd3b5af941ee738a0ad4991b7cbb1ec349e8c"
+    },
+    {
+      "business_name": "灾害监测覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.geohazard_monitoring_coverage_fraction",
+      "location": {
+        "cell": "F10",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_monitoring_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "business_name": "滑坡位移速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.landslide_displacement_rate_mm_year",
+      "location": {
+        "cell": "F11",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.landslide_displacement_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "滑坡易发性指数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.landslide_susceptibility_index",
+      "location": {
+        "cell": "F12",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.landslide_susceptibility_index",
+      "target_unit": null,
+      "value_sha256": "817117fbef3073db67e741cb490d45db79f431381106dc0d71bc2c64414e698c"
+    },
+    {
+      "business_name": "液化易发性指数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.liquefaction_susceptibility_index",
+      "location": {
+        "cell": "F13",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.liquefaction_susceptibility_index",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "最大冲刷深度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.maximum_scour_depth_m",
+      "location": {
+        "cell": "F14",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "m",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.maximum_scour_depth_m",
+      "target_unit": "m",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "冻土融沉速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.permafrost_thaw_settlement_rate",
+      "location": {
+        "cell": "F15",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.permafrost_thaw_settlement_rate",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "河道摆动速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.river_migration_rate_m_year",
+      "location": {
+        "cell": "F16",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "m/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.river_migration_rate_m_year",
+      "target_unit": "m/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "峰值地震加速度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.seismic_peak_ground_acceleration_g",
+      "location": {
+        "cell": "F17",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "g",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.seismic_peak_ground_acceleration_g",
+      "target_unit": "g",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "坡度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.slope_angle_deg",
+      "location": {
+        "cell": "F18",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "deg",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.slope_angle_deg",
+      "target_unit": "deg",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "地面沉降速率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.subsidence_rate_mm_year",
+      "location": {
+        "cell": "F19",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "mm/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.subsidence_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "地形地貌类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.geohazard.terrain_type",
+      "location": {
+        "cell": "F20",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.terrain_type",
+      "target_unit": null,
+      "value_sha256": "53123ca14d0bfc5739aafa879528282804a7b0a41338edce5179ad6b2cf6e6a4"
+    },
+    {
+      "business_name": "施工交叉点密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.construction_crossing_count_per_km",
+      "location": {
+        "cell": "F21",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.construction_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "开挖活动密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.excavation_events_per_km_year",
+      "location": {
+        "cell": "F22",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/(km*year)",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.excavation_events_per_km_year",
+      "target_unit": "1/(km*year)",
+      "value_sha256": "9ecdb7a86b45fb1fdef7bfd0064c4e4c454682cac810bce9ea4cc084370b2647"
+    },
+    {
+      "business_name": "违章占压数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.illegal_occupation_count",
+      "location": {
+        "cell": "F23",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.illegal_occupation_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "土地利用类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.land_use_type",
+      "location": {
+        "cell": "F24",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.land_use_type",
+      "target_unit": null,
+      "value_sha256": "83a5a4effb646f43fa221e7df73d4f015c5d0f3e8837c58bf46dc81a189ed973"
+    },
+    {
+      "business_name": "标志完好率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.marker_condition_fraction",
+      "location": {
+        "cell": "F25",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.marker_condition_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "标志桩密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.marker_density_per_km",
+      "location": {
+        "cell": "F26",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.marker_density_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "施工信息协同机制可用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.one_call_system_available",
+      "location": {
+        "cell": "F27",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.one_call_system_available",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "巡线完成率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.patrol_completion_fraction",
+      "location": {
+        "cell": "F28",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.patrol_completion_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "巡线周期",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.patrol_interval_days",
+      "location": {
+        "cell": "F29",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "day",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.patrol_interval_days",
+      "target_unit": "day",
+      "value_sha256": "229e660ad08e85d9055496e7eeeb4e572e8f75c6cc331a7e569688097704139b"
+    },
+    {
+      "business_name": "管道保护宣传次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.public_awareness_activities_per_year",
+      "location": {
+        "cell": "F30",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.public_awareness_activities_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "铁路穿越密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.railway_crossing_count_per_km",
+      "location": {
+        "cell": "F31",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.railway_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "河流穿越密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.river_crossing_count_per_km",
+      "location": {
+        "cell": "F32",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.river_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "道路穿越密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.road_crossing_count_per_km",
+      "location": {
+        "cell": "F33",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.road_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "第三方损伤历史次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.third_party.third_party_damage_history_count",
+      "location": {
+        "cell": "F34",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.third_party_damage_history_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "区域活动等级",
+      "criticality": "BLOCKING",
+      "field_id": "segment.area_activity",
+      "location": {
+        "cell": "F35",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": null,
+      "target_path": "segments.*.area_activity",
+      "target_unit": null,
+      "value_sha256": "1ec127b429e934e3407eaf7b035fcc27a1f5317456f35e775df97d3224015f75"
+    },
+    {
+      "business_name": "埋深",
+      "criticality": "IMPORTANT",
+      "field_id": "segment.burial_depth_m",
+      "location": {
+        "cell": "F36",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "06_第三方与巡线记录.xlsx",
+      "source_unit": "m",
+      "target_path": "segments.*.burial_depth_m",
+      "target_unit": "m",
+      "value_sha256": "8b5bcb80aeaf403fc5f1245def1192a5045ac730051ddc103f81eb45e001d711"
+    },
+    {
+      "business_name": "建筑占用类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.building_occupancy",
+      "location": {
+        "cell": "F5",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_occupancy",
+      "target_unit": null,
+      "value_sha256": "6eb391c37abd3abad015f3dc61db65a883ba35a8f994409385312f57a1ab28c2"
+    },
+    {
+      "business_name": "建筑抗超压能力",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.building_overpressure_resistance_kpa",
+      "location": {
+        "cell": "F6",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": "kPa",
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_overpressure_resistance_kpa",
+      "target_unit": "kPa",
+      "value_sha256": "585348dbd28810f9a34f57be46f000c5f9effab894d074713d93fe7ccfeb3b76"
+    },
+    {
+      "business_name": "建筑热辐射遮蔽系数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.building_thermal_shelter_factor",
+      "location": {
+        "cell": "F7",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_thermal_shelter_factor",
+      "target_unit": null,
+      "value_sha256": "d2cbad71ff333de67d07ec676e352ab7f38248eb69c942950157220607c55e84"
+    },
+    {
+      "business_name": "建筑类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.building_type",
+      "location": {
+        "cell": "F8",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_type",
+      "target_unit": null,
+      "value_sha256": "45afce7527b6cce17b6e1d61dcc0d0971d143c45746573ef3a624c228f466a19"
+    },
+    {
+      "business_name": "密集居民区",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.dense_residential_present",
+      "location": {
+        "cell": "F9",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.dense_residential_present",
+      "target_unit": null,
+      "value_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+    },
+    {
+      "business_name": "人员疏散响应时间",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.evacuation_response_time_s",
+      "location": {
+        "cell": "F10",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": "s",
+      "target_path": "engineering_indicators.observations_global.population_receptors.evacuation_response_time_s",
+      "target_unit": "s",
+      "value_sha256": "a970559125d5ccd0dbbbb7685636bbcae5ce7cac4e8d1c6954d2467616a9db8c"
+    },
+    {
+      "business_name": "医院受体",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.hospital_present",
+      "location": {
+        "cell": "F11",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.hospital_present",
+      "target_unit": null,
+      "value_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+    },
+    {
+      "business_name": "学校受体",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.population_receptors.school_present",
+      "location": {
+        "cell": "F12",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.population_receptors.school_present",
+      "target_unit": null,
+      "value_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+    },
+    {
+      "business_name": "population_cells",
+      "criticality": "IMPORTANT",
+      "field_id": "population_cells",
+      "location": {
+        "cell": "F20",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "population_cells",
+      "target_unit": null,
+      "value_sha256": "0856074ab8cc1fea982be6813e194f1b106f3458ebb33a52b9a47aa470542bcd"
+    },
+    {
+      "business_name": "人口网格编号",
+      "criticality": "BLOCKING",
+      "field_id": "population_cell.cell_id",
+      "location": {
+        "cell": "F13",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "population_cells.*.cell_id",
+      "target_unit": null,
+      "value_sha256": "24e87c2546c4ade31cc01982dbfd6bd9e74d6ac1ab65bc212865835df8972fc8"
+    },
+    {
+      "business_name": "昼间室外人口比例",
+      "criticality": "IMPORTANT",
+      "field_id": "population_cell.outdoor_fraction_day",
+      "location": {
+        "cell": "F14",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "population_cells.*.outdoor_fraction_day",
+      "target_unit": null,
+      "value_sha256": "bcedadefeaa36740f3dc49389e082914437703eb14b08e95da6e37def93f6ed7"
+    },
+    {
+      "business_name": "夜间室外人口比例",
+      "criticality": "IMPORTANT",
+      "field_id": "population_cell.outdoor_fraction_night",
+      "location": {
+        "cell": "F15",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "population_cells.*.outdoor_fraction_night",
+      "target_unit": null,
+      "value_sha256": "1b249694917f24f286b9ab66715d793396bd97fba736632fe92fc55ff65640ab"
+    },
+    {
+      "business_name": "昼间人口",
+      "criticality": "BLOCKING",
+      "field_id": "population_cell.population_day",
+      "location": {
+        "cell": "F16",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": "person",
+      "target_path": "population_cells.*.population_day",
+      "target_unit": "person",
+      "value_sha256": "cafff868d7661fc1dcf528e54f249065b04897c70bb07e7179f19eb665bbcb50"
+    },
+    {
+      "business_name": "夜间人口",
+      "criticality": "BLOCKING",
+      "field_id": "population_cell.population_night",
+      "location": {
+        "cell": "F17",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": "person",
+      "target_path": "population_cells.*.population_night",
+      "target_unit": "person",
+      "value_sha256": "6e31d246888d83e7193af6faa69577a9931708fbc99c61f51554ac057790c083"
+    },
+    {
+      "business_name": "受体类型",
+      "criticality": "IMPORTANT",
+      "field_id": "population_cell.receptor_type",
+      "location": {
+        "cell": "F18",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": null,
+      "target_path": "population_cells.*.receptor_type",
+      "target_unit": null,
+      "value_sha256": "9dc6c33275204d4b81e7fcffdc5f59052b572057522383d51b4795074d19d7d2"
+    },
+    {
+      "business_name": "受体坐标",
+      "criticality": "BLOCKING",
+      "field_id": "population_cell.xy_m",
+      "location": {
+        "cell": "F19",
+        "location_type": "xlsx_cell",
+        "sheet": "字段证据"
+      },
+      "source_document": "07_人口和敏感受体.xlsx",
+      "source_unit": "m",
+      "target_path": "population_cells.*.xy_m",
+      "target_unit": "m",
+      "value_sha256": "a10869657f074e07247e80723f6efad7a6e6f7036837672fa29cba2f34dd46ef"
+    },
+    {
+      "business_name": "扩散地形类别",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.dispersion_terrain_class",
+      "location": {
+        "column": "value_json",
+        "line": 2,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.dispersion_terrain_class",
+      "target_unit": null,
+      "value_sha256": "3a2bdcd76be9fb02ace080872b36f53a8d06fab33ef12018e27ba31f0ee205ef"
+    },
+    {
+      "business_name": "气象统计年限",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.meteorological_data_years",
+      "location": {
+        "column": "value_json",
+        "line": 3,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": "year",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.meteorological_data_years",
+      "target_unit": "year",
+      "value_sha256": "254780e68d4f1cf55c6803f46b41fb6609af0d2297ca6cc0a6dbf64b0f09a534"
+    },
+    {
+      "business_name": "相对湿度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.relative_humidity_fraction",
+      "location": {
+        "column": "value_json",
+        "line": 4,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.relative_humidity_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "2a2d3fc252ac1ed1bb7ae650264a97cd49ffae7469fa711abc6608481545305e"
+    },
+    {
+      "business_name": "地面粗糙度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.surface_roughness_m",
+      "location": {
+        "column": "value_json",
+        "line": 5,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": "m",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.surface_roughness_m",
+      "target_unit": "m",
+      "value_sha256": "98c416e790855c26249c9f39e3b7dee4a208d2986310fd5fcb6fe88a69950239"
+    },
+    {
+      "business_name": "逆温出现频率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.temperature_inversion_frequency",
+      "location": {
+        "column": "value_json",
+        "line": 6,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.temperature_inversion_frequency",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "地形导流效应",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.weather_terrain.topographic_channeling",
+      "location": {
+        "column": "value_json",
+        "line": 7,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.topographic_channeling",
+      "target_unit": null,
+      "value_sha256": "26babb1c6d2a3a753687d1b4904f6a1ca63a7153f87a2beb8249ea11a2ec7c99"
+    },
+    {
+      "business_name": "weather_joint_probability",
+      "criticality": "IMPORTANT",
+      "field_id": "weather_joint_probability",
+      "location": {
+        "column": "value_json",
+        "line": 14,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability",
+      "target_unit": null,
+      "value_sha256": "11ad569e1882bf1743175da9189c6e0feb90e441afdab43de0fd84f6b7d12e6d"
+    },
+    {
+      "business_name": "气象联合概率",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.probability",
+      "location": {
+        "column": "value_json",
+        "line": 8,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability.*.probability",
+      "target_unit": null,
+      "value_sha256": "3f2d89281a622101d59c2a815f784048c5ec5b1617223b5cdd807ee5c9f3627d"
+    },
+    {
+      "business_name": "大气稳定度",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.stability_class",
+      "location": {
+        "column": "value_json",
+        "line": 9,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability.*.stability_class",
+      "target_unit": null,
+      "value_sha256": "ca0392263fb852b3dbab227740af301e7468fe84189498fe9cf4629b98603099"
+    },
+    {
+      "business_name": "昼夜时段",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.time_period",
+      "location": {
+        "column": "value_json",
+        "line": 10,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability.*.time_period",
+      "target_unit": null,
+      "value_sha256": "8a04eb3b521f15fb64feedc501b4855b1baf7cb9f2b94358a790577498c4f395"
+    },
+    {
+      "business_name": "气象工况编号",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.weather_id",
+      "location": {
+        "column": "value_json",
+        "line": 11,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability.*.weather_id",
+      "target_unit": null,
+      "value_sha256": "b1e3235848c07b4ce79f1c64854bf31f72aa6e6d585b9c5c94e2191ac375babd"
+    },
+    {
+      "business_name": "风向",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.wind_direction_from",
+      "location": {
+        "column": "value_json",
+        "line": 12,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": null,
+      "target_path": "weather_joint_probability.*.wind_direction_from",
+      "target_unit": null,
+      "value_sha256": "95720aeb1181eae2c09940a5d51a12d957628acd9190eb5940ad41e455b5df49"
+    },
+    {
+      "business_name": "风速",
+      "criticality": "BLOCKING",
+      "field_id": "weather_case.wind_speed_m_s",
+      "location": {
+        "column": "value_json",
+        "line": 13,
+        "location_type": "csv_cell"
+      },
+      "source_document": "08_气象联合概率.csv",
+      "source_unit": "m/s",
+      "target_path": "weather_joint_probability.*.wind_speed_m_s",
+      "target_unit": "m/s",
+      "value_sha256": "b7c7ee02e2b2489de0b9b7abdcd4ec2c0a40bef11ff3e84c6edc2b7a9dc8baa6"
+    },
+    {
+      "business_name": "回填材料类型",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.backfill_type",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.backfill_type",
+      "target_unit": null,
+      "value_sha256": "e51c16ec45ba77f9b3fe6d94a8de2405131805330dca32684104043927a6dc2f"
+    },
+    {
+      "business_name": "套管状态",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.casing_condition",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_condition",
+      "target_unit": null,
+      "value_sha256": "ecdff7e410c1c9fca9a78972eacdd3b5af941ee738a0ad4991b7cbb1ec349e8c"
+    },
+    {
+      "business_name": "套管密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.casing_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "冷弯管弯曲半径比",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.cold_bend_radius_ratio",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.cold_bend_radius_ratio",
+      "target_unit": null,
+      "value_sha256": "f60e16304d60f2477fb9733c3e2eaad65dbf890930d5bd92473e77c9390aadb5"
+    },
+    {
+      "business_name": "盖板保护覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.concrete_slab_coverage_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.concrete_slab_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "施工单位",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.construction_contractor",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.694741
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1625
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_contractor",
+      "target_unit": null,
+      "value_sha256": "ad96d480c5c38c03b462ecd46551569854091b3dfa256711b1bb417707fff659"
+    },
+    {
+      "business_name": "施工不符合项数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.construction_nonconformity_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_nonconformity_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "现场弯管密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.field_bend_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.field_bend_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "环焊缝密度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.girth_weld_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "1/km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.girth_weld_count_per_km",
+      "target_unit": "1/km",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "石方段保护层",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.rock_shield_present",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.rock_shield_present",
+      "target_unit": null,
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "business_name": "监理单位",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.supervision_contractor",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.380504
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          890
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.supervision_contractor",
+      "target_unit": null,
+      "value_sha256": "73ffc8ae61e72eb72a36ee29fe4dc3cfe95119668bc2cbe62caadf4817f66e25"
+    },
+    {
+      "business_name": "焊缝无损检测覆盖率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.weld_ndt_coverage_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_ndt_coverage_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "business_name": "焊口返修率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.weld_reject_rate_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_reject_rate_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "焊接工艺",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.construction.welding_process",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.694741
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1625
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.welding_process",
+      "target_unit": null,
+      "value_sha256": "893bd4e431cdb6fdf1ad142f7adbb2f1c466aafd3550c9de6843914fc77ef1ea"
+    },
+    {
+      "business_name": "报警响应时间",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.alarm_response_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "s",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.alarm_response_time_s",
+      "target_unit": "s",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "未关闭审核不符合项",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.audit_nonconformity_open_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.audit_nonconformity_open_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "年应急演练次数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.emergency_drills_per_year",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "1/year",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_drills_per_year",
+      "target_unit": "1/year",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "紧急隔离程序可用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.emergency_isolation_procedure_available",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_isolation_procedure_available",
+      "target_unit": null,
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "business_name": "应急队伍响应时间",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.emergency_team_response_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "s",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_team_response_time_s",
+      "target_unit": "s",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "维护计划完成率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.maintenance_completion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.maintenance_completion_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "变更管理符合率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.management_of_change_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.management_of_change_compliance_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "历史误操作事件数",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.misoperation_event_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.misoperation_event_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "运行规程完整",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.operating_procedure_available",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operating_procedure_available",
+      "target_unit": null,
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "business_name": "操作人员能力考核通过率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.operator_competency_pass_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_competency_pass_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "操作人员培训完成率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.operator_training_completion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_training_completion_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "作业许可符合率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.permit_to_work_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.permit_to_work_compliance_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "规程执行符合率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.procedure_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.procedure_compliance_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "交接班符合率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.management_emergency.shift_handover_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.shift_handover_compliance_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "全局工程指标观测",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicators.observations_global",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.616503
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1442
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global",
+      "target_unit": null,
+      "value_sha256": "76094e8ce69270f0db17529ecfdb53a84f51bfc681381bac51cdaff54d1cc5ff"
+    },
+    {
+      "business_name": "模型与参数批准文件引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.approval_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.approval_ref",
+      "target_unit": null,
+      "value_sha256": "433288dc48e03163ff8dd3d51bffa5bbbf119d9e10c7161582cfb423079e9e85"
+    },
+    {
+      "business_name": "竣工图引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.as_built_drawing_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.as_built_drawing_ref",
+      "target_unit": null,
+      "value_sha256": "7cf11300b8c30cc0c385c6bc2fdbdff5f76aaad60a3ba9e0d105388762c4191d"
+    },
+    {
+      "business_name": "施工记录引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.construction_record_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.construction_record_ref",
+      "target_unit": null,
+      "value_sha256": "3ed881e0651d75e34d20ea2c7cb6f299da3a1e71d0d81c02a195d1350b9fb91b"
+    },
+    {
+      "business_name": "数据责任人",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.data_owner",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.data_owner",
+      "target_unit": null,
+      "value_sha256": "d9b34fff6e31da642bf331ee957fd6cc70d053b6c27ca2ac19e668e2fec948f4"
+    },
+    {
+      "business_name": "初步设计报告引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.design_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.design_report_ref",
+      "target_unit": null,
+      "value_sha256": "c8a9b2d552cbe76c340c0284934f51200fb601adb88f283685ed05fc7749df2d"
+    },
+    {
+      "business_name": "应急预案引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.emergency_plan_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.emergency_plan_ref",
+      "target_unit": null,
+      "value_sha256": "1552e78e12578f66fa2bc3542bf5e12f1af3b1b736cf31c11d4b0dac033d6f69"
+    },
+    {
+      "business_name": "环境影响评价报告引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.environment_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.environment_report_ref",
+      "target_unit": null,
+      "value_sha256": "d51df59f9cc122b386f0e815f647ff9073f91d0152b5feb3a32e28b34c5b50cb"
+    },
+    {
+      "business_name": "地质灾害评估报告引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.geohazard_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.geohazard_report_ref",
+      "target_unit": null,
+      "value_sha256": "310970b6e295782e5f58c499e533e4486f1a184519eda69a8fb4a82d075bc8e6"
+    },
+    {
+      "business_name": "高后果区识别报告引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.hca_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.hca_report_ref",
+      "target_unit": null,
+      "value_sha256": "9e8385d394940ae25d813af4d0e18215a3658be4ae99e9affd1759f9ababab91"
+    },
+    {
+      "business_name": "完整性管理计划引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.integrity_plan_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.integrity_plan_ref",
+      "target_unit": null,
+      "value_sha256": "79b2100df8cf9ddfdd27d889101f834f9e3d35e564042043f17091dd170f186f"
+    },
+    {
+      "business_name": "既往风险评价报告引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.previous_risk_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.previous_risk_report_ref",
+      "target_unit": null,
+      "value_sha256": "e01bf8c57471f1dcfe38dfb7fa5f0705132f1b6ca698c04470bc736c448154df"
+    },
+    {
+      "business_name": "遥感或航拍线路图引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.route_map_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 6
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.route_map_ref",
+      "target_unit": null,
+      "value_sha256": "f3f008b3300f728c62bd5193211766ca7d5672c508e6d06afd6b0a744cb77e63"
+    },
+    {
+      "business_name": "监理记录引用",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.governance.supervision_record_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 6
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_global.governance.supervision_record_ref",
+      "target_unit": null,
+      "value_sha256": "48c67ceb24c8658b9b5e653250894ee15f7921ac696107e0d3c39cc4fefa0707"
+    },
+    {
+      "business_name": "点火面源面积",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.area_ignition_source_area_m2",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.225625,
+          0.71,
+          0.259375
+        ],
+        "bbox_pixels": [
+          1149,
+          361,
+          1704,
+          415
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "m2",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.area_ignition_source_area_m2",
+      "target_unit": "m2",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "气云经过点火源时间",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.cloud_exposure_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.225625,
+          0.964167,
+          0.259375
+        ],
+        "bbox_pixels": [
+          1759,
+          361,
+          2314,
+          415
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "s",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.cloud_exposure_time_s",
+      "target_unit": "s",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "约束率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.confinement_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.35375,
+          0.71,
+          0.3875
+        ],
+        "bbox_pixels": [
+          1149,
+          566,
+          1704,
+          620
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.confinement_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "拥塞率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.congestion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.35375,
+          0.964167,
+          0.3875
+        ],
+        "bbox_pixels": [
+          1759,
+          566,
+          2314,
+          620
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "%",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.congestion_fraction",
+      "target_unit": "fraction",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "爆炸源体积",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.explosion_source_volume_m3",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.481875,
+          0.71,
+          0.515625
+        ],
+        "bbox_pixels": [
+          1149,
+          771,
+          1704,
+          825
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "m3",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.explosion_source_volume_m3",
+      "target_unit": "m3",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "点火效率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.ignition_efficiency_per_s",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.481875,
+          0.964167,
+          0.515625
+        ],
+        "bbox_pixels": [
+          1759,
+          771,
+          2314,
+          825
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "1/s",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_efficiency_per_s",
+      "target_unit": "1/s",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "点火源存在概率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.ignition_source_presence_probability",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.61,
+          0.71,
+          0.64375
+        ],
+        "bbox_pixels": [
+          1149,
+          976,
+          1704,
+          1030
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_source_presence_probability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "点火线源长度",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.line_ignition_source_length_m",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.61,
+          0.964167,
+          0.64375
+        ],
+        "bbox_pixels": [
+          1759,
+          976,
+          2314,
+          1030
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "m",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.line_ignition_source_length_m",
+      "target_unit": "m",
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "business_name": "点火点源数量",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.point_ignition_source_count",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.738125,
+          0.71,
+          0.771875
+        ],
+        "bbox_pixels": [
+          1149,
+          1181,
+          1704,
+          1235
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": "count",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.point_ignition_source_count",
+      "target_unit": "count",
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "TNO爆炸强度等级",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.tno_source_strength",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.738125,
+          0.964167,
+          0.771875
+        ],
+        "bbox_pixels": [
+          1759,
+          1181,
+          2314,
+          1235
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.tno_source_strength",
+      "target_unit": null,
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "business_name": "延迟点火后VCE条件概率",
+      "criticality": "IMPORTANT",
+      "field_id": "engineering_indicator.ignition_congestion.vce_given_delayed_probability",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.86625,
+          0.71,
+          0.9
+        ],
+        "bbox_pixels": [
+          1149,
+          1386,
+          1704,
+          1440
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_unit": null,
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.vce_given_delayed_probability",
+      "target_unit": null,
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    }
+  ],
+  "entry_count": 256,
+  "scenario_id": "S20_THIRD_PARTY_SURGE",
+  "schema_version": "1.0.0"
+}

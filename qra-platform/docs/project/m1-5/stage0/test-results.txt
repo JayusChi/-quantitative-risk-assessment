@@ -1,0 +1,13 @@
+M1.5 stage 0 regression test summary
+recorded_on=2026-09-01
+command=.\.venv\Scripts\python.exe -m unittest discover -s tests -t . -v
+total=254
+passed=253
+skipped=1
+failures=0
+errors=0
+elapsed_seconds=114.947
+result=OK (skipped=1)
+conditional_skip=tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest.test_real_ocr_provider_smoke
+skip_reason=requires configured real online OCR service and formal scan sample
+

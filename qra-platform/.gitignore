@@ -9,6 +9,7 @@ __pycache__/
 htmlcov/
 build/
 dist/
+output/
 .venv/
 venv/
 .env

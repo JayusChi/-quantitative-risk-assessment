@@ -1,0 +1,1446 @@
+{
+  "model_id": "human.aqt3046.jet_fire_threshold.dynamic.v1",
+  "rows": [
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 1233.4634744925906,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 796.087965502388,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-001",
+      "threshold_distance_m": 470.4633399910375,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 1233.4634744925906,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 796.087965502388,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-002",
+      "threshold_distance_m": 470.4633399910375,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 1233.4634744925906,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 796.087965502388,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-003",
+      "threshold_distance_m": 470.4633399910375,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 1233.4634744925906,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 796.087965502388,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-004",
+      "threshold_distance_m": 470.4633399910375,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-005",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-006",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-007",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-008",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 1328.118058138923,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 857.2934429187371,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-009",
+      "threshold_distance_m": 506.7087141527762,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 1328.118058138923,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 857.2934429187371,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-010",
+      "threshold_distance_m": 506.7087141527762,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-011",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-012",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-013",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-014",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 1253.36573311744,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 808.9563449039026,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-015",
+      "threshold_distance_m": 478.08336400159476,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 1253.36573311744,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 808.9563449039026,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-016",
+      "threshold_distance_m": 478.08336400159476,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-017",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 1300.0871532635038,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 839.1671198325337,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-018",
+      "threshold_distance_m": 495.97380633802095,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-019",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 6.226277654352609,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 3.9925892042129494,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "small_5mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 2.3424896647312243,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 29.564056095421982,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 18.98505407544703,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "medium_25mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 11.156730619749357,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 112.59632532039228,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 72.4133529963853,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "large_100mm",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 42.62554161306835,
+      "threshold_heat_flux_kw_m2": 37.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 1275.405902107304,
+      "threshold_heat_flux_kw_m2": 5.0
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 823.2075573676696,
+      "threshold_heat_flux_kw_m2": 12.5
+    },
+    {
+      "loc_id": "rupture",
+      "segment_id": "SEG-020",
+      "threshold_distance_m": 486.52256277709273,
+      "threshold_heat_flux_kw_m2": 37.5
+    }
+  ],
+  "source": "AQ/T 3046-2013 E.57-E.59"
+}

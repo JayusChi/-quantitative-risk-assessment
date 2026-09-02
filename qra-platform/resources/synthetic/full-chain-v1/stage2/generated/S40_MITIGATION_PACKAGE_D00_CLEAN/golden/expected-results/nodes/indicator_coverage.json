@@ -1,0 +1,136 @@
+{
+  "catalog_id": "qra.pipeline.engineering_indicators.v1",
+  "catalog_status": "STANDARD_TRACEABLE_SCHEMA",
+  "catalog_version": "1.0.0",
+  "coverage_fraction": 0.9852536865783554,
+  "covered_observation_slots": 3942,
+  "expected_observation_slots": 4001,
+  "group_coverage": {
+    "consequence_parameters": {
+      "coverage_fraction": 0.7857142857142857,
+      "covered_observation_slots": 11,
+      "expected_observation_slots": 14,
+      "indicator_definition_count": 14,
+      "name_zh": "物性与人员后果模型参数"
+    },
+    "construction": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "expected_observation_slots": 280,
+      "indicator_definition_count": 14,
+      "name_zh": "施工、焊接与防护设施"
+    },
+    "external_corrosion": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "expected_observation_slots": 320,
+      "indicator_definition_count": 16,
+      "name_zh": "外腐蚀与阴极保护"
+    },
+    "geohazard": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "expected_observation_slots": 320,
+      "indicator_definition_count": 16,
+      "name_zh": "自然与地质灾害"
+    },
+    "geometry_material": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 341,
+      "expected_observation_slots": 341,
+      "indicator_definition_count": 18,
+      "name_zh": "管道几何、材料与设计"
+    },
+    "governance": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 14,
+      "expected_observation_slots": 14,
+      "indicator_definition_count": 14,
+      "name_zh": "项目、文件与数据治理"
+    },
+    "ignition_congestion": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 221,
+      "expected_observation_slots": 221,
+      "indicator_definition_count": 12,
+      "name_zh": "点火源、约束与拥塞"
+    },
+    "inspection_integrity": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "expected_observation_slots": 320,
+      "indicator_definition_count": 16,
+      "name_zh": "检测、缺陷与维修"
+    },
+    "internal_corrosion": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "expected_observation_slots": 280,
+      "indicator_definition_count": 14,
+      "name_zh": "内腐蚀与介质腐蚀性"
+    },
+    "management_emergency": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "expected_observation_slots": 280,
+      "indicator_definition_count": 14,
+      "name_zh": "运行管理、人因与应急"
+    },
+    "manufacturing_defects": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "expected_observation_slots": 240,
+      "indicator_definition_count": 12,
+      "name_zh": "制造与施工缺陷"
+    },
+    "operation_medium": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 265,
+      "expected_observation_slots": 265,
+      "indicator_definition_count": 18,
+      "name_zh": "运行工况与输送介质"
+    },
+    "population_receptors": {
+      "coverage_fraction": 0.5,
+      "covered_observation_slots": 56,
+      "expected_observation_slots": 112,
+      "indicator_definition_count": 14,
+      "name_zh": "人口、建筑与敏感受体"
+    },
+    "scc_fatigue": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "expected_observation_slots": 240,
+      "indicator_definition_count": 12,
+      "name_zh": "应力腐蚀开裂与疲劳"
+    },
+    "third_party": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "expected_observation_slots": 320,
+      "indicator_definition_count": 16,
+      "name_zh": "第三方损伤与占压活动"
+    },
+    "valve_control": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "expected_observation_slots": 280,
+      "indicator_definition_count": 14,
+      "name_zh": "阀室、隔离、监控与泄漏检测"
+    },
+    "weather_terrain": {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 154,
+      "expected_observation_slots": 154,
+      "indicator_definition_count": 12,
+      "name_zh": "气象、地面条件与扩散环境"
+    }
+  },
+  "indicator_definition_count": 246,
+  "method_note": "覆盖率统计原始数据和证据是否存在，不代表指标已经被赋权。指标只有通过已批准的频率修正模型才能改变失效频率。",
+  "missing_required_indicator_ids": [],
+  "required_coverage_fraction": 1.0,
+  "required_covered_observation_slots": 588,
+  "required_expected_observation_slots": 588,
+  "required_indicator_definition_count": 62
+}

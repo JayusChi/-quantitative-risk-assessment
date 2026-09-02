@@ -1,0 +1,4 @@
+﻿data_classification,expected_normalized_value,source_unit,target_path,target_unit,value
+SYNTHETIC_TEST_ONLY,8.0,kPa,pipeline.operating_pressure_mpa,MPa,8000
+SYNTHETIC_TEST_ONLY,1016.0,m,segments.*.outside_diameter_mm,mm,1.016
+SYNTHETIC_TEST_ONLY,18.0,m,segments.*.wall_thickness_mm,mm,0.018

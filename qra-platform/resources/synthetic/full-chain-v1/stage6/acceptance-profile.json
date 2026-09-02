@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "stage": 6,
+  "gate": "S6_CONTROLLED_REPORT_AGENT_ACCEPTED",
+  "expected_check_count": 14,
+  "expected_section_count": 15,
+  "expected_node_count": 11,
+  "expected_formats": ["HTML", "PDF", "DOCX", "ZIP"],
+  "formal_report_allowed": false
+}

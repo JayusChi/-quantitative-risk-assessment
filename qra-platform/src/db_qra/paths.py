@@ -9,8 +9,12 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+_configured_project_root = os.environ.get("QRA_PROJECT_ROOT")
+PROJECT_ROOT = (
+    Path(_configured_project_root).resolve()
+    if _configured_project_root
+    else Path(__file__).resolve().parents[2]
+)
 _configured_workspace = os.environ.get("QRA_WORKSPACE_ROOT")
 WORKSPACE_ROOT = (
     Path(_configured_workspace).resolve()
@@ -27,4 +31,3 @@ __all__ = [
     "PROJECT_ROOT",
     "WORKSPACE_ROOT",
 ]
-

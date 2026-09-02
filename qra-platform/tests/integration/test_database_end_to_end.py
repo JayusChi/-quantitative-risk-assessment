@@ -93,6 +93,13 @@ class DatabaseQraEndToEndTest(unittest.TestCase):
 
                 with urlopen(f"http://{host}:{port}/", timeout=5) as response:
                     self.assertEqual(response.status, 200)
+                    projects = response.read().decode("utf-8")
+                    self.assertIn("QRA 项目工作台", projects)
+                    self.assertIn("加载全合成演示项目", projects)
+                    self.assertNotIn("上传JSON数据", projects)
+                    self.assertNotIn("数据库只读视图", projects)
+                with urlopen(f"http://{host}:{port}/admin/", timeout=5) as response:
+                    self.assertEqual(response.status, 200)
                     admin = response.read().decode("utf-8")
                     self.assertIn("SIGA 风险智控", admin)
                     self.assertIn("上传JSON数据", admin)

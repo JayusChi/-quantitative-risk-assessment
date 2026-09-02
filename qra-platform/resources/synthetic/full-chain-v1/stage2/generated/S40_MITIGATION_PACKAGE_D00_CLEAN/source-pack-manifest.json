@@ -1,0 +1,213 @@
+{
+  "business_content_sha256": "e9abfa2c9550056e361f73c4501178693eddfb000a6af36cf380355e611e8d8e",
+  "byte_manifest_sha256": "7098090dfa1962de9061b657bbf9667dabc98619e73d1e11d18efaf5ffb254b8",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "data_condition_id": "D00_CLEAN",
+  "files": [
+    {
+      "business_sha256": "3e03184bf9087d35acdfd6260c1ceee9328de90249cf0b21edaa1483dc746c21",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "source-documents/01_管线与管段台账.xlsx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "11471a80bda29b1a454ff18c3fbfea9f1d9f3761dfd76271f5015f74e306abb6",
+      "size_bytes": 19577,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "6f1f129f15a406602bfaa680cb48626bbe1384358b91f224e60df0bdd836a4a2",
+      "media_type": "text/csv",
+      "path": "source-documents/02_运行工况.csv",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "ac6c77765afdcca59e5f4eb3ddb808d62697a9fd14d44c49a26b3baaeea771dd",
+      "size_bytes": 13490,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "e9b3e3e12e5e8dbc075475a9547d81163b109e1a6485e211207bb7d9a067667c",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "source-documents/03_天然气组分.xlsx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "c368ee6bad74b33d4f359ffef86ec387de71cbb356bdb6c42f269b769012e2da",
+      "size_bytes": 8961,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "7b0a5a0278ab7238c6357be55824232990fc532ed746ed3382e507df2ec271b6",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "source-documents/04_CIPS与腐蚀检测.xlsx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "1920acb68320b3333b54c4cde8718bff19ce329d057a183a625a5bb725f2b076",
+      "size_bytes": 13076,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "8ae77c19bbca58a01f37fa2e2d62c0cc4a7d92625db5412ec47e94fce0a7d55e",
+      "media_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "path": "source-documents/05_缺陷与维修记录.docx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "b7507d0c35b9fc9e0f5a79518dce02e09f7482cd6d03c480f3b7c6a1d155a4f1",
+      "size_bytes": 42240,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "af1cc564f6a15fdf87a8d02dbb55bbb47b07c0ff58d22fcf7fea3bdf86858505",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "source-documents/06_第三方与巡线记录.xlsx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "4c934506e6370471a3ac730319b09f40ba1a5dd08c82bd2dc84d94993206542a",
+      "size_bytes": 13800,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "5a96a220a6e35e367a61d1d56157bb6eecc91459137b4c80b637029e0d8dc1e8",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "path": "source-documents/07_人口和敏感受体.xlsx",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "db45ae85c2d18ea8efab3b2e6eb5bfe8c2bb4003f507faa6cec8f16c4142341e",
+      "size_bytes": 12570,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "5a503a2bab5a6f676c6dcab12e939c6f72ac33c72ec3c60dcab081e264de85c1",
+      "media_type": "text/csv",
+      "path": "source-documents/08_气象联合概率.csv",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "1a6b6f33846b484930e6f20dc763fdd0a822ebec5254fefe17caa510666c44cd",
+      "size_bytes": 5877,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "78c0eea6fa824413461e56f01352bd8b7aa01f4eb3644ea3dc5c743798a35c97",
+      "media_type": "application/pdf",
+      "path": "source-documents/09_现场检查扫描件.pdf",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "80fecd82b1395402ff3ae16cfd538399b2dfd303661ab2eb60ca665fa56f6b1d",
+      "size_bytes": 2737913,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "de7eb54191764470b5918ec735f8bbf526fb065fb086209082ad88291e934542",
+      "media_type": "image/png",
+      "path": "source-documents/10_现场照片说明.png",
+      "role": "SOURCE_DOCUMENT",
+      "sha256": "eb4b7f4401a75c2b4cbb7a55527bac0bf374acee09e9c852bbf99ce3e7fa20be",
+      "size_bytes": 185473,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "1840bc461c1ac41d0c763131ff0b61d8d56afd1321e78c71b14d12e4fbb736de",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-consequence-parameters-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "04d6bf792b3f45245901c76b588c9828d3dfe020122435a2f89874571edd93ba",
+      "size_bytes": 72931,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "0c5624361cef98d9a0ffb5e2c347a4ebd6de3733fc5ae2fd9ae78e15d1f40494",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-frequency-correction-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "7da5fd556c84ea08f3a7a7631b60624add7a8d601d7e93f722f643987a2969a2",
+      "size_bytes": 8806,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "0b243a0c031a96ece0c831642b6de38958e388c6d68877b8855f00ca392b9247",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-frequency-library-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "39195942fda1a53b5c032ca41f2d96263fc475f079378c40ec5658c0085a7527",
+      "size_bytes": 5035,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "93539ea0ac7b7284b50774b1da506f7af88b4073736532c4a743ab63449d42cc",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-ignition-model-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "7600eaf949efe9affaf41edb1a4fcb55242a18c255188da769000bad75e63221",
+      "size_bytes": 3904,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "9d5a2630826ace7d33cad96cfd2b9f60b3acd9b4a80afb9113a3fd50f8c0a229",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-model-validation-fixture-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "c3ee9337c52999cbe80f5d9fdc20b1f55cfc6eb92b3890d16571b6dba32f1e65",
+      "size_bytes": 20589,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "bdaae3e4ea829f3434b19cdcb6fa59450f095069dfcaae46163c04fffaf14606",
+      "media_type": "application/json",
+      "path": "parameter-packs/synthetic-risk-criteria-v1.json",
+      "role": "PARAMETER_PACK",
+      "sha256": "6dd03292b8ebc4b5071910b6dff8343b8818d711890898a51bb1572751102ab5",
+      "size_bytes": 1599,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "6f19bc7e2f301512260713a8b45b5915b8791a0954b38470153912f40de5a645",
+      "media_type": "application/json",
+      "path": "golden/ground-truth.json",
+      "role": "GOLDEN_ANSWER",
+      "sha256": "96ddac4bce9bfbb0cf1d3dcf5db30aa53d21574ecf6ece50d12e700f4345bbff",
+      "size_bytes": 231551,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "5481c2f0ba4fe90d88baade1e0c45bf36b1870edde3a8347ea602cb99717fadf",
+      "media_type": "application/json",
+      "path": "golden/evidence-manifest.json",
+      "role": "GOLDEN_ANSWER",
+      "sha256": "08224139bfff8bbb8af1c495f8d27bb2c83075136c3cd097c43ba5d498e423ac",
+      "size_bytes": 166682,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "d959bf60c79c269f262fe18c3ab2504a813d7438a7685a0894acb593e0c521e7",
+      "media_type": "application/json",
+      "path": "golden/expected-snapshot.json",
+      "role": "GOLDEN_ANSWER",
+      "sha256": "05e3cacfada65ca0630633a2cfcb59f6e5a8296db9db576e1f7ee2226f321ca8",
+      "size_bytes": 294238,
+      "synthetic_marker_verified": true
+    },
+    {
+      "business_sha256": "d8833461a63a6c6c7f070c4340a0eadca920328d482cf1dd95bb5539cabc8529",
+      "media_type": "application/json",
+      "path": "golden/expected-result.json",
+      "role": "GOLDEN_ANSWER",
+      "sha256": "99276e3e64d95188b2abf8c530bc4f0fea377a25ab1d1668abef6f979fb7eb6f",
+      "size_bytes": 1567,
+      "synthetic_marker_verified": true
+    }
+  ],
+  "generator": {
+    "deterministic": true,
+    "id": "build_synthetic_source_pack.py",
+    "random_seed": null,
+    "version": "qra.synthetic-source-pack/1.1.0"
+  },
+  "golden": {
+    "evidence_manifest": "golden/evidence-manifest.json",
+    "expected_result": "golden/expected-result.json",
+    "expected_snapshot": "golden/expected-snapshot.json",
+    "ground_truth": "golden/ground-truth.json",
+    "numerical_result_sha256": "24fe1b913fa592457823f6806a24459cb3dff17772a89a926307904163649928"
+  },
+  "pack_id": "SYNTHETIC-SOURCE-PACK-S40-D00-v1",
+  "parameter_packs": [
+    "synthetic-consequence-parameters-v1",
+    "synthetic-frequency-correction-v1",
+    "synthetic-frequency-library-v1",
+    "synthetic-ignition-model-v1",
+    "synthetic-model-validation-fixture-v1",
+    "synthetic-risk-criteria-v1"
+  ],
+  "scenario_id": "S40_MITIGATION_PACKAGE",
+  "schema_version": "1.0.0",
+  "variants": []
+}

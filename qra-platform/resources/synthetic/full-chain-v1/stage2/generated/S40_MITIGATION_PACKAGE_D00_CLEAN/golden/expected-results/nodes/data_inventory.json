@@ -1,0 +1,362 @@
+{
+  "all_indicator_groups": [
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 14,
+      "data_group_id": "governance",
+      "detected": true,
+      "expected_observation_slots": 14,
+      "name_zh": "项目、文件与数据治理"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 341,
+      "data_group_id": "geometry_material",
+      "detected": true,
+      "expected_observation_slots": 341,
+      "name_zh": "管道几何、材料与设计"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "construction",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "施工、焊接与防护设施"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 265,
+      "data_group_id": "operation_medium",
+      "detected": true,
+      "expected_observation_slots": 265,
+      "name_zh": "运行工况与输送介质"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "valve_control",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "阀室、隔离、监控与泄漏检测"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "external_corrosion",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "外腐蚀与阴极保护"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "internal_corrosion",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "内腐蚀与介质腐蚀性"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "data_group_id": "scc_fatigue",
+      "detected": true,
+      "expected_observation_slots": 240,
+      "name_zh": "应力腐蚀开裂与疲劳"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "data_group_id": "manufacturing_defects",
+      "detected": true,
+      "expected_observation_slots": 240,
+      "name_zh": "制造与施工缺陷"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "third_party",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "第三方损伤与占压活动"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "geohazard",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "自然与地质灾害"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "inspection_integrity",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "检测、缺陷与维修"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 154,
+      "data_group_id": "weather_terrain",
+      "detected": true,
+      "expected_observation_slots": 154,
+      "name_zh": "气象、地面条件与扩散环境"
+    },
+    {
+      "coverage_fraction": 0.5,
+      "covered_observation_slots": 56,
+      "data_group_id": "population_receptors",
+      "detected": true,
+      "expected_observation_slots": 112,
+      "name_zh": "人口、建筑与敏感受体"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 221,
+      "data_group_id": "ignition_congestion",
+      "detected": true,
+      "expected_observation_slots": 221,
+      "name_zh": "点火源、约束与拥塞"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "management_emergency",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "运行管理、人因与应急"
+    },
+    {
+      "coverage_fraction": 0.7857142857142857,
+      "covered_observation_slots": 11,
+      "data_group_id": "consequence_parameters",
+      "detected": true,
+      "expected_observation_slots": 14,
+      "name_zh": "物性与人员后果模型参数"
+    }
+  ],
+  "data_categories": {
+    "categories": [
+      {
+        "category_id": "asset_register",
+        "name_zh": "管线与管段台账",
+        "record_count": 1
+      },
+      {
+        "category_id": "operating_conditions",
+        "name_zh": "运行工况",
+        "record_count": 1
+      },
+      {
+        "category_id": "gas_composition",
+        "name_zh": "天然气组分",
+        "record_count": 1
+      },
+      {
+        "category_id": "integrity_inspection",
+        "name_zh": "CIPS与腐蚀检测",
+        "record_count": 1
+      },
+      {
+        "category_id": "defects_repairs",
+        "name_zh": "缺陷与维修记录",
+        "record_count": 1
+      },
+      {
+        "category_id": "third_party_patrol",
+        "name_zh": "第三方与巡线记录",
+        "record_count": 1
+      },
+      {
+        "category_id": "population_receptors",
+        "name_zh": "人口和敏感受体",
+        "record_count": 1
+      },
+      {
+        "category_id": "weather_joint_probability",
+        "name_zh": "气象联合概率",
+        "record_count": 1
+      },
+      {
+        "category_id": "site_inspection",
+        "name_zh": "现场检查扫描件",
+        "record_count": 1
+      },
+      {
+        "category_id": "site_photo_context",
+        "name_zh": "现场照片说明",
+        "record_count": 1
+      }
+    ],
+    "category_count": 10,
+    "definition": "EXPLICIT_DATA_CATEGORY_MANIFEST"
+  },
+  "detected_indicator_group_count": 17,
+  "detected_indicator_groups": [
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 14,
+      "data_group_id": "governance",
+      "detected": true,
+      "expected_observation_slots": 14,
+      "name_zh": "项目、文件与数据治理"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 341,
+      "data_group_id": "geometry_material",
+      "detected": true,
+      "expected_observation_slots": 341,
+      "name_zh": "管道几何、材料与设计"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "construction",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "施工、焊接与防护设施"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 265,
+      "data_group_id": "operation_medium",
+      "detected": true,
+      "expected_observation_slots": 265,
+      "name_zh": "运行工况与输送介质"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "valve_control",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "阀室、隔离、监控与泄漏检测"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "external_corrosion",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "外腐蚀与阴极保护"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "internal_corrosion",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "内腐蚀与介质腐蚀性"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "data_group_id": "scc_fatigue",
+      "detected": true,
+      "expected_observation_slots": 240,
+      "name_zh": "应力腐蚀开裂与疲劳"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 240,
+      "data_group_id": "manufacturing_defects",
+      "detected": true,
+      "expected_observation_slots": 240,
+      "name_zh": "制造与施工缺陷"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "third_party",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "第三方损伤与占压活动"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "geohazard",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "自然与地质灾害"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 320,
+      "data_group_id": "inspection_integrity",
+      "detected": true,
+      "expected_observation_slots": 320,
+      "name_zh": "检测、缺陷与维修"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 154,
+      "data_group_id": "weather_terrain",
+      "detected": true,
+      "expected_observation_slots": 154,
+      "name_zh": "气象、地面条件与扩散环境"
+    },
+    {
+      "coverage_fraction": 0.5,
+      "covered_observation_slots": 56,
+      "data_group_id": "population_receptors",
+      "detected": true,
+      "expected_observation_slots": 112,
+      "name_zh": "人口、建筑与敏感受体"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 221,
+      "data_group_id": "ignition_congestion",
+      "detected": true,
+      "expected_observation_slots": 221,
+      "name_zh": "点火源、约束与拥塞"
+    },
+    {
+      "coverage_fraction": 1.0,
+      "covered_observation_slots": 280,
+      "data_group_id": "management_emergency",
+      "detected": true,
+      "expected_observation_slots": 280,
+      "name_zh": "运行管理、人因与应急"
+    },
+    {
+      "coverage_fraction": 0.7857142857142857,
+      "covered_observation_slots": 11,
+      "data_group_id": "consequence_parameters",
+      "detected": true,
+      "expected_observation_slots": 14,
+      "name_zh": "物性与人员后果模型参数"
+    }
+  ],
+  "explicit_engineering_observation_count": 908,
+  "note": "数据类别数量只用于盘点；算法能否运行由具体必需字段、单位、覆盖范围和上游结果共同决定。",
+  "registered_indicator_group_count": 17,
+  "schema_version": "1.3.0",
+  "top_level_section_count": 20,
+  "top_level_sections": [
+    "assessment",
+    "data_category_manifest",
+    "engineering_indicators",
+    "extensions",
+    "frequency_correction_model",
+    "frequency_library",
+    "ignition_model",
+    "metadata",
+    "pipeline",
+    "population_cells",
+    "raw_data_categories",
+    "risk_matrix_criteria",
+    "schema_version",
+    "segment_correction_factor",
+    "segments",
+    "standard_formula_test_parameters",
+    "synthetic_test_edition",
+    "system_parameters",
+    "validation_expectations",
+    "weather_joint_probability"
+  ]
+}

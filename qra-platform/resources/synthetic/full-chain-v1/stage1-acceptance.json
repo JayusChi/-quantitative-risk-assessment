@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "all_dictionary_fields_exported": true,
+    "all_eleven_nodes_exported": true,
+    "all_explicit_schema_fields_exported": true,
+    "all_model_parameters_have_versioned_packs": true,
+    "all_project_facts_have_raw_documents": true,
+    "all_required_node_inputs_have_sources": true,
+    "all_run_assumptions_are_explicit": true,
+    "no_unregistered_silent_zero_default": true,
+    "stage1_freeze_implementation_gaps_are_classified": true
+  },
+  "counts": {
+    "blocking_field_count": 77,
+    "explicit_schema_field_count": 72,
+    "field_dictionary_field_count": 280,
+    "historical_coverage_gap_field_count_at_stage1_freeze": 218,
+    "matrix_field_count": 361,
+    "model_parameter_count": 68,
+    "node_count": 11,
+    "optional_node_input_count": 14,
+    "project_fact_count": 260,
+    "required_node_input_count": 115,
+    "run_assumption_count": 33,
+    "runtime_review_field_count": 60
+  },
+  "errors": [],
+  "passed": true,
+  "schema_version": "1.0.0",
+  "stage_id": "S1",
+  "status": "S1_FULL_CONTRACT_MAPPED"
+}

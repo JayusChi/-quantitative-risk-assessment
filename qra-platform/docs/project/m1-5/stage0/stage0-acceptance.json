@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0.0",
+  "record_id": "M1.5-S0-20260901",
+  "recorded_on": "2026-09-01",
+  "milestone_id": "M1.5",
+  "stage_id": "S0",
+  "status": "S0_BASELINE_FROZEN",
+  "next_stage_allowed": true,
+  "source_requirement_document": {
+    "path": "../合成数据跑通项目.md",
+    "sha256": "cfd9441dc8d7e572892c193b8913320b7fc8f3f39460949ed2b94af313d075ce",
+    "git_tracked_at_capture": false
+  },
+  "git": {
+    "branch": "codex/stage0-takeover-20260828",
+    "head": "1ebdc65c6169f6c5a999c80bfa9b7c74f3b1a99f",
+    "tree": "e8bf0ea9759ff36b264b21822157e397afc3da56",
+    "rollback_tag": "roadmap-stage4-internal-pilot-20260901",
+    "tracked_worktree_clean_at_capture": true,
+    "untracked_requirement_document_present": true
+  },
+  "runtime": {
+    "python": "3.10.11",
+    "package": "pipeline-qra-platform 0.9.1",
+    "dependencies_healthy": true,
+    "database_schema_version": "2.1.0",
+    "database_table_count": 33,
+    "dynamic_schema_version": "1.3.0",
+    "dynamic_node_count": 11
+  },
+  "architecture_check": {
+    "status": "PASS",
+    "message": "ARCHITECTURE CHECK PASSED"
+  },
+  "tests": {
+    "status": "PASS",
+    "total": 254,
+    "passed": 253,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 114.947,
+    "conditional_skip": "tests.integration.test_document_parsing_pipeline.DocumentParsingPipelineIntegrationTest.test_real_ocr_provider_smoke"
+  },
+  "new_environment_smoke": {
+    "status": "PASS",
+    "imports": "PASS",
+    "database_initialization": "PASS",
+    "cli_startup": "PASS",
+    "dynamic_node_count": 11,
+    "database_schema_version": "2.1.0"
+  },
+  "synthetic_scenarios": {
+    "status": "PASSED_ALL_SYNTHETIC_SCENARIOS",
+    "scenario_count": 5,
+    "all_scenarios_passed": true,
+    "all_response_checks_passed": true,
+    "all_scenarios_completed_11_of_11": true,
+    "zero_real_project_data": true,
+    "formal_report_allowed": false,
+    "numerical_result_hashes": {
+      "S00_BASELINE": "4004e9ae58881a78beda9fd0f042776cd683f635674d1ba69d80757752a1b29c",
+      "S10_CORROSION_DEGRADATION": "93b0a545a9ed993029557d43218c131b60c73fe576003fcd4f7aa4352be77cbf",
+      "S20_THIRD_PARTY_SURGE": "c17fd6595aa3ee80d08d2b8585b1e34eb7f7f4723785cf98f4c543e7f252151c",
+      "S30_HIGH_PRESSURE_POPULATION_PEAK": "ff13ef3e5dacb9fe91de81bb06ba25ed3760d5bed1797248103cc942dde3408d",
+      "S40_MITIGATION_PACKAGE": "72fdd681bb0a88098502c9fec0c90b978df2385474e1e3027171631bcf8e99bb"
+    }
+  },
+  "frozen_scope": {
+    "product_level": "DEMO_SYNTHETIC",
+    "first_acceptance_chain": "S00_BASELINE × D00_CLEAN",
+    "target_node_count": 11,
+    "canonical_json_may_replace_raw_documents": false,
+    "formal_report_allowed": false,
+    "final_milestone_status": "M1_5_FULL_SYNTHETIC_END_TO_END_ACCEPTED"
+  },
+  "stage_gate": {
+    "new_environment_starts": true,
+    "tests_have_no_regression_failure": true,
+    "five_synthetic_scenarios_pass": true,
+    "demo_is_not_formal_qra_boundary_is_explicit": true
+  }
+}
+

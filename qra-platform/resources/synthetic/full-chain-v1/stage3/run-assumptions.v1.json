@@ -1,0 +1,366 @@
+{
+  "binding_id": "run-assumption:S00_BASELINE-v1",
+  "business_content_sha256": "35e43ba7712d06183f5a7c33f6d75dea3ea7c225058134701ae7a02d8e6cc3a9",
+  "schema_version": "1.0.0",
+  "values": [
+    {
+      "field_id": "assessment",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment",
+      "value": {
+        "as_of": "2026-08-26",
+        "assessment_id": "RA-S00_BASELINE",
+        "convergence": {
+          "contour_distance_change_m": 10.0,
+          "max_ir_relative_change": 0.05,
+          "pll_relative_change": 0.05
+        },
+        "coordinate_system": "LOCAL_CARTESIAN_METRE",
+        "criteria_set_by_domain": {
+          "asset": null,
+          "environment": null,
+          "human": "GBT34346_2017_ANNEX_C_FIG_C2_REFERENCE_IR",
+          "service": null
+        },
+        "enabled_consequence_domains": [
+          "human",
+          "asset",
+          "environment",
+          "service"
+        ],
+        "failure_probability_horizon_years": 1.0,
+        "judgement_status_by_domain": {
+          "asset": "CALCULATED_NOT_JUDGED",
+          "environment": "CALCULATED_NOT_JUDGED",
+          "human": "IR_JUDGED_WITH_GBT34346_REFERENCE_FN_NOT_JUDGED",
+          "service": "CALCULATED_NOT_JUDGED"
+        },
+        "leak_point_initial_spacing_m": 50.0,
+        "reference_height_m": 1.0
+      }
+    },
+    {
+      "field_id": "assessment.as_of",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.as_of",
+      "value": "2026-08-26"
+    },
+    {
+      "field_id": "assessment.assessment_id",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.assessment_id",
+      "value": "RA-S00_BASELINE"
+    },
+    {
+      "field_id": "assessment.convergence",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.convergence",
+      "value": {
+        "contour_distance_change_m": 10.0,
+        "max_ir_relative_change": 0.05,
+        "pll_relative_change": 0.05
+      }
+    },
+    {
+      "field_id": "assessment.criteria_set_by_domain",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.criteria_set_by_domain",
+      "value": {
+        "asset": null,
+        "environment": null,
+        "human": "GBT34346_2017_ANNEX_C_FIG_C2_REFERENCE_IR",
+        "service": null
+      }
+    },
+    {
+      "field_id": "assessment.enabled_consequence_domains",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.enabled_consequence_domains",
+      "value": [
+        "human",
+        "asset",
+        "environment",
+        "service"
+      ]
+    },
+    {
+      "field_id": "assessment.failure_probability_horizon_years",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.failure_probability_horizon_years",
+      "value": 1.0
+    },
+    {
+      "field_id": "assessment.judgement_status_by_domain",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.judgement_status_by_domain",
+      "value": {
+        "asset": "CALCULATED_NOT_JUDGED",
+        "environment": "CALCULATED_NOT_JUDGED",
+        "human": "IR_JUDGED_WITH_GBT34346_REFERENCE_FN_NOT_JUDGED",
+        "service": "CALCULATED_NOT_JUDGED"
+      }
+    },
+    {
+      "field_id": "assessment.leak_point_initial_spacing_m",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.leak_point_initial_spacing_m",
+      "value": 50.0
+    },
+    {
+      "field_id": "assessment.reference_height_m",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "assessment.reference_height_m",
+      "value": 1.0
+    },
+    {
+      "field_id": "data_category_manifest",
+      "source_document": "system-generated:source-pack-manifest-v1",
+      "target_path": "data_category_manifest",
+      "value": {
+        "categories": [
+          {
+            "category_id": "asset_register",
+            "name_zh": "管线与管段台账",
+            "record_count": 1
+          },
+          {
+            "category_id": "operating_conditions",
+            "name_zh": "运行工况",
+            "record_count": 1
+          },
+          {
+            "category_id": "gas_composition",
+            "name_zh": "天然气组分",
+            "record_count": 1
+          },
+          {
+            "category_id": "integrity_inspection",
+            "name_zh": "CIPS与腐蚀检测",
+            "record_count": 1
+          },
+          {
+            "category_id": "defects_repairs",
+            "name_zh": "缺陷与维修记录",
+            "record_count": 1
+          },
+          {
+            "category_id": "third_party_patrol",
+            "name_zh": "第三方与巡线记录",
+            "record_count": 1
+          },
+          {
+            "category_id": "population_receptors",
+            "name_zh": "人口和敏感受体",
+            "record_count": 1
+          },
+          {
+            "category_id": "weather_joint_probability",
+            "name_zh": "气象联合概率",
+            "record_count": 1
+          },
+          {
+            "category_id": "site_inspection",
+            "name_zh": "现场检查扫描件",
+            "record_count": 1
+          },
+          {
+            "category_id": "site_photo_context",
+            "name_zh": "现场照片说明",
+            "record_count": 1
+          }
+        ],
+        "category_count": 10
+      }
+    },
+    {
+      "field_id": "engineering_indicators.catalog_id",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "engineering_indicators.catalog_id",
+      "value": "qra.pipeline.engineering_indicators.v1"
+    },
+    {
+      "field_id": "engineering_indicators.catalog_version",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "engineering_indicators.catalog_version",
+      "value": "1.0.0"
+    },
+    {
+      "field_id": "engineering_indicators.data_classification",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "engineering_indicators.data_classification",
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "field_id": "engineering_indicators.description",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "engineering_indicators.description",
+      "value": "用于验证指标注册、证据追踪、原型继承和修正模型接口；所有值均为人工构造"
+    },
+    {
+      "field_id": "engineering_indicators.segment_archetype",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "engineering_indicators.segment_archetype",
+      "value": {
+        "SEG-001": "RURAL",
+        "SEG-002": "RURAL",
+        "SEG-003": "RURAL",
+        "SEG-004": "RURAL",
+        "SEG-005": "VILLAGE",
+        "SEG-006": "VILLAGE",
+        "SEG-007": "VILLAGE",
+        "SEG-008": "VILLAGE",
+        "SEG-009": "DENSE",
+        "SEG-010": "DENSE",
+        "SEG-011": "DENSE",
+        "SEG-012": "DENSE",
+        "SEG-013": "INDUSTRIAL",
+        "SEG-014": "INDUSTRIAL",
+        "SEG-015": "INDUSTRIAL",
+        "SEG-016": "INDUSTRIAL",
+        "SEG-017": "GEOHAZARD",
+        "SEG-018": "GEOHAZARD",
+        "SEG-019": "GEOHAZARD",
+        "SEG-020": "GEOHAZARD"
+      }
+    },
+    {
+      "field_id": "extensions",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "extensions",
+      "value": {
+        "synthetic_contract_completion": {
+          "data_classification": "SYNTHETIC_TEST_ONLY",
+          "profile_id": "full-chain-v1-offline-defaults",
+          "scenario_id": "S00_BASELINE"
+        }
+      }
+    },
+    {
+      "field_id": "metadata.allowed_use",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.allowed_use",
+      "value": [
+        "software_development",
+        "algorithm_verification",
+        "regression_test",
+        "training_demo"
+      ]
+    },
+    {
+      "field_id": "metadata.case_id",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.case_id",
+      "value": "SYN-TEST-EDITION-V1-S00_BASELINE"
+    },
+    {
+      "field_id": "metadata.conversion_scope",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.conversion_scope",
+      "value": "FULL_361_FIELD_CONTRACT_SYNTHETIC_OFFLINE"
+    },
+    {
+      "field_id": "metadata.converter_note",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.converter_note",
+      "value": "按现有合同和全合成默认口径补齐；未调用外部模型。"
+    },
+    {
+      "field_id": "metadata.created_at",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.created_at",
+      "value": "2026-08-26"
+    },
+    {
+      "field_id": "metadata.data_classification",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.data_classification",
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "field_id": "metadata.explicit_data_gaps",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.explicit_data_gaps",
+      "value": []
+    },
+    {
+      "field_id": "metadata.formal_qra_allowed",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.formal_qra_allowed",
+      "value": false
+    },
+    {
+      "field_id": "metadata.model_id",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.model_id",
+      "value": "QRA.NG.PIPELINE.MULTI_CONSEQUENCE.v1"
+    },
+    {
+      "field_id": "metadata.name",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.name",
+      "value": "全合成QRA测试版：基准场景"
+    },
+    {
+      "field_id": "metadata.prohibited_use",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.prohibited_use",
+      "value": [
+        "real_asset_assessment",
+        "formal_qra_report",
+        "regulatory_submission",
+        "safety_decision",
+        "parameter_calibration_claim"
+      ]
+    },
+    {
+      "field_id": "metadata.project_name",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.project_name",
+      "value": "全合成QRA测试版：基准场景"
+    },
+    {
+      "field_id": "metadata.run_profile",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.run_profile",
+      "value": "engineering_test"
+    },
+    {
+      "field_id": "metadata.version",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.version",
+      "value": "1.0.0"
+    },
+    {
+      "field_id": "metadata.warning",
+      "source_document": "project-wizard:S00_BASELINE",
+      "target_path": "metadata.warning",
+      "value": "SYNTHETIC_TEST_ONLY；不得用于真实资产评价或正式QRA。"
+    },
+    {
+      "field_id": "schema_version",
+      "source_document": "run-assumption:S00_BASELINE-v1",
+      "target_path": "schema_version",
+      "value": "1.0.0"
+    },
+    {
+      "field_id": "synthetic_test_edition",
+      "source_document": "system-metadata:SYNTHETIC_TEST_ONLY-v1",
+      "target_path": "synthetic_test_edition",
+      "value": {
+        "changes": [],
+        "description": "20段虚拟埋地天然气管道，包含农村、村庄、学校、工业和地灾区。",
+        "deterministic_generation": true,
+        "edition_id": "QRA-SYNTHETIC-TEST-EDITION-V1",
+        "expected_relation": "reference",
+        "formal_release_allowed": false,
+        "random_seed": null,
+        "scenario_id": "S00_BASELINE",
+        "scenario_name_zh": "基准场景",
+        "template": "tests/fixtures/qra_synthetic_case_v1.json",
+        "warning": "全部资产、现场、人口、气象、频率和物理参数均为人工合成；结果只验证软件链路和场景响应，不代表任何真实管道。",
+        "zero_real_project_data": true
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

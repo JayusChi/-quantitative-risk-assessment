@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pipeline-qra-platform"
-version = "0.9.1"
+version = "1.0.0"
 description = "陆上埋地天然气输送管道 QRA 计算、数据转换与持久化平台"
 readme = {text = "天然气输送管道定量风险评估、源资料转换与持久化平台。完整使用说明见代码库外层 README.md。", content-type = "text/markdown"}
 requires-python = ">=3.10"
@@ -14,8 +14,13 @@ dependencies = [
     "Pillow>=11,<13",
     "pdfplumber>=0.11,<1",
     "pypdf>=5,<7",
+    "python-docx>=1.1,<2",
+    "reportlab>=4,<5",
     "xlrd>=2.0,<3",
 ]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
 
 [project.scripts]
 qra-engine = "qra_engine.cli:main"

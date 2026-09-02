@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "full-chain-v1-offline-defaults",
+  "baseline_relation": "SUPERSEDES_STAGE0_FOR_FULL_361_FIELD_SOURCE_PACK_ONLY",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "scenarios": [
+    {
+      "scenario_id": "S00_BASELINE",
+      "numerical_result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286"
+    },
+    {
+      "scenario_id": "S10_CORROSION_DEGRADATION",
+      "numerical_result_sha256": "c05361b1d1dc865e432c94c1137f6baa8cf64a45dfa3f080ec7c2c4769abc679"
+    },
+    {
+      "scenario_id": "S20_THIRD_PARTY_SURGE",
+      "numerical_result_sha256": "4a6411d80f33e0ed145a576515d812e42d2201193affd1d528f937560c9703e2"
+    },
+    {
+      "scenario_id": "S30_HIGH_PRESSURE_POPULATION_PEAK",
+      "numerical_result_sha256": "06ed2cbd5388e8262fd965e83fd2dfad67b79fc309b68b4257c4b7b1f2cc69af"
+    },
+    {
+      "scenario_id": "S40_MITIGATION_PACKAGE",
+      "numerical_result_sha256": "24fe1b913fa592457823f6806a24459cb3dff17772a89a926307904163649928"
+    }
+  ]
+}

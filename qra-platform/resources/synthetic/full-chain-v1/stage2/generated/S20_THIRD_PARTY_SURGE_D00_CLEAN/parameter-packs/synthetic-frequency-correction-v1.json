@@ -1,0 +1,246 @@
+{
+  "business_content_sha256": "de566c4ed84ef6b5f283ece186ce64c7b1cb519695cff0403bdaed94f136318d",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-frequency-correction-v1",
+  "parameters": [
+    {
+      "criticality": "BLOCKING",
+      "field_id": "frequency_correction_model",
+      "target_path": "frequency_correction_model",
+      "unit": null,
+      "value": {
+        "model_id": "frequency.correction.synthetic_provided.v1",
+        "model_type": "provided_factors",
+        "source": "SY/T 6891.2-2020 Annex A formula A.1; synthetic uncalibrated K_j values",
+        "status": "SYNTHETIC_TEST_ONLY",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_correction_model.model_id",
+      "target_path": "frequency_correction_model.model_id",
+      "unit": null,
+      "value": "frequency.correction.synthetic_provided.v1"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_correction_model.model_type",
+      "target_path": "frequency_correction_model.model_type",
+      "unit": null,
+      "value": "provided_factors"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_correction_model.source",
+      "target_path": "frequency_correction_model.source",
+      "unit": null,
+      "value": "SY/T 6891.2-2020 Annex A formula A.1; synthetic uncalibrated K_j values"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_correction_model.status",
+      "target_path": "frequency_correction_model.status",
+      "unit": null,
+      "value": "SYNTHETIC_TEST_ONLY"
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "frequency_correction_model.version",
+      "target_path": "frequency_correction_model.version",
+      "unit": null,
+      "value": "1.0.0"
+    },
+    {
+      "criticality": "BLOCKING",
+      "field_id": "segment_correction_factor",
+      "target_path": "segment_correction_factor",
+      "unit": null,
+      "value": {
+        "SEG-001": {
+          "external_corrosion": 0.7,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.6,
+          "misoperation": 0.5,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.7,
+          "third_party_damage": 0.5
+        },
+        "SEG-002": {
+          "external_corrosion": 0.7,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.6,
+          "misoperation": 0.5,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.7,
+          "third_party_damage": 0.5
+        },
+        "SEG-003": {
+          "external_corrosion": 0.7,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.6,
+          "misoperation": 0.5,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.7,
+          "third_party_damage": 0.5
+        },
+        "SEG-004": {
+          "external_corrosion": 0.7,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.6,
+          "misoperation": 0.5,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.7,
+          "third_party_damage": 0.5
+        },
+        "SEG-005": {
+          "external_corrosion": 0.9,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.7,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 1.8
+        },
+        "SEG-006": {
+          "external_corrosion": 0.9,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.7,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 1.8
+        },
+        "SEG-007": {
+          "external_corrosion": 0.9,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.7,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 5.04
+        },
+        "SEG-008": {
+          "external_corrosion": 0.9,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.7,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 5.04
+        },
+        "SEG-009": {
+          "external_corrosion": 1.0,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 4.199999999999999
+        },
+        "SEG-010": {
+          "external_corrosion": 1.0,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 4.199999999999999
+        },
+        "SEG-011": {
+          "external_corrosion": 1.0,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 4.199999999999999
+        },
+        "SEG-012": {
+          "external_corrosion": 1.0,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.8,
+          "natural_geohazard": 0.5,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 4.199999999999999
+        },
+        "SEG-013": {
+          "external_corrosion": 0.8,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.7,
+          "misoperation": 1.2,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 3.36
+        },
+        "SEG-014": {
+          "external_corrosion": 0.8,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.7,
+          "misoperation": 1.2,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 3.36
+        },
+        "SEG-015": {
+          "external_corrosion": 0.8,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.7,
+          "misoperation": 1.2,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 3.36
+        },
+        "SEG-016": {
+          "external_corrosion": 0.8,
+          "internal_corrosion": 0.9,
+          "manufacturing_construction": 0.7,
+          "misoperation": 1.2,
+          "natural_geohazard": 0.4,
+          "stress_corrosion_cracking": 0.8,
+          "third_party_damage": 3.36
+        },
+        "SEG-017": {
+          "external_corrosion": 1.1,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.6,
+          "natural_geohazard": 3.0,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 0.5
+        },
+        "SEG-018": {
+          "external_corrosion": 1.1,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.6,
+          "natural_geohazard": 3.0,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 0.5
+        },
+        "SEG-019": {
+          "external_corrosion": 1.1,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.6,
+          "natural_geohazard": 3.0,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 0.5
+        },
+        "SEG-020": {
+          "external_corrosion": 1.1,
+          "internal_corrosion": 0.8,
+          "manufacturing_construction": 0.8,
+          "misoperation": 0.6,
+          "natural_geohazard": 3.0,
+          "stress_corrosion_cracking": 1.0,
+          "third_party_damage": 0.5
+        }
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S20_THIRD_PARTY_SURGE",
+  "version": "1.0.0"
+}

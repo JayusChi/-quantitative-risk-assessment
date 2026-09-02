@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "stage": 5,
+  "gate": "S5_USER_JOURNEY_ACCEPTED",
+  "expected_check_count": 11,
+  "expected_journey_steps": [
+    "UPLOAD",
+    "CONVERT",
+    "REVIEW",
+    "CONFIRM",
+    "CALCULATE",
+    "REPORT"
+  ],
+  "expected_source_count": 10,
+  "expected_parameter_pack_count": 6,
+  "expected_completed_node_count": 11,
+  "formal_report_allowed": false
+}

@@ -1,0 +1,49 @@
+{
+  "business_content_sha256": "bdaae3e4ea829f3434b19cdcb6fa59450f095069dfcaae46163c04fffaf14606",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-risk-criteria-v1",
+  "parameters": [
+    {
+      "criticality": "IMPORTANT",
+      "field_id": "risk_matrix_criteria",
+      "target_path": "risk_matrix_criteria",
+      "unit": null,
+      "value": {
+        "consequence_labels": {
+          "A": "<1人",
+          "B": "1-5人",
+          "C": "5-20人",
+          "D": "20-100人",
+          "E": ">=100人"
+        },
+        "consequence_metric": "equivalent_fatalities_per_initiating_failure",
+        "consequence_upper_bounds_fatalities": [
+          1.0,
+          5.0,
+          20.0,
+          100.0
+        ],
+        "criteria_id": "QRA_DISPLAY_MATRIX_V1",
+        "likelihood_labels": {
+          "1": "极低",
+          "2": "较低",
+          "3": "中等",
+          "4": "较高",
+          "5": "高"
+        },
+        "likelihood_metric": "segment_initiating_failure_frequency_per_year",
+        "likelihood_upper_bounds_per_year": [
+          1e-05,
+          3e-05,
+          8e-05,
+          0.0002
+        ],
+        "note": "该5x5矩阵只用于结果展示、筛选和报告排版，不替代PLL、个人风险IR、F-N曲线，也不构成项目风险接受准则。正式项目必须用经批准的阈值覆盖本配置。",
+        "status": "DISPLAY_ONLY_NOT_ACCEPTANCE_CRITERION"
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S30_HIGH_PRESSURE_POPULATION_PEAK",
+  "version": "1.0.0"
+}

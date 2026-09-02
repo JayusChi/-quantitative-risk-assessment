@@ -1,0 +1,1011 @@
+{
+  "nodes": [
+    {
+      "dependencies": [],
+      "node_id": "data_inventory",
+      "optional_inputs": [
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "data_category_manifest",
+          "path": "data_category_manifest",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "system-generated:source-pack-manifest-v1"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "engineering_indicators.catalog_id",
+          "path": "engineering_indicators.catalog_id",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "raw_data_categories",
+          "path": "raw_data_categories",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "01_管线与管段台账.xlsx|02_运行工况.csv|03_天然气组分.xlsx|04_CIPS与腐蚀检测.xlsx|05_缺陷与维修记录.docx|06_第三方与巡线记录.xlsx|07_人口和敏感受体.xlsx|08_气象联合概率.csv|09_现场检查扫描件.pdf|10_现场照片说明.png"
+        }
+      ],
+      "required_inputs": []
+    },
+    {
+      "dependencies": [
+        "data_inventory"
+      ],
+      "node_id": "indicator_coverage",
+      "optional_inputs": [
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "engineering_indicators.catalog_id",
+          "path": "engineering_indicators.catalog_id",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "engineering_indicators.catalog_version",
+          "path": "engineering_indicators.catalog_version",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "engineering_indicators.observations_by_archetype",
+          "path": "engineering_indicators.observations_by_archetype",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "09_现场检查扫描件.pdf"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "engineering_indicators.observations_by_segment",
+          "path": "engineering_indicators.observations_by_segment",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "09_现场检查扫描件.pdf"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "engineering_indicators.observations_global",
+          "path": "engineering_indicators.observations_global",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "09_现场检查扫描件.pdf"
+        }
+      ],
+      "required_inputs": []
+    },
+    {
+      "dependencies": [
+        "data_inventory"
+      ],
+      "node_id": "segment_geometry",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_km",
+          "path": "segments.*.end_km",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.length_km",
+          "path": "segments.*.length_km",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.segment_id",
+          "path": "segments.*.segment_id",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_km",
+          "path": "segments.*.start_km",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "node_id": "failure_frequency",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "assessment.failure_probability_horizon_years",
+          "path": "assessment.failure_probability_horizon_years",
+          "requirement_kind": "RUN_ASSUMPTION_REQUIRED_FOR_M1_5",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_correction_model",
+          "path": "frequency_correction_model",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "parameter-pack:synthetic-frequency-correction-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.base_frequency_by_mechanism",
+          "path": "frequency_library.base_frequency_by_mechanism",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.loc_fraction_by_mechanism",
+          "path": "frequency_library.loc_fraction_by_mechanism",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.unit",
+          "path": "frequency_library.unit",
+          "requirement_kind": "RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "segment_correction_factor",
+          "path": "segment_correction_factor",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "parameter-pack:synthetic-frequency-correction-v1"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "node_id": "leak_point_discretization",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "assessment.leak_point_initial_spacing_m",
+          "path": "assessment.leak_point_initial_spacing_m",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_km",
+          "path": "segments.*.end_km",
+          "requirement_kind": "UPSTREAM_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_xy_m",
+          "path": "segments.*.end_xy_m",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.segment_id",
+          "path": "segments.*.segment_id",
+          "requirement_kind": "UPSTREAM_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_km",
+          "path": "segments.*.start_km",
+          "requirement_kind": "UPSTREAM_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_xy_m",
+          "path": "segments.*.start_xy_m",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "node_id": "aqt3046_source_term",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.gas_composition_mole_fraction",
+          "path": "pipeline.gas_composition_mole_fraction",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "03_天然气组分.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_pressure_mpa",
+          "path": "pipeline.operating_pressure_mpa",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_temperature_k",
+          "path": "pipeline.operating_temperature_k",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.downstream_valve_km",
+          "path": "segments.*.downstream_valve_km",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_km",
+          "path": "segments.*.end_km",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.outside_diameter_mm",
+          "path": "segments.*.outside_diameter_mm",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.segment_id",
+          "path": "segments.*.segment_id",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_km",
+          "path": "segments.*.start_km",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.upstream_valve_km",
+          "path": "segments.*.upstream_valve_km",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.wall_thickness_mm",
+          "path": "segments.*.wall_thickness_mm",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+          "requirement_kind": "RUNTIME_REQUIRED_FOR_S00",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "aqt3046_source_term"
+      ],
+      "node_id": "jet_fire_thresholds",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "node_id": "gbt34346_annex_c",
+      "optional_inputs": [],
+      "required_inputs": [
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_pressure_mpa",
+          "path": "pipeline.operating_pressure_mpa",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_temperature_k",
+          "path": "pipeline.operating_temperature_k",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.outside_diameter_mm",
+          "path": "segments.*.outside_diameter_mm",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.wall_thickness_mm",
+          "path": "segments.*.wall_thickness_mm",
+          "requirement_kind": "EXPLICIT_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_factors",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_factors",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_weights",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_weights",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.management_scores_c3_to_c8",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.management_scores_c3_to_c8",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.point_ignition_probability",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.point_ignition_probability",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.population_density_per_m2",
+          "path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.population_density_per_m2",
+          "requirement_kind": "PREFLIGHT_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "segment_geometry"
+      ],
+      "node_id": "adaptive_evidence_qra",
+      "optional_inputs": [
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.population_day",
+          "path": "population_cells.*.population_day",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.population_night",
+          "path": "population_cells.*.population_night",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.xy_m",
+          "path": "population_cells.*.xy_m",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "07_人口和敏感受体.xlsx"
+        }
+      ],
+      "required_inputs": [
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "system_parameters.adaptive_evidence_qra",
+          "path": "system_parameters.adaptive_evidence_qra",
+          "requirement_kind": "MODEL_SPEC_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "failure_frequency",
+        "leak_point_discretization",
+        "aqt3046_source_term"
+      ],
+      "node_id": "human_qra",
+      "optional_inputs": [
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.outdoor_fraction_day",
+          "path": "population_cells.*.outdoor_fraction_day",
+          "requirement_kind": "OPTIONAL_WITH_EXPLICIT_PRIOR",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.outdoor_fraction_night",
+          "path": "population_cells.*.outdoor_fraction_night",
+          "requirement_kind": "OPTIONAL_WITH_EXPLICIT_PRIOR",
+          "source_document": "07_人口和敏感受体.xlsx"
+        }
+      ],
+      "required_inputs": [
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "assessment.assessment_id",
+          "path": "assessment.assessment_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "assessment.leak_point_initial_spacing_m",
+          "path": "assessment.leak_point_initial_spacing_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "assessment.reference_height_m",
+          "path": "assessment.reference_height_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "run-assumption:S00_BASELINE-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_correction_model",
+          "path": "frequency_correction_model",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-correction-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.base_frequency_by_mechanism",
+          "path": "frequency_library.base_frequency_by_mechanism",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.library_id",
+          "path": "frequency_library.library_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.loc_fraction_by_mechanism",
+          "path": "frequency_library.loc_fraction_by_mechanism",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.unit",
+          "path": "frequency_library.unit",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "frequency_library.version",
+          "path": "frequency_library.version",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-library-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "ignition_model.immediate_ignition_probability",
+          "path": "ignition_model.immediate_ignition_probability",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-ignition-model-v1"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "metadata.case_id",
+          "path": "metadata.case_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "project-wizard:S00_BASELINE"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "metadata.data_classification",
+          "path": "metadata.data_classification",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "project-wizard:S00_BASELINE"
+        },
+        {
+          "data_layer": "RUN_ASSUMPTION",
+          "field_id": "metadata.model_id",
+          "path": "metadata.model_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "project-wizard:S00_BASELINE"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.design_pressure_mpa",
+          "path": "pipeline.design_pressure_mpa",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.gas_composition_mole_fraction",
+          "path": "pipeline.gas_composition_mole_fraction",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "03_天然气组分.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_pressure_mpa",
+          "path": "pipeline.operating_pressure_mpa",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "pipeline.operating_temperature_k",
+          "path": "pipeline.operating_temperature_k",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.cell_id",
+          "path": "population_cells.*.cell_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.population_day",
+          "path": "population_cells.*.population_day",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.population_night",
+          "path": "population_cells.*.population_night",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "population_cell.xy_m",
+          "path": "population_cells.*.xy_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "07_人口和敏感受体.xlsx"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "segment_correction_factor",
+          "path": "segment_correction_factor",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-frequency-correction-v1"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.area_activity",
+          "path": "segments.*.area_activity",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "06_第三方与巡线记录.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.downstream_valve_km",
+          "path": "segments.*.downstream_valve_km",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_km",
+          "path": "segments.*.end_km",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.end_xy_m",
+          "path": "segments.*.end_xy_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.length_km",
+          "path": "segments.*.length_km",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.outside_diameter_mm",
+          "path": "segments.*.outside_diameter_mm",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.segment_id",
+          "path": "segments.*.segment_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_km",
+          "path": "segments.*.start_km",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.start_xy_m",
+          "path": "segments.*.start_xy_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.upstream_valve_km",
+          "path": "segments.*.upstream_valve_km",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "02_运行工况.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "segment.wall_thickness_mm",
+          "path": "segments.*.wall_thickness_mm",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "01_管线与管段台账.xlsx"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.explosion_source_volume_m3",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.explosion_source_volume_m3",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.terrain",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.terrain",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.tno_source_strength",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.tno_source_strength",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+          "path": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "parameter-pack:synthetic-consequence-parameters-v1"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.probability",
+          "path": "weather_joint_probability.*.probability",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.stability_class",
+          "path": "weather_joint_probability.*.stability_class",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.time_period",
+          "path": "weather_joint_probability.*.time_period",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.weather_id",
+          "path": "weather_joint_probability.*.weather_id",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.wind_direction_from",
+          "path": "weather_joint_probability.*.wind_direction_from",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        },
+        {
+          "data_layer": "PROJECT_FACT",
+          "field_id": "weather_case.wind_speed_m_s",
+          "path": "weather_joint_probability.*.wind_speed_m_s",
+          "requirement_kind": "PREFLIGHT_OR_RUNTIME_REQUIRED",
+          "source_document": "08_气象联合概率.csv"
+        }
+      ]
+    },
+    {
+      "dependencies": [
+        "adaptive_evidence_qra"
+      ],
+      "node_id": "risk_matrix",
+      "optional_inputs": [
+        {
+          "data_layer": "MODEL_PARAMETER",
+          "field_id": "risk_matrix_criteria",
+          "path": "risk_matrix_criteria",
+          "requirement_kind": "OPTIONAL",
+          "source_document": "parameter-pack:synthetic-risk-criteria-v1"
+        }
+      ],
+      "required_inputs": []
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source": "dynamic_node_catalog + reviewed runtime consumption",
+  "stage_status": "S1_FULL_CONTRACT_MAPPED"
+}

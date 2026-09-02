@@ -1,0 +1,1608 @@
+{
+  "at_least_one_failure_probability_over_horizon": 0.0029027787668656083,
+  "failure_probability_by_loc_over_horizon": {
+    "large_100mm": 0.0004209213877259374,
+    "medium_25mm": 0.0006854549683346404,
+    "rupture": 0.0005671191271222266,
+    "small_5mm": 0.0012322601431781067
+  },
+  "failure_probability_by_mechanism_over_horizon": {
+    "external_corrosion": 0.0008468412274045336,
+    "internal_corrosion": 0.00026796409120792363,
+    "manufacturing_construction": 0.00011359354776432695,
+    "misoperation": 6.179809041933757e-05,
+    "natural_geohazard": 0.00014758910765590998,
+    "stress_corrosion_cracking": 0.00020277943747005052,
+    "third_party_damage": 0.001265198960074509
+  },
+  "failure_probability_by_segment_over_horizon": {
+    "SEG-001": 0.00011849297915232623,
+    "SEG-002": 0.00011849297915232623,
+    "SEG-003": 0.00011849297915232623,
+    "SEG-004": 0.00011849297915232623,
+    "SEG-005": 0.00016308669991809096,
+    "SEG-006": 0.00016308669991809096,
+    "SEG-007": 0.0001863826285993598,
+    "SEG-008": 0.0001863826285993598,
+    "SEG-009": 0.00013349108927153183,
+    "SEG-010": 0.00013349108927153183,
+    "SEG-011": 0.00015573787159842435,
+    "SEG-012": 0.00015573787159842435,
+    "SEG-013": 0.00014798904854027866,
+    "SEG-014": 0.00014798904854027866,
+    "SEG-015": 0.0001664861396442604,
+    "SEG-016": 0.0001664861396442604,
+    "SEG-017": 0.0001228424542477517,
+    "SEG-018": 0.0001228424542477517,
+    "SEG-019": 0.0001403901443812484,
+    "SEG-020": 0.0001403901443812484
+  },
+  "failure_probability_model": {
+    "aggregation_note": "frequencies are additive; probabilities are calculated after frequency aggregation and must not be summed",
+    "assumption": "constant independent event intensity within each reported aggregation",
+    "distribution": "homogeneous_poisson",
+    "exposure_years": 1.0,
+    "formula": "P(N>=1)=1-exp(-lambda*t)"
+  },
+  "frequency_by_loc_per_year": {
+    "large_100mm": 0.00042101,
+    "medium_25mm": 0.0006856900000000001,
+    "rupture": 0.00056728,
+    "small_5mm": 0.0012330199999999998
+  },
+  "frequency_by_mechanism_per_year": {
+    "external_corrosion": 0.0008472,
+    "internal_corrosion": 0.0002679999999999999,
+    "manufacturing_construction": 0.00011359999999999997,
+    "misoperation": 6.18e-05,
+    "natural_geohazard": 0.00014760000000000006,
+    "stress_corrosion_cracking": 0.0002028,
+    "third_party_damage": 0.0012660000000000002
+  },
+  "frequency_by_segment_per_year": {
+    "SEG-001": 0.00011850000000000001,
+    "SEG-002": 0.00011850000000000001,
+    "SEG-003": 0.00011850000000000001,
+    "SEG-004": 0.00011850000000000001,
+    "SEG-005": 0.0001631,
+    "SEG-006": 0.0001631,
+    "SEG-007": 0.00018640000000000003,
+    "SEG-008": 0.00018640000000000003,
+    "SEG-009": 0.0001335,
+    "SEG-010": 0.0001335,
+    "SEG-011": 0.00015575,
+    "SEG-012": 0.00015575,
+    "SEG-013": 0.000148,
+    "SEG-014": 0.000148,
+    "SEG-015": 0.00016649999999999998,
+    "SEG-016": 0.00016649999999999998,
+    "SEG-017": 0.00012284999999999998,
+    "SEG-018": 0.00012284999999999998,
+    "SEG-019": 0.00014040000000000002,
+    "SEG-020": 0.00014040000000000002
+  },
+  "frequency_correction_model": {
+    "approved_for_formal_qra": false,
+    "factors_by_segment": {
+      "SEG-001": {
+        "external_corrosion": 0.7,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.6,
+        "misoperation": 0.5,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.7,
+        "third_party_damage": 0.5
+      },
+      "SEG-002": {
+        "external_corrosion": 0.7,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.6,
+        "misoperation": 0.5,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.7,
+        "third_party_damage": 0.5
+      },
+      "SEG-003": {
+        "external_corrosion": 0.7,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.6,
+        "misoperation": 0.5,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.7,
+        "third_party_damage": 0.5
+      },
+      "SEG-004": {
+        "external_corrosion": 0.7,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.6,
+        "misoperation": 0.5,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.7,
+        "third_party_damage": 0.5
+      },
+      "SEG-005": {
+        "external_corrosion": 0.9,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.7,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.8
+      },
+      "SEG-006": {
+        "external_corrosion": 0.9,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.7,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.8
+      },
+      "SEG-007": {
+        "external_corrosion": 0.9,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.7,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.8
+      },
+      "SEG-008": {
+        "external_corrosion": 0.9,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.7,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.8
+      },
+      "SEG-009": {
+        "external_corrosion": 1.0,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 1.5
+      },
+      "SEG-010": {
+        "external_corrosion": 1.0,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 1.5
+      },
+      "SEG-011": {
+        "external_corrosion": 1.0,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 1.5
+      },
+      "SEG-012": {
+        "external_corrosion": 1.0,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.8,
+        "natural_geohazard": 0.5,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 1.5
+      },
+      "SEG-013": {
+        "external_corrosion": 0.8,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.7,
+        "misoperation": 1.2,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.2
+      },
+      "SEG-014": {
+        "external_corrosion": 0.8,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.7,
+        "misoperation": 1.2,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.2
+      },
+      "SEG-015": {
+        "external_corrosion": 0.8,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.7,
+        "misoperation": 1.2,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.2
+      },
+      "SEG-016": {
+        "external_corrosion": 0.8,
+        "internal_corrosion": 0.9,
+        "manufacturing_construction": 0.7,
+        "misoperation": 1.2,
+        "natural_geohazard": 0.4,
+        "stress_corrosion_cracking": 0.8,
+        "third_party_damage": 1.2
+      },
+      "SEG-017": {
+        "external_corrosion": 1.1,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.6,
+        "natural_geohazard": 3.0,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 0.5
+      },
+      "SEG-018": {
+        "external_corrosion": 1.1,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.6,
+        "natural_geohazard": 3.0,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 0.5
+      },
+      "SEG-019": {
+        "external_corrosion": 1.1,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.6,
+        "natural_geohazard": 3.0,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 0.5
+      },
+      "SEG-020": {
+        "external_corrosion": 1.1,
+        "internal_corrosion": 0.8,
+        "manufacturing_construction": 0.8,
+        "misoperation": 0.6,
+        "natural_geohazard": 3.0,
+        "stress_corrosion_cracking": 1.0,
+        "third_party_damage": 0.5
+      }
+    },
+    "formal_release_blockers": [
+      "失效频率修正模型或其系数未标记为APPROVED_CALIBRATED/APPROVED_PROJECT_FACTORS",
+      "工程指标观测为合成测试数据"
+    ],
+    "method_note": "SY/T 6891.2附录A定义K_j(a1,a2,...)但不提供统一权重。log_linear_calibrated只是受支持的校准函数形式，系数必须由适用失效数据拟合并批准。",
+    "model_id": "frequency.correction.synthetic_provided.v1",
+    "model_type": "provided_factors",
+    "source": "SY/T 6891.2-2020 Annex A formula A.1; synthetic uncalibrated K_j values",
+    "status": "SYNTHETIC_TEST_ONLY",
+    "term_trace": null,
+    "version": "1.0.0"
+  },
+  "loc_frequency": [
+    {
+      "annual_frequency": 5.3425000000000004e-05,
+      "failure_probability_over_horizon": 5.3423572910101704e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 1.0400000000000002e-05,
+        "manufacturing_construction": 1.8e-06,
+        "misoperation": 1.25e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 1.3124999999999999e-05
+      },
+      "segment_id": "SEG-001"
+    },
+    {
+      "annual_frequency": 2.7575e-05,
+      "failure_probability_over_horizon": 2.757461981318206e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 3.2000000000000007e-06,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 6.25e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-001"
+    },
+    {
+      "annual_frequency": 1.6624999999999998e-05,
+      "failure_probability_over_horizon": 1.6624861805453327e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.6000000000000004e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 3.75e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 5.6249999999999995e-06
+      },
+      "segment_id": "SEG-001"
+    },
+    {
+      "annual_frequency": 2.0875000000000003e-05,
+      "failure_probability_over_horizon": 2.0874782118703597e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 8.000000000000002e-07,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 2.5000000000000004e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-001"
+    },
+    {
+      "annual_frequency": 5.3425000000000004e-05,
+      "failure_probability_over_horizon": 5.3423572910101704e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 1.0400000000000002e-05,
+        "manufacturing_construction": 1.8e-06,
+        "misoperation": 1.25e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 1.3124999999999999e-05
+      },
+      "segment_id": "SEG-002"
+    },
+    {
+      "annual_frequency": 2.7575e-05,
+      "failure_probability_over_horizon": 2.757461981318206e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 3.2000000000000007e-06,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 6.25e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-002"
+    },
+    {
+      "annual_frequency": 1.6624999999999998e-05,
+      "failure_probability_over_horizon": 1.6624861805453327e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.6000000000000004e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 3.75e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 5.6249999999999995e-06
+      },
+      "segment_id": "SEG-002"
+    },
+    {
+      "annual_frequency": 2.0875000000000003e-05,
+      "failure_probability_over_horizon": 2.0874782118703597e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 8.000000000000002e-07,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 2.5000000000000004e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-002"
+    },
+    {
+      "annual_frequency": 5.3425000000000004e-05,
+      "failure_probability_over_horizon": 5.3423572910101704e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 1.0400000000000002e-05,
+        "manufacturing_construction": 1.8e-06,
+        "misoperation": 1.25e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 1.3124999999999999e-05
+      },
+      "segment_id": "SEG-003"
+    },
+    {
+      "annual_frequency": 2.7575e-05,
+      "failure_probability_over_horizon": 2.757461981318206e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 3.2000000000000007e-06,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 6.25e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-003"
+    },
+    {
+      "annual_frequency": 1.6624999999999998e-05,
+      "failure_probability_over_horizon": 1.6624861805453327e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.6000000000000004e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 3.75e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 5.6249999999999995e-06
+      },
+      "segment_id": "SEG-003"
+    },
+    {
+      "annual_frequency": 2.0875000000000003e-05,
+      "failure_probability_over_horizon": 2.0874782118703597e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 8.000000000000002e-07,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 2.5000000000000004e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-003"
+    },
+    {
+      "annual_frequency": 5.3425000000000004e-05,
+      "failure_probability_over_horizon": 5.3423572910101704e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 1.0400000000000002e-05,
+        "manufacturing_construction": 1.8e-06,
+        "misoperation": 1.25e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 1.3124999999999999e-05
+      },
+      "segment_id": "SEG-004"
+    },
+    {
+      "annual_frequency": 2.7575e-05,
+      "failure_probability_over_horizon": 2.757461981318206e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 3.2000000000000007e-06,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 6.25e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-004"
+    },
+    {
+      "annual_frequency": 1.6624999999999998e-05,
+      "failure_probability_over_horizon": 1.6624861805453327e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.6000000000000004e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 3.75e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 5.6249999999999995e-06
+      },
+      "segment_id": "SEG-004"
+    },
+    {
+      "annual_frequency": 2.0875000000000003e-05,
+      "failure_probability_over_horizon": 2.0874782118703597e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 8.000000000000002e-07,
+        "manufacturing_construction": 1.5e-06,
+        "misoperation": 2.5000000000000004e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 9.375e-06
+      },
+      "segment_id": "SEG-004"
+    },
+    {
+      "annual_frequency": 6.727e-05,
+      "failure_probability_over_horizon": 6.726773742428477e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.2680000000000003e-05,
+        "internal_corrosion": 7.280000000000001e-06,
+        "manufacturing_construction": 1.47e-06,
+        "misoperation": 1.4000000000000001e-06,
+        "natural_geohazard": 5.25e-07,
+        "stress_corrosion_cracking": 8.4e-07,
+        "third_party_damage": 3.3075e-05
+      },
+      "segment_id": "SEG-005"
+    },
+    {
+      "annual_frequency": 3.9200000000000004e-05,
+      "failure_probability_over_horizon": 3.919923169003929e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9.450000000000001e-06,
+        "internal_corrosion": 2.24e-06,
+        "manufacturing_construction": 1.225e-06,
+        "misoperation": 7.000000000000001e-07,
+        "natural_geohazard": 7.000000000000001e-07,
+        "stress_corrosion_cracking": 1.2599999999999998e-06,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-005"
+    },
+    {
+      "annual_frequency": 2.345e-05,
+      "failure_probability_over_horizon": 2.344972505089919e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.7800000000000007e-06,
+        "internal_corrosion": 1.12e-06,
+        "manufacturing_construction": 9.8e-07,
+        "misoperation": 4.2000000000000006e-07,
+        "natural_geohazard": 8.75e-07,
+        "stress_corrosion_cracking": 2.1e-06,
+        "third_party_damage": 1.4174999999999999e-05
+      },
+      "segment_id": "SEG-005"
+    },
+    {
+      "annual_frequency": 3.318e-05,
+      "failure_probability_over_horizon": 3.317944954988799e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.8900000000000003e-06,
+        "internal_corrosion": 5.6e-07,
+        "manufacturing_construction": 1.225e-06,
+        "misoperation": 2.8e-07,
+        "natural_geohazard": 1.4000000000000001e-06,
+        "stress_corrosion_cracking": 4.2e-06,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-005"
+    },
+    {
+      "annual_frequency": 6.727e-05,
+      "failure_probability_over_horizon": 6.726773742428477e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.2680000000000003e-05,
+        "internal_corrosion": 7.280000000000001e-06,
+        "manufacturing_construction": 1.47e-06,
+        "misoperation": 1.4000000000000001e-06,
+        "natural_geohazard": 5.25e-07,
+        "stress_corrosion_cracking": 8.4e-07,
+        "third_party_damage": 3.3075e-05
+      },
+      "segment_id": "SEG-006"
+    },
+    {
+      "annual_frequency": 3.9200000000000004e-05,
+      "failure_probability_over_horizon": 3.919923169003929e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9.450000000000001e-06,
+        "internal_corrosion": 2.24e-06,
+        "manufacturing_construction": 1.225e-06,
+        "misoperation": 7.000000000000001e-07,
+        "natural_geohazard": 7.000000000000001e-07,
+        "stress_corrosion_cracking": 1.2599999999999998e-06,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-006"
+    },
+    {
+      "annual_frequency": 2.345e-05,
+      "failure_probability_over_horizon": 2.344972505089919e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.7800000000000007e-06,
+        "internal_corrosion": 1.12e-06,
+        "manufacturing_construction": 9.8e-07,
+        "misoperation": 4.2000000000000006e-07,
+        "natural_geohazard": 8.75e-07,
+        "stress_corrosion_cracking": 2.1e-06,
+        "third_party_damage": 1.4174999999999999e-05
+      },
+      "segment_id": "SEG-006"
+    },
+    {
+      "annual_frequency": 3.318e-05,
+      "failure_probability_over_horizon": 3.317944954988799e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.8900000000000003e-06,
+        "internal_corrosion": 5.6e-07,
+        "manufacturing_construction": 1.225e-06,
+        "misoperation": 2.8e-07,
+        "natural_geohazard": 1.4000000000000001e-06,
+        "stress_corrosion_cracking": 4.2e-06,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-006"
+    },
+    {
+      "annual_frequency": 7.688000000000001e-05,
+      "failure_probability_over_horizon": 7.68770448085322e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.5920000000000003e-05,
+        "internal_corrosion": 8.320000000000002e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.6000000000000004e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 9.600000000000001e-07,
+        "third_party_damage": 3.7800000000000004e-05
+      },
+      "segment_id": "SEG-007"
+    },
+    {
+      "annual_frequency": 4.4800000000000005e-05,
+      "failure_probability_over_horizon": 4.4798996494985744e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.0800000000000002e-05,
+        "internal_corrosion": 2.560000000000001e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 8.000000000000002e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.4400000000000002e-06,
+        "third_party_damage": 2.7000000000000002e-05
+      },
+      "segment_id": "SEG-007"
+    },
+    {
+      "annual_frequency": 2.68e-05,
+      "failure_probability_over_horizon": 2.679964088320812e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.320000000000001e-06,
+        "internal_corrosion": 1.2800000000000005e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 4.800000000000001e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.4000000000000003e-06,
+        "third_party_damage": 1.62e-05
+      },
+      "segment_id": "SEG-007"
+    },
+    {
+      "annual_frequency": 3.792e-05,
+      "failure_probability_over_horizon": 3.791928104588761e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1600000000000005e-06,
+        "internal_corrosion": 6.400000000000002e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 3.200000000000001e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 4.800000000000001e-06,
+        "third_party_damage": 2.7000000000000002e-05
+      },
+      "segment_id": "SEG-007"
+    },
+    {
+      "annual_frequency": 7.688000000000001e-05,
+      "failure_probability_over_horizon": 7.68770448085322e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.5920000000000003e-05,
+        "internal_corrosion": 8.320000000000002e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.6000000000000004e-06,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 9.600000000000001e-07,
+        "third_party_damage": 3.7800000000000004e-05
+      },
+      "segment_id": "SEG-008"
+    },
+    {
+      "annual_frequency": 4.4800000000000005e-05,
+      "failure_probability_over_horizon": 4.4798996494985744e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.0800000000000002e-05,
+        "internal_corrosion": 2.560000000000001e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 8.000000000000002e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 1.4400000000000002e-06,
+        "third_party_damage": 2.7000000000000002e-05
+      },
+      "segment_id": "SEG-008"
+    },
+    {
+      "annual_frequency": 2.68e-05,
+      "failure_probability_over_horizon": 2.679964088320812e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.320000000000001e-06,
+        "internal_corrosion": 1.2800000000000005e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 4.800000000000001e-07,
+        "natural_geohazard": 1.0000000000000002e-06,
+        "stress_corrosion_cracking": 2.4000000000000003e-06,
+        "third_party_damage": 1.62e-05
+      },
+      "segment_id": "SEG-008"
+    },
+    {
+      "annual_frequency": 3.792e-05,
+      "failure_probability_over_horizon": 3.791928104588761e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1600000000000005e-06,
+        "internal_corrosion": 6.400000000000002e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 3.200000000000001e-07,
+        "natural_geohazard": 1.6000000000000004e-06,
+        "stress_corrosion_cracking": 4.800000000000001e-06,
+        "third_party_damage": 2.7000000000000002e-05
+      },
+      "segment_id": "SEG-008"
+    },
+    {
+      "annual_frequency": 5.6235e-05,
+      "failure_probability_over_horizon": 5.6233418842026446e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.16e-05,
+        "internal_corrosion": 7.0200000000000006e-06,
+        "manufacturing_construction": 1.4400000000000002e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 4.5e-07,
+        "stress_corrosion_cracking": 9.000000000000001e-07,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-009"
+    },
+    {
+      "annual_frequency": 3.1785e-05,
+      "failure_probability_over_horizon": 3.178449486223945e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9e-06,
+        "internal_corrosion": 2.16e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 6.000000000000001e-07,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.35e-06,
+        "third_party_damage": 1.6875e-05
+      },
+      "segment_id": "SEG-009"
+    },
+    {
+      "annual_frequency": 1.9125000000000004e-05,
+      "failure_probability_over_horizon": 1.9124817118353376e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.6000000000000003e-06,
+        "internal_corrosion": 1.08e-06,
+        "manufacturing_construction": 9.600000000000001e-07,
+        "misoperation": 3.6000000000000005e-07,
+        "natural_geohazard": 7.5e-07,
+        "stress_corrosion_cracking": 2.25e-06,
+        "third_party_damage": 1.0125e-05
+      },
+      "segment_id": "SEG-009"
+    },
+    {
+      "annual_frequency": 2.6355e-05,
+      "failure_probability_over_horizon": 2.635465271003845e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.8000000000000001e-06,
+        "internal_corrosion": 5.4e-07,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 2.4000000000000003e-07,
+        "natural_geohazard": 1.2000000000000002e-06,
+        "stress_corrosion_cracking": 4.5e-06,
+        "third_party_damage": 1.6875e-05
+      },
+      "segment_id": "SEG-009"
+    },
+    {
+      "annual_frequency": 5.6235e-05,
+      "failure_probability_over_horizon": 5.6233418842026446e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.16e-05,
+        "internal_corrosion": 7.0200000000000006e-06,
+        "manufacturing_construction": 1.4400000000000002e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 4.5e-07,
+        "stress_corrosion_cracking": 9.000000000000001e-07,
+        "third_party_damage": 2.3624999999999998e-05
+      },
+      "segment_id": "SEG-010"
+    },
+    {
+      "annual_frequency": 3.1785e-05,
+      "failure_probability_over_horizon": 3.178449486223945e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9e-06,
+        "internal_corrosion": 2.16e-06,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 6.000000000000001e-07,
+        "natural_geohazard": 6.000000000000001e-07,
+        "stress_corrosion_cracking": 1.35e-06,
+        "third_party_damage": 1.6875e-05
+      },
+      "segment_id": "SEG-010"
+    },
+    {
+      "annual_frequency": 1.9125000000000004e-05,
+      "failure_probability_over_horizon": 1.9124817118353376e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.6000000000000003e-06,
+        "internal_corrosion": 1.08e-06,
+        "manufacturing_construction": 9.600000000000001e-07,
+        "misoperation": 3.6000000000000005e-07,
+        "natural_geohazard": 7.5e-07,
+        "stress_corrosion_cracking": 2.25e-06,
+        "third_party_damage": 1.0125e-05
+      },
+      "segment_id": "SEG-010"
+    },
+    {
+      "annual_frequency": 2.6355e-05,
+      "failure_probability_over_horizon": 2.635465271003845e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.8000000000000001e-06,
+        "internal_corrosion": 5.4e-07,
+        "manufacturing_construction": 1.2000000000000002e-06,
+        "misoperation": 2.4000000000000003e-07,
+        "natural_geohazard": 1.2000000000000002e-06,
+        "stress_corrosion_cracking": 4.5e-06,
+        "third_party_damage": 1.6875e-05
+      },
+      "segment_id": "SEG-010"
+    },
+    {
+      "annual_frequency": 6.560749999999998e-05,
+      "failure_probability_over_horizon": 6.56053478750373e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 8.19e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.4000000000000001e-06,
+        "natural_geohazard": 5.25e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 2.7562499999999996e-05
+      },
+      "segment_id": "SEG-011"
+    },
+    {
+      "annual_frequency": 3.70825e-05,
+      "failure_probability_over_horizon": 3.708181245259556e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 2.52e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 7.000000000000001e-07,
+        "natural_geohazard": 7.000000000000001e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 1.9687499999999997e-05
+      },
+      "segment_id": "SEG-011"
+    },
+    {
+      "annual_frequency": 2.2312499999999997e-05,
+      "failure_probability_over_horizon": 2.2312251078023233e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.26e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 4.2000000000000006e-07,
+        "natural_geohazard": 8.75e-07,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 1.1812499999999997e-05
+      },
+      "segment_id": "SEG-011"
+    },
+    {
+      "annual_frequency": 3.0747499999999997e-05,
+      "failure_probability_over_horizon": 3.074702730046666e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 6.3e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 2.8e-07,
+        "natural_geohazard": 1.4000000000000001e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 1.9687499999999997e-05
+      },
+      "segment_id": "SEG-011"
+    },
+    {
+      "annual_frequency": 6.560749999999998e-05,
+      "failure_probability_over_horizon": 6.56053478750373e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.52e-05,
+        "internal_corrosion": 8.19e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.4000000000000001e-06,
+        "natural_geohazard": 5.25e-07,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 2.7562499999999996e-05
+      },
+      "segment_id": "SEG-012"
+    },
+    {
+      "annual_frequency": 3.70825e-05,
+      "failure_probability_over_horizon": 3.708181245259556e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.05e-05,
+        "internal_corrosion": 2.52e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 7.000000000000001e-07,
+        "natural_geohazard": 7.000000000000001e-07,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 1.9687499999999997e-05
+      },
+      "segment_id": "SEG-012"
+    },
+    {
+      "annual_frequency": 2.2312499999999997e-05,
+      "failure_probability_over_horizon": 2.2312251078023233e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.2e-06,
+        "internal_corrosion": 1.26e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 4.2000000000000006e-07,
+        "natural_geohazard": 8.75e-07,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 1.1812499999999997e-05
+      },
+      "segment_id": "SEG-012"
+    },
+    {
+      "annual_frequency": 3.0747499999999997e-05,
+      "failure_probability_over_horizon": 3.074702730046666e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.1e-06,
+        "internal_corrosion": 6.3e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 2.8e-07,
+        "natural_geohazard": 1.4000000000000001e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 1.9687499999999997e-05
+      },
+      "segment_id": "SEG-012"
+    },
+    {
+      "annual_frequency": 6.311999999999999e-05,
+      "failure_probability_over_horizon": 6.311800797471242e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.3040000000000003e-05,
+        "internal_corrosion": 9.36e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 2.4000000000000003e-06,
+        "natural_geohazard": 4.800000000000001e-07,
+        "stress_corrosion_cracking": 9.600000000000001e-07,
+        "third_party_damage": 2.52e-05
+      },
+      "segment_id": "SEG-013"
+    },
+    {
+      "annual_frequency": 3.516e-05,
+      "failure_probability_over_horizon": 3.515938189444422e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9.600000000000001e-06,
+        "internal_corrosion": 2.8800000000000004e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 6.400000000000002e-07,
+        "stress_corrosion_cracking": 1.4400000000000002e-06,
+        "third_party_damage": 1.8e-05
+      },
+      "segment_id": "SEG-013"
+    },
+    {
+      "annual_frequency": 2.112e-05,
+      "failure_probability_over_horizon": 2.1119776974370105e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.8400000000000005e-06,
+        "internal_corrosion": 1.4400000000000002e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 7.200000000000001e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 2.4000000000000003e-06,
+        "third_party_damage": 1.08e-05
+      },
+      "segment_id": "SEG-013"
+    },
+    {
+      "annual_frequency": 2.86e-05,
+      "failure_probability_over_horizon": 2.8599591023898918e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.9200000000000003e-06,
+        "internal_corrosion": 7.200000000000001e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 4.800000000000001e-07,
+        "natural_geohazard": 1.2800000000000005e-06,
+        "stress_corrosion_cracking": 4.800000000000001e-06,
+        "third_party_damage": 1.8e-05
+      },
+      "segment_id": "SEG-013"
+    },
+    {
+      "annual_frequency": 6.311999999999999e-05,
+      "failure_probability_over_horizon": 6.311800797471242e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.3040000000000003e-05,
+        "internal_corrosion": 9.36e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 2.4000000000000003e-06,
+        "natural_geohazard": 4.800000000000001e-07,
+        "stress_corrosion_cracking": 9.600000000000001e-07,
+        "third_party_damage": 2.52e-05
+      },
+      "segment_id": "SEG-014"
+    },
+    {
+      "annual_frequency": 3.516e-05,
+      "failure_probability_over_horizon": 3.515938189444422e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 9.600000000000001e-06,
+        "internal_corrosion": 2.8800000000000004e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 6.400000000000002e-07,
+        "stress_corrosion_cracking": 1.4400000000000002e-06,
+        "third_party_damage": 1.8e-05
+      },
+      "segment_id": "SEG-014"
+    },
+    {
+      "annual_frequency": 2.112e-05,
+      "failure_probability_over_horizon": 2.1119776974370105e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.8400000000000005e-06,
+        "internal_corrosion": 1.4400000000000002e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 7.200000000000001e-07,
+        "natural_geohazard": 8.000000000000002e-07,
+        "stress_corrosion_cracking": 2.4000000000000003e-06,
+        "third_party_damage": 1.08e-05
+      },
+      "segment_id": "SEG-014"
+    },
+    {
+      "annual_frequency": 2.86e-05,
+      "failure_probability_over_horizon": 2.8599591023898918e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 1.9200000000000003e-06,
+        "internal_corrosion": 7.200000000000001e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 4.800000000000001e-07,
+        "natural_geohazard": 1.2800000000000005e-06,
+        "stress_corrosion_cracking": 4.800000000000001e-06,
+        "third_party_damage": 1.8e-05
+      },
+      "segment_id": "SEG-014"
+    },
+    {
+      "annual_frequency": 7.101e-05,
+      "failure_probability_over_horizon": 7.100747884962599e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.592e-05,
+        "internal_corrosion": 1.053e-05,
+        "manufacturing_construction": 1.89e-06,
+        "misoperation": 2.7e-06,
+        "natural_geohazard": 5.400000000000001e-07,
+        "stress_corrosion_cracking": 1.08e-06,
+        "third_party_damage": 2.8349999999999995e-05
+      },
+      "segment_id": "SEG-015"
+    },
+    {
+      "annual_frequency": 3.9554999999999997e-05,
+      "failure_probability_over_horizon": 3.955421771130201e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.08e-05,
+        "internal_corrosion": 3.2400000000000003e-06,
+        "manufacturing_construction": 1.575e-06,
+        "misoperation": 1.35e-06,
+        "natural_geohazard": 7.200000000000002e-07,
+        "stress_corrosion_cracking": 1.62e-06,
+        "third_party_damage": 2.0249999999999998e-05
+      },
+      "segment_id": "SEG-015"
+    },
+    {
+      "annual_frequency": 2.3760000000000003e-05,
+      "failure_probability_over_horizon": 2.3759717733435558e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.32e-06,
+        "internal_corrosion": 1.6200000000000002e-06,
+        "manufacturing_construction": 1.26e-06,
+        "misoperation": 8.1e-07,
+        "natural_geohazard": 9.000000000000002e-07,
+        "stress_corrosion_cracking": 2.7e-06,
+        "third_party_damage": 1.2149999999999999e-05
+      },
+      "segment_id": "SEG-015"
+    },
+    {
+      "annual_frequency": 3.2174999999999996e-05,
+      "failure_probability_over_horizon": 3.217448239023887e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.16e-06,
+        "internal_corrosion": 8.100000000000001e-07,
+        "manufacturing_construction": 1.575e-06,
+        "misoperation": 5.4e-07,
+        "natural_geohazard": 1.4400000000000004e-06,
+        "stress_corrosion_cracking": 5.4e-06,
+        "third_party_damage": 2.0249999999999998e-05
+      },
+      "segment_id": "SEG-015"
+    },
+    {
+      "annual_frequency": 7.101e-05,
+      "failure_probability_over_horizon": 7.100747884962599e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.592e-05,
+        "internal_corrosion": 1.053e-05,
+        "manufacturing_construction": 1.89e-06,
+        "misoperation": 2.7e-06,
+        "natural_geohazard": 5.400000000000001e-07,
+        "stress_corrosion_cracking": 1.08e-06,
+        "third_party_damage": 2.8349999999999995e-05
+      },
+      "segment_id": "SEG-016"
+    },
+    {
+      "annual_frequency": 3.9554999999999997e-05,
+      "failure_probability_over_horizon": 3.955421771130201e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.08e-05,
+        "internal_corrosion": 3.2400000000000003e-06,
+        "manufacturing_construction": 1.575e-06,
+        "misoperation": 1.35e-06,
+        "natural_geohazard": 7.200000000000002e-07,
+        "stress_corrosion_cracking": 1.62e-06,
+        "third_party_damage": 2.0249999999999998e-05
+      },
+      "segment_id": "SEG-016"
+    },
+    {
+      "annual_frequency": 2.3760000000000003e-05,
+      "failure_probability_over_horizon": 2.3759717733435558e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.32e-06,
+        "internal_corrosion": 1.6200000000000002e-06,
+        "manufacturing_construction": 1.26e-06,
+        "misoperation": 8.1e-07,
+        "natural_geohazard": 9.000000000000002e-07,
+        "stress_corrosion_cracking": 2.7e-06,
+        "third_party_damage": 1.2149999999999999e-05
+      },
+      "segment_id": "SEG-016"
+    },
+    {
+      "annual_frequency": 3.2174999999999996e-05,
+      "failure_probability_over_horizon": 3.217448239023887e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.16e-06,
+        "internal_corrosion": 8.100000000000001e-07,
+        "manufacturing_construction": 1.575e-06,
+        "misoperation": 5.4e-07,
+        "natural_geohazard": 1.4400000000000004e-06,
+        "stress_corrosion_cracking": 5.4e-06,
+        "third_party_damage": 2.0249999999999998e-05
+      },
+      "segment_id": "SEG-016"
+    },
+    {
+      "annual_frequency": 5.111749999999999e-05,
+      "failure_probability_over_horizon": 5.111619352285824e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.772e-05,
+        "internal_corrosion": 7.280000000000001e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.05e-06,
+        "natural_geohazard": 3.1500000000000003e-06,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 9.187499999999998e-06
+      },
+      "segment_id": "SEG-017"
+    },
+    {
+      "annual_frequency": 2.80525e-05,
+      "failure_probability_over_horizon": 2.8052106532301134e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.155e-05,
+        "internal_corrosion": 2.24e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 5.25e-07,
+        "natural_geohazard": 4.2000000000000004e-06,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 6.5624999999999994e-06
+      },
+      "segment_id": "SEG-017"
+    },
+    {
+      "annual_frequency": 1.89875e-05,
+      "failure_probability_over_horizon": 1.898731973856278e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.62e-06,
+        "internal_corrosion": 1.12e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 3.1499999999999995e-07,
+        "natural_geohazard": 5.2500000000000006e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 3.937499999999999e-06
+      },
+      "segment_id": "SEG-017"
+    },
+    {
+      "annual_frequency": 2.46925e-05,
+      "failure_probability_over_horizon": 2.469219514273111e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.31e-06,
+        "internal_corrosion": 5.6e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 2.1e-07,
+        "natural_geohazard": 8.400000000000001e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 6.5624999999999994e-06
+      },
+      "segment_id": "SEG-017"
+    },
+    {
+      "annual_frequency": 5.111749999999999e-05,
+      "failure_probability_over_horizon": 5.111619352285824e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 2.772e-05,
+        "internal_corrosion": 7.280000000000001e-06,
+        "manufacturing_construction": 1.6800000000000002e-06,
+        "misoperation": 1.05e-06,
+        "natural_geohazard": 3.1500000000000003e-06,
+        "stress_corrosion_cracking": 1.05e-06,
+        "third_party_damage": 9.187499999999998e-06
+      },
+      "segment_id": "SEG-018"
+    },
+    {
+      "annual_frequency": 2.80525e-05,
+      "failure_probability_over_horizon": 2.8052106532301134e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.155e-05,
+        "internal_corrosion": 2.24e-06,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 5.25e-07,
+        "natural_geohazard": 4.2000000000000004e-06,
+        "stress_corrosion_cracking": 1.575e-06,
+        "third_party_damage": 6.5624999999999994e-06
+      },
+      "segment_id": "SEG-018"
+    },
+    {
+      "annual_frequency": 1.89875e-05,
+      "failure_probability_over_horizon": 1.898731973856278e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 4.62e-06,
+        "internal_corrosion": 1.12e-06,
+        "manufacturing_construction": 1.12e-06,
+        "misoperation": 3.1499999999999995e-07,
+        "natural_geohazard": 5.2500000000000006e-06,
+        "stress_corrosion_cracking": 2.625e-06,
+        "third_party_damage": 3.937499999999999e-06
+      },
+      "segment_id": "SEG-018"
+    },
+    {
+      "annual_frequency": 2.46925e-05,
+      "failure_probability_over_horizon": 2.469219514273111e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.31e-06,
+        "internal_corrosion": 5.6e-07,
+        "manufacturing_construction": 1.4000000000000001e-06,
+        "misoperation": 2.1e-07,
+        "natural_geohazard": 8.400000000000001e-06,
+        "stress_corrosion_cracking": 5.25e-06,
+        "third_party_damage": 6.5624999999999994e-06
+      },
+      "segment_id": "SEG-018"
+    },
+    {
+      "annual_frequency": 5.8420000000000006e-05,
+      "failure_probability_over_horizon": 5.8418293585029756e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.168e-05,
+        "internal_corrosion": 8.320000000000002e-06,
+        "manufacturing_construction": 1.9200000000000003e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 3.6000000000000003e-06,
+        "stress_corrosion_cracking": 1.2000000000000002e-06,
+        "third_party_damage": 1.0499999999999998e-05
+      },
+      "segment_id": "SEG-019"
+    },
+    {
+      "annual_frequency": 3.206000000000001e-05,
+      "failure_probability_over_horizon": 3.2059486083692075e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.3200000000000002e-05,
+        "internal_corrosion": 2.560000000000001e-06,
+        "manufacturing_construction": 1.6000000000000004e-06,
+        "misoperation": 6.000000000000001e-07,
+        "natural_geohazard": 4.8000000000000015e-06,
+        "stress_corrosion_cracking": 1.8e-06,
+        "third_party_damage": 7.499999999999999e-06
+      },
+      "segment_id": "SEG-019"
+    },
+    {
+      "annual_frequency": 2.17e-05,
+      "failure_probability_over_horizon": 2.1699764556703043e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 5.280000000000001e-06,
+        "internal_corrosion": 1.2800000000000005e-06,
+        "manufacturing_construction": 1.2800000000000005e-06,
+        "misoperation": 3.6000000000000005e-07,
+        "natural_geohazard": 6.000000000000001e-06,
+        "stress_corrosion_cracking": 3e-06,
+        "third_party_damage": 4.499999999999999e-06
+      },
+      "segment_id": "SEG-019"
+    },
+    {
+      "annual_frequency": 2.8220000000000004e-05,
+      "failure_probability_over_horizon": 2.8219601819545565e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.6400000000000006e-06,
+        "internal_corrosion": 6.400000000000002e-07,
+        "manufacturing_construction": 1.6000000000000004e-06,
+        "misoperation": 2.4000000000000003e-07,
+        "natural_geohazard": 9.600000000000003e-06,
+        "stress_corrosion_cracking": 6e-06,
+        "third_party_damage": 7.499999999999999e-06
+      },
+      "segment_id": "SEG-019"
+    },
+    {
+      "annual_frequency": 5.8420000000000006e-05,
+      "failure_probability_over_horizon": 5.8418293585029756e-05,
+      "loc_id": "small_5mm",
+      "mechanism_contribution": {
+        "external_corrosion": 3.168e-05,
+        "internal_corrosion": 8.320000000000002e-06,
+        "manufacturing_construction": 1.9200000000000003e-06,
+        "misoperation": 1.2000000000000002e-06,
+        "natural_geohazard": 3.6000000000000003e-06,
+        "stress_corrosion_cracking": 1.2000000000000002e-06,
+        "third_party_damage": 1.0499999999999998e-05
+      },
+      "segment_id": "SEG-020"
+    },
+    {
+      "annual_frequency": 3.206000000000001e-05,
+      "failure_probability_over_horizon": 3.2059486083692075e-05,
+      "loc_id": "medium_25mm",
+      "mechanism_contribution": {
+        "external_corrosion": 1.3200000000000002e-05,
+        "internal_corrosion": 2.560000000000001e-06,
+        "manufacturing_construction": 1.6000000000000004e-06,
+        "misoperation": 6.000000000000001e-07,
+        "natural_geohazard": 4.8000000000000015e-06,
+        "stress_corrosion_cracking": 1.8e-06,
+        "third_party_damage": 7.499999999999999e-06
+      },
+      "segment_id": "SEG-020"
+    },
+    {
+      "annual_frequency": 2.17e-05,
+      "failure_probability_over_horizon": 2.1699764556703043e-05,
+      "loc_id": "large_100mm",
+      "mechanism_contribution": {
+        "external_corrosion": 5.280000000000001e-06,
+        "internal_corrosion": 1.2800000000000005e-06,
+        "manufacturing_construction": 1.2800000000000005e-06,
+        "misoperation": 3.6000000000000005e-07,
+        "natural_geohazard": 6.000000000000001e-06,
+        "stress_corrosion_cracking": 3e-06,
+        "third_party_damage": 4.499999999999999e-06
+      },
+      "segment_id": "SEG-020"
+    },
+    {
+      "annual_frequency": 2.8220000000000004e-05,
+      "failure_probability_over_horizon": 2.8219601819545565e-05,
+      "loc_id": "rupture",
+      "mechanism_contribution": {
+        "external_corrosion": 2.6400000000000006e-06,
+        "internal_corrosion": 6.400000000000002e-07,
+        "manufacturing_construction": 1.6000000000000004e-06,
+        "misoperation": 2.4000000000000003e-07,
+        "natural_geohazard": 9.600000000000003e-06,
+        "stress_corrosion_cracking": 6e-06,
+        "third_party_damage": 7.499999999999999e-06
+      },
+      "segment_id": "SEG-020"
+    }
+  ],
+  "model_id": "pipeline.syt6891.2.frequency.dynamic.v1",
+  "segment_ranking": [
+    {
+      "annual_frequency": 0.00018640000000000003,
+      "failure_probability_over_horizon": 0.0001863826285993598,
+      "rank": 1,
+      "segment_id": "SEG-007"
+    },
+    {
+      "annual_frequency": 0.00018640000000000003,
+      "failure_probability_over_horizon": 0.0001863826285993598,
+      "rank": 2,
+      "segment_id": "SEG-008"
+    },
+    {
+      "annual_frequency": 0.00016649999999999998,
+      "failure_probability_over_horizon": 0.0001664861396442604,
+      "rank": 3,
+      "segment_id": "SEG-015"
+    },
+    {
+      "annual_frequency": 0.00016649999999999998,
+      "failure_probability_over_horizon": 0.0001664861396442604,
+      "rank": 4,
+      "segment_id": "SEG-016"
+    },
+    {
+      "annual_frequency": 0.0001631,
+      "failure_probability_over_horizon": 0.00016308669991809096,
+      "rank": 5,
+      "segment_id": "SEG-005"
+    },
+    {
+      "annual_frequency": 0.0001631,
+      "failure_probability_over_horizon": 0.00016308669991809096,
+      "rank": 6,
+      "segment_id": "SEG-006"
+    },
+    {
+      "annual_frequency": 0.00015575,
+      "failure_probability_over_horizon": 0.00015573787159842435,
+      "rank": 7,
+      "segment_id": "SEG-011"
+    },
+    {
+      "annual_frequency": 0.00015575,
+      "failure_probability_over_horizon": 0.00015573787159842435,
+      "rank": 8,
+      "segment_id": "SEG-012"
+    },
+    {
+      "annual_frequency": 0.000148,
+      "failure_probability_over_horizon": 0.00014798904854027866,
+      "rank": 9,
+      "segment_id": "SEG-013"
+    },
+    {
+      "annual_frequency": 0.000148,
+      "failure_probability_over_horizon": 0.00014798904854027866,
+      "rank": 10,
+      "segment_id": "SEG-014"
+    },
+    {
+      "annual_frequency": 0.00014040000000000002,
+      "failure_probability_over_horizon": 0.0001403901443812484,
+      "rank": 11,
+      "segment_id": "SEG-019"
+    },
+    {
+      "annual_frequency": 0.00014040000000000002,
+      "failure_probability_over_horizon": 0.0001403901443812484,
+      "rank": 12,
+      "segment_id": "SEG-020"
+    },
+    {
+      "annual_frequency": 0.0001335,
+      "failure_probability_over_horizon": 0.00013349108927153183,
+      "rank": 13,
+      "segment_id": "SEG-009"
+    },
+    {
+      "annual_frequency": 0.0001335,
+      "failure_probability_over_horizon": 0.00013349108927153183,
+      "rank": 14,
+      "segment_id": "SEG-010"
+    },
+    {
+      "annual_frequency": 0.00012284999999999998,
+      "failure_probability_over_horizon": 0.0001228424542477517,
+      "rank": 15,
+      "segment_id": "SEG-017"
+    },
+    {
+      "annual_frequency": 0.00012284999999999998,
+      "failure_probability_over_horizon": 0.0001228424542477517,
+      "rank": 16,
+      "segment_id": "SEG-018"
+    },
+    {
+      "annual_frequency": 0.00011850000000000001,
+      "failure_probability_over_horizon": 0.00011849297915232623,
+      "rank": 17,
+      "segment_id": "SEG-001"
+    },
+    {
+      "annual_frequency": 0.00011850000000000001,
+      "failure_probability_over_horizon": 0.00011849297915232623,
+      "rank": 18,
+      "segment_id": "SEG-002"
+    },
+    {
+      "annual_frequency": 0.00011850000000000001,
+      "failure_probability_over_horizon": 0.00011849297915232623,
+      "rank": 19,
+      "segment_id": "SEG-003"
+    },
+    {
+      "annual_frequency": 0.00011850000000000001,
+      "failure_probability_over_horizon": 0.00011849297915232623,
+      "rank": 20,
+      "segment_id": "SEG-004"
+    }
+  ],
+  "source": "SY/T 6891.2-2020 Annex A",
+  "total_initiating_frequency_per_year": 0.002907,
+  "unit": "per_year"
+}

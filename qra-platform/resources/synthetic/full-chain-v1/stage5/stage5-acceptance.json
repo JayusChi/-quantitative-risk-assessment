@@ -1,0 +1,188 @@
+{
+  "calculation_run_id": "RUN-20260902T042048Z-b34f9191",
+  "check_count": 11,
+  "checked_at": "2026-09-01T00:00:00+08:00",
+  "checks": [
+    {
+      "check_id": "S5-01_PROJECT_AGGREGATION",
+      "detail": {
+        "demo_status": "REPORT_READY",
+        "ordinary_status": "NEEDS_UPLOAD",
+        "project_count": 2
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-02_FULL_SYNTHETIC_DEMO_LOADER",
+      "detail": {
+        "parameter_pack_count": 6,
+        "source_count": 10
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-03_SIX_STEP_GUIDED_JOURNEY",
+      "detail": [
+        {
+          "id": "UPLOAD",
+          "label": "上传资料",
+          "state": "COMPLETED"
+        },
+        {
+          "id": "CONVERT",
+          "label": "自动整理",
+          "state": "COMPLETED"
+        },
+        {
+          "id": "REVIEW",
+          "label": "数据复核",
+          "state": "COMPLETED"
+        },
+        {
+          "id": "CONFIRM",
+          "label": "确认数据",
+          "state": "COMPLETED"
+        },
+        {
+          "id": "CALCULATE",
+          "label": "风险计算",
+          "state": "COMPLETED"
+        },
+        {
+          "id": "REPORT",
+          "label": "报告中心",
+          "state": "ACTIVE"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-04_STATUS_AND_11_NODE_PROGRESS",
+      "detail": {
+        "progress": {
+          "completed": 11,
+          "percent": 100,
+          "status": "COMPLETED",
+          "total": 11
+        },
+        "status": "REPORT_READY"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-05_ORDINARY_UI_HIDES_JSON_AND_DATABASE",
+      "detail": {
+        "file_upload": true,
+        "visible_database_operations": false,
+        "visible_json_upload": false
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-06_ADVANCED_AUDIT_DISCLOSURE",
+      "detail": {
+        "controlled_report_id": null,
+        "conversion_job_id": null,
+        "engine_version": "qra-engine/0.6.1; db-adapter/0.1.0",
+        "input_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f",
+        "project_id": "PROJECT-ab387b1d-308e-4d00-a214-1fcdc8e1d092",
+        "report_context_sha256": null,
+        "report_draft_sha256": null,
+        "result_sha256": "2d351acfc98cb73df38e4221e8baf427edd5fdd4b6788992d8c5480246d25286",
+        "review_session_id": null,
+        "run_id": "RUN-20260902T042048Z-b34f9191",
+        "snapshot_id": "SNAP-3ae65708-eda5-46cc-8135-776ebac65b75",
+        "snapshot_sha256": "f9948915db0433ab38d37fb30b8c5a5d762d26fc536096fd0cdede9a9d15979f"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-07_SYNTHETIC_MARKER_AND_FORMAL_GATE",
+      "detail": {
+        "manual_status": "SYNTHETIC_NOT_FOR_APPROVAL",
+        "warning": "本项目全部资料、参数和结果均为人工合成，仅用于软件演示与测试，不得用于真实资产评价、监管申报或安全决策。"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-08_RETRY_AND_CONTINUE_STATE",
+      "detail": {
+        "completed_action": {
+          "id": "OPEN_REPORT",
+          "label": "查看结果与报告"
+        },
+        "failed_action": {
+          "id": "RETRY_CALCULATION",
+          "label": "重新计算"
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-09_DESKTOP_AND_NARROW_RESPONSIVE",
+      "detail": {
+        "desktop": true,
+        "narrow_breakpoints": [
+          900,
+          560
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "S5-10_KEYBOARD_ERRORS_AND_PROJECT_BACKLINK",
+      "detail": {
+        "error_live_region": true,
+        "focus_indicator": true,
+        "review_project_backlink": true,
+        "skip_link": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "END_TO_END_REPORT_RETURN_NAVIGATION",
+      "detail": {
+        "report": {
+          "html_url": "/runs/RUN-20260902T042048Z-b34f9191/",
+          "label": "QRA计算结果",
+          "run_id": "RUN-20260902T042048Z-b34f9191",
+          "zip_url": "/admin/api/runs/RUN-20260902T042048Z-b34f9191/export"
+        },
+        "report_center": {
+          "artifact_count": 17,
+          "citations": "BOUND",
+          "completeness": "PASS",
+          "context_sha256": null,
+          "controlled_report_id": null,
+          "draft": true,
+          "draft_sha256": null,
+          "formats": {
+            "DOCX": false,
+            "HTML": true,
+            "PDF": false,
+            "ZIP": true
+          },
+          "generation_mode": null,
+          "history": [],
+          "manual_status": "SYNTHETIC_NOT_FOR_APPROVAL",
+          "numerical_consistency": "PASS",
+          "provider_id": null,
+          "status": "READY",
+          "version_no": null
+        }
+      },
+      "status": "PASS"
+    }
+  ],
+  "completed_node_count": 11,
+  "database": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage5-user-journey-20260901\\stage5-user-journey.sqlite3",
+  "formal_report_allowed": false,
+  "gate": "S5_USER_JOURNEY_ACCEPTED",
+  "output_root": "D:\\风险定量评估\\qra-platform\\workspace\\outputs\\m1-5-stage5-user-journey-20260901",
+  "passed_count": 11,
+  "project_id": "PROJECT-ab387b1d-308e-4d00-a214-1fcdc8e1d092",
+  "schema_version": "1.0.0",
+  "snapshot_id": "SNAP-3ae65708-eda5-46cc-8135-776ebac65b75",
+  "stage": 5,
+  "status": "PASS"
+}

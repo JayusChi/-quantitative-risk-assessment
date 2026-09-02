@@ -1,0 +1,1866 @@
+{
+  "binding_policy": "source-file-sha256+page-or-image+bbox+crop-pixel-sha256",
+  "business_content_sha256": "8e5947a2cdc4b08a2b0cf1bf9ca7e73863bebf9016ff6a2b4efc7edcfa910f34",
+  "items": [
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "99c53de2a8a8706e5c234849b3b028e02c909b8002057205d18ad19b14354db7",
+      "field_id": "engineering_indicator.construction.backfill_type",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.backfill_type",
+      "value": {
+        "by_archetype": {
+          "DENSE": "筛分细土",
+          "GEOHAZARD": "筛分细土",
+          "INDUSTRIAL": "筛分细土",
+          "RURAL": "筛分细土",
+          "VILLAGE": "筛分细土"
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "e51c16ec45ba77f9b3fe6d94a8de2405131805330dca32684104043927a6dc2f"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "ab06a91c55ef04bf2188fc4a888af7b68c13760f25cf54b09317f8f3aa3b879a",
+      "field_id": "engineering_indicator.construction.casing_condition",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_condition",
+      "value": {
+        "by_archetype": {
+          "DENSE": "GOOD",
+          "GEOHAZARD": "GOOD",
+          "INDUSTRIAL": "GOOD",
+          "RURAL": "GOOD",
+          "VILLAGE": "GOOD"
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "ecdff7e410c1c9fca9a78972eacdd3b5af941ee738a0ad4991b7cbb1ec349e8c"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "880cef913523c0dd931df2efc15cbc83347b35b80d3e7057b46849c2ddfbed29",
+      "field_id": "engineering_indicator.construction.casing_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_count_per_km",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "f04ae7d925488eea42504b1af1a33c5b927a45e5dbb4a18889022eb66e9e96e4",
+      "field_id": "engineering_indicator.construction.cold_bend_radius_ratio",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.cold_bend_radius_ratio",
+      "value": {
+        "by_archetype": {
+          "DENSE": 40.0,
+          "GEOHAZARD": 40.0,
+          "INDUSTRIAL": 40.0,
+          "RURAL": 40.0,
+          "VILLAGE": 40.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "f60e16304d60f2477fb9733c3e2eaad65dbf890930d5bd92473e77c9390aadb5"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "01aaf272b4801ac26f475182dc7068d1a91a3213457f44d9acc7a2eb7e33625a",
+      "field_id": "engineering_indicator.construction.concrete_slab_coverage_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.concrete_slab_coverage_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "bcdc424485b286be77839b2f659dbabfe9772cb6532e4ab4237f2d191e7cb7b8",
+      "field_id": "engineering_indicator.construction.construction_contractor",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.694741
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1625
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_contractor",
+      "value": {
+        "by_archetype": {
+          "DENSE": "SYNTHETIC_CONSTRUCTION_CO",
+          "GEOHAZARD": "SYNTHETIC_CONSTRUCTION_CO",
+          "INDUSTRIAL": "SYNTHETIC_CONSTRUCTION_CO",
+          "RURAL": "SYNTHETIC_CONSTRUCTION_CO",
+          "VILLAGE": "SYNTHETIC_CONSTRUCTION_CO"
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "ad96d480c5c38c03b462ecd46551569854091b3dfa256711b1bb417707fff659"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "7f02a20dede33336eb86fb71ccc5d5b3c5941928df112e3a20190df339b49b59",
+      "field_id": "engineering_indicator.construction.construction_nonconformity_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_nonconformity_count",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0,
+          "GEOHAZARD": 0,
+          "INDUSTRIAL": 0,
+          "RURAL": 0,
+          "VILLAGE": 0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b8425efe64c083e5d91b900dba05434b4a2a946619522735f7f4e23a0ff40ed9",
+      "field_id": "engineering_indicator.construction.field_bend_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 1
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.field_bend_count_per_km",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b147b15bffbb6bd8d26142304de69331a2f5e3517f7c49f8cc3686642fc60895",
+      "field_id": "engineering_indicator.construction.girth_weld_count_per_km",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.girth_weld_count_per_km",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "3a37323fb3caa5ce4e765fee4057c934cc9af5e881502b08206e9fcafc4465a1",
+      "field_id": "engineering_indicator.construction.rock_shield_present",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.rock_shield_present",
+      "value": {
+        "by_archetype": {
+          "DENSE": true,
+          "GEOHAZARD": true,
+          "INDUSTRIAL": true,
+          "RURAL": true,
+          "VILLAGE": true
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "445d9b898667f8ecdea7821ec5cc9b563b434643108ea66f7021482bb6fd28db",
+      "field_id": "engineering_indicator.construction.supervision_contractor",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.380504
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          890
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.supervision_contractor",
+      "value": {
+        "by_archetype": {
+          "DENSE": "SYNTHETIC_SUPERVISION_CO",
+          "GEOHAZARD": "SYNTHETIC_SUPERVISION_CO",
+          "INDUSTRIAL": "SYNTHETIC_SUPERVISION_CO",
+          "RURAL": "SYNTHETIC_SUPERVISION_CO",
+          "VILLAGE": "SYNTHETIC_SUPERVISION_CO"
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "73ffc8ae61e72eb72a36ee29fe4dc3cfe95119668bc2cbe62caadf4817f66e25"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "f25f17697808dc70a51a3ebafc3482b8ef7b1179f96f1fdd0de687b616295a4a",
+      "field_id": "engineering_indicator.construction.weld_ndt_coverage_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_ndt_coverage_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 1.0,
+          "GEOHAZARD": 1.0,
+          "INDUSTRIAL": 1.0,
+          "RURAL": 1.0,
+          "VILLAGE": 1.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cc6fa59073dde8f39a134dcb17e7ddfc05f8f692a71b139c03548c350263d1a1"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "01aaf272b4801ac26f475182dc7068d1a91a3213457f44d9acc7a2eb7e33625a",
+      "field_id": "engineering_indicator.construction.weld_reject_rate_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_reject_rate_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "100ade895baaad1295e412619e975d0b6d24d1fcf2195eb08281d0184d0403c8",
+      "field_id": "engineering_indicator.construction.welding_process",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.694741
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1625
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.welding_process",
+      "value": {
+        "by_archetype": {
+          "DENSE": "SMAW_AUTOMATIC_COMBINED",
+          "GEOHAZARD": "SMAW_AUTOMATIC_COMBINED",
+          "INDUSTRIAL": "SMAW_AUTOMATIC_COMBINED",
+          "RURAL": "SMAW_AUTOMATIC_COMBINED",
+          "VILLAGE": "SMAW_AUTOMATIC_COMBINED"
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "893bd4e431cdb6fdf1ad142f7adbb2f1c466aafd3550c9de6843914fc77ef1ea"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "215d1725e8374fe00f64aea312e7d9901b865f0cf7051bd1fc82019fff84f118",
+      "field_id": "engineering_indicator.management_emergency.alarm_response_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.alarm_response_time_s",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "0b476815759071123ead56b5a23cda189d68e80853819ffb788645bbeec78ee1",
+      "field_id": "engineering_indicator.management_emergency.audit_nonconformity_open_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 2
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.audit_nonconformity_open_count",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0,
+          "GEOHAZARD": 0,
+          "INDUSTRIAL": 0,
+          "RURAL": 0,
+          "VILLAGE": 0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b147b15bffbb6bd8d26142304de69331a2f5e3517f7c49f8cc3686642fc60895",
+      "field_id": "engineering_indicator.management_emergency.emergency_drills_per_year",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_drills_per_year",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "3a37323fb3caa5ce4e765fee4057c934cc9af5e881502b08206e9fcafc4465a1",
+      "field_id": "engineering_indicator.management_emergency.emergency_isolation_procedure_available",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_isolation_procedure_available",
+      "value": {
+        "by_archetype": {
+          "DENSE": true,
+          "GEOHAZARD": true,
+          "INDUSTRIAL": true,
+          "RURAL": true,
+          "VILLAGE": true
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "880cef913523c0dd931df2efc15cbc83347b35b80d3e7057b46849c2ddfbed29",
+      "field_id": "engineering_indicator.management_emergency.emergency_team_response_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_team_response_time_s",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "1a31b115b0cdb4d02cafaa0ad2a5df8ef071e99059e584e631b94d1c7c53a7bd",
+      "field_id": "engineering_indicator.management_emergency.maintenance_completion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.maintenance_completion_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "01aaf272b4801ac26f475182dc7068d1a91a3213457f44d9acc7a2eb7e33625a",
+      "field_id": "engineering_indicator.management_emergency.management_of_change_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.management_of_change_compliance_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "fdae6738f68d2d9d11b9f3aa3a0e760e95deb8e8a1d759f2c956c88b87685bc5",
+      "field_id": "engineering_indicator.management_emergency.misoperation_event_count",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.misoperation_event_count",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0,
+          "GEOHAZARD": 0,
+          "INDUSTRIAL": 0,
+          "RURAL": 0,
+          "VILLAGE": 0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "02bcd2544d6a5cf75030d8346395f33bd4af792872e3ee1da25803695d66a9eb",
+      "field_id": "engineering_indicator.management_emergency.operating_procedure_available",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operating_procedure_available",
+      "value": {
+        "by_archetype": {
+          "DENSE": true,
+          "GEOHAZARD": true,
+          "INDUSTRIAL": true,
+          "RURAL": true,
+          "VILLAGE": true
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "e9719ca82c9341fe6c850aca64b223dde0cd026b68fc32f8a6de014e99f3e833"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b8425efe64c083e5d91b900dba05434b4a2a946619522735f7f4e23a0ff40ed9",
+      "field_id": "engineering_indicator.management_emergency.operator_competency_pass_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 3
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_competency_pass_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b147b15bffbb6bd8d26142304de69331a2f5e3517f7c49f8cc3686642fc60895",
+      "field_id": "engineering_indicator.management_emergency.operator_training_completion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_training_completion_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "7e2e1550d1966daabee6236116e3092cf8e2f8131e451258c9e548ebdda05599",
+      "field_id": "engineering_indicator.management_emergency.permit_to_work_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.permit_to_work_compliance_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "880cef913523c0dd931df2efc15cbc83347b35b80d3e7057b46849c2ddfbed29",
+      "field_id": "engineering_indicator.management_emergency.procedure_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.procedure_compliance_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "1a31b115b0cdb4d02cafaa0ad2a5df8ef071e99059e584e631b94d1c7c53a7bd",
+      "field_id": "engineering_indicator.management_emergency.shift_handover_compliance_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.shift_handover_compliance_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "513c95b911322085460ba88de831bf3e308f7fb33af2c3a81e1e1d189d4bb2bb",
+      "field_id": "engineering_indicators.observations_global",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.616503
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1442
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global",
+      "value": {
+        "consequence_parameters.probit_model_version": {
+          "as_of": "2026-08-04",
+          "quality": "B",
+          "source_ref": "AQ/T 3046-2013",
+          "value": "AQT3046-2013-I.1"
+        },
+        "consequence_parameters.tno_curve_version": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "AQ/T 3046-2013 Figure E.1",
+          "value": "AQT3046-FIG-E1-DIGITIZED-PROVISIONAL"
+        },
+        "governance.approval_ref": {
+          "as_of": "2026-08-04",
+          "quality": "D",
+          "source_ref": "synthetic://approval",
+          "value": "TEST-ONLY-NOT-APPROVED"
+        },
+        "governance.as_built_drawing_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://as-built",
+          "value": "SYN-ASBUILT-001"
+        },
+        "governance.construction_record_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://construction-record",
+          "value": "SYN-CONSTRUCTION-001"
+        },
+        "governance.data_owner": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://data-owner",
+          "value": "SYNTHETIC_DATA_OWNER"
+        },
+        "governance.design_report_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://design",
+          "value": "SYN-DESIGN-001"
+        },
+        "governance.emergency_plan_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://emergency-plan",
+          "value": "SYN-ERP-001"
+        },
+        "governance.environment_report_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "SYN-ENV-001"
+        },
+        "governance.geohazard_report_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "SYN-GEO-001"
+        },
+        "governance.hca_report_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://hca",
+          "value": "SYN-HCA-001"
+        },
+        "governance.integrity_plan_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://integrity-plan",
+          "value": "SYN-IMP-001"
+        },
+        "governance.previous_risk_report_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "SYN-PREV-QRA-001"
+        },
+        "governance.route_map_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "SYN-ROUTE-001"
+        },
+        "governance.supervision_record_ref": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "SYN-SUPERVISION-001"
+        },
+        "population_receptors.building_occupancy": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "RESIDENTIAL_SYNTHETIC"
+        },
+        "population_receptors.building_overpressure_resistance_kpa": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": 20.0
+        },
+        "population_receptors.building_thermal_shelter_factor": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": 0.5
+        },
+        "population_receptors.building_type": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": "MASONRY_SYNTHETIC"
+        },
+        "population_receptors.dense_residential_present": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": false
+        },
+        "population_receptors.evacuation_response_time_s": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": 300.0
+        },
+        "population_receptors.hospital_present": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": false
+        },
+        "population_receptors.school_present": {
+          "as_of": "2026-08-04",
+          "quality": "C",
+          "source_ref": "synthetic://full-contract-defaults/global",
+          "value": false
+        }
+      },
+      "value_sha256": "76094e8ce69270f0db17529ecfdb53a84f51bfc681381bac51cdaff54d1cc5ff"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "f83af7ef4b1c4eb9e6bde664a3c399f2963f39042942b64ccce35a019b0a6ab4",
+      "field_id": "engineering_indicator.governance.approval_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.approval_ref",
+      "value": "TEST-ONLY-NOT-APPROVED",
+      "value_sha256": "433288dc48e03163ff8dd3d51bffa5bbbf119d9e10c7161582cfb423079e9e85"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "451dc27eb8dc930272d8592645206f09db558f779121337d7755ce2159bf12cc",
+      "field_id": "engineering_indicator.governance.as_built_drawing_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.as_built_drawing_ref",
+      "value": "SYN-ASBUILT-001",
+      "value_sha256": "7cf11300b8c30cc0c385c6bc2fdbdff5f76aaad60a3ba9e0d105388762c4191d"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "3d3c7a7b4a261e7e80d97ca80afcc731e9033284cc7c61b8ef0059e7365cf405",
+      "field_id": "engineering_indicator.governance.construction_record_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 4
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.construction_record_ref",
+      "value": "SYN-CONSTRUCTION-001",
+      "value_sha256": "3ed881e0651d75e34d20ea2c7cb6f299da3a1e71d0d81c02a195d1350b9fb91b"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "49c0d2b748351b1b0ef2f0fb722a5fc85a1f1173814421e1044c31c1bd468496",
+      "field_id": "engineering_indicator.governance.data_owner",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.data_owner",
+      "value": "SYNTHETIC_DATA_OWNER",
+      "value_sha256": "d9b34fff6e31da642bf331ee957fd6cc70d053b6c27ca2ac19e668e2fec948f4"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "3f4294e50b78d566ba0761d01fc465c33fc7b22a6b1e2f766ad3985b8ab35cef",
+      "field_id": "engineering_indicator.governance.design_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.design_report_ref",
+      "value": "SYN-DESIGN-001",
+      "value_sha256": "c8a9b2d552cbe76c340c0284934f51200fb601adb88f283685ed05fc7749df2d"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "f5836892a5dc14585e72128846960f43a8c0cc06ffd785585d4c883da2d10eca",
+      "field_id": "engineering_indicator.governance.emergency_plan_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.353997,
+          0.930472,
+          0.367251
+        ],
+        "bbox_pixels": [
+          105,
+          828,
+          1539,
+          859
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.emergency_plan_ref",
+      "value": "SYN-ERP-001",
+      "value_sha256": "1552e78e12578f66fa2bc3542bf5e12f1af3b1b736cf31c11d4b0dac033d6f69"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "88e4470a502995c82a06748415dca644ddbcf07f826a04d2839a221713318c21",
+      "field_id": "engineering_indicator.governance.environment_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.458743,
+          0.930472,
+          0.471997
+        ],
+        "bbox_pixels": [
+          105,
+          1073,
+          1539,
+          1104
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.environment_report_ref",
+      "value": "SYN-ENV-001",
+      "value_sha256": "d51df59f9cc122b386f0e815f647ff9073f91d0152b5feb3a32e28b34c5b50cb"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "7011697581b49865c5d04d50347e78c67d09db99229e9268ab44ff01be508696",
+      "field_id": "engineering_indicator.governance.geohazard_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.563489,
+          0.930472,
+          0.576742
+        ],
+        "bbox_pixels": [
+          105,
+          1318,
+          1539,
+          1349
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.geohazard_report_ref",
+      "value": "SYN-GEO-001",
+      "value_sha256": "310970b6e295782e5f58c499e533e4486f1a184519eda69a8fb4a82d075bc8e6"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "1b666bb2b2ad572ec0c42b2dcdc8b295968ef1dc28ae7734e8b1574c78b374d8",
+      "field_id": "engineering_indicator.governance.hca_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.668234,
+          0.930472,
+          0.681488
+        ],
+        "bbox_pixels": [
+          105,
+          1563,
+          1539,
+          1594
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.hca_report_ref",
+      "value": "SYN-HCA-001",
+      "value_sha256": "9e8385d394940ae25d813af4d0e18215a3658be4ae99e9affd1759f9ababab91"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "f426fa240156d3895ddf87ac9d1cb7d8c1f837223b08f192629823d9db028e31",
+      "field_id": "engineering_indicator.governance.integrity_plan_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.77298,
+          0.930472,
+          0.786233
+        ],
+        "bbox_pixels": [
+          105,
+          1808,
+          1539,
+          1839
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.integrity_plan_ref",
+      "value": "SYN-IMP-001",
+      "value_sha256": "79b2100df8cf9ddfdd27d889101f834f9e3d35e564042043f17091dd170f186f"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9180ac8df3491243de54c10d0badcd01cebb82179c686ed9f2952a76b800013c",
+      "field_id": "engineering_indicator.governance.previous_risk_report_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.877726,
+          0.930472,
+          0.890979
+        ],
+        "bbox_pixels": [
+          105,
+          2053,
+          1539,
+          2084
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 5
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.previous_risk_report_ref",
+      "value": "SYN-PREV-QRA-001",
+      "value_sha256": "e01bf8c57471f1dcfe38dfb7fa5f0705132f1b6ca698c04470bc736c448154df"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "e6a6c98afb072e62a27d6a310d6ac7576469eab56c0c0aac21691302343ad4a5",
+      "field_id": "engineering_indicator.governance.route_map_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.144506,
+          0.930472,
+          0.15776
+        ],
+        "bbox_pixels": [
+          105,
+          338,
+          1539,
+          369
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 6
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.route_map_ref",
+      "value": "SYN-ROUTE-001",
+      "value_sha256": "f3f008b3300f728c62bd5193211766ca7d5672c508e6d06afd6b0a744cb77e63"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9b31ed6ab730755f3ac68dfaf1ebb30d6467497728ff827fae45facbf541ccb7",
+      "field_id": "engineering_indicator.governance.supervision_record_ref",
+      "location": {
+        "bbox_normalized": [
+          0.063482,
+          0.249252,
+          0.930472,
+          0.262505
+        ],
+        "bbox_pixels": [
+          105,
+          583,
+          1539,
+          614
+        ],
+        "location_type": "pdf_page_bbox",
+        "page": 6
+      },
+      "source_document": "09_现场检查扫描件.pdf",
+      "source_file_sha256": "e73612354a957fd129f1daebe81f276db433ad34f22d433198f2180be4d7b4a3",
+      "target_path": "engineering_indicators.observations_global.governance.supervision_record_ref",
+      "value": "SYN-SUPERVISION-001",
+      "value_sha256": "48c67ceb24c8658b9b5e653250894ee15f7921ac696107e0d3c39cc4fefa0707"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.area_ignition_source_area_m2",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.225625,
+          0.71,
+          0.259375
+        ],
+        "bbox_pixels": [
+          1149,
+          361,
+          1704,
+          415
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.area_ignition_source_area_m2",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.cloud_exposure_time_s",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.225625,
+          0.964167,
+          0.259375
+        ],
+        "bbox_pixels": [
+          1759,
+          361,
+          2314,
+          415
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.cloud_exposure_time_s",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.confinement_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.35375,
+          0.71,
+          0.3875
+        ],
+        "bbox_pixels": [
+          1149,
+          566,
+          1704,
+          620
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.confinement_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.congestion_fraction",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.35375,
+          0.964167,
+          0.3875
+        ],
+        "bbox_pixels": [
+          1759,
+          566,
+          2314,
+          620
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.congestion_fraction",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.explosion_source_volume_m3",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.481875,
+          0.71,
+          0.515625
+        ],
+        "bbox_pixels": [
+          1149,
+          771,
+          1704,
+          825
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.explosion_source_volume_m3",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.ignition_efficiency_per_s",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.481875,
+          0.964167,
+          0.515625
+        ],
+        "bbox_pixels": [
+          1759,
+          771,
+          2314,
+          825
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_efficiency_per_s",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.ignition_source_presence_probability",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.61,
+          0.71,
+          0.64375
+        ],
+        "bbox_pixels": [
+          1149,
+          976,
+          1704,
+          1030
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_source_presence_probability",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.line_ignition_source_length_m",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.61,
+          0.964167,
+          0.64375
+        ],
+        "bbox_pixels": [
+          1759,
+          976,
+          2314,
+          1030
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.line_ignition_source_length_m",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b75839be837977351ef94e8ec996fc41c90d0706b8073acb3527768679d68fa2",
+      "field_id": "engineering_indicator.ignition_congestion.point_ignition_source_count",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.738125,
+          0.71,
+          0.771875
+        ],
+        "bbox_pixels": [
+          1149,
+          1181,
+          1704,
+          1235
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.point_ignition_source_count",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0,
+          "GEOHAZARD": 0,
+          "INDUSTRIAL": 0,
+          "RURAL": 0,
+          "VILLAGE": 0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "b75839be837977351ef94e8ec996fc41c90d0706b8073acb3527768679d68fa2",
+      "field_id": "engineering_indicator.ignition_congestion.tno_source_strength",
+      "location": {
+        "bbox_normalized": [
+          0.732917,
+          0.738125,
+          0.964167,
+          0.771875
+        ],
+        "bbox_pixels": [
+          1759,
+          1181,
+          2314,
+          1235
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.tno_source_strength",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0,
+          "GEOHAZARD": 0,
+          "INDUSTRIAL": 0,
+          "RURAL": 0,
+          "VILLAGE": 0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "cd385841cf91fd30a82c59329bee2b258d7fd443bb4326e9b7f8e96df3224c55"
+    },
+    {
+      "confidence": 1.0,
+      "crop_pixel_sha256": "9459bb546d75ba3694d3dd9315eb0c5c956a0f1644a8784db6312156fec7a721",
+      "field_id": "engineering_indicator.ignition_congestion.vce_given_delayed_probability",
+      "location": {
+        "bbox_normalized": [
+          0.47875,
+          0.86625,
+          0.71,
+          0.9
+        ],
+        "bbox_pixels": [
+          1149,
+          1386,
+          1704,
+          1440
+        ],
+        "location_type": "image_bbox"
+      },
+      "source_document": "10_现场照片说明.png",
+      "source_file_sha256": "1e8a5d4dda0d43c390c6f4a8d45a3139ee9f6e16b96bd0620f9c7f75e23d3232",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.vce_given_delayed_probability",
+      "value": {
+        "by_archetype": {
+          "DENSE": 0.0,
+          "GEOHAZARD": 0.0,
+          "INDUSTRIAL": 0.0,
+          "RURAL": 0.0,
+          "VILLAGE": 0.0
+        },
+        "segment_overrides": {}
+      },
+      "value_sha256": "c71b8c7aef79a147436b3560f81005571b3b947d30c69c2dfbdc2e9f4f8c8c42"
+    }
+  ],
+  "provider_id": "synthetic-deterministic-replay",
+  "provider_version": "1.0.0",
+  "schema_version": "1.0.0"
+}

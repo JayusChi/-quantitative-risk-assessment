@@ -1,0 +1,41 @@
+{
+  "business_content_sha256": "47892dc33573356e85bd195d74bbc841bff2d2ebd4fc568edab3eb4f5f6c85d6",
+  "components": {
+    "evidence_manifest": "5166bd4011f53a53f309bc26b723f8fac1bfe20664da0468e1b54c4ede69a254",
+    "expected_result": "09eab6e5cf977340738c8dfe9400b7054c7827b56b1f30a873d00854ca751ea6",
+    "expected_snapshot": "5ee1cc344d0d72c135582f1cc481442784f88eed205df8d36d84053f90c39d93",
+    "ground_truth": "a4845e93f68f1bd34c2bbf2ca7fd4b0b6b5a03de4d44315efd66cc0b8b3584fb",
+    "parameter_packs": {
+      "synthetic-consequence-parameters-v1": "1840bc461c1ac41d0c763131ff0b61d8d56afd1321e78c71b14d12e4fbb736de",
+      "synthetic-frequency-correction-v1": "26713c274b6dcdbf6353ffb91c5e802105403d65629ed51430c903f68d719c1d",
+      "synthetic-frequency-library-v1": "0b243a0c031a96ece0c831642b6de38958e388c6d68877b8855f00ca392b9247",
+      "synthetic-ignition-model-v1": "93539ea0ac7b7284b50774b1da506f7af88b4073736532c4a743ab63449d42cc",
+      "synthetic-model-validation-fixture-v1": "9d5a2630826ace7d33cad96cfd2b9f60b3acd9b4a80afb9113a3fd50f8c0a229",
+      "synthetic-risk-criteria-v1": "bdaae3e4ea829f3434b19cdcb6fa59450f095069dfcaae46163c04fffaf14606"
+    },
+    "source_documents": {
+      "01_管线与管段台账.xlsx": "3e03184bf9087d35acdfd6260c1ceee9328de90249cf0b21edaa1483dc746c21",
+      "02_运行工况.csv": "11e139590dbb1e4d3192f1998b2897eda19b3f09572fea509ee0d00501499345",
+      "03_天然气组分.xlsx": "e9b3e3e12e5e8dbc075475a9547d81163b109e1a6485e211207bb7d9a067667c",
+      "04_CIPS与腐蚀检测.xlsx": "7b0a5a0278ab7238c6357be55824232990fc532ed746ed3382e507df2ec271b6",
+      "05_缺陷与维修记录.docx": "8ae77c19bbca58a01f37fa2e2d62c0cc4a7d92625db5412ec47e94fce0a7d55e",
+      "06_第三方与巡线记录.xlsx": "af1cc564f6a15fdf87a8d02dbb55bbb47b07c0ff58d22fcf7fea3bdf86858505",
+      "07_人口和敏感受体.xlsx": "5a96a220a6e35e367a61d1d56157bb6eecc91459137b4c80b637029e0d8dc1e8",
+      "08_气象联合概率.csv": "5a503a2bab5a6f676c6dcab12e939c6f72ac33c72ec3c60dcab081e264de85c1",
+      "09_现场检查扫描件.pdf": "78c0eea6fa824413461e56f01352bd8b7aa01f4eb3644ea3dc5c743798a35c97",
+      "10_现场照片说明.png": "de7eb54191764470b5918ec735f8bbf526fb065fb086209082ad88291e934542"
+    },
+    "variants": {
+      "D10_CONFLICT": "197cad277c74b2a7994cfaa09544a9314dfdd31081a75a187d0ff94a91e87fe2",
+      "D20_MISSING": "9473afc378f1e934c164d2b53642dc5a2a72042290178dffa4dd30ad376f05e4",
+      "D30_LOW_QUALITY_SCAN": "d9f3b74b7c28441da13b489bea76baa89d8f1ce9ab342c3a40d1a1e48adcd842",
+      "D40_OVERSIZED_IMAGE": "3a2f0089330ba576161608b85dbb2084b342bb545b20bd90e57a6a91e8e394dd",
+      "D50_PROMPT_INJECTION": "382d9c3e1dc4e4f960edaaf5a9e8e35e3c59f5474bad41c8b767a3298e0ce62b",
+      "D60_DUPLICATE_VERSION": "233e57bff55fd840ec4ef5945dae730421af3d3bca315c5ac7b0eb2998761692",
+      "D70_UNIT_ANOMALY": "d4ca3acbd7d0590a3139fdf561adebd4ddde436669cd9060afa69ba51d8dca9d"
+    }
+  },
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "generator_version": "qra.synthetic-source-pack/1.1.0",
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,650 @@
+{
+  "business_content_sha256": "9d5a2630826ace7d33cad96cfd2b9f60b3acd9b4a80afb9113a3fd50f8c0a229",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "pack_id": "synthetic-model-validation-fixture-v1",
+  "parameters": [
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "expected_aggregation",
+      "target_path": "expected_aggregation",
+      "unit": null,
+      "value": {
+        "asset": {
+          "pipeline_eal_cny_per_year": 70.07,
+          "ranking": [
+            "SEG-016",
+            "SEG-012",
+            "SEG-015",
+            "SEG-014",
+            "SEG-020",
+            "SEG-013",
+            "SEG-011",
+            "SEG-008",
+            "SEG-010",
+            "SEG-019",
+            "SEG-009",
+            "SEG-007",
+            "SEG-018",
+            "SEG-006",
+            "SEG-017",
+            "SEG-005",
+            "SEG-004",
+            "SEG-003",
+            "SEG-002",
+            "SEG-001"
+          ],
+          "segment_eal_cny_per_year": {
+            "SEG-001": 0.01,
+            "SEG-002": 0.024,
+            "SEG-003": 0.042,
+            "SEG-004": 0.064,
+            "SEG-005": 0.25,
+            "SEG-006": 0.42,
+            "SEG-007": 0.7,
+            "SEG-008": 1.2,
+            "SEG-009": 0.72,
+            "SEG-010": 1.0,
+            "SEG-011": 2.2,
+            "SEG-012": 9.6,
+            "SEG-013": 2.6,
+            "SEG-014": 5.6,
+            "SEG-015": 9.0,
+            "SEG-016": 32.0,
+            "SEG-017": 0.34,
+            "SEG-018": 0.54,
+            "SEG-019": 0.76,
+            "SEG-020": 3.0
+          }
+        },
+        "cross_domain": {
+          "mandatory_action_segments": [
+            "SEG-012",
+            "SEG-020"
+          ],
+          "unweighted_total_score_exists": false
+        },
+        "environment": {
+          "mandatory_sensitive_receptor_segments": [
+            "SEG-020"
+          ],
+          "pipeline_expected_area_m2_per_year": 0.04361,
+          "pipeline_expected_recovery_days_per_year": 0.0005688,
+          "pipeline_expected_release_kg_per_year": 0.08325,
+          "release_ranking": [
+            "SEG-016",
+            "SEG-020",
+            "SEG-012",
+            "SEG-015",
+            "SEG-014",
+            "SEG-019",
+            "SEG-011",
+            "SEG-013",
+            "SEG-018",
+            "SEG-010",
+            "SEG-008",
+            "SEG-017",
+            "SEG-009",
+            "SEG-007",
+            "SEG-006",
+            "SEG-005",
+            "SEG-004",
+            "SEG-003",
+            "SEG-002",
+            "SEG-001"
+          ],
+          "segment_expected_release_kg_per_year": {
+            "SEG-001": 5e-05,
+            "SEG-002": 0.00012,
+            "SEG-003": 0.00021,
+            "SEG-004": 0.00032,
+            "SEG-005": 0.001,
+            "SEG-006": 0.0015,
+            "SEG-007": 0.0021,
+            "SEG-008": 0.0028,
+            "SEG-009": 0.00225,
+            "SEG-010": 0.003,
+            "SEG-011": 0.0044,
+            "SEG-012": 0.0096,
+            "SEG-013": 0.0039,
+            "SEG-014": 0.0056,
+            "SEG-015": 0.0075,
+            "SEG-016": 0.016,
+            "SEG-017": 0.00255,
+            "SEG-018": 0.0036,
+            "SEG-019": 0.00475,
+            "SEG-020": 0.012
+          }
+        },
+        "fn_curve": [
+          {
+            "cumulative_frequency_per_year": 1.46e-05,
+            "fatalities_at_least": 1.0
+          },
+          {
+            "cumulative_frequency_per_year": 8.1e-06,
+            "fatalities_at_least": 5.0
+          },
+          {
+            "cumulative_frequency_per_year": 4.9e-06,
+            "fatalities_at_least": 10.0
+          },
+          {
+            "cumulative_frequency_per_year": 1.2e-06,
+            "fatalities_at_least": 30.0
+          },
+          {
+            "cumulative_frequency_per_year": 1.2e-06,
+            "fatalities_at_least": 50.0
+          },
+          {
+            "cumulative_frequency_per_year": 0.0,
+            "fatalities_at_least": 100.0
+          }
+        ],
+        "human_pll_ranking": [
+          "SEG-012",
+          "SEG-011",
+          "SEG-016",
+          "SEG-010",
+          "SEG-015",
+          "SEG-009",
+          "SEG-014",
+          "SEG-008",
+          "SEG-020",
+          "SEG-007",
+          "SEG-013",
+          "SEG-006",
+          "SEG-019",
+          "SEG-005",
+          "SEG-018",
+          "SEG-017",
+          "SEG-004",
+          "SEG-003",
+          "SEG-002",
+          "SEG-001"
+        ],
+        "human_top_three_segments": [
+          "SEG-012",
+          "SEG-011",
+          "SEG-016"
+        ],
+        "ir_by_receptor_per_year": {
+          "R-INDUSTRIAL": 1.008e-05,
+          "R-SCHOOL": 1.018e-05,
+          "R-VILLAGE": 3.01e-06
+        },
+        "max_ir_per_year": 1.018e-05,
+        "max_ir_receptor": "R-SCHOOL",
+        "pipeline_pll_per_year": 0.00016763,
+        "segment_pll_per_year": {
+          "SEG-001": 1e-08,
+          "SEG-002": 4e-08,
+          "SEG-003": 9e-08,
+          "SEG-004": 1.6e-07,
+          "SEG-005": 1e-06,
+          "SEG-006": 1.8e-06,
+          "SEG-007": 2.8e-06,
+          "SEG-008": 4e-06,
+          "SEG-009": 7.2e-06,
+          "SEG-010": 1.5e-05,
+          "SEG-011": 2.75e-05,
+          "SEG-012": 7.2e-05,
+          "SEG-013": 1.95e-06,
+          "SEG-014": 4.2e-06,
+          "SEG-015": 7.5e-06,
+          "SEG-016": 1.6e-05,
+          "SEG-017": 3.4e-07,
+          "SEG-018": 7.2e-07,
+          "SEG-019": 1.52e-06,
+          "SEG-020": 3.8e-06
+        },
+        "service": {
+          "critical_customer_segments": [
+            "SEG-012"
+          ],
+          "pipeline_expected_customer_hours_per_year": 0.15605,
+          "pipeline_expected_unserved_volume_m3_per_year": 2.949,
+          "segment_expected_unserved_volume_m3_per_year": {
+            "SEG-001": 0.001,
+            "SEG-002": 0.0024,
+            "SEG-003": 0.0042,
+            "SEG-004": 0.0064,
+            "SEG-005": 0.025,
+            "SEG-006": 0.036,
+            "SEG-007": 0.056,
+            "SEG-008": 0.08,
+            "SEG-009": 0.054,
+            "SEG-010": 0.08,
+            "SEG-011": 0.11,
+            "SEG-012": 0.216,
+            "SEG-013": 0.26,
+            "SEG-014": 0.35,
+            "SEG-015": 0.45,
+            "SEG-016": 0.8,
+            "SEG-017": 0.051,
+            "SEG-018": 0.072,
+            "SEG-019": 0.095,
+            "SEG-020": 0.2
+          },
+          "unserved_volume_ranking": [
+            "SEG-016",
+            "SEG-015",
+            "SEG-014",
+            "SEG-013",
+            "SEG-012",
+            "SEG-020",
+            "SEG-011",
+            "SEG-019",
+            "SEG-008",
+            "SEG-010",
+            "SEG-018",
+            "SEG-007",
+            "SEG-009",
+            "SEG-017",
+            "SEG-006",
+            "SEG-005",
+            "SEG-004",
+            "SEG-003",
+            "SEG-002",
+            "SEG-001"
+          ]
+        },
+        "tolerance_absolute": 1e-12
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "mock_adapter_output",
+      "target_path": "mock_adapter_output",
+      "unit": null,
+      "value": {
+        "adapter_id": "mock.consequence.adapter.v1",
+        "description": "二十管段聚合层黄金测试；场景频率已经包含泄漏、气象、时段和事件树分支概率",
+        "ir_contribution_by_segment_and_receptor": {
+          "SEG-001": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 1e-09
+          },
+          "SEG-002": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 2e-09
+          },
+          "SEG-003": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 3e-09
+          },
+          "SEG-004": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 4e-09
+          },
+          "SEG-005": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 2e-08,
+            "R-VILLAGE": 4e-07
+          },
+          "SEG-006": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 3e-08,
+            "R-VILLAGE": 6e-07
+          },
+          "SEG-007": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 4e-08,
+            "R-VILLAGE": 8e-07
+          },
+          "SEG-008": {
+            "R-INDUSTRIAL": 0.0,
+            "R-SCHOOL": 5e-08,
+            "R-VILLAGE": 1e-06
+          },
+          "SEG-009": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 1e-06,
+            "R-VILLAGE": 5e-08
+          },
+          "SEG-010": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 2e-06,
+            "R-VILLAGE": 5e-08
+          },
+          "SEG-011": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 3e-06,
+            "R-VILLAGE": 5e-08
+          },
+          "SEG-012": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 4e-06,
+            "R-VILLAGE": 5e-08
+          },
+          "SEG-013": {
+            "R-INDUSTRIAL": 1e-06,
+            "R-SCHOOL": 1e-08,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-014": {
+            "R-INDUSTRIAL": 2e-06,
+            "R-SCHOOL": 1e-08,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-015": {
+            "R-INDUSTRIAL": 3e-06,
+            "R-SCHOOL": 1e-08,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-016": {
+            "R-INDUSTRIAL": 4e-06,
+            "R-SCHOOL": 1e-08,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-017": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-018": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-019": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 0.0
+          },
+          "SEG-020": {
+            "R-INDUSTRIAL": 1e-08,
+            "R-SCHOOL": 0.0,
+            "R-VILLAGE": 0.0
+          }
+        },
+        "scenario_outcomes": [
+          {
+            "annual_frequency": 1e-07,
+            "asset_loss_cny": 100000,
+            "customer_interruption_hours": 100,
+            "environment_area_m2": 100,
+            "environment_recovery_days": 1,
+            "expected_fatalities": 0.1,
+            "outcome": "jet_fire",
+            "released_mass_kg": 500,
+            "scenario_id": "E001",
+            "segment_id": "SEG-001",
+            "unserved_volume_m3": 10000
+          },
+          {
+            "annual_frequency": 2e-07,
+            "asset_loss_cny": 120000,
+            "customer_interruption_hours": 120,
+            "environment_area_m2": 120,
+            "environment_recovery_days": 2,
+            "expected_fatalities": 0.2,
+            "outcome": "flash_fire",
+            "released_mass_kg": 600,
+            "scenario_id": "E002",
+            "segment_id": "SEG-002",
+            "unserved_volume_m3": 12000
+          },
+          {
+            "annual_frequency": 3e-07,
+            "asset_loss_cny": 140000,
+            "customer_interruption_hours": 140,
+            "environment_area_m2": 140,
+            "environment_recovery_days": 3,
+            "expected_fatalities": 0.3,
+            "outcome": "jet_fire",
+            "released_mass_kg": 700,
+            "scenario_id": "E003",
+            "segment_id": "SEG-003",
+            "unserved_volume_m3": 14000
+          },
+          {
+            "annual_frequency": 4e-07,
+            "asset_loss_cny": 160000,
+            "customer_interruption_hours": 160,
+            "environment_area_m2": 160,
+            "environment_recovery_days": 4,
+            "expected_fatalities": 0.4,
+            "outcome": "vce",
+            "released_mass_kg": 800,
+            "scenario_id": "E004",
+            "segment_id": "SEG-004",
+            "unserved_volume_m3": 16000
+          },
+          {
+            "annual_frequency": 5e-07,
+            "asset_loss_cny": 500000,
+            "customer_interruption_hours": 1000,
+            "environment_area_m2": 500,
+            "environment_recovery_days": 3,
+            "expected_fatalities": 2.0,
+            "outcome": "jet_fire",
+            "released_mass_kg": 2000,
+            "scenario_id": "E005",
+            "segment_id": "SEG-005",
+            "unserved_volume_m3": 50000
+          },
+          {
+            "annual_frequency": 6e-07,
+            "asset_loss_cny": 700000,
+            "customer_interruption_hours": 1500,
+            "environment_area_m2": 700,
+            "environment_recovery_days": 5,
+            "expected_fatalities": 3.0,
+            "outcome": "flash_fire",
+            "released_mass_kg": 2500,
+            "scenario_id": "E006",
+            "segment_id": "SEG-006",
+            "unserved_volume_m3": 60000
+          },
+          {
+            "annual_frequency": 7e-07,
+            "asset_loss_cny": 1000000,
+            "customer_interruption_hours": 2500,
+            "environment_area_m2": 1000,
+            "environment_recovery_days": 7,
+            "expected_fatalities": 4.0,
+            "outcome": "jet_fire",
+            "released_mass_kg": 3000,
+            "scenario_id": "E007",
+            "segment_id": "SEG-007",
+            "unserved_volume_m3": 80000
+          },
+          {
+            "annual_frequency": 8e-07,
+            "asset_loss_cny": 1500000,
+            "customer_interruption_hours": 4000,
+            "environment_area_m2": 1500,
+            "environment_recovery_days": 10,
+            "expected_fatalities": 5.0,
+            "outcome": "vce",
+            "released_mass_kg": 3500,
+            "scenario_id": "E008",
+            "segment_id": "SEG-008",
+            "unserved_volume_m3": 100000
+          },
+          {
+            "annual_frequency": 9e-07,
+            "asset_loss_cny": 800000,
+            "customer_interruption_hours": 2000,
+            "environment_area_m2": 600,
+            "environment_recovery_days": 4,
+            "expected_fatalities": 8.0,
+            "outcome": "jet_fire",
+            "released_mass_kg": 2500,
+            "scenario_id": "E009",
+            "segment_id": "SEG-009",
+            "unserved_volume_m3": 60000
+          },
+          {
+            "annual_frequency": 1e-06,
+            "asset_loss_cny": 1000000,
+            "customer_interruption_hours": 4000,
+            "environment_area_m2": 1000,
+            "environment_recovery_days": 7,
+            "expected_fatalities": 15.0,
+            "outcome": "flash_fire",
+            "released_mass_kg": 3000,
+            "scenario_id": "E010",
+            "segment_id": "SEG-010",
+            "unserved_volume_m3": 80000
+          },
+          {
+            "annual_frequency": 1.1e-06,
+            "asset_loss_cny": 2000000,
+            "customer_interruption_hours": 6000,
+            "environment_area_m2": 2000,
+            "environment_recovery_days": 10,
+            "expected_fatalities": 25.0,
+            "outcome": "jet_fire",
+            "released_mass_kg": 4000,
+            "scenario_id": "E011",
+            "segment_id": "SEG-011",
+            "unserved_volume_m3": 100000
+          },
+          {
+            "annual_frequency": 1.2e-06,
+            "asset_loss_cny": 8000000,
+            "critical_customer_hit": true,
+            "customer_interruption_hours": 15000,
+            "environment_area_m2": 5000,
+            "environment_recovery_days": 60,
+            "expected_fatalities": 60.0,
+            "outcome": "vce",
+            "released_mass_kg": 8000,
+            "scenario_id": "E012",
+            "segment_id": "SEG-012",
+            "unserved_volume_m3": 180000
+          },
+          {
+            "annual_frequency": 1.3e-06,
+            "asset_loss_cny": 2000000,
+            "customer_interruption_hours": 8000,
+            "environment_area_m2": 800,
+            "environment_recovery_days": 5,
+            "expected_fatalities": 1.5,
+            "outcome": "jet_fire",
+            "released_mass_kg": 3000,
+            "scenario_id": "E013",
+            "segment_id": "SEG-013",
+            "unserved_volume_m3": 200000
+          },
+          {
+            "annual_frequency": 1.4e-06,
+            "asset_loss_cny": 4000000,
+            "customer_interruption_hours": 12000,
+            "environment_area_m2": 1500,
+            "environment_recovery_days": 10,
+            "expected_fatalities": 3.0,
+            "outcome": "flash_fire",
+            "released_mass_kg": 4000,
+            "scenario_id": "E014",
+            "segment_id": "SEG-014",
+            "unserved_volume_m3": 250000
+          },
+          {
+            "annual_frequency": 1.5e-06,
+            "asset_loss_cny": 6000000,
+            "customer_interruption_hours": 15000,
+            "environment_area_m2": 2500,
+            "environment_recovery_days": 14,
+            "expected_fatalities": 5.0,
+            "outcome": "jet_fire",
+            "released_mass_kg": 5000,
+            "scenario_id": "E015",
+            "segment_id": "SEG-015",
+            "unserved_volume_m3": 300000
+          },
+          {
+            "annual_frequency": 1.6e-06,
+            "asset_loss_cny": 20000000,
+            "customer_interruption_hours": 40000,
+            "environment_area_m2": 8000,
+            "environment_recovery_days": 90,
+            "expected_fatalities": 10.0,
+            "outcome": "vce",
+            "released_mass_kg": 10000,
+            "scenario_id": "E016",
+            "segment_id": "SEG-016",
+            "unserved_volume_m3": 500000
+          },
+          {
+            "annual_frequency": 1.7e-06,
+            "asset_loss_cny": 200000,
+            "customer_interruption_hours": 300,
+            "environment_area_m2": 400,
+            "environment_recovery_days": 3,
+            "expected_fatalities": 0.2,
+            "outcome": "jet_fire",
+            "released_mass_kg": 1500,
+            "scenario_id": "E017",
+            "segment_id": "SEG-017",
+            "unserved_volume_m3": 30000
+          },
+          {
+            "annual_frequency": 1.8e-06,
+            "asset_loss_cny": 300000,
+            "customer_interruption_hours": 450,
+            "environment_area_m2": 600,
+            "environment_recovery_days": 5,
+            "expected_fatalities": 0.4,
+            "outcome": "flash_fire",
+            "released_mass_kg": 2000,
+            "scenario_id": "E018",
+            "segment_id": "SEG-018",
+            "unserved_volume_m3": 40000
+          },
+          {
+            "annual_frequency": 1.9e-06,
+            "asset_loss_cny": 400000,
+            "customer_interruption_hours": 600,
+            "environment_area_m2": 900,
+            "environment_recovery_days": 8,
+            "expected_fatalities": 0.8,
+            "outcome": "jet_fire",
+            "released_mass_kg": 2500,
+            "scenario_id": "E019",
+            "segment_id": "SEG-019",
+            "unserved_volume_m3": 50000
+          },
+          {
+            "annual_frequency": 2e-06,
+            "asset_loss_cny": 1500000,
+            "customer_interruption_hours": 1500,
+            "environment_area_m2": 4000,
+            "environment_recovery_days": 120,
+            "environment_sensitive_receptor_hit": true,
+            "expected_fatalities": 1.9,
+            "outcome": "vce",
+            "released_mass_kg": 6000,
+            "scenario_id": "E020",
+            "segment_id": "SEG-020",
+            "unserved_volume_m3": 100000
+          }
+        ],
+        "status": "SYNTHETIC_TEST_ONLY"
+      }
+    },
+    {
+      "criticality": "OPTIONAL",
+      "field_id": "validation_expectations",
+      "target_path": "validation_expectations",
+      "unit": null,
+      "value": {
+        "all_loc_fraction_sums": 1.0,
+        "all_probabilities_in_zero_one": true,
+        "formal_report_allowed": false,
+        "gas_composition_sum": 1.0,
+        "segment_lengths_sum_to_pipeline_length": true,
+        "weather_probability_sum": 1.0
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_case": "S10_CORROSION_DEGRADATION",
+  "version": "1.0.0"
+}

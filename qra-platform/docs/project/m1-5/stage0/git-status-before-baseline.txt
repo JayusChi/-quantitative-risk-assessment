@@ -1,0 +1,16 @@
+M1.5 stage 0 Git capture
+recorded_on=2026-09-01
+repository=D:\风险定量评估
+project=D:\风险定量评估\qra-platform
+branch=codex/stage0-takeover-20260828
+upstream=origin/codex/stage0-takeover-20260828
+upstream_relation=ahead 1
+head=1ebdc65c6169f6c5a999c80bfa9b7c74f3b1a99f
+tree=e8bf0ea9759ff36b264b21822157e397afc3da56
+rollback_tag=roadmap-stage4-internal-pilot-20260901
+tracked_worktree_clean=true
+staged_changes=false
+untracked_files:
+?? 合成数据跑通项目.md
+untracked_requirement_sha256=cfd9441dc8d7e572892c193b8913320b7fc8f3f39460949ed2b94af313d075ce
+

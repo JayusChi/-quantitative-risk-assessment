@@ -1,0 +1,3713 @@
+{
+  "explicit_schema_field_count": 72,
+  "field_dictionary_field_count": 280,
+  "fields": [
+    {
+      "business_name": "assessment",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "assessment",
+      "target_path": "assessment",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "评价基准日期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "assessment.as_of",
+      "target_path": "assessment.as_of",
+      "target_unit": "",
+      "value_type": "date"
+    },
+    {
+      "business_name": "评价编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.assessment_id",
+      "target_path": "assessment.assessment_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "收敛判据",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.convergence",
+      "target_path": "assessment.convergence",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "坐标系",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "assessment.coordinate_system",
+      "target_path": "assessment.coordinate_system",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "分域准则集",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "assessment.criteria_set_by_domain",
+      "target_path": "assessment.criteria_set_by_domain",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "启用后果域",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "assessment.enabled_consequence_domains",
+      "target_path": "assessment.enabled_consequence_domains",
+      "target_unit": "",
+      "value_type": "array"
+    },
+    {
+      "business_name": "失效概率时间跨度",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.failure_probability_horizon_years",
+      "target_path": "assessment.failure_probability_horizon_years",
+      "target_unit": "year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "分域判定状态",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.judgement_status_by_domain",
+      "target_path": "assessment.judgement_status_by_domain",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "泄漏点初始间距",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.leak_point_initial_spacing_m",
+      "target_path": "assessment.leak_point_initial_spacing_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "受体参考高度",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "assessment.reference_height_m",
+      "target_path": "assessment.reference_height_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "测试损伤模型",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "damage_model",
+      "target_path": "damage_model",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "资料类别清单",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "data_category_manifest",
+      "target_path": "data_category_manifest",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "engineering_indicators",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "engineering_indicators",
+      "target_path": "engineering_indicators",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "工程指标目录编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.catalog_id",
+      "target_path": "engineering_indicators.catalog_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "工程指标目录版本",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.catalog_version",
+      "target_path": "engineering_indicators.catalog_version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "工程指标数据分类",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.data_classification",
+      "target_path": "engineering_indicators.data_classification",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "工程指标说明",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.description",
+      "target_path": "engineering_indicators.description",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "按原型工程指标观测",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.observations_by_archetype",
+      "target_path": "engineering_indicators.observations_by_archetype",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段工程指标观测",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.observations_by_segment",
+      "target_path": "engineering_indicators.observations_by_segment",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "回填材料类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.backfill_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.backfill_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "套管状态",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.casing_condition",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_condition",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "套管密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.casing_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.casing_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "冷弯管弯曲半径比",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.cold_bend_radius_ratio",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.cold_bend_radius_ratio",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "盖板保护覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.concrete_slab_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.concrete_slab_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "施工单位",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.construction_contractor",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_contractor",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "施工不符合项数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.construction_nonconformity_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.construction_nonconformity_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "现场弯管密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.field_bend_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.field_bend_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "环焊缝密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.girth_weld_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.girth_weld_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "石方段保护层",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.rock_shield_present",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.rock_shield_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "监理单位",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.supervision_contractor",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.supervision_contractor",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "焊缝无损检测覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.weld_ndt_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_ndt_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "焊口返修率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.weld_reject_rate_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.weld_reject_rate_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "焊接工艺",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.construction.welding_process",
+      "target_path": "engineering_indicators.observations_by_segment.*.construction.welding_process",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "交流干扰电压",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.ac_interference_voltage_v",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.ac_interference_voltage_v",
+      "target_unit": "V",
+      "value_type": "number"
+    },
+    {
+      "business_name": "防腐层状态指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.coating_condition_index",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_condition_index",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "防腐层缺陷密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.coating_defect_density_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_defect_density_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "防腐层安装年份",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.coating_installation_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_installation_year",
+      "target_unit": "year",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "外防腐层类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.coating_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.coating_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "断电电位",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.cp_off_potential_v",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_off_potential_v",
+      "target_unit": "V",
+      "value_type": "number"
+    },
+    {
+      "business_name": "通电电位",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.cp_on_potential_v",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_on_potential_v",
+      "target_unit": "V",
+      "value_type": "number"
+    },
+    {
+      "business_name": "保护电位超限比例",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.cp_out_of_range_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_out_of_range_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "阴极保护覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.cp_protection_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_protection_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "阴保测试周期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.cp_test_interval_days",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.cp_test_interval_days",
+      "target_unit": "day",
+      "value_type": "number"
+    },
+    {
+      "business_name": "DCVG/ACVG最大严重度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.dcvg_acvg_severity_max",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.dcvg_acvg_severity_max",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "土壤氯离子",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.soil_chloride_mg_kg",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_chloride_mg_kg",
+      "target_unit": "mg/kg",
+      "value_type": "number"
+    },
+    {
+      "business_name": "土壤含水率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.soil_moisture_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_moisture_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "土壤pH",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.soil_ph",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_ph",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "土壤电阻率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.soil_resistivity_ohm_m",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.soil_resistivity_ohm_m",
+      "target_unit": "ohm*m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "杂散电流存在",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.external_corrosion.stray_current_detected",
+      "target_path": "engineering_indicators.observations_by_segment.*.external_corrosion.stray_current_detected",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "泥石流易发性指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.debris_flow_susceptibility_index",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.debris_flow_susceptibility_index",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "活动断层穿越",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.fault_crossing_present",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.fault_crossing_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "洪水年发生频率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.flood_frequency_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.flood_frequency_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "地质灾害历史失效次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.geohazard_failure_history_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_failure_history_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "灾害治理工程状态",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.geohazard_mitigation_condition",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_mitigation_condition",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "灾害监测覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.geohazard_monitoring_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.geohazard_monitoring_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "滑坡位移速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.landslide_displacement_rate_mm_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.landslide_displacement_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "滑坡易发性指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.landslide_susceptibility_index",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.landslide_susceptibility_index",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "液化易发性指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.liquefaction_susceptibility_index",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.liquefaction_susceptibility_index",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "最大冲刷深度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.maximum_scour_depth_m",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.maximum_scour_depth_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "冻土融沉速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.permafrost_thaw_settlement_rate",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.permafrost_thaw_settlement_rate",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "河道摆动速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.river_migration_rate_m_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.river_migration_rate_m_year",
+      "target_unit": "m/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "峰值地震加速度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.seismic_peak_ground_acceleration_g",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.seismic_peak_ground_acceleration_g",
+      "target_unit": "g",
+      "value_type": "number"
+    },
+    {
+      "business_name": "坡度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.slope_angle_deg",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.slope_angle_deg",
+      "target_unit": "deg",
+      "value_type": "number"
+    },
+    {
+      "business_name": "地面沉降速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.subsidence_rate_mm_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.subsidence_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "地形地貌类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geohazard.terrain_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.geohazard.terrain_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "设计系数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.design_factor",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.design_factor",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "高程剖面",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.elevation_profile",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.elevation_profile",
+      "target_unit": "m",
+      "value_type": "array"
+    },
+    {
+      "business_name": "断裂韧度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.fracture_toughness",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.fracture_toughness",
+      "target_unit": "MPa√m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "实测最小壁厚",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.measured_wall_thickness_mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.measured_wall_thickness_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "泊松比",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.poisson_ratio",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.poisson_ratio",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "制管焊缝类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.seam_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.seam_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "规定最小抗拉强度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.smts_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.smts_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "规定最小屈服强度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.smys_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.smys_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "弹性模量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.geometry_material.youngs_modulus_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.geometry_material.youngs_modulus_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "点火面源面积",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.area_ignition_source_area_m2",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.area_ignition_source_area_m2",
+      "target_unit": "m2",
+      "value_type": "number"
+    },
+    {
+      "business_name": "气云经过点火源时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.cloud_exposure_time_s",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.cloud_exposure_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "约束率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.confinement_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.confinement_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "拥塞率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.congestion_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.congestion_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "爆炸源体积",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.explosion_source_volume_m3",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.explosion_source_volume_m3",
+      "target_unit": "m3",
+      "value_type": "number"
+    },
+    {
+      "business_name": "点火效率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.ignition_efficiency_per_s",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_efficiency_per_s",
+      "target_unit": "1/s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "点火源存在概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.ignition_source_presence_probability",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.ignition_source_presence_probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "点火线源长度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.line_ignition_source_length_m",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.line_ignition_source_length_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "点火点源数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.point_ignition_source_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.point_ignition_source_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "TNO爆炸强度等级",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.tno_source_strength",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.tno_source_strength",
+      "target_unit": "",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "延迟点火后VCE条件概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.ignition_congestion.vce_given_delayed_probability",
+      "target_path": "engineering_indicators.observations_by_segment.*.ignition_congestion.vce_given_delayed_probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "腐蚀增长率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.corrosion_growth_rate_mm_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.corrosion_growth_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "裂纹数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.crack_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.crack_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "凹陷数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.dent_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.dent_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "外腐蚀异常数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.external_corrosion_anomaly_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.external_corrosion_anomaly_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "开挖验证数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.field_verification_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.field_verification_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "开挖验证符合率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.field_verification_match_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.field_verification_match_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "内检测覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.ili_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "缺陷深度测量误差",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.ili_depth_tolerance_mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_depth_tolerance_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "内检测检出阈值",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.ili_detection_threshold_mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_detection_threshold_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "内检测技术类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.ili_technology",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.ili_technology",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "内腐蚀异常数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.internal_corrosion_anomaly_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.internal_corrosion_anomaly_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "最近内检测日期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.latest_ili_date",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.latest_ili_date",
+      "target_unit": "",
+      "value_type": "date"
+    },
+    {
+      "business_name": "最大腐蚀深度比",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.maximum_corrosion_depth_ratio",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.maximum_corrosion_depth_ratio",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "最大腐蚀轴向长度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.maximum_corrosion_length_mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.maximum_corrosion_length_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "历史修复数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.repair_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.repair_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "未修复临界缺陷数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.inspection_integrity.unrepaired_critical_anomaly_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.inspection_integrity.unrepaired_critical_anomaly_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "液相氯离子浓度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.chloride_concentration_mg_l",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.chloride_concentration_mg_l",
+      "target_unit": "mg/L",
+      "value_type": "number"
+    },
+    {
+      "business_name": "二氧化碳分压",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.co2_partial_pressure_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.co2_partial_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "缓蚀剂使用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.corrosion_inhibitor_used",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.corrosion_inhibitor_used",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "挂片腐蚀速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.coupon_corrosion_rate_mm_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.coupon_corrosion_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "游离水出现概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.free_water_probability",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.free_water_probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "硫化氢分压",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.h2s_partial_pressure_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.h2s_partial_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "缓蚀剂有效投加率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.inhibitor_availability_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.inhibitor_availability_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "内腐蚀泄漏历史次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.internal_corrosion_leak_history_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.internal_corrosion_leak_history_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "液相pH",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.liquid_ph",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.liquid_ph",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "低点积液",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.low_point_liquid_holdup",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.low_point_liquid_holdup",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "微生物腐蚀迹象",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.microbial_activity_detected",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.microbial_activity_detected",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "清管周期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.pigging_interval_days",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.pigging_interval_days",
+      "target_unit": "day",
+      "value_type": "number"
+    },
+    {
+      "business_name": "探针腐蚀速率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.probe_corrosion_rate_mm_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.probe_corrosion_rate_mm_year",
+      "target_unit": "mm/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "固体沉积物存在",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.internal_corrosion.solid_deposit_detected",
+      "target_path": "engineering_indicators.observations_by_segment.*.internal_corrosion.solid_deposit_detected",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "报警响应时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.alarm_response_time_s",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.alarm_response_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "未关闭审核不符合项",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.audit_nonconformity_open_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.audit_nonconformity_open_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "年应急演练次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.emergency_drills_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_drills_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "紧急隔离程序可用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.emergency_isolation_procedure_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_isolation_procedure_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "应急队伍响应时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.emergency_team_response_time_s",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.emergency_team_response_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "维护计划完成率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.maintenance_completion_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.maintenance_completion_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "变更管理符合率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.management_of_change_compliance_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.management_of_change_compliance_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "历史误操作事件数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.misoperation_event_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.misoperation_event_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "运行规程完整",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.operating_procedure_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operating_procedure_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "操作人员能力考核通过率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.operator_competency_pass_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_competency_pass_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "操作人员培训完成率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.operator_training_completion_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.operator_training_completion_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "作业许可符合率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.permit_to_work_compliance_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.permit_to_work_compliance_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "规程执行符合率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.procedure_compliance_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.procedure_compliance_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "交接班符合率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.management_emergency.shift_handover_compliance_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.management_emergency.shift_handover_compliance_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "凹陷最大应变",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.dent_strain_max_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.dent_strain_max_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "环焊缝异常密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.girth_weld_anomaly_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.girth_weld_anomaly_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "水压试验压力比",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.hydrotest_pressure_ratio_smys",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.hydrotest_pressure_ratio_smys",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "未熔合缺陷密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.lack_of_fusion_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.lack_of_fusion_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "分层缺陷密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.lamination_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.lamination_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "制造缺陷历史失效次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.manufacturing_failure_history_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.manufacturing_failure_history_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "钢管制造标准",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.manufacturing_standard",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.manufacturing_standard",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "钢管制造商",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.pipe_manufacturer",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.pipe_manufacturer",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "制管焊缝缺陷密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.seam_defect_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.seam_defect_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "夹渣缺陷密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.slag_inclusion_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.slag_inclusion_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "焊接裂纹密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.weld_crack_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.weld_crack_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "褶皱弯管存在",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.manufacturing_defects.wrinkle_bend_present",
+      "target_path": "engineering_indicators.observations_by_segment.*.manufacturing_defects.wrinkle_bend_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "流速",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.flow_velocity_m_s",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.flow_velocity_m_s",
+      "target_unit": "m/s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "硫化氢摩尔分数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.gas_h2s_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.gas_h2s_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "天然气含水量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.gas_water_content_mg_m3",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.gas_water_content_mg_m3",
+      "target_unit": "mg/m3",
+      "value_type": "number"
+    },
+    {
+      "business_name": "烃露点",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.hydrocarbon_dew_point_k",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.hydrocarbon_dew_point_k",
+      "target_unit": "K",
+      "value_type": "number"
+    },
+    {
+      "business_name": "液体夹带事件次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.liquid_carryover_events_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.liquid_carryover_events_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "历史最高运行压力",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.maximum_operating_pressure_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.maximum_operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "历史最低运行压力",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.minimum_operating_pressure_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.minimum_operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "年超压次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.overpressure_events_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.overpressure_events_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "年压力循环次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.pressure_cycle_count_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.pressure_cycle_count_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "压力循环幅值",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.pressure_cycle_range_mpa",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.pressure_cycle_range_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "年停输次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.shutdown_events_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.shutdown_events_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "日输量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.throughput_m3_d",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.throughput_m3_d",
+      "target_unit": "m3/d",
+      "value_type": "number"
+    },
+    {
+      "business_name": "水露点",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.operation_medium.water_dew_point_k",
+      "target_path": "engineering_indicators.observations_by_segment.*.operation_medium.water_dew_point_k",
+      "target_unit": "K",
+      "value_type": "number"
+    },
+    {
+      "business_name": "裂纹内检测覆盖率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.crack_ili_coverage_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.crack_ili_coverage_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "裂纹指示密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.crack_indication_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.crack_indication_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "疲劳累积使用系数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.fatigue_usage_factor",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.fatigue_usage_factor",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "高pH SCC环境",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.high_ph_scc_environment",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.high_ph_scc_environment",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "最大裂纹深度比",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.maximum_crack_depth_ratio",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.maximum_crack_depth_ratio",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "最大裂纹长度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.maximum_crack_length_mm",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.maximum_crack_length_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "近中性pH SCC环境",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.near_neutral_ph_scc_environment",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.near_neutral_ph_scc_environment",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "压力波动指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.pressure_fluctuation_index",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.pressure_fluctuation_index",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "SCC历史失效次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.scc_failure_history_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_failure_history_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "SCC敏感防腐层",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.scc_susceptible_coating",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_susceptible_coating",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "SCC敏感温度条件",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.scc_susceptible_temperature",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.scc_susceptible_temperature",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "运行应力占SMYS比例",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.scc_fatigue.stress_level_fraction_smys",
+      "target_path": "engineering_indicators.observations_by_segment.*.scc_fatigue.stress_level_fraction_smys",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "施工交叉点密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.construction_crossing_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.construction_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "开挖活动密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.excavation_events_per_km_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.excavation_events_per_km_year",
+      "target_unit": "1/(km*year)",
+      "value_type": "number"
+    },
+    {
+      "business_name": "违章占压数量",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.illegal_occupation_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.illegal_occupation_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "土地利用类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.land_use_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.land_use_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "标志完好率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.marker_condition_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.marker_condition_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "标志桩密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.marker_density_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.marker_density_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "施工信息协同机制可用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.one_call_system_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.one_call_system_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "巡线完成率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.patrol_completion_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.patrol_completion_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "巡线周期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.patrol_interval_days",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.patrol_interval_days",
+      "target_unit": "day",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管道保护宣传次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.public_awareness_activities_per_year",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.public_awareness_activities_per_year",
+      "target_unit": "1/year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "铁路穿越密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.railway_crossing_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.railway_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "河流穿越密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.river_crossing_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.river_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "道路穿越密度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.road_crossing_count_per_km",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.road_crossing_count_per_km",
+      "target_unit": "1/km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "第三方损伤历史次数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.third_party.third_party_damage_history_count",
+      "target_path": "engineering_indicators.observations_by_segment.*.third_party.third_party_damage_history_count",
+      "target_unit": "count",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "自动切断可用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.automatic_shutdown_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.automatic_shutdown_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "控制室可靠性",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.control_room_reliability",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.control_room_reliability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "泄漏检测系统可用率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.leak_detection_availability_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.leak_detection_availability_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "压力报警可用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.pressure_alarm_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.pressure_alarm_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "远程控制可用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.remote_control_available",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.remote_control_available",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "SCADA可用率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.scada_availability_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.scada_availability_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "阀门拒关概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.valve_fail_to_close_probability",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_fail_to_close_probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "阀门内漏概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.valve_internal_leak_probability",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_internal_leak_probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "阀门测试周期",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.valve_test_interval_days",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_test_interval_days",
+      "target_unit": "day",
+      "value_type": "number"
+    },
+    {
+      "business_name": "隔离阀类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.valve_control.valve_type",
+      "target_path": "engineering_indicators.observations_by_segment.*.valve_control.valve_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "扩散地形类别",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.dispersion_terrain_class",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.dispersion_terrain_class",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "气象统计年限",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.meteorological_data_years",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.meteorological_data_years",
+      "target_unit": "year",
+      "value_type": "number"
+    },
+    {
+      "business_name": "相对湿度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.relative_humidity_fraction",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.relative_humidity_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "地面粗糙度",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.surface_roughness_m",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.surface_roughness_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "逆温出现频率",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.temperature_inversion_frequency",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.temperature_inversion_frequency",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "地形导流效应",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.weather_terrain.topographic_channeling",
+      "target_path": "engineering_indicators.observations_by_segment.*.weather_terrain.topographic_channeling",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "全局工程指标观测",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.observations_global",
+      "target_path": "engineering_indicators.observations_global",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "室内超压死亡修正",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.consequence_parameters.indoor_overpressure_fatality_factor",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.indoor_overpressure_fatality_factor",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "室内热辐射防护系数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.consequence_parameters.indoor_thermal_protection_factor",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.indoor_thermal_protection_factor",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "Probit模型版本",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.consequence_parameters.probit_model_version",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.probit_model_version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "扩散地面粗糙度类别",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.consequence_parameters.roughness_class",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.roughness_class",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "TNO曲线数据版本",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.consequence_parameters.tno_curve_version",
+      "target_path": "engineering_indicators.observations_global.consequence_parameters.tno_curve_version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "模型与参数批准文件引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.approval_ref",
+      "target_path": "engineering_indicators.observations_global.governance.approval_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "竣工图引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.as_built_drawing_ref",
+      "target_path": "engineering_indicators.observations_global.governance.as_built_drawing_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "施工记录引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.construction_record_ref",
+      "target_path": "engineering_indicators.observations_global.governance.construction_record_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "数据责任人",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.data_owner",
+      "target_path": "engineering_indicators.observations_global.governance.data_owner",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "初步设计报告引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.design_report_ref",
+      "target_path": "engineering_indicators.observations_global.governance.design_report_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "应急预案引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.emergency_plan_ref",
+      "target_path": "engineering_indicators.observations_global.governance.emergency_plan_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "环境影响评价报告引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.environment_report_ref",
+      "target_path": "engineering_indicators.observations_global.governance.environment_report_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "地质灾害评估报告引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.geohazard_report_ref",
+      "target_path": "engineering_indicators.observations_global.governance.geohazard_report_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "高后果区识别报告引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.hca_report_ref",
+      "target_path": "engineering_indicators.observations_global.governance.hca_report_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "完整性管理计划引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.integrity_plan_ref",
+      "target_path": "engineering_indicators.observations_global.governance.integrity_plan_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "既往风险评价报告引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.previous_risk_report_ref",
+      "target_path": "engineering_indicators.observations_global.governance.previous_risk_report_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "遥感或航拍线路图引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.route_map_ref",
+      "target_path": "engineering_indicators.observations_global.governance.route_map_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "监理记录引用",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.governance.supervision_record_ref",
+      "target_path": "engineering_indicators.observations_global.governance.supervision_record_ref",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "建筑占用类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.building_occupancy",
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_occupancy",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "建筑抗超压能力",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.building_overpressure_resistance_kpa",
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_overpressure_resistance_kpa",
+      "target_unit": "kPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "建筑热辐射遮蔽系数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.building_thermal_shelter_factor",
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_thermal_shelter_factor",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "建筑类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.building_type",
+      "target_path": "engineering_indicators.observations_global.population_receptors.building_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "密集居民区",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.dense_residential_present",
+      "target_path": "engineering_indicators.observations_global.population_receptors.dense_residential_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "人员疏散响应时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.evacuation_response_time_s",
+      "target_path": "engineering_indicators.observations_global.population_receptors.evacuation_response_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "医院受体",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.hospital_present",
+      "target_path": "engineering_indicators.observations_global.population_receptors.hospital_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "学校受体",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "engineering_indicator.population_receptors.school_present",
+      "target_path": "engineering_indicators.observations_global.population_receptors.school_present",
+      "target_unit": "",
+      "value_type": "boolean"
+    },
+    {
+      "business_name": "管段原型",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "engineering_indicators.segment_archetype",
+      "target_path": "engineering_indicators.segment_archetype",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "测试聚合黄金答案",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "expected_aggregation",
+      "target_path": "expected_aggregation",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "extensions",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "extensions",
+      "target_path": "extensions",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "频率修正模型",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model",
+      "target_path": "frequency_correction_model",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "频率修正模型编号",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model.model_id",
+      "target_path": "frequency_correction_model.model_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "频率修正模型类型",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model.model_type",
+      "target_path": "frequency_correction_model.model_type",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "频率修正模型来源",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model.source",
+      "target_path": "frequency_correction_model.source",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "频率修正模型状态",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model.status",
+      "target_path": "frequency_correction_model.status",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "频率修正模型版本",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_correction_model.version",
+      "target_path": "frequency_correction_model.version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "frequency_library",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "frequency_library",
+      "target_path": "frequency_library",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "分机理基准频率",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.base_frequency_by_mechanism",
+      "target_path": "frequency_library.base_frequency_by_mechanism",
+      "target_unit": "per_km_year",
+      "value_type": "object"
+    },
+    {
+      "business_name": "失效频率库数据分类",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.data_classification",
+      "target_path": "frequency_library.data_classification",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "失效频率库编号",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.library_id",
+      "target_path": "frequency_library.library_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "分机理孔径比例",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.loc_fraction_by_mechanism",
+      "target_path": "frequency_library.loc_fraction_by_mechanism",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "失效频率单位",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.unit",
+      "target_path": "frequency_library.unit",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "失效频率库版本",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "frequency_library.version",
+      "target_path": "frequency_library.version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "点火模型",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "ignition_model",
+      "target_path": "ignition_model",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "延迟点火测试概率",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "ignition_model.delayed_ignition_test_probability",
+      "target_path": "ignition_model.delayed_ignition_test_probability",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "立即点火概率",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "ignition_model.immediate_ignition_probability",
+      "target_path": "ignition_model.immediate_ignition_probability",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "点火模型状态",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "ignition_model.model_status",
+      "target_path": "ignition_model.model_status",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "延迟点火后VCE测试概率",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "ignition_model.vce_given_delayed_test_probability",
+      "target_path": "ignition_model.vce_given_delayed_test_probability",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "allowed_use",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.allowed_use",
+      "target_path": "metadata.allowed_use",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "案例编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "metadata.case_id",
+      "target_path": "metadata.case_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "conversion_scope",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.conversion_scope",
+      "target_path": "metadata.conversion_scope",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "converter_note",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.converter_note",
+      "target_path": "metadata.converter_note",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "created_at",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.created_at",
+      "target_path": "metadata.created_at",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "数据分类",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "metadata.data_classification",
+      "target_path": "metadata.data_classification",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "explicit_data_gaps",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.explicit_data_gaps",
+      "target_path": "metadata.explicit_data_gaps",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "formal_qra_allowed",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.formal_qra_allowed",
+      "target_path": "metadata.formal_qra_allowed",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "model_id",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "metadata.model_id",
+      "target_path": "metadata.model_id",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "name",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.name",
+      "target_path": "metadata.name",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "prohibited_use",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.prohibited_use",
+      "target_path": "metadata.prohibited_use",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "项目名称",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.project_name",
+      "target_path": "metadata.project_name",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "运行配置",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.run_profile",
+      "target_path": "metadata.run_profile",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "version",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.version",
+      "target_path": "metadata.version",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "warning",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "metadata.warning",
+      "target_path": "metadata.warning",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "测试适配器输出",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "mock_adapter_output",
+      "target_path": "mock_adapter_output",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "设计压力",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "pipeline.design_pressure_mpa",
+      "target_path": "pipeline.design_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "气体摩尔组分",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "pipeline.gas_composition_mole_fraction",
+      "target_path": "pipeline.gas_composition_mole_fraction",
+      "target_unit": "fraction",
+      "value_type": "object"
+    },
+    {
+      "business_name": "二氧化碳摩尔分数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "pipeline.gas_composition_mole_fraction.carbon_dioxide",
+      "target_path": "pipeline.gas_composition_mole_fraction.carbon_dioxide",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "甲烷摩尔分数",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "pipeline.gas_composition_mole_fraction.methane",
+      "target_path": "pipeline.gas_composition_mole_fraction.methane",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "installation",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.installation",
+      "target_path": "pipeline.installation",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "material",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.material",
+      "target_path": "pipeline.material",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "operating_pressure_data_status",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.operating_pressure_data_status",
+      "target_path": "pipeline.operating_pressure_data_status",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "运行压力",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "pipeline.operating_pressure_mpa",
+      "target_path": "pipeline.operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "operating_temperature_data_status",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.operating_temperature_data_status",
+      "target_path": "pipeline.operating_temperature_data_status",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "运行温度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "pipeline.operating_temperature_k",
+      "target_path": "pipeline.operating_temperature_k",
+      "target_unit": "K",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管线共性外径",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.outside_diameter_mm",
+      "target_path": "pipeline.outside_diameter_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管线编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.pipeline_id",
+      "target_path": "pipeline.pipeline_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "population_spatial_data_status",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.population_spatial_data_status",
+      "target_path": "pipeline.population_spatial_data_status",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "输送介质类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.service",
+      "target_path": "pipeline.service",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "source_refs",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.source_refs",
+      "target_path": "pipeline.source_refs",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "管线总长度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.total_length_km",
+      "target_path": "pipeline.total_length_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "wall_thickness_data_status",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.wall_thickness_data_status",
+      "target_path": "pipeline.wall_thickness_data_status",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "管线共性壁厚",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "pipeline.wall_thickness_mm",
+      "target_path": "pipeline.wall_thickness_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "人口网格编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.cell_id",
+      "target_path": "population_cells.*.cell_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "昼间室外人口比例",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.outdoor_fraction_day",
+      "target_path": "population_cells.*.outdoor_fraction_day",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "夜间室外人口比例",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.outdoor_fraction_night",
+      "target_path": "population_cells.*.outdoor_fraction_night",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "昼间人口",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.population_day",
+      "target_path": "population_cells.*.population_day",
+      "target_unit": "person",
+      "value_type": "number"
+    },
+    {
+      "business_name": "夜间人口",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.population_night",
+      "target_path": "population_cells.*.population_night",
+      "target_unit": "person",
+      "value_type": "number"
+    },
+    {
+      "business_name": "受体类型",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "population_cell.receptor_type",
+      "target_path": "population_cells.*.receptor_type",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "受体坐标",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "population_cell.xy_m",
+      "target_path": "population_cells.*.xy_m",
+      "target_unit": "m",
+      "value_type": "array"
+    },
+    {
+      "business_name": "population_cells",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "population_cells",
+      "target_path": "population_cells",
+      "target_unit": "",
+      "value_type": "array"
+    },
+    {
+      "business_name": "原始资料类别",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "raw_data_categories",
+      "target_path": "raw_data_categories",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "风险矩阵展示准则",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "risk_matrix_criteria",
+      "target_path": "risk_matrix_criteria",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "schema_version",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "schema_version",
+      "target_path": "schema_version",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "区域活动等级",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.area_activity",
+      "target_path": "segments.*.area_activity",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "埋深",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.burial_depth_m",
+      "target_path": "segments.*.burial_depth_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "投产年份",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.commissioning_year",
+      "target_path": "segments.*.commissioning_year",
+      "target_unit": "year",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "下游隔离阀里程",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.downstream_valve_km",
+      "target_path": "segments.*.downstream_valve_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "终点里程",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.end_km",
+      "target_path": "segments.*.end_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管段终点坐标",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.end_xy_m",
+      "target_path": "segments.*.end_xy_m",
+      "target_unit": "m",
+      "value_type": "array"
+    },
+    {
+      "business_name": "泄漏检测时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.leak_detection_time_s",
+      "target_path": "segments.*.leak_detection_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管段长度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.length_km",
+      "target_path": "segments.*.length_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "material_grade",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.material_grade",
+      "target_path": "segments.*.material_grade",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "外径",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.outside_diameter_mm",
+      "target_path": "segments.*.outside_diameter_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "population_context",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.population_context",
+      "target_path": "segments.*.population_context",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "quality",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.quality",
+      "target_path": "segments.*.quality",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "review_status",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.review_status",
+      "target_path": "segments.*.review_status",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "管段编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.segment_id",
+      "target_path": "segments.*.segment_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "source_ref",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.source_ref",
+      "target_path": "segments.*.source_ref",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "source_refs",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.source_refs",
+      "target_path": "segments.*.source_refs",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "split_reason",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.split_reason",
+      "target_path": "segments.*.split_reason",
+      "target_unit": "",
+      "value_type": "any"
+    },
+    {
+      "business_name": "起点里程",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.start_km",
+      "target_path": "segments.*.start_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "中心线平面坐标",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.start_xy_m",
+      "target_path": "segments.*.start_xy_m",
+      "target_unit": "m",
+      "value_type": "array"
+    },
+    {
+      "business_name": "钢级",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.steel_grade",
+      "target_path": "segments.*.steel_grade",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "上游隔离阀里程",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.upstream_valve_km",
+      "target_path": "segments.*.upstream_valve_km",
+      "target_unit": "km",
+      "value_type": "number"
+    },
+    {
+      "business_name": "关阀时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "segment.valve_closure_time_s",
+      "target_path": "segments.*.valve_closure_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "名义壁厚",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment.wall_thickness_mm",
+      "target_path": "segments.*.wall_thickness_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "管段修正因子",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "segment_correction_factor",
+      "target_path": "segment_correction_factor",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "standard_formula_test_parameters",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "standard_formula_test_parameters",
+      "target_path": "standard_formula_test_parameters",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "环境绝对压力",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_pressure_pa_abs",
+      "target_unit": "Pa",
+      "value_type": "number"
+    },
+    {
+      "business_name": "环境温度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ambient_temperature_k",
+      "target_unit": "K",
+      "value_type": "number"
+    },
+    {
+      "business_name": "后果参数数据分类",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.data_classification",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "有效释放高度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.effective_release_height_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "气体绝热指数",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.gamma",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "泄漏系数",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.gas_discharge_coefficient",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "燃烧热",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.heat_of_combustion_j_kg",
+      "target_unit": "J/kg",
+      "value_type": "number"
+    },
+    {
+      "business_name": "物理链点火模型参数",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "物质活性分类",
+      "contract_sources": [
+        "FIELD_DICTIONARY"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model.material_reactivity_class",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.ignition_model.material_reactivity_class",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "喷射火方向模式",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.jet_direction_mode",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "可燃下限体积分数",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.lfl_volume_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "最小效应距离",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_effect_distance_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "破裂流最小等效长度",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.minimum_rupture_flow_length_m",
+      "target_unit": "m",
+      "value_type": "number"
+    },
+    {
+      "business_name": "气体摩尔质量",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.molar_mass_kg_mol",
+      "target_unit": "kg/mol",
+      "value_type": "number"
+    },
+    {
+      "business_name": "运行压力基准",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.operating_pressure_basis",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "管内绝对粗糙度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.pipe_absolute_roughness_mm",
+      "target_unit": "mm",
+      "value_type": "number"
+    },
+    {
+      "business_name": "热辐射分数",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.radiative_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "物理链逐段参数",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段爆炸源体积",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.explosion_source_volume_m3",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.explosion_source_volume_m3",
+      "target_unit": "m3",
+      "value_type": "number"
+    },
+    {
+      "business_name": "逐段地形类型",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.terrain",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.terrain",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "逐段TNO源强",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.segments.item.tno_source_strength",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.segments.*.tno_source_strength",
+      "target_unit": "",
+      "value_type": "integer"
+    },
+    {
+      "business_name": "热辐射暴露时间",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+      "target_path": "standard_formula_test_parameters.aqt3046_physical_chain.thermal_exposure_time_s",
+      "target_unit": "s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C环境绝压",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.ambient_pressure_pa_abs",
+      "target_unit": "Pa_abs",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C参数数据分类",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.data_classification",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "附录C致死热通量阈值",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.fatal_heat_flux_threshold_kw_m2",
+      "target_unit": "kW/m2",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C绝热指数",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.gamma",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C气体泄放系数C.13",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.gas_discharge_coefficient_c13",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C燃烧热",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.heat_of_combustion_j_kg",
+      "target_unit": "J/kg",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C摩尔质量",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.molar_mass_kg_mol",
+      "target_unit": "kg/mol",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C运行压力基准",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.operating_pressure_basis",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "附录C辐射分数",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.radiative_fraction",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "附录C逐段参数",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段损伤分量因子",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_factors",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_factors",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段损伤分量权重",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.damage_component_weights",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.damage_component_weights",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段管理评分C.3-C.8",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.management_scores_c3_to_c8",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.management_scores_c3_to_c8",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "逐段点火概率",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.point_ignition_probability",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.point_ignition_probability",
+      "target_unit": "fraction",
+      "value_type": "number"
+    },
+    {
+      "business_name": "逐段人口密度",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "standard_formula_test_parameters.gbt34346_annex_c.segments.item.population_density_per_m2",
+      "target_path": "standard_formula_test_parameters.gbt34346_annex_c.segments.*.population_density_per_m2",
+      "target_unit": "person/m2",
+      "value_type": "number"
+    },
+    {
+      "business_name": "自适应证据风险模型参数",
+      "contract_sources": [
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "system_parameters.adaptive_evidence_qra",
+      "target_path": "system_parameters.adaptive_evidence_qra",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "测试校验预期",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "validation_expectations",
+      "target_path": "validation_expectations",
+      "target_unit": "",
+      "value_type": "object"
+    },
+    {
+      "business_name": "气象联合概率",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.probability",
+      "target_path": "weather_joint_probability.*.probability",
+      "target_unit": "",
+      "value_type": "number"
+    },
+    {
+      "business_name": "大气稳定度",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.stability_class",
+      "target_path": "weather_joint_probability.*.stability_class",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "昼夜时段",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.time_period",
+      "target_path": "weather_joint_probability.*.time_period",
+      "target_unit": "",
+      "value_type": "enum"
+    },
+    {
+      "business_name": "气象工况编号",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.weather_id",
+      "target_path": "weather_joint_probability.*.weather_id",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "风向",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.wind_direction_from",
+      "target_path": "weather_joint_probability.*.wind_direction_from",
+      "target_unit": "",
+      "value_type": "string"
+    },
+    {
+      "business_name": "风速",
+      "contract_sources": [
+        "FIELD_DICTIONARY",
+        "NODE_RUNTIME_REVIEW"
+      ],
+      "field_id": "weather_case.wind_speed_m_s",
+      "target_path": "weather_joint_probability.*.wind_speed_m_s",
+      "target_unit": "m/s",
+      "value_type": "number"
+    },
+    {
+      "business_name": "weather_joint_probability",
+      "contract_sources": [
+        "QRA_INPUT_SCHEMA"
+      ],
+      "field_id": "weather_joint_probability",
+      "target_path": "weather_joint_probability",
+      "target_unit": "",
+      "value_type": "array"
+    }
+  ],
+  "matrix_union_field_count": 361,
+  "part1_contract_id": "qra.part1-input",
+  "part1_contract_version": "1.0.0",
+  "runtime_review_field_count": 60,
+  "schema_version": "1.0.0"
+}

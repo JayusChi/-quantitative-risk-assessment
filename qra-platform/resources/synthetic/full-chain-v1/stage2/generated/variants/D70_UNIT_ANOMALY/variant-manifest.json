@@ -1,0 +1,39 @@
+{
+  "base_condition_id": "D00_CLEAN",
+  "business_content_sha256": "d4ca3acbd7d0590a3139fdf561adebd4ddde436669cd9060afa69ba51d8dca9d",
+  "data_classification": "SYNTHETIC_TEST_ONLY",
+  "expected_behavior": "确定性归一已知单位；未知或矛盾单位阻断",
+  "injected_conditions": [
+    {
+      "data_classification": "SYNTHETIC_TEST_ONLY",
+      "expected_normalized_value": 8.0,
+      "source_unit": "kPa",
+      "target_path": "pipeline.operating_pressure_mpa",
+      "target_unit": "MPa",
+      "value": 8000
+    },
+    {
+      "data_classification": "SYNTHETIC_TEST_ONLY",
+      "expected_normalized_value": 1016.0,
+      "source_unit": "m",
+      "target_path": "segments.*.outside_diameter_mm",
+      "target_unit": "mm",
+      "value": 1.016
+    },
+    {
+      "data_classification": "SYNTHETIC_TEST_ONLY",
+      "expected_normalized_value": 18.0,
+      "source_unit": "m",
+      "target_path": "segments.*.wall_thickness_mm",
+      "target_unit": "mm",
+      "value": 0.018
+    }
+  ],
+  "overlay_files": [
+    "overlay/D70_单位异常覆盖.csv"
+  ],
+  "remove_files": [],
+  "scenario_id": "S00_BASELINE",
+  "schema_version": "1.0.0",
+  "variant_id": "D70_UNIT_ANOMALY"
+}
