@@ -59,6 +59,7 @@ from .contracts import Stage4Result, StepResult, WorkflowStatus
 from .state import InMemoryWorkflowStore, WorkflowStore
 
 PROMPT_ROOT = Path(__file__).resolve().parents[3] / "resources" / "extraction" / "part1" / "v1"
+DEFAULT_AUTO_FIELD_LIMIT = 256
 
 
 class Stage4Cancelled(RuntimeError):
@@ -253,6 +254,7 @@ class Stage4Workflow:
         store: WorkflowStore | None = None,
         prompt_root: Path | str = PROMPT_ROOT,
         max_retries: int = 2,
+        auto_field_limit: int | None = None,
     ) -> None:
         self.catalog = catalog
         self.provider = provider
@@ -269,6 +271,19 @@ class Stage4Workflow:
         )
         self._provider_enabled_for_run = True
         self.fields = field_index(catalog.field_dictionary)
+        configured_limit = (
+            auto_field_limit
+            if auto_field_limit is not None
+            else os.environ.get("QRA_EXTRACTION_AUTO_FIELD_LIMIT", DEFAULT_AUTO_FIELD_LIMIT)
+        )
+        try:
+            self.auto_field_limit = int(configured_limit)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("QRA_EXTRACTION_AUTO_FIELD_LIMIT必须是整数") from exc
+        if not 1 <= self.auto_field_limit <= len(self.fields):
+            raise ValueError(
+                "QRA_EXTRACTION_AUTO_FIELD_LIMIT必须在1到字段字典总数之间"
+            )
         unit_path = catalog.root / "unit_registry.json"
         self.unit_registry = json.loads(unit_path.read_text(encoding="utf-8"))
         self._active_evidence: dict[str, dict[str, Any]] = {}
@@ -649,7 +664,7 @@ class Stage4Workflow:
                 and definition.get("required_level") == "REQUIRED"
             ):
                 selected.append(field_id)
-        return tuple(sorted(selected[:80]))
+        return tuple(sorted(selected)[: self.auto_field_limit])
 
     def run(
         self,

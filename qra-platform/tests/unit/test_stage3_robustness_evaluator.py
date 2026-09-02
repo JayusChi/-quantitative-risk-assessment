@@ -9,7 +9,7 @@ TOOLS_ROOT = PROJECT_ROOT / "tools"
 if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
-from evaluate_stage3_robustness import evaluate_files  # noqa: E402
+from evaluate_stage3_robustness import evaluate_files, evaluate_records  # noqa: E402
 from run_stage3_standard_golden import _standard_identifier  # noqa: E402
 
 FIXTURES = PROJECT_ROOT / "tests" / "fixtures" / "roadmap_stage3_golden"
@@ -54,6 +54,77 @@ class Stage3RobustnessEvaluatorTests(unittest.TestCase):
         serialized = str(report)
         self.assertNotIn("SEG-A", serialized)
         self.assertNotIn("SYNTH-STAGE3", serialized)
+
+    def test_internal_draft_mode_stratifies_metrics_and_keeps_document_ids_private(
+        self,
+    ) -> None:
+        manifest = [
+            {
+                "document_id": "PRIVATE-DOC-001",
+                "document_type": "SPREADSHEET",
+                "is_real_business_document": True,
+                "annotation_status": "DRAFT",
+                "features": {"prompt_injection": False},
+            }
+        ]
+        annotations = [
+            {
+                "document_id": "PRIVATE-DOC-001",
+                "annotation_status": "DRAFT",
+                "fields": [
+                    {
+                        "field_id": "pipeline.design_pressure_mpa",
+                        "entity_key": "PIPE-1",
+                        "state": "VALUE",
+                        "raw_value": "6.3",
+                        "normalized_value": 6.3,
+                        "evidence": [{"page_number": 1, "cell": "H4"}],
+                        "conflict_expected": False,
+                        "do_not_infer": [],
+                    }
+                ],
+            }
+        ]
+        results = [
+            {
+                "document_id": "PRIVATE-DOC-001",
+                "candidates": [
+                    {
+                        "field_id": "pipeline.design_pressure_mpa",
+                        "entity_key": "PIPE-1",
+                        "normalized_value": 6.3,
+                        "evidence": [{"page_number": 1, "cell": "H4"}],
+                    }
+                ],
+                "conflicts": [],
+                "run_statistics": {
+                    "elapsed_ms": 1250,
+                    "input_tokens": 10,
+                    "output_tokens": 5,
+                    "manual_review_ms": 200,
+                },
+            }
+        ]
+        report = evaluate_records(manifest, annotations, results, include_draft=True)
+        self.assertEqual(report["evaluation_mode"], "DRAFT_INTERNAL")
+        self.assertEqual(report["document_counts"]["draft_evaluated"], 1)
+        self.assertFalse(report["gates"]["formal_annotation_approval"])
+        self.assertEqual(
+            report["stratified_metrics"]["document_type"]["SPREADSHEET"][
+                "metrics"
+            ]["recall"],
+            1.0,
+        )
+        self.assertEqual(
+            report["stratified_metrics"]["field_group"]["pipeline"]["metrics"][
+                "precision"
+            ],
+            1.0,
+        )
+        self.assertEqual(report["run_statistics"]["total_tokens"], 15)
+        self.assertEqual(report["run_statistics"]["manual_review_ms"], 200)
+        serialized = str(report)
+        self.assertNotIn("PRIVATE-DOC-001", serialized)
 
 
 if __name__ == "__main__":
